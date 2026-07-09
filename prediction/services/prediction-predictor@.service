@@ -14,6 +14,7 @@ RestartSec=10
 StandardOutput=append:/var/log/prediction-system/%i-predictor-loop.log
 StandardError=append:/var/log/prediction-system/%i-predictor-loop.log
 Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONPATH=/home/chain-deaction/local_prediction/predition-app/prediction
 
 [Install]
 WantedBy=multi-user.target

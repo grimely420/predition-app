@@ -82,3 +82,114 @@
 2026-07-09 00:49:44 - BNB-Collector - WARNING - Circuit opened for Binance
 2026-07-09 00:49:50 - BNB-Collector - INFO - Shutdown signal received
 2026-07-09 00:49:55 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 5, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783572584.7679024}, 'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783572584.8939457, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783572590.0651197, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 03:35:51 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 03:35:52 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:35:57 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:36:02 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:36:08 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:36:13 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:36:13 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:36:50 - BNB-Collector - INFO - BNB: $573.3400 (source: Kraken, total: 12)
+2026-07-09 03:37:16 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:37:16 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:37:52 - BNB-Collector - INFO - BNB: $573.3400 (source: Kraken, total: 24)
+2026-07-09 03:38:18 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:38:18 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:38:55 - BNB-Collector - INFO - BNB: $573.3100 (source: Kraken, total: 36)
+2026-07-09 03:39:21 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:39:21 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:39:58 - BNB-Collector - INFO - BNB: $573.3100 (source: Kraken, total: 48)
+2026-07-09 03:40:24 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:40:24 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:41:00 - BNB-Collector - INFO - BNB: $573.1600 (source: Kraken, total: 60)
+2026-07-09 03:41:27 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:41:27 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:42:04 - BNB-Collector - INFO - BNB: $573.1600 (source: Kraken, total: 72)
+2026-07-09 03:42:30 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:42:30 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:43:06 - BNB-Collector - INFO - BNB: $573.6100 (source: Kraken, total: 84)
+2026-07-09 03:43:32 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:43:32 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:44:09 - BNB-Collector - INFO - BNB: $574.0700 (source: Kraken, total: 96)
+2026-07-09 03:44:35 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:44:35 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:45:11 - BNB-Collector - INFO - BNB: $574.0700 (source: Kraken, total: 108)
+2026-07-09 03:45:37 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:45:37 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:46:13 - BNB-Collector - INFO - BNB: $574.4600 (source: Kraken, total: 120)
+2026-07-09 03:46:39 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:46:39 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:47:16 - BNB-Collector - INFO - BNB: $574.6800 (source: Kraken, total: 132)
+2026-07-09 03:47:42 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:47:42 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:48:18 - BNB-Collector - INFO - BNB: $574.6800 (source: Kraken, total: 144)
+2026-07-09 03:48:44 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:48:44 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:49:21 - BNB-Collector - INFO - BNB: $574.6900 (source: Kraken, total: 156)
+2026-07-09 03:49:47 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:49:47 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:50:23 - BNB-Collector - INFO - BNB: $574.6900 (source: Kraken, total: 168)
+2026-07-09 03:50:49 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:50:49 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:51:26 - BNB-Collector - INFO - BNB: $573.9400 (source: Kraken, total: 180)
+2026-07-09 03:51:52 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:51:52 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:52:28 - BNB-Collector - INFO - BNB: $573.9600 (source: Kraken, total: 192)
+2026-07-09 03:52:54 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:52:54 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:53:31 - BNB-Collector - INFO - BNB: $573.9600 (source: Kraken, total: 204)
+2026-07-09 03:53:54 - BNB-Collector - WARNING - Timeout from Kraken
+2026-07-09 03:53:54 - BNB-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 03:54:19 - BNB-Collector - ERROR - Unexpected error from Binance: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/ticker/price?symbol=BNBUSDT (Caused by NameResolutionError("HTTPSConnection(host='api.binance.com', port=443): Failed to resolve 'api.binance.com' ([Errno -3] Temporary failure in name resolution)"))
+2026-07-09 03:54:19 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:54:27 - BNB-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-09 03:55:21 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:55:21 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:55:42 - BNB-Collector - INFO - BNB: $573.2400 (source: Kraken, total: 216)
+2026-07-09 03:56:24 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:56:24 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:56:45 - BNB-Collector - INFO - BNB: $573.2400 (source: Kraken, total: 228)
+2026-07-09 03:57:26 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:57:26 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:57:52 - BNB-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-09 03:58:20 - BNB-Collector - INFO - BNB: $572.3600 (source: Kraken, total: 240)
+2026-07-09 03:58:30 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 03:58:30 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 03:59:57 - BNB-Collector - WARNING - Timeout from Kraken
+2026-07-09 03:59:57 - BNB-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 04:00:14 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:00:14 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:00:25 - BNB-Collector - INFO - BNB: $572.3000 (source: Coinbase, total: 252)
+2026-07-09 04:01:17 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:01:17 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:01:28 - BNB-Collector - INFO - BNB: $572.3100 (source: Coinbase, total: 264)
+2026-07-09 04:02:19 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:02:19 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:02:30 - BNB-Collector - INFO - BNB: $572.1600 (source: Coinbase, total: 276)
+2026-07-09 04:03:22 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:03:22 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:03:32 - BNB-Collector - INFO - BNB: $571.8450 (source: Coinbase, total: 288)
+2026-07-09 04:04:24 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:04:24 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:04:34 - BNB-Collector - INFO - BNB: $571.9950 (source: Coinbase, total: 300)
+2026-07-09 04:05:26 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:05:26 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:05:37 - BNB-Collector - INFO - BNB: $571.9200 (source: Coinbase, total: 312)
+2026-07-09 04:06:29 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:06:29 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:06:39 - BNB-Collector - INFO - BNB: $571.9200 (source: Coinbase, total: 324)
+2026-07-09 04:07:31 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:07:31 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:07:42 - BNB-Collector - INFO - BNB: $572.0800 (source: Coinbase, total: 336)
+2026-07-09 04:08:33 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:08:33 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:08:44 - BNB-Collector - INFO - BNB: $572.2300 (source: Coinbase, total: 348)
+2026-07-09 04:09:35 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:09:35 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:09:46 - BNB-Collector - INFO - BNB: $572.2500 (source: Coinbase, total: 360)
+2026-07-09 04:10:38 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:10:38 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:10:48 - BNB-Collector - INFO - BNB: $572.1150 (source: Coinbase, total: 372)
+2026-07-09 04:11:40 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 04:11:40 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 04:11:51 - BNB-Collector - INFO - BNB: $572.3450 (source: Coinbase, total: 384)

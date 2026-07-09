@@ -86,6 +86,22 @@ def create_app() -> Flask:
             }
         })
 
+    @app.route('/', methods=['GET'])
+    def index():
+        return jsonify({
+            'service': 'Cryptocurrency Prediction API',
+            'coins': list_coins(),
+            'endpoints': {
+                'GET /': 'This page',
+                'GET /health': 'Health check',
+                'GET /coins': 'List supported coins',
+                'GET /predict/<coin>': 'Predictions for all horizons (5, 10, 15 min)',
+                'GET /predict/<coin>/<horizon>': 'Single horizon prediction',
+                'GET /stats/<coin>': 'Prediction accuracy stats',
+                'POST /validate/<coin>': 'Validate past predictions',
+            }
+        })
+
     @app.route('/coins', methods=['GET'])
     def coins():
         return jsonify({'coins': list_coins()})
