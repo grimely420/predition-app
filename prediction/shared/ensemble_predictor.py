@@ -35,7 +35,7 @@ class EnsemblePredictor:
     def __init__(self, 
                  symbol: str,
                  model_dir: str,
-                 feature_engineer_module: any,
+                 feature_engineer_module: Any,
                  lookback_minutes: int = 30,
                  prediction_horizon: int = 15,
                  min_data_points: int = 100):

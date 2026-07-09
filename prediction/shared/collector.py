@@ -6,7 +6,7 @@ import time
 import signal
 import requests
 from datetime import datetime, timezone
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Tuple
 
 from .coin_config import CoinConfig
 from .data_store import DataStore
@@ -76,7 +76,7 @@ class PriceCollector:
         stats['failures'] = 0
         stats['last_call'] = time.time()
 
-    def get_price(self) -> tuple[Optional[float], Optional[str]]:
+    def get_price(self) -> Tuple[Optional[float], Optional[str]]:
         sources = sorted(self.cfg.price_sources, key=lambda s: s.get('weight', 99))
         for src in sources:
             if not self._can_call(src):

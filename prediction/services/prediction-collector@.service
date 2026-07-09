@@ -1,18 +1,18 @@
 [Unit]
-Description=%I Price Collector
+Description=Cryptocurrency Prediction System - %i Collector
 After=network.target
 
 [Service]
 Type=simple
 User=chain-deaction
-WorkingDirectory=/home/chain-deaction/prediction
-Environment=PYTHONPATH=/home/chain-deaction/prediction
-Environment=PATH=/home/chain-deaction/prediction/.venv/bin:$PATH
-ExecStart=/home/chain-deaction/prediction/.venv/bin/python -m shared.collector %i
+Group=chain-deaction
+WorkingDirectory=/home/chain-deaction/local_prediction/predition-app/prediction
+ExecStart=/home/chain-deaction/local_prediction/predition-app/prediction/.venv/bin/python -m shared.collector %i
 Restart=always
-RestartSec=10
+RestartSec=5
 StandardOutput=append:/var/log/prediction-system/%i-collector.log
 StandardError=append:/var/log/prediction-system/%i-collector.log
+Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target

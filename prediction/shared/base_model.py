@@ -10,6 +10,7 @@ import numpy as np
 import xgboost as xgb
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import mean_absolute_error
+from typing import Any
 from datetime import datetime
 
 # Add parent directory for imports
@@ -26,7 +27,7 @@ class BaseModelTrainer:
                  symbol: str,
                  db_path: str,
                  model_dir: str,
-                 feature_engineer: any,
+                 feature_engineer: Any,
                  min_train_points: int = 5000,
                  retrain_every_n_points: int = 10000,
                  prediction_horizon: int = 15):
@@ -83,7 +84,7 @@ class BaseModelTrainer:
             with open(self.last_train_file, 'r') as f:
                 last_count = int(f.read().strip())
             return (current_count - last_count) >= self.retrain_every_n_points, current_count
-        except:
+        except Exception:
             return True, current_count
     
     def save_last_train_count(self, count: int) -> None:

@@ -137,3 +137,13 @@ def calculate_percent_change(old_value: float, new_value: float) -> float:
 def format_currency(amount: float) -> str:
     """Format a number as currency string."""
     return f"${amount:,.2f}"
+
+
+class ModelNotReadyError(Exception):
+    """Raised when the model is not ready to make predictions."""
+    pass
+
+
+class InsufficientDataError(Exception):
+    """Raised when there is insufficient data for the requested operation."""
+    pass

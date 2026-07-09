@@ -82,38 +82,37 @@ def check_data_available():
     
     btc_db = os.path.join(BASE_DIR, "bitcoin", "bitcoin_prices.db")
     bnb_db = os.path.join(BASE_DIR, "bnb", "bnb_prices.db")
+    hype_db = os.path.join(BASE_DIR, "hype", "hype_prices.db")
     
     btc_count = 0
     bnb_count = 0
+    hype_count = 0
     
-    if os.path.exists(btc_db):
-        try:
-            conn = sqlite3.connect(btc_db)
-            c = conn.cursor()
-            c.execute("SELECT COUNT(*) FROM prices")
-            btc_count = c.fetchone()[0]
-            conn.close()
-        except:
-            pass
+    for db_path, name in [(btc_db, 'btc'), (bnb_db, 'bnb'), (hype_db, 'hype')]:
+        if os.path.exists(db_path):
+            try:
+                conn = sqlite3.connect(db_path)
+                c = conn.cursor()
+                c.execute("SELECT COUNT(*) FROM prices")
+                count = c.fetchone()[0]
+                conn.close()
+                if name == 'btc':
+                    btc_count = count
+                elif name == 'bnb':
+                    bnb_count = count
+                else:
+                    hype_count = count
+            except Exception:
+                pass
     
-    if os.path.exists(bnb_db):
-        try:
-            conn = sqlite3.connect(bnb_db)
-            c = conn.cursor()
-            c.execute("SELECT COUNT(*) FROM prices")
-            bnb_count = c.fetchone()[0]
-            conn.close()
-        except:
-            pass
-    
-    return btc_count, bnb_count
+    return btc_count, bnb_count, hype_count
 
 
 def train_models_if_needed():
     """Train models if data is available."""
-    btc_count, bnb_count = check_data_available()
+    btc_count, bnb_count, hype_count = check_data_available()
     
-    logger.info(f"Data status - Bitcoin: {btc_count} points, BNB: {bnb_count} points")
+    logger.info(f"Data status - Bitcoin: {btc_count} points, BNB: {bnb_count} points, HYPE: {hype_count} points")
     
     # Train Bitcoin model if enough data
     if btc_count >= 1800:
@@ -154,6 +153,26 @@ def train_models_if_needed():
             logger.error(f"  BNB model training failed: {e}")
     else:
         logger.warning(f"  BNB needs {800 - bnb_count} more data points for training")
+    
+    # Train HYPE model if enough data
+    if hype_count >= 60:
+        logger.info("Training HYPE model...")
+        try:
+            result = subprocess.run(
+                [VENV_PYTHON, os.path.join(BASE_DIR, "hype", "model.py")],
+                cwd=BASE_DIR,
+                capture_output=True,
+                text=True,
+                timeout=300
+            )
+            if result.returncode == 0:
+                logger.info("  HYPE model trained successfully")
+            else:
+                logger.warning(f"  HYPE model training issues: {result.stderr}")
+        except Exception as e:
+            logger.error(f"  HYPE model training failed: {e}")
+    else:
+        logger.warning(f"  HYPE needs {60 - hype_count} more data points for training")
 
 
 def main():
@@ -167,34 +186,45 @@ def main():
     train_models_if_needed()
     
     # Step 2: Start data collectors
-    print("\n[2/4] Starting data collectors...")
-    start_component("Bitcoin Collector", os.path.join(BASE_DIR, "bitcoin", "collector.py"))
-    start_component("BNB Collector", os.path.join(BASE_DIR, "bnb", "collector.py"))
+    print("\n[2/5] Starting data collectors...")
+    start_component("Bitcoin Collector", os.path.join(BASE_DIR, "bitcoin", "btc_collector.py"))
+    start_component("BNB Collector", os.path.join(BASE_DIR, "bnb", "bnb_collector.py"))
+    start_component("HYPE Collector", os.path.join(BASE_DIR, "hype", "hype_collector.py"))
     
     # Step 3: Start APIs
-    print("\n[3/4] Starting prediction APIs...")
-    start_component("Bitcoin API", os.path.join(BASE_DIR, "bitcoin", "api.py"))
-    start_component("BNB API", os.path.join(BASE_DIR, "bnb", "api.py"))
+    print("\n[3/5] Starting prediction APIs...")
+    start_component("Bitcoin API", os.path.join(BASE_DIR, "bitcoin", "btc_api.py"))
+    start_component("BNB API", os.path.join(BASE_DIR, "bnb", "bnb_api.py"))
+    start_component("HYPE API", os.path.join(BASE_DIR, "hype", "hype_api.py"))
     
     # Wait for APIs to be ready
     print("\n  Waiting for APIs to initialize...")
     time.sleep(5)
     
     # Step 4: Start prediction generators
-    print("\n[4/4] Starting automatic prediction generators...")
-    start_component("Bitcoin Generator (15min)", os.path.join(BASE_DIR, "bitcoin", "generate_predictions.py"))
-    start_component("BNB Generator (5min)", os.path.join(BASE_DIR, "bnb", "generate_predictions.py"))
+    print("\n[4/5] Starting automatic prediction generators...")
+    start_component("Bitcoin Generator (15min)", os.path.join(BASE_DIR, "bitcoin", "btc_generate_predictions.py"))
+    start_component("BNB Generator (5min)", os.path.join(BASE_DIR, "bnb", "bnb_generate_predictions.py"))
+    start_component("HYPE Generator (5min)", os.path.join(BASE_DIR, "hype", "hype_generate_predictions.py"))
+    
+    # Step 5: Start auto-retrain daemons
+    print("\n[5/5] Starting auto-retrain daemons...")
+    start_component("Bitcoin Auto-Retrain", os.path.join(BASE_DIR, "bitcoin", "auto_retrain.py"))
+    start_component("BNB Auto-Retrain", os.path.join(BASE_DIR, "bnb", "bnb_auto_retrain.py"))
+    start_component("HYPE Auto-Retrain", os.path.join(BASE_DIR, "hype", "hype_auto_retrain.py"))
     
     # Summary
     print("\n" + "=" * 60)
     print("SYSTEM STARTED SUCCESSFULLY!")
     print("=" * 60)
     print("\nComponents running:")
-    print("  - Data collectors: Collecting prices every 5 seconds")
-    print("  - Prediction APIs: Ready on ports 5001 (BTC) and 5002 (BNB)")
+    print("  - Data collectors: Collecting prices every 5-6 seconds")
+    print("  - Prediction APIs: Ready on ports 5001 (BTC), 5002 (BNB), 5003 (HYPE)")
     print("  - Auto-predictions:")
     print("    * Bitcoin: Every 15 minutes")
     print("    * BNB: Every 5 minutes")
+    print("    * HYPE: Every 5 minutes")
+    print("  - Auto-retrain daemons: Monitoring for retraining triggers")
     print("\nPress Ctrl+C to stop all components")
     print("=" * 60)
     

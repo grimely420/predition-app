@@ -35,12 +35,14 @@ def load_price_data(limit: Optional[int] = None, since_timestamp: Optional[str] 
     try:
         conn = get_db_connection(DB_PATH)
         
-        query = "SELECT timestamp, price FROM prices ORDER BY id ASC"
+        query = "SELECT timestamp, price FROM prices"
         params = []
         
         if since_timestamp:
             query += " WHERE timestamp >= ?"
             params.append(since_timestamp)
+        
+        query += " ORDER BY id ASC"
         
         df = pd.read_sql_query(query, conn, params=params)
         conn.close()

@@ -9,7 +9,8 @@ import time
 import subprocess
 from datetime import datetime
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PREDICTION_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prediction")
+sys.path.insert(0, PREDICTION_DIR)
 
 from shared.utils import setup_logging, get_db_connection
 from bitcoin.config import DB_PATH, MODEL_DIR, RETRAIN_EVERY_N_POINTS, SYMBOL
@@ -62,7 +63,7 @@ def save_last_train_count(count: int) -> None:
 def run_retrain() -> bool:
     """Run the retraining script."""
     try:
-        script_path = os.path.join(os.path.dirname(__file__), "model.py")
+        script_path = os.path.join(os.path.dirname(__file__), "prediction", "bitcoin", "model.py")
         result = subprocess.run(
             [sys.executable, script_path],
             capture_output=True,

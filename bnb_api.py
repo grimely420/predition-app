@@ -14,9 +14,10 @@ import threading
 import time
 import pytz
 
-# Add parent directory to path
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, BASE_DIR)
+# Add project directory to path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PREDICTION_DIR = os.path.join(BASE_DIR, "prediction")
+sys.path.insert(0, PREDICTION_DIR)
 
 from bnb.config import DB_PATH, MODEL_DIR, THRESHOLD_FILE, SYMBOL, PREDICTION_HORIZON
 from shared.predictor import get_predictor

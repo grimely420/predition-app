@@ -80,8 +80,8 @@ def check_data_available():
     """Check if there's enough data for training."""
     import sqlite3
     
-    btc_db = os.path.join(BASE_DIR, "bitcoin", "bitcoin_prices.db")
-    bnb_db = os.path.join(BASE_DIR, "bnb", "bnb_prices.db")
+    btc_db = os.path.join(BASE_DIR, "prediction", "bitcoin", "bitcoin_prices.db")
+    bnb_db = os.path.join(BASE_DIR, "prediction", "bnb", "bnb_prices.db")
     
     btc_count = 0
     bnb_count = 0
@@ -120,7 +120,7 @@ def train_models_if_needed():
         logger.info("Training Bitcoin model...")
         try:
             result = subprocess.run(
-                [VENV_PYTHON, os.path.join(BASE_DIR, "bitcoin", "model.py")],
+                [VENV_PYTHON, os.path.join(BASE_DIR, "prediction", "bitcoin", "model.py")],
                 cwd=BASE_DIR,
                 capture_output=True,
                 text=True,
@@ -140,7 +140,7 @@ def train_models_if_needed():
         logger.info("Training BNB model...")
         try:
             result = subprocess.run(
-                [VENV_PYTHON, os.path.join(BASE_DIR, "bnb", "model.py")],
+                [VENV_PYTHON, os.path.join(BASE_DIR, "prediction", "bnb", "model.py")],
                 cwd=BASE_DIR,
                 capture_output=True,
                 text=True,

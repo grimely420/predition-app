@@ -10,7 +10,7 @@ import signal
 import requests
 from abc import ABC, abstractmethod
 from datetime import datetime, timezone
-from typing import Optional, Tuple, List, Dict, Any
+from typing import Optional, Tuple, List, Dict, Any, Callable
 from dataclasses import dataclass
 
 from .utils import setup_logging, get_db_connection, ensure_table_schema, get_timestamp
@@ -21,7 +21,7 @@ class APIEndpoint:
     """Represents a price API endpoint configuration."""
     name: str
     url: str
-    parser: callable
+    parser: Callable
     timeout: int = 10
     weight: int = 1  # Lower weight = higher priority
     cooldown: int = 1  # Minimum seconds between calls
