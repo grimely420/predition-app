@@ -1,0 +1,8 @@
+2026-07-08 22:07:47 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-08 22:07:47 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-08 22:07:47 - PredictorLoop - INFO - [BNB:5m] Predicted 573.9308 (change -0.0756% model=xgboost)
+2026-07-08 22:07:47 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-08 22:07:47 - PredictorLoop - INFO - [BNB:10m] Predicted 573.4103 (change -0.1662% model=xgboost)
+2026-07-08 22:07:47 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-08 22:07:47 - PredictorLoop - INFO - [BNB:15m] Predicted 573.0015 (change -0.2374% model=xgboost)
+2026-07-08 22:08:10 - PredictorLoop - INFO - Shutdown signal received

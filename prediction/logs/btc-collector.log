@@ -1,0 +1,7 @@
+2026-07-08 22:07:31 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-08 22:07:31 - DataStore - ERROR - [BTC] save_price error: table prices has no column named created_at
+2026-07-08 22:07:36 - DataStore - ERROR - [BTC] save_price error: table prices has no column named created_at
+2026-07-08 22:07:41 - DataStore - ERROR - [BTC] save_price error: table prices has no column named created_at
+2026-07-08 22:07:46 - DataStore - ERROR - [BTC] save_price error: table prices has no column named created_at
+2026-07-08 22:08:05 - BTC-Collector - INFO - Shutdown signal received
+2026-07-08 22:08:05 - BTC-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))

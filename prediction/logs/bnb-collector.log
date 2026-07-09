@@ -1,0 +1,8 @@
+2026-07-08 22:07:33 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-08 22:07:33 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-08 22:07:33 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-08 22:07:38 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-08 22:07:39 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-08 22:07:44 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-08 22:07:44 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-08 22:08:06 - BNB-Collector - INFO - Shutdown signal received

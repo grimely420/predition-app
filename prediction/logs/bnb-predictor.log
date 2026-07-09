@@ -1,0 +1,392 @@
+2026-06-18 08:20:51 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-reaction/prediction/prediction-system/bnb/models/xgb_5min_latest.pkl
+2026-06-18 08:20:51 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:25:51 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:30:51 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:35:51 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:40:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:45:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:50:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 08:55:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:00:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:05:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:10:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:15:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:20:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:25:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:30:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:35:52 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:40:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:45:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:50:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 09:55:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:00:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:05:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:10:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:15:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:20:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:25:53 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:30:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:35:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:40:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:45:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:50:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 10:55:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:00:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:05:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:10:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:15:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:20:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:25:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:30:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:35:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:40:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:45:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:50:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 11:55:54 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:00:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:05:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:10:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:15:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:20:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:25:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:30:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:35:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:40:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:45:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:50:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 12:55:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:00:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:05:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:10:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:15:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:20:55 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:25:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:30:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:35:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:40:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:45:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:50:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 13:55:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:00:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:05:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:10:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:15:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:20:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:25:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:30:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:35:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:40:56 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:45:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:50:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 14:55:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:00:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:05:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:10:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:15:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:20:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:25:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:30:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:35:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:40:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:45:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:50:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 15:55:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:00:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:05:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:10:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:15:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:20:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:25:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:30:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:35:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:40:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:45:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:50:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 16:55:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:00:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:05:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:10:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:15:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:20:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:25:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:30:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:35:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:40:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:45:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:50:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 17:55:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:00:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:05:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:10:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:15:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:20:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:25:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:30:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:35:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:40:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:45:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:50:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 18:56:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:01:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:06:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:11:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:16:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:21:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:26:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:31:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:36:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:41:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:46:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:51:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 19:56:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:01:00 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:06:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:11:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:16:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:21:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:26:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:31:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:36:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:41:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:46:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:51:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 20:56:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:01:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:06:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:11:01 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:16:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:21:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:26:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:31:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:36:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:41:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:46:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:51:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 21:56:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:01:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:06:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:11:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:16:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:21:02 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:26:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:31:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:36:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:41:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:46:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:51:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 22:56:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-18 23:01:03 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:25:57 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-reaction/prediction/prediction-system/bnb/models/xgb_5min_latest.pkl
+2026-06-19 21:25:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:30:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:35:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:40:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:45:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:50:57 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 21:55:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:00:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:05:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:10:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:15:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:20:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:25:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:30:58 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:35:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:40:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-19 22:45:59 - BNB-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 4, got 14
+2026-06-23 01:02:08 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:02:08 - BNB-Predictor - INFO - Prediction: $579.85 (Current: $579.92, Change: -0.01%, Model: xgboost)
+2026-06-23 01:02:51 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:02:51 - BNB-Predictor - INFO - Prediction: $586.72 (Current: $586.79, Change: -0.01%, Model: xgboost)
+2026-06-23 01:06:58 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:06:58 - BNB-Predictor - INFO - Prediction: $587.20 (Current: $587.11, Change: +0.02%, Model: xgboost)
+2026-06-23 01:07:10 - BNB-Predictor - INFO - Prediction: $587.15 (Current: $587.11, Change: +0.01%, Model: xgboost)
+2026-06-23 01:08:04 - BNB-Predictor - INFO - Prediction: $586.70 (Current: $586.75, Change: -0.01%, Model: xgboost)
+2026-06-23 01:09:00 - BNB-Predictor - INFO - Prediction: $586.46 (Current: $586.50, Change: -0.01%, Model: xgboost)
+2026-06-23 01:09:16 - BNB-Predictor - INFO - Prediction: $586.37 (Current: $586.49, Change: -0.02%, Model: xgboost)
+2026-06-23 01:11:23 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:11:23 - BNB-Predictor - INFO - Prediction: $587.21 (Current: $587.23, Change: -0.00%, Model: xgboost)
+2026-06-23 01:11:39 - BNB-Predictor - INFO - Prediction: $587.21 (Current: $587.23, Change: -0.00%, Model: xgboost)
+2026-06-23 01:12:52 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:12:52 - BNB-Predictor - INFO - Prediction: $587.14 (Current: $587.05, Change: +0.02%, Model: xgboost)
+2026-06-23 01:13:07 - BNB-Predictor - INFO - Prediction: $587.12 (Current: $587.04, Change: +0.01%, Model: xgboost)
+2026-06-23 01:15:32 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:15:32 - BNB-Predictor - INFO - Prediction: $586.59 (Current: $586.28, Change: +0.05%, Model: xgboost)
+2026-06-23 01:15:50 - BNB-Predictor - INFO - Prediction: $586.50 (Current: $586.20, Change: +0.05%, Model: xgboost)
+2026-06-23 01:16:47 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:16:47 - BNB-Predictor - INFO - Prediction: $586.88 (Current: $586.50, Change: +0.07%, Model: xgboost)
+2026-06-23 01:17:39 - BNB-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-06-23 01:17:39 - BNB-Predictor - INFO - Prediction: $586.93 (Current: $586.62, Change: +0.05%, Model: xgboost)
+2026-06-23 01:18:55 - BNB-Predictor - INFO - Prediction: $586.58 (Current: $586.26, Change: +0.05%, Model: xgboost)
+2026-06-23 01:22:40 - BNB-Predictor - INFO - Prediction: $585.42 (Current: $585.66, Change: -0.04%, Model: xgboost)
+2026-06-23 01:27:40 - BNB-Predictor - INFO - Prediction: $585.26 (Current: $584.79, Change: +0.08%, Model: xgboost)
+2026-06-23 01:32:40 - BNB-Predictor - INFO - Prediction: $585.59 (Current: $585.55, Change: +0.01%, Model: xgboost)
+2026-06-23 01:37:40 - BNB-Predictor - INFO - Prediction: $585.44 (Current: $585.54, Change: -0.02%, Model: xgboost)
+2026-06-23 01:42:40 - BNB-Predictor - INFO - Prediction: $585.31 (Current: $585.48, Change: -0.03%, Model: xgboost)
+2026-06-23 01:47:40 - BNB-Predictor - INFO - Prediction: $585.39 (Current: $585.59, Change: -0.03%, Model: xgboost)
+2026-06-23 01:52:40 - BNB-Predictor - INFO - Prediction: $584.96 (Current: $585.14, Change: -0.03%, Model: xgboost)
+2026-06-23 01:57:40 - BNB-Predictor - INFO - Prediction: $585.48 (Current: $585.17, Change: +0.05%, Model: xgboost)
+2026-06-23 02:02:40 - BNB-Predictor - INFO - Prediction: $584.46 (Current: $584.59, Change: -0.02%, Model: xgboost)
+2026-06-23 02:07:40 - BNB-Predictor - INFO - Prediction: $583.86 (Current: $583.98, Change: -0.02%, Model: xgboost)
+2026-06-23 02:12:40 - BNB-Predictor - INFO - Prediction: $582.72 (Current: $582.31, Change: +0.07%, Model: xgboost)
+2026-06-23 02:17:41 - BNB-Predictor - INFO - Prediction: $581.91 (Current: $582.53, Change: -0.11%, Model: xgboost)
+2026-06-23 02:22:41 - BNB-Predictor - INFO - Prediction: $577.22 (Current: $577.68, Change: -0.08%, Model: xgboost)
+2026-06-23 02:27:41 - BNB-Predictor - INFO - Prediction: $577.59 (Current: $578.40, Change: -0.14%, Model: xgboost)
+2026-06-23 02:32:41 - BNB-Predictor - INFO - Prediction: $577.81 (Current: $578.83, Change: -0.18%, Model: xgboost)
+2026-06-23 02:37:41 - BNB-Predictor - INFO - Prediction: $580.21 (Current: $580.25, Change: -0.01%, Model: xgboost)
+2026-06-23 02:42:41 - BNB-Predictor - INFO - Prediction: $580.13 (Current: $580.44, Change: -0.05%, Model: xgboost)
+2026-06-23 02:47:41 - BNB-Predictor - INFO - Prediction: $580.53 (Current: $580.96, Change: -0.07%, Model: xgboost)
+2026-06-23 02:52:41 - BNB-Predictor - INFO - Prediction: $579.97 (Current: $580.07, Change: -0.02%, Model: xgboost)
+2026-06-23 02:57:41 - BNB-Predictor - INFO - Prediction: $580.57 (Current: $580.53, Change: +0.01%, Model: xgboost)
+2026-06-23 03:02:41 - BNB-Predictor - INFO - Prediction: $581.03 (Current: $580.98, Change: +0.01%, Model: xgboost)
+2026-06-23 03:07:42 - BNB-Predictor - INFO - Prediction: $580.80 (Current: $581.00, Change: -0.03%, Model: xgboost)
+2026-06-23 03:12:42 - BNB-Predictor - INFO - Prediction: $580.76 (Current: $581.02, Change: -0.05%, Model: xgboost)
+2026-06-23 03:17:42 - BNB-Predictor - INFO - Prediction: $581.07 (Current: $581.24, Change: -0.03%, Model: xgboost)
+2026-06-23 03:22:42 - BNB-Predictor - INFO - Prediction: $582.27 (Current: $581.93, Change: +0.06%, Model: xgboost)
+2026-06-23 03:27:42 - BNB-Predictor - INFO - Prediction: $581.47 (Current: $581.53, Change: -0.01%, Model: xgboost)
+2026-06-23 03:32:42 - BNB-Predictor - INFO - Prediction: $580.93 (Current: $580.87, Change: +0.01%, Model: xgboost)
+2026-06-23 03:37:42 - BNB-Predictor - INFO - Prediction: $581.29 (Current: $580.92, Change: +0.06%, Model: xgboost)
+2026-06-23 03:42:42 - BNB-Predictor - INFO - Prediction: $580.76 (Current: $580.98, Change: -0.04%, Model: xgboost)
+2026-06-23 03:47:42 - BNB-Predictor - INFO - Prediction: $580.98 (Current: $581.10, Change: -0.02%, Model: xgboost)
+2026-06-23 03:52:42 - BNB-Predictor - INFO - Prediction: $580.81 (Current: $580.75, Change: +0.01%, Model: xgboost)
+2026-06-23 03:57:43 - BNB-Predictor - INFO - Prediction: $582.04 (Current: $581.22, Change: +0.14%, Model: xgboost)
+2026-06-23 04:02:43 - BNB-Predictor - INFO - Prediction: $580.64 (Current: $580.55, Change: +0.01%, Model: xgboost)
+2026-06-23 04:07:43 - BNB-Predictor - INFO - Prediction: $579.65 (Current: $579.88, Change: -0.04%, Model: xgboost)
+2026-06-23 04:12:43 - BNB-Predictor - INFO - Prediction: $580.02 (Current: $580.04, Change: -0.00%, Model: xgboost)
+2026-06-23 04:17:43 - BNB-Predictor - INFO - Prediction: $576.48 (Current: $576.66, Change: -0.03%, Model: xgboost)
+2026-06-23 04:22:43 - BNB-Predictor - INFO - Prediction: $575.06 (Current: $574.54, Change: +0.09%, Model: xgboost)
+2026-06-23 04:27:43 - BNB-Predictor - INFO - Prediction: $571.27 (Current: $572.47, Change: -0.21%, Model: xgboost)
+2026-06-23 04:32:43 - BNB-Predictor - INFO - Prediction: $572.57 (Current: $573.16, Change: -0.10%, Model: xgboost)
+2026-06-23 04:37:43 - BNB-Predictor - INFO - Prediction: $572.06 (Current: $573.60, Change: -0.27%, Model: xgboost)
+2026-06-23 04:42:43 - BNB-Predictor - INFO - Prediction: $573.96 (Current: $574.25, Change: -0.05%, Model: xgboost)
+2026-06-23 04:47:44 - BNB-Predictor - INFO - Prediction: $572.92 (Current: $573.18, Change: -0.05%, Model: xgboost)
+2026-06-23 04:52:44 - BNB-Predictor - INFO - Prediction: $573.66 (Current: $574.11, Change: -0.08%, Model: xgboost)
+2026-06-23 04:57:44 - BNB-Predictor - INFO - Prediction: $575.52 (Current: $574.49, Change: +0.18%, Model: xgboost)
+2026-06-23 05:02:44 - BNB-Predictor - INFO - Prediction: $573.74 (Current: $573.94, Change: -0.03%, Model: xgboost)
+2026-06-23 05:07:44 - BNB-Predictor - INFO - Prediction: $573.04 (Current: $573.18, Change: -0.02%, Model: xgboost)
+2026-06-23 05:12:44 - BNB-Predictor - INFO - Prediction: $572.15 (Current: $572.08, Change: +0.01%, Model: xgboost)
+2026-06-23 05:17:44 - BNB-Predictor - INFO - Prediction: $571.43 (Current: $572.66, Change: -0.22%, Model: xgboost)
+2026-06-23 05:22:44 - BNB-Predictor - INFO - Prediction: $573.07 (Current: $573.00, Change: +0.01%, Model: xgboost)
+2026-06-23 05:27:44 - BNB-Predictor - INFO - Prediction: $572.44 (Current: $572.71, Change: -0.05%, Model: xgboost)
+2026-06-23 05:32:44 - BNB-Predictor - INFO - Prediction: $572.67 (Current: $572.35, Change: +0.06%, Model: xgboost)
+2026-06-23 05:37:45 - BNB-Predictor - INFO - Prediction: $572.61 (Current: $572.23, Change: +0.07%, Model: xgboost)
+2026-06-23 05:42:45 - BNB-Predictor - INFO - Prediction: $571.24 (Current: $571.09, Change: +0.03%, Model: xgboost)
+2026-06-23 05:47:45 - BNB-Predictor - INFO - Prediction: $571.10 (Current: $571.05, Change: +0.01%, Model: xgboost)
+2026-06-23 05:52:45 - BNB-Predictor - INFO - Prediction: $571.89 (Current: $571.78, Change: +0.02%, Model: xgboost)
+2026-06-23 05:57:45 - BNB-Predictor - INFO - Prediction: $571.15 (Current: $571.40, Change: -0.05%, Model: xgboost)
+2026-06-23 06:02:45 - BNB-Predictor - INFO - Prediction: $572.33 (Current: $572.34, Change: -0.00%, Model: xgboost)
+2026-06-23 06:07:45 - BNB-Predictor - INFO - Prediction: $572.57 (Current: $572.38, Change: +0.03%, Model: xgboost)
+2026-06-23 06:12:45 - BNB-Predictor - INFO - Prediction: $571.18 (Current: $571.27, Change: -0.02%, Model: xgboost)
+2026-06-23 06:17:45 - BNB-Predictor - INFO - Prediction: $571.93 (Current: $571.62, Change: +0.06%, Model: xgboost)
+2026-06-23 06:22:46 - BNB-Predictor - INFO - Prediction: $571.96 (Current: $571.99, Change: -0.01%, Model: xgboost)
+2026-06-23 06:27:46 - BNB-Predictor - INFO - Prediction: $571.89 (Current: $571.98, Change: -0.02%, Model: xgboost)
+2026-06-23 06:32:46 - BNB-Predictor - INFO - Prediction: $571.53 (Current: $571.38, Change: +0.03%, Model: xgboost)
+2026-06-23 06:37:46 - BNB-Predictor - INFO - Prediction: $571.80 (Current: $571.53, Change: +0.05%, Model: xgboost)
+2026-06-23 06:42:46 - BNB-Predictor - INFO - Prediction: $570.56 (Current: $570.78, Change: -0.04%, Model: xgboost)
+2026-06-23 06:47:46 - BNB-Predictor - INFO - Prediction: $571.57 (Current: $571.54, Change: +0.00%, Model: xgboost)
+2026-06-23 06:52:46 - BNB-Predictor - INFO - Prediction: $571.57 (Current: $570.91, Change: +0.12%, Model: xgboost)
+2026-06-23 06:57:46 - BNB-Predictor - INFO - Prediction: $571.28 (Current: $571.46, Change: -0.03%, Model: xgboost)
+2026-06-23 07:02:46 - BNB-Predictor - INFO - Prediction: $571.21 (Current: $571.33, Change: -0.02%, Model: xgboost)
+2026-06-23 07:07:46 - BNB-Predictor - INFO - Prediction: $571.35 (Current: $571.41, Change: -0.01%, Model: xgboost)
+2026-06-23 07:12:47 - BNB-Predictor - INFO - Prediction: $571.94 (Current: $571.83, Change: +0.02%, Model: xgboost)
+2026-06-23 07:17:47 - BNB-Predictor - INFO - Prediction: $572.03 (Current: $572.17, Change: -0.02%, Model: xgboost)
+2026-06-23 07:22:47 - BNB-Predictor - INFO - Prediction: $573.29 (Current: $573.39, Change: -0.02%, Model: xgboost)
+2026-06-23 07:27:47 - BNB-Predictor - INFO - Prediction: $572.54 (Current: $573.37, Change: -0.15%, Model: xgboost)
+2026-06-23 07:32:47 - BNB-Predictor - INFO - Prediction: $573.73 (Current: $573.70, Change: +0.01%, Model: xgboost)
+2026-06-23 07:37:47 - BNB-Predictor - INFO - Prediction: $573.45 (Current: $573.38, Change: +0.01%, Model: xgboost)
+2026-06-23 07:42:47 - BNB-Predictor - INFO - Prediction: $573.27 (Current: $573.14, Change: +0.02%, Model: xgboost)
+2026-06-23 07:47:47 - BNB-Predictor - INFO - Prediction: $573.65 (Current: $573.38, Change: +0.05%, Model: xgboost)
+2026-06-23 07:52:47 - BNB-Predictor - INFO - Prediction: $572.88 (Current: $572.66, Change: +0.04%, Model: xgboost)
+2026-06-23 07:57:47 - BNB-Predictor - INFO - Prediction: $573.46 (Current: $573.29, Change: +0.03%, Model: xgboost)
+2026-06-23 08:02:48 - BNB-Predictor - INFO - Prediction: $573.58 (Current: $573.48, Change: +0.02%, Model: xgboost)
+2026-06-23 08:07:48 - BNB-Predictor - INFO - Prediction: $573.32 (Current: $573.48, Change: -0.03%, Model: xgboost)
+2026-06-23 08:12:48 - BNB-Predictor - INFO - Prediction: $573.99 (Current: $573.76, Change: +0.04%, Model: xgboost)
+2026-06-23 08:17:48 - BNB-Predictor - INFO - Prediction: $574.06 (Current: $573.85, Change: +0.04%, Model: xgboost)
+2026-06-23 08:22:48 - BNB-Predictor - INFO - Prediction: $573.92 (Current: $573.92, Change: -0.00%, Model: xgboost)
+2026-06-23 08:27:48 - BNB-Predictor - INFO - Prediction: $573.85 (Current: $573.62, Change: +0.04%, Model: xgboost)
+2026-06-23 08:32:48 - BNB-Predictor - INFO - Prediction: $574.92 (Current: $574.26, Change: +0.11%, Model: xgboost)
+2026-06-23 08:37:48 - BNB-Predictor - INFO - Prediction: $574.21 (Current: $574.14, Change: +0.01%, Model: xgboost)
+2026-06-23 08:42:48 - BNB-Predictor - INFO - Prediction: $573.39 (Current: $573.55, Change: -0.03%, Model: xgboost)
+2026-06-23 08:47:48 - BNB-Predictor - INFO - Prediction: $573.64 (Current: $573.17, Change: +0.08%, Model: xgboost)
+2026-06-23 08:52:49 - BNB-Predictor - INFO - Prediction: $573.13 (Current: $572.87, Change: +0.05%, Model: xgboost)
+2026-06-23 08:57:49 - BNB-Predictor - INFO - Prediction: $572.92 (Current: $572.77, Change: +0.03%, Model: xgboost)
+2026-06-23 09:02:49 - BNB-Predictor - INFO - Prediction: $572.62 (Current: $572.88, Change: -0.05%, Model: xgboost)
+2026-06-23 09:07:49 - BNB-Predictor - INFO - Prediction: $572.16 (Current: $572.18, Change: -0.00%, Model: xgboost)
+2026-06-23 09:12:49 - BNB-Predictor - INFO - Prediction: $571.50 (Current: $571.37, Change: +0.02%, Model: xgboost)
+2026-06-23 09:17:49 - BNB-Predictor - INFO - Prediction: $571.86 (Current: $571.92, Change: -0.01%, Model: xgboost)
+2026-06-23 09:22:49 - BNB-Predictor - INFO - Prediction: $570.97 (Current: $571.20, Change: -0.04%, Model: xgboost)
+2026-06-23 09:27:49 - BNB-Predictor - INFO - Prediction: $571.06 (Current: $571.26, Change: -0.04%, Model: xgboost)
+2026-06-23 09:32:49 - BNB-Predictor - INFO - Prediction: $573.58 (Current: $573.60, Change: -0.00%, Model: xgboost)
+2026-06-23 09:37:50 - BNB-Predictor - INFO - Prediction: $573.21 (Current: $572.89, Change: +0.06%, Model: xgboost)
+2026-06-23 09:42:50 - BNB-Predictor - INFO - Prediction: $572.93 (Current: $572.71, Change: +0.04%, Model: xgboost)
+2026-06-23 09:47:50 - BNB-Predictor - INFO - Prediction: $571.69 (Current: $571.82, Change: -0.02%, Model: xgboost)
+2026-06-23 09:52:50 - BNB-Predictor - INFO - Prediction: $573.03 (Current: $573.48, Change: -0.08%, Model: xgboost)
+2026-06-23 09:57:50 - BNB-Predictor - INFO - Prediction: $574.50 (Current: $574.09, Change: +0.07%, Model: xgboost)
+2026-06-23 10:02:50 - BNB-Predictor - INFO - Prediction: $575.51 (Current: $575.46, Change: +0.01%, Model: xgboost)
+2026-06-23 10:07:50 - BNB-Predictor - INFO - Prediction: $574.03 (Current: $574.59, Change: -0.10%, Model: xgboost)
+2026-06-23 10:12:50 - BNB-Predictor - INFO - Prediction: $574.26 (Current: $574.27, Change: -0.00%, Model: xgboost)
+2026-06-23 10:17:50 - BNB-Predictor - INFO - Prediction: $575.93 (Current: $575.91, Change: +0.00%, Model: xgboost)
+2026-06-23 10:22:51 - BNB-Predictor - INFO - Prediction: $574.79 (Current: $575.03, Change: -0.04%, Model: xgboost)
+2026-06-23 10:27:51 - BNB-Predictor - INFO - Prediction: $574.21 (Current: $574.23, Change: -0.00%, Model: xgboost)
+2026-06-23 10:32:51 - BNB-Predictor - INFO - Prediction: $575.36 (Current: $574.67, Change: +0.12%, Model: xgboost)
+2026-06-23 10:37:51 - BNB-Predictor - INFO - Prediction: $575.85 (Current: $575.82, Change: +0.01%, Model: xgboost)
+2026-06-23 10:42:51 - BNB-Predictor - INFO - Prediction: $574.68 (Current: $574.54, Change: +0.02%, Model: xgboost)
+2026-06-23 10:47:51 - BNB-Predictor - INFO - Prediction: $573.19 (Current: $573.07, Change: +0.02%, Model: xgboost)
+2026-06-23 10:52:51 - BNB-Predictor - INFO - Prediction: $573.45 (Current: $573.42, Change: +0.00%, Model: xgboost)
+2026-06-23 10:57:51 - BNB-Predictor - INFO - Prediction: $573.14 (Current: $573.17, Change: -0.01%, Model: xgboost)
+2026-06-23 11:02:51 - BNB-Predictor - INFO - Prediction: $573.20 (Current: $573.05, Change: +0.03%, Model: xgboost)
+2026-06-23 11:07:51 - BNB-Predictor - INFO - Prediction: $571.79 (Current: $572.04, Change: -0.04%, Model: xgboost)
+2026-06-23 11:12:52 - BNB-Predictor - INFO - Prediction: $572.46 (Current: $572.57, Change: -0.02%, Model: xgboost)
+2026-06-23 11:17:52 - BNB-Predictor - INFO - Prediction: $572.60 (Current: $572.75, Change: -0.02%, Model: xgboost)
+2026-06-23 11:22:52 - BNB-Predictor - INFO - Prediction: $572.61 (Current: $572.47, Change: +0.02%, Model: xgboost)
+2026-06-23 11:27:52 - BNB-Predictor - INFO - Prediction: $573.27 (Current: $572.99, Change: +0.05%, Model: xgboost)
+2026-06-23 11:32:52 - BNB-Predictor - INFO - Prediction: $573.37 (Current: $573.42, Change: -0.01%, Model: xgboost)
+2026-06-23 11:37:52 - BNB-Predictor - INFO - Prediction: $572.92 (Current: $573.18, Change: -0.05%, Model: xgboost)
+2026-06-23 11:42:52 - BNB-Predictor - INFO - Prediction: $572.45 (Current: $572.46, Change: -0.00%, Model: xgboost)
+2026-06-23 11:47:52 - BNB-Predictor - INFO - Prediction: $571.99 (Current: $571.80, Change: +0.03%, Model: xgboost)
+2026-06-23 11:52:52 - BNB-Predictor - INFO - Prediction: $572.08 (Current: $571.96, Change: +0.02%, Model: xgboost)
+2026-06-23 11:57:53 - BNB-Predictor - INFO - Prediction: $572.78 (Current: $573.17, Change: -0.07%, Model: xgboost)
+2026-06-23 12:02:53 - BNB-Predictor - INFO - Prediction: $573.72 (Current: $573.98, Change: -0.05%, Model: xgboost)
+2026-06-23 12:07:53 - BNB-Predictor - INFO - Prediction: $575.07 (Current: $575.45, Change: -0.07%, Model: xgboost)
+2026-06-23 12:12:53 - BNB-Predictor - INFO - Prediction: $575.69 (Current: $576.08, Change: -0.07%, Model: xgboost)
+2026-06-23 12:17:53 - BNB-Predictor - INFO - Prediction: $574.54 (Current: $575.11, Change: -0.10%, Model: xgboost)
+2026-06-23 12:22:53 - BNB-Predictor - INFO - Prediction: $575.04 (Current: $574.93, Change: +0.02%, Model: xgboost)
+2026-06-23 12:27:53 - BNB-Predictor - INFO - Prediction: $574.88 (Current: $574.75, Change: +0.02%, Model: xgboost)
+2026-06-23 12:32:53 - BNB-Predictor - INFO - Prediction: $574.19 (Current: $574.26, Change: -0.01%, Model: xgboost)
+2026-06-23 12:37:53 - BNB-Predictor - INFO - Prediction: $574.92 (Current: $574.48, Change: +0.08%, Model: xgboost)
+2026-06-23 12:42:54 - BNB-Predictor - INFO - Prediction: $574.52 (Current: $574.29, Change: +0.04%, Model: xgboost)
+2026-06-23 12:47:54 - BNB-Predictor - INFO - Prediction: $574.09 (Current: $574.50, Change: -0.07%, Model: xgboost)
+2026-06-23 12:52:54 - BNB-Predictor - INFO - Prediction: $574.30 (Current: $574.20, Change: +0.02%, Model: xgboost)
+2026-06-23 12:57:54 - BNB-Predictor - INFO - Prediction: $574.25 (Current: $573.83, Change: +0.07%, Model: xgboost)
+2026-06-23 13:02:54 - BNB-Predictor - INFO - Prediction: $573.59 (Current: $573.54, Change: +0.01%, Model: xgboost)
+2026-06-23 13:07:54 - BNB-Predictor - INFO - Prediction: $573.65 (Current: $573.29, Change: +0.06%, Model: xgboost)
+2026-06-23 13:12:54 - BNB-Predictor - INFO - Prediction: $574.36 (Current: $574.16, Change: +0.03%, Model: xgboost)
+2026-06-23 13:17:54 - BNB-Predictor - INFO - Prediction: $572.67 (Current: $572.95, Change: -0.05%, Model: xgboost)
+2026-06-23 13:22:54 - BNB-Predictor - INFO - Prediction: $574.01 (Current: $574.17, Change: -0.03%, Model: xgboost)
+2026-06-23 13:27:55 - BNB-Predictor - INFO - Prediction: $574.05 (Current: $574.38, Change: -0.06%, Model: xgboost)
+2026-06-23 13:32:55 - BNB-Predictor - INFO - Prediction: $573.42 (Current: $573.61, Change: -0.03%, Model: xgboost)
+2026-06-23 13:37:55 - BNB-Predictor - INFO - Prediction: $574.99 (Current: $575.13, Change: -0.03%, Model: xgboost)
+2026-06-23 13:42:55 - BNB-Predictor - INFO - Prediction: $573.78 (Current: $574.02, Change: -0.04%, Model: xgboost)
+2026-06-23 13:47:55 - BNB-Predictor - INFO - Prediction: $573.68 (Current: $573.66, Change: +0.00%, Model: xgboost)
+2026-06-23 13:52:55 - BNB-Predictor - INFO - Prediction: $573.60 (Current: $573.27, Change: +0.06%, Model: xgboost)
+2026-06-23 13:57:55 - BNB-Predictor - INFO - Prediction: $573.66 (Current: $573.53, Change: +0.02%, Model: xgboost)
+2026-06-23 14:02:55 - BNB-Predictor - INFO - Prediction: $573.81 (Current: $573.92, Change: -0.02%, Model: xgboost)
+2026-06-23 14:07:55 - BNB-Predictor - INFO - Prediction: $572.42 (Current: $572.68, Change: -0.05%, Model: xgboost)
+2026-06-23 14:12:56 - BNB-Predictor - INFO - Prediction: $572.68 (Current: $572.95, Change: -0.05%, Model: xgboost)
+2026-06-23 14:17:56 - BNB-Predictor - INFO - Prediction: $572.96 (Current: $573.15, Change: -0.03%, Model: xgboost)
+2026-06-23 14:22:56 - BNB-Predictor - INFO - Prediction: $573.84 (Current: $573.88, Change: -0.01%, Model: xgboost)
+2026-06-23 14:27:56 - BNB-Predictor - INFO - Prediction: $574.21 (Current: $574.36, Change: -0.03%, Model: xgboost)
+2026-06-23 14:32:56 - BNB-Predictor - INFO - Prediction: $573.71 (Current: $573.71, Change: +0.00%, Model: xgboost)
+2026-06-23 14:37:56 - BNB-Predictor - INFO - Prediction: $573.93 (Current: $573.25, Change: +0.12%, Model: xgboost)
+2026-06-23 14:42:56 - BNB-Predictor - INFO - Prediction: $573.16 (Current: $572.98, Change: +0.03%, Model: xgboost)
+2026-06-23 14:47:56 - BNB-Predictor - INFO - Prediction: $572.31 (Current: $572.13, Change: +0.03%, Model: xgboost)
+2026-06-23 14:52:56 - BNB-Predictor - INFO - Prediction: $573.49 (Current: $572.88, Change: +0.11%, Model: xgboost)
+2026-06-23 14:57:57 - BNB-Predictor - INFO - Prediction: $573.10 (Current: $573.21, Change: -0.02%, Model: xgboost)
+2026-06-23 15:02:57 - BNB-Predictor - INFO - Prediction: $573.36 (Current: $573.12, Change: +0.04%, Model: xgboost)
+2026-06-23 15:07:57 - BNB-Predictor - INFO - Prediction: $574.18 (Current: $574.12, Change: +0.01%, Model: xgboost)
+2026-06-23 15:12:57 - BNB-Predictor - INFO - Prediction: $574.20 (Current: $574.16, Change: +0.01%, Model: xgboost)
+2026-06-23 15:17:57 - BNB-Predictor - INFO - Prediction: $574.28 (Current: $574.18, Change: +0.02%, Model: xgboost)
+2026-06-23 15:22:57 - BNB-Predictor - INFO - Prediction: $573.91 (Current: $573.80, Change: +0.02%, Model: xgboost)
+2026-06-23 15:27:57 - BNB-Predictor - INFO - Prediction: $574.23 (Current: $574.06, Change: +0.03%, Model: xgboost)
+2026-06-23 15:32:57 - BNB-Predictor - INFO - Prediction: $574.45 (Current: $574.57, Change: -0.02%, Model: xgboost)
+2026-06-23 15:37:57 - BNB-Predictor - INFO - Prediction: $574.60 (Current: $574.60, Change: -0.00%, Model: xgboost)

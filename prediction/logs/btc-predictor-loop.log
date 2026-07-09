@@ -1,0 +1,8 @@
+2026-07-08 22:07:45 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-08 22:07:45 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:07:45 - PredictorLoop - INFO - [BTC:5m] Predicted 62212.4102 (change -0.0633% model=xgboost)
+2026-07-08 22:07:45 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-08 22:07:45 - PredictorLoop - INFO - [BTC:10m] Predicted 62239.8331 (change -0.0193% model=xgboost)
+2026-07-08 22:07:45 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:07:45 - PredictorLoop - INFO - [BTC:15m] Predicted 62028.451 (change -0.3588% model=xgboost)
+2026-07-08 22:08:09 - PredictorLoop - INFO - Shutdown signal received

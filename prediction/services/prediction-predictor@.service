@@ -1,0 +1,19 @@
+[Unit]
+Description=%I Predictor Loop
+After=network.target prediction-api.service
+Requires=prediction-api.service
+
+[Service]
+Type=simple
+User=chain-deaction
+WorkingDirectory=/home/chain-deaction/prediction
+Environment=PYTHONPATH=/home/chain-deaction/prediction
+Environment=PATH=/home/chain-deaction/prediction/.venv/bin:$PATH
+ExecStart=/home/chain-deaction/prediction/.venv/bin/python -m services.predictor_loop %i
+Restart=always
+RestartSec=30
+StandardOutput=append:/var/log/prediction-system/%i-predictor-loop.log
+StandardError=append:/var/log/prediction-system/%i-predictor-loop.log
+
+[Install]
+WantedBy=multi-user.target

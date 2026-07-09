@@ -1,0 +1,162 @@
+2026-06-18 08:30:51 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-reaction/prediction/prediction-system/bitcoin/models/xgb_15min_latest.pkl
+2026-06-18 08:30:51 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 08:45:52 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 09:00:52 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 09:15:53 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 09:30:53 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 09:38:09 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 09:45:54 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:00:54 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:15:55 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:30:55 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:45:56 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:54:19 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:54:26 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 10:55:45 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 11:00:56 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 11:15:57 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 11:30:57 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 11:45:57 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 12:00:57 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 12:15:57 - BTC-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 7, got 27
+2026-06-18 12:20:12 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-reaction/prediction/prediction-system/bitcoin/models/xgb_15min_latest.pkl
+2026-06-18 12:20:12 - BTC-Predictor - INFO - Prediction: $62635.06 (Current: $62498.81, Change: +0.22%, Model: xgboost)
+2026-06-18 12:20:14 - BTC-Predictor - INFO - Prediction: $62635.06 (Current: $62498.81, Change: +0.22%, Model: xgboost)
+2026-06-18 12:20:20 - BTC-Predictor - INFO - Prediction: $62635.06 (Current: $62498.81, Change: +0.22%, Model: xgboost)
+2026-06-18 12:20:24 - BTC-Predictor - INFO - Prediction: $62635.06 (Current: $62498.81, Change: +0.22%, Model: xgboost)
+2026-06-18 12:20:35 - BTC-Predictor - INFO - Prediction: $62708.02 (Current: $62571.61, Change: +0.22%, Model: xgboost)
+2026-06-18 12:20:46 - BTC-Predictor - INFO - Prediction: $62770.55 (Current: $62634.00, Change: +0.22%, Model: xgboost)
+2026-06-18 12:20:59 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-reaction/prediction/prediction-system/bitcoin/models/xgb_15min_latest.pkl
+2026-06-18 12:20:59 - BTC-Predictor - INFO - Prediction: $62775.22 (Current: $62638.65, Change: +0.22%, Model: xgboost)
+2026-06-18 12:35:57 - BTC-Predictor - INFO - Prediction: $62652.27 (Current: $62547.18, Change: +0.17%, Model: xgboost)
+2026-06-18 12:50:57 - BTC-Predictor - INFO - Prediction: $62715.82 (Current: $62608.62, Change: +0.17%, Model: xgboost)
+2026-06-18 13:05:58 - BTC-Predictor - INFO - Prediction: $62627.88 (Current: $62531.11, Change: +0.15%, Model: xgboost)
+2026-06-18 13:20:58 - BTC-Predictor - INFO - Prediction: $62550.06 (Current: $62490.89, Change: +0.09%, Model: xgboost)
+2026-06-18 13:35:58 - BTC-Predictor - INFO - Prediction: $62646.78 (Current: $62583.29, Change: +0.10%, Model: xgboost)
+2026-06-18 13:50:58 - BTC-Predictor - INFO - Prediction: $62445.63 (Current: $62563.79, Change: -0.19%, Model: xgboost)
+2026-06-18 14:05:58 - BTC-Predictor - INFO - Prediction: $62669.10 (Current: $62588.56, Change: +0.13%, Model: xgboost)
+2026-06-18 14:20:58 - BTC-Predictor - INFO - Prediction: $62920.23 (Current: $62835.14, Change: +0.14%, Model: xgboost)
+2026-06-18 14:35:59 - BTC-Predictor - INFO - Prediction: $62748.04 (Current: $62703.96, Change: +0.07%, Model: xgboost)
+2026-06-18 14:50:59 - BTC-Predictor - INFO - Prediction: $62651.67 (Current: $62712.00, Change: -0.10%, Model: xgboost)
+2026-06-18 15:05:59 - BTC-Predictor - INFO - Prediction: $62477.97 (Current: $62587.96, Change: -0.18%, Model: xgboost)
+2026-06-18 15:20:59 - BTC-Predictor - INFO - Prediction: $62683.08 (Current: $62602.68, Change: +0.13%, Model: xgboost)
+2026-06-18 15:35:59 - BTC-Predictor - INFO - Prediction: $62761.69 (Current: $62713.88, Change: +0.08%, Model: xgboost)
+2026-06-18 15:50:59 - BTC-Predictor - INFO - Prediction: $62909.51 (Current: $62863.28, Change: +0.07%, Model: xgboost)
+2026-06-18 16:05:59 - BTC-Predictor - INFO - Prediction: $63187.15 (Current: $63085.86, Change: +0.16%, Model: xgboost)
+2026-06-18 16:21:00 - BTC-Predictor - INFO - Prediction: $63107.83 (Current: $63130.21, Change: -0.04%, Model: xgboost)
+2026-06-18 16:36:00 - BTC-Predictor - INFO - Prediction: $63019.83 (Current: $63049.68, Change: -0.05%, Model: xgboost)
+2026-06-18 16:51:00 - BTC-Predictor - INFO - Prediction: $62992.35 (Current: $62997.97, Change: -0.01%, Model: xgboost)
+2026-06-18 17:06:00 - BTC-Predictor - INFO - Prediction: $63038.93 (Current: $63012.86, Change: +0.04%, Model: xgboost)
+2026-06-18 17:21:00 - BTC-Predictor - INFO - Prediction: $62785.82 (Current: $62937.12, Change: -0.24%, Model: xgboost)
+2026-06-18 17:36:00 - BTC-Predictor - INFO - Prediction: $62819.81 (Current: $62893.00, Change: -0.12%, Model: xgboost)
+2026-06-18 17:51:00 - BTC-Predictor - INFO - Prediction: $62788.64 (Current: $62867.07, Change: -0.12%, Model: xgboost)
+2026-06-18 18:06:01 - BTC-Predictor - INFO - Prediction: $62770.97 (Current: $62841.93, Change: -0.11%, Model: xgboost)
+2026-06-18 18:21:01 - BTC-Predictor - INFO - Prediction: $62768.62 (Current: $62721.99, Change: +0.07%, Model: xgboost)
+2026-06-18 18:36:01 - BTC-Predictor - INFO - Prediction: $62643.22 (Current: $62716.01, Change: -0.12%, Model: xgboost)
+2026-06-18 18:51:01 - BTC-Predictor - INFO - Prediction: $62686.42 (Current: $62777.74, Change: -0.15%, Model: xgboost)
+2026-06-18 19:06:01 - BTC-Predictor - INFO - Prediction: $62757.87 (Current: $62796.42, Change: -0.06%, Model: xgboost)
+2026-06-18 19:21:01 - BTC-Predictor - INFO - Prediction: $62569.38 (Current: $62762.18, Change: -0.31%, Model: xgboost)
+2026-06-18 19:36:02 - BTC-Predictor - INFO - Prediction: $62764.65 (Current: $62821.97, Change: -0.09%, Model: xgboost)
+2026-06-18 19:51:02 - BTC-Predictor - INFO - Prediction: $62878.34 (Current: $62856.72, Change: +0.03%, Model: xgboost)
+2026-06-18 20:06:02 - BTC-Predictor - INFO - Prediction: $62890.49 (Current: $62879.11, Change: +0.02%, Model: xgboost)
+2026-06-18 20:21:02 - BTC-Predictor - INFO - Prediction: $62830.91 (Current: $62842.51, Change: -0.02%, Model: xgboost)
+2026-06-18 20:36:02 - BTC-Predictor - INFO - Prediction: $62907.63 (Current: $62943.53, Change: -0.06%, Model: xgboost)
+2026-06-18 20:51:03 - BTC-Predictor - INFO - Prediction: $63026.97 (Current: $62949.18, Change: +0.12%, Model: xgboost)
+2026-06-18 21:06:03 - BTC-Predictor - INFO - Prediction: $63001.85 (Current: $63005.46, Change: -0.01%, Model: xgboost)
+2026-06-18 21:21:03 - BTC-Predictor - INFO - Prediction: $62907.78 (Current: $62976.49, Change: -0.11%, Model: xgboost)
+2026-06-18 21:36:03 - BTC-Predictor - INFO - Prediction: $62674.67 (Current: $62790.68, Change: -0.18%, Model: xgboost)
+2026-06-18 21:51:03 - BTC-Predictor - INFO - Prediction: $62789.14 (Current: $62864.76, Change: -0.12%, Model: xgboost)
+2026-06-18 22:06:03 - BTC-Predictor - INFO - Prediction: $62971.15 (Current: $63040.06, Change: -0.11%, Model: xgboost)
+2026-06-18 22:21:04 - BTC-Predictor - INFO - Prediction: $62869.61 (Current: $62920.71, Change: -0.08%, Model: xgboost)
+2026-06-18 22:36:04 - BTC-Predictor - INFO - Prediction: $62890.21 (Current: $62945.15, Change: -0.09%, Model: xgboost)
+2026-06-18 22:51:04 - BTC-Predictor - INFO - Prediction: $62816.01 (Current: $62854.86, Change: -0.06%, Model: xgboost)
+2026-06-19 21:35:57 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-reaction/prediction/prediction-system/bitcoin/models/xgb_15min_latest.pkl
+2026-06-19 21:35:57 - BTC-Predictor - INFO - Prediction: $63428.07 (Current: $63491.86, Change: -0.10%, Model: xgboost)
+2026-06-19 21:50:57 - BTC-Predictor - INFO - Prediction: $63443.07 (Current: $63506.88, Change: -0.10%, Model: xgboost)
+2026-06-19 22:05:57 - BTC-Predictor - INFO - Prediction: $63381.68 (Current: $63445.43, Change: -0.10%, Model: xgboost)
+2026-06-19 22:20:58 - BTC-Predictor - INFO - Prediction: $63292.59 (Current: $63356.25, Change: -0.10%, Model: xgboost)
+2026-06-19 22:35:58 - BTC-Predictor - INFO - Prediction: $63351.19 (Current: $63414.90, Change: -0.10%, Model: xgboost)
+2026-06-23 01:02:07 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:02:07 - BTC-Predictor - INFO - Prediction: $63321.22 (Current: $63368.53, Change: -0.07%, Model: xgboost)
+2026-06-23 01:02:49 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:02:49 - BTC-Predictor - INFO - Prediction: $63537.71 (Current: $63585.18, Change: -0.07%, Model: xgboost)
+2026-06-23 01:06:04 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:06:04 - BTC-Predictor - INFO - Prediction: $63576.49 (Current: $63623.99, Change: -0.07%, Model: xgboost)
+2026-06-23 01:06:21 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:06:21 - BTC-Predictor - INFO - Prediction: $63581.10 (Current: $63628.60, Change: -0.07%, Model: xgboost)
+2026-06-23 01:06:55 - BTC-Predictor - INFO - Prediction: $63585.42 (Current: $63632.93, Change: -0.07%, Model: xgboost)
+2026-06-23 01:07:10 - BTC-Predictor - INFO - Prediction: $63591.05 (Current: $63638.56, Change: -0.07%, Model: xgboost)
+2026-06-23 01:08:02 - BTC-Predictor - INFO - Prediction: $63555.49 (Current: $63602.96, Change: -0.07%, Model: xgboost)
+2026-06-23 01:08:59 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:08:59 - BTC-Predictor - INFO - Prediction: $63527.03 (Current: $63574.49, Change: -0.07%, Model: xgboost)
+2026-06-23 01:09:16 - BTC-Predictor - INFO - Prediction: $63529.06 (Current: $63576.51, Change: -0.07%, Model: xgboost)
+2026-06-23 01:11:21 - BTC-Predictor - INFO - Prediction: $63578.61 (Current: $63626.11, Change: -0.07%, Model: xgboost)
+2026-06-23 01:11:39 - BTC-Predictor - INFO - Prediction: $63575.01 (Current: $63622.50, Change: -0.07%, Model: xgboost)
+2026-06-23 01:12:50 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:12:50 - BTC-Predictor - INFO - Prediction: $63578.51 (Current: $63626.00, Change: -0.07%, Model: xgboost)
+2026-06-23 01:13:07 - BTC-Predictor - INFO - Prediction: $63576.67 (Current: $63624.17, Change: -0.07%, Model: xgboost)
+2026-06-23 01:15:30 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:15:30 - BTC-Predictor - INFO - Prediction: $63521.20 (Current: $63514.92, Change: +0.01%, Model: xgboost)
+2026-06-23 01:15:50 - BTC-Predictor - INFO - Prediction: $63505.01 (Current: $63498.72, Change: +0.01%, Model: xgboost)
+2026-06-23 01:16:37 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:16:38 - BTC-Predictor - INFO - Prediction: $63584.33 (Current: $63578.04, Change: +0.01%, Model: xgboost)
+2026-06-23 01:17:37 - BTC-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-06-23 01:17:37 - BTC-Predictor - INFO - Prediction: $63583.51 (Current: $63577.21, Change: +0.01%, Model: xgboost)
+2026-06-23 01:18:55 - BTC-Predictor - INFO - Prediction: $63552.94 (Current: $63546.65, Change: +0.01%, Model: xgboost)
+2026-06-23 01:32:38 - BTC-Predictor - INFO - Prediction: $63402.76 (Current: $63396.49, Change: +0.01%, Model: xgboost)
+2026-06-23 01:47:38 - BTC-Predictor - INFO - Prediction: $63299.51 (Current: $63293.25, Change: +0.01%, Model: xgboost)
+2026-06-23 02:02:38 - BTC-Predictor - INFO - Prediction: $63313.74 (Current: $63307.47, Change: +0.01%, Model: xgboost)
+2026-06-23 02:17:38 - BTC-Predictor - INFO - Prediction: $63157.46 (Current: $63151.21, Change: +0.01%, Model: xgboost)
+2026-06-23 02:32:39 - BTC-Predictor - INFO - Prediction: $62701.12 (Current: $62698.60, Change: +0.00%, Model: xgboost)
+2026-06-23 02:47:39 - BTC-Predictor - INFO - Prediction: $62969.26 (Current: $62966.53, Change: +0.00%, Model: xgboost)
+2026-06-23 03:02:39 - BTC-Predictor - INFO - Prediction: $62933.07 (Current: $62862.96, Change: +0.11%, Model: xgboost)
+2026-06-23 03:17:39 - BTC-Predictor - INFO - Prediction: $63016.63 (Current: $62945.81, Change: +0.11%, Model: xgboost)
+2026-06-23 03:32:39 - BTC-Predictor - INFO - Prediction: $62768.38 (Current: $62834.00, Change: -0.10%, Model: xgboost)
+2026-06-23 03:47:39 - BTC-Predictor - INFO - Prediction: $62864.82 (Current: $62868.99, Change: -0.01%, Model: xgboost)
+2026-06-23 04:02:40 - BTC-Predictor - INFO - Prediction: $62813.81 (Current: $62835.29, Change: -0.03%, Model: xgboost)
+2026-06-23 04:17:40 - BTC-Predictor - INFO - Prediction: $62505.21 (Current: $62518.86, Change: -0.02%, Model: xgboost)
+2026-06-23 04:32:40 - BTC-Predictor - INFO - Prediction: $62284.08 (Current: $62136.83, Change: +0.24%, Model: xgboost)
+2026-06-23 04:47:40 - BTC-Predictor - INFO - Prediction: $62416.13 (Current: $62291.99, Change: +0.20%, Model: xgboost)
+2026-06-23 05:02:40 - BTC-Predictor - INFO - Prediction: $62416.58 (Current: $62371.21, Change: +0.07%, Model: xgboost)
+2026-06-23 05:17:41 - BTC-Predictor - INFO - Prediction: $62441.18 (Current: $62392.57, Change: +0.08%, Model: xgboost)
+2026-06-23 05:32:41 - BTC-Predictor - INFO - Prediction: $62464.08 (Current: $62415.61, Change: +0.08%, Model: xgboost)
+2026-06-23 05:47:41 - BTC-Predictor - INFO - Prediction: $62351.02 (Current: $62307.10, Change: +0.07%, Model: xgboost)
+2026-06-23 06:02:41 - BTC-Predictor - INFO - Prediction: $62447.34 (Current: $62404.00, Change: +0.07%, Model: xgboost)
+2026-06-23 06:17:41 - BTC-Predictor - INFO - Prediction: $62382.89 (Current: $62318.71, Change: +0.10%, Model: xgboost)
+2026-06-23 06:32:42 - BTC-Predictor - INFO - Prediction: $62320.91 (Current: $62269.79, Change: +0.08%, Model: xgboost)
+2026-06-23 06:47:42 - BTC-Predictor - INFO - Prediction: $62229.94 (Current: $62182.71, Change: +0.08%, Model: xgboost)
+2026-06-23 07:02:42 - BTC-Predictor - INFO - Prediction: $62364.62 (Current: $62312.03, Change: +0.08%, Model: xgboost)
+2026-06-23 07:17:42 - BTC-Predictor - INFO - Prediction: $62380.40 (Current: $62333.46, Change: +0.08%, Model: xgboost)
+2026-06-23 07:32:42 - BTC-Predictor - INFO - Prediction: $62586.77 (Current: $62544.00, Change: +0.07%, Model: xgboost)
+2026-06-23 07:47:43 - BTC-Predictor - INFO - Prediction: $62451.88 (Current: $62436.00, Change: +0.03%, Model: xgboost)
+2026-06-23 08:02:43 - BTC-Predictor - INFO - Prediction: $62560.14 (Current: $62478.50, Change: +0.13%, Model: xgboost)
+2026-06-23 08:17:43 - BTC-Predictor - INFO - Prediction: $62403.57 (Current: $62322.29, Change: +0.13%, Model: xgboost)
+2026-06-23 08:32:43 - BTC-Predictor - INFO - Prediction: $62393.30 (Current: $62334.00, Change: +0.10%, Model: xgboost)
+2026-06-23 08:47:43 - BTC-Predictor - INFO - Prediction: $62296.79 (Current: $62238.53, Change: +0.09%, Model: xgboost)
+2026-06-23 09:02:44 - BTC-Predictor - INFO - Prediction: $62263.55 (Current: $62201.18, Change: +0.10%, Model: xgboost)
+2026-06-23 09:17:44 - BTC-Predictor - INFO - Prediction: $62103.65 (Current: $62042.33, Change: +0.10%, Model: xgboost)
+2026-06-23 09:32:44 - BTC-Predictor - INFO - Prediction: $62353.06 (Current: $62291.20, Change: +0.10%, Model: xgboost)
+2026-06-23 09:47:44 - BTC-Predictor - INFO - Prediction: $62207.36 (Current: $62253.03, Change: -0.07%, Model: xgboost)
+2026-06-23 10:02:44 - BTC-Predictor - INFO - Prediction: $62450.52 (Current: $62511.06, Change: -0.10%, Model: xgboost)
+2026-06-23 10:17:45 - BTC-Predictor - INFO - Prediction: $62687.73 (Current: $62675.43, Change: +0.02%, Model: xgboost)
+2026-06-23 10:32:45 - BTC-Predictor - INFO - Prediction: $62212.91 (Current: $62393.75, Change: -0.29%, Model: xgboost)
+2026-06-23 10:47:45 - BTC-Predictor - INFO - Prediction: $62423.12 (Current: $62398.68, Change: +0.04%, Model: xgboost)
+2026-06-23 11:02:45 - BTC-Predictor - INFO - Prediction: $62450.79 (Current: $62368.77, Change: +0.13%, Model: xgboost)
+2026-06-23 11:17:46 - BTC-Predictor - INFO - Prediction: $62263.45 (Current: $62223.18, Change: +0.06%, Model: xgboost)
+2026-06-23 11:32:46 - BTC-Predictor - INFO - Prediction: $62385.52 (Current: $62315.00, Change: +0.11%, Model: xgboost)
+2026-06-23 11:47:46 - BTC-Predictor - INFO - Prediction: $62225.73 (Current: $62155.83, Change: +0.11%, Model: xgboost)
+2026-06-23 12:02:46 - BTC-Predictor - INFO - Prediction: $62415.54 (Current: $62387.06, Change: +0.05%, Model: xgboost)
+2026-06-23 12:17:46 - BTC-Predictor - INFO - Prediction: $62623.56 (Current: $62569.02, Change: +0.09%, Model: xgboost)
+2026-06-23 12:32:47 - BTC-Predictor - INFO - Prediction: $62422.30 (Current: $62513.89, Change: -0.15%, Model: xgboost)
+2026-06-23 12:47:47 - BTC-Predictor - INFO - Prediction: $62565.74 (Current: $62515.21, Change: +0.08%, Model: xgboost)
+2026-06-23 13:02:47 - BTC-Predictor - INFO - Prediction: $62485.89 (Current: $62421.10, Change: +0.10%, Model: xgboost)
+2026-06-23 13:17:47 - BTC-Predictor - INFO - Prediction: $62433.33 (Current: $62400.02, Change: +0.05%, Model: xgboost)
+2026-06-23 13:32:47 - BTC-Predictor - INFO - Prediction: $62527.10 (Current: $62430.50, Change: +0.15%, Model: xgboost)
+2026-06-23 13:47:48 - BTC-Predictor - INFO - Prediction: $62438.93 (Current: $62418.64, Change: +0.03%, Model: xgboost)
+2026-06-23 14:02:48 - BTC-Predictor - INFO - Prediction: $62436.27 (Current: $62368.00, Change: +0.11%, Model: xgboost)
+2026-06-23 14:17:48 - BTC-Predictor - INFO - Prediction: $62304.58 (Current: $62246.96, Change: +0.09%, Model: xgboost)
+2026-06-23 14:32:48 - BTC-Predictor - INFO - Prediction: $62271.12 (Current: $62214.42, Change: +0.09%, Model: xgboost)
+2026-06-23 14:47:49 - BTC-Predictor - INFO - Prediction: $62078.36 (Current: $62034.31, Change: +0.07%, Model: xgboost)
+2026-06-23 15:02:49 - BTC-Predictor - INFO - Prediction: $62283.98 (Current: $62168.43, Change: +0.19%, Model: xgboost)
+2026-06-23 15:17:49 - BTC-Predictor - INFO - Prediction: $62294.50 (Current: $62235.03, Change: +0.10%, Model: xgboost)
+2026-06-23 15:32:49 - BTC-Predictor - INFO - Prediction: $62355.67 (Current: $62334.86, Change: +0.03%, Model: xgboost)

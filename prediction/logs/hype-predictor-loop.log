@@ -1,0 +1,17 @@
+2026-07-08 22:07:49 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-08 22:07:49 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.22 (change 0.0% model=fallback)
+2026-07-08 22:07:49 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.22 (change 0.0% model=fallback)
+2026-07-08 22:07:49 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.22 (change 0.0% model=fallback)
+2026-07-08 22:07:49 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-08 22:08:11 - PredictorLoop - INFO - Shutdown signal received

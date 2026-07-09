@@ -1,0 +1,6 @@
+2026-06-18 10:55:36 - BNB-Model - INFO - Training BNB XGBoost model...
+2026-06-18 10:55:36 - BNB-Model - WARNING - Insufficient data for training: 1858 points
+2026-06-23 01:00:29 - BNB-Model - INFO - Training BNB XGBoost model...
+2026-06-23 01:00:30 - BNB-Model - INFO - Validation MAE: 0.00076 (0.076%)
+2026-06-23 01:00:30 - BNB-Model - INFO - Model saved to /home/chain-deaction/prediction/bnb/models/xgb_5min_20260623_010030.pkl
+2026-06-23 01:00:30 - BNB-Model - INFO - Training completed successfully

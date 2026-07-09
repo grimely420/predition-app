@@ -1,0 +1,52 @@
+2026-07-08 22:02:40 - ModelManager - WARNING - [BTC] Could not load train counts: 'ModelManager' object has no attribute 'model_dir'
+2026-07-08 22:02:40 - ModelManager - INFO - [BTC:5m] No model found, training...
+2026-07-08 22:02:41 - ModelManager - INFO - [BTC:5m] Trained model (17 features, 151 samples, val_mae=0.001433) -> /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:02:41 - ModelManager - INFO - [BTC:10m] No model found, training...
+2026-07-08 22:02:41 - ModelManager - INFO - [BTC:10m] Trained model (17 features, 146 samples, val_mae=0.003172) -> /home/chain-deaction/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-08 22:02:41 - ModelManager - INFO - [BTC:15m] Loaded model (27 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:02:41 - ModelManager - WARNING - [BTC:15m] Feature mismatch (saved=27, current=17). Retraining...
+2026-07-08 22:02:41 - ModelManager - INFO - [BTC:15m] Trained model (17 features, 141 samples, val_mae=0.004526) -> /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:03:13 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:03:13 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-08 22:03:13 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:03:27 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:03:27 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-08 22:03:27 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:03:33 - ModelManager - INFO - [BNB:5m] Loaded model (14 features) from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-08 22:03:33 - ModelManager - WARNING - [BNB:5m] Feature mismatch (saved=14, current=17). Retraining...
+2026-07-08 22:03:33 - ModelManager - INFO - [BNB:5m] Trained model (17 features, 158 samples, val_mae=0.001282) -> /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-08 22:03:33 - ModelManager - INFO - [BNB:10m] No model found, training...
+2026-07-08 22:03:33 - ModelManager - INFO - [BNB:10m] Trained model (17 features, 153 samples, val_mae=0.001844) -> /home/chain-deaction/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-08 22:03:33 - ModelManager - INFO - [BNB:15m] No model found, training...
+2026-07-08 22:03:33 - ModelManager - INFO - [BNB:15m] Trained model (17 features, 148 samples, val_mae=0.001642) -> /home/chain-deaction/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-08 22:04:48 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:05:58 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:05:58 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-08 22:05:58 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:06:00 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-08 22:06:00 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-08 22:06:00 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-08 22:06:02 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-08 22:06:02 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-08 22:06:02 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-08 22:06:02 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-08 22:06:02 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-08 22:06:02 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-08 22:06:02 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-08 22:06:02 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-08 22:06:02 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:45 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-08 22:07:45 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-08 22:07:45 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-08 22:07:47 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-08 22:07:47 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-08 22:07:47 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-08 22:07:49 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)

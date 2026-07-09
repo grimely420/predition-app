@@ -1,0 +1,8 @@
+2026-06-18 10:55:00 - BTC-Model - INFO - Training BTC XGBoost model...
+2026-06-18 10:55:01 - BTC-Model - INFO - Validation MAE: 0.00166 (0.166%)
+2026-06-18 10:55:01 - BTC-Model - INFO - Model saved to /home/chain-reaction/prediction/prediction-system/bitcoin/models/xgb_15min_20260618_105501.pkl
+2026-06-18 10:55:01 - BTC-Model - INFO - Training completed successfully
+2026-06-23 01:14:49 - BTC-Model - INFO - Training BTC XGBoost model...
+2026-06-23 01:14:51 - BTC-Model - INFO - Validation MAE: 0.00155 (0.155%)
+2026-06-23 01:14:52 - BTC-Model - INFO - Model saved to /home/chain-deaction/prediction/bitcoin/models/xgb_15min_20260623_011452.pkl
+2026-06-23 01:14:52 - BTC-Model - INFO - Training completed successfully
