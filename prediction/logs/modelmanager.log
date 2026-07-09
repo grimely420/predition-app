@@ -50,3 +50,161 @@
 2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
 2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
 2026-07-08 22:07:49 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:09 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:09 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:09 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:09 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:09 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:36:09 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:09 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:36:09 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:09 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:36:09 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:33 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:33 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:33 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:55 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:55 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:55 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:56 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:56 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:57 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:57 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:36:57 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:57 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:36:57 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:57 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:36:57 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:57 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:58 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:36:58 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:20 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:20 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:20 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:21 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:21 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:21 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:22 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:37:22 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:22 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:37:22 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:22 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:37:22 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:22 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:22 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:22 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:53 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:53 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:54 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:54 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:54 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:55 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:55 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:37:55 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:55 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:37:55 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:55 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:37:55 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:56 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:56 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:37:56 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:38:59 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:38:59 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:38:59 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:38:59 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:39:00 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:39:00 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:39:00 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:39:01 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:39:01 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:39:01 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:39:01 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:39:01 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:39:01 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:39:01 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:39:01 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:10 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:10 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:10 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:11 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:11 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:12 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:12 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:40:12 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:12 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:40:12 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:12 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:40:13 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:13 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:13 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:13 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:40:59 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:59 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:59 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:00 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:00 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:00 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:01 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:41:01 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:41:01 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:41:01 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:41:01 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:41:01 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:41:01 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:41:01 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:41:01 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:46:44 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:46:44 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:46:44 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:46:44 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:46:44 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:46:44 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:46:44 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:46:44 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:46:44 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:46:44 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:47:00 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:47:00 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 00:47:00 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 00:47:01 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:47:01 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:47:01 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:47:01 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:47:01 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:47:01 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:47:01 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:47:01 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:47:01 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:47:01 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:47:01 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:47:01 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:48:47 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:48:47 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 00:48:47 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 00:48:48 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:48:48 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:48:48 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:48:48 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:48:48 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:48:48 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:48:48 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:48:48 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:48:48 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:48:48 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:48:48 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:48:48 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:49:26 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:49:26 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 00:49:26 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 00:49:27 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:49:27 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:49:27 - ModelManager - INFO - [HYPE:5m] No model found, training...
+2026-07-09 00:49:27 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:49:27 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:49:27 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 00:49:27 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:49:27 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 00:49:27 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 00:49:27 - ModelManager - WARNING - [HYPE:5m] Not enough data to train (got 0 samples)
+2026-07-09 00:49:27 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
+2026-07-09 00:49:27 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)

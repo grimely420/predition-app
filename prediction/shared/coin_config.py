@@ -30,6 +30,14 @@ def _parse_coingecko_hype(data: dict) -> float:
     return float(data['hyperliquid']['usd'])
 
 
+def _parse_kraken_hypeusd(data: dict) -> float:
+    return float(data['result']['HYPEUSD']['c'][0])
+
+
+def _parse_mexc_price(data: dict) -> float:
+    return float(data['price'])
+
+
 @dataclass
 class CoinConfig:
     """Configuration for a single coin."""
@@ -126,6 +134,22 @@ def _hype_sources() -> List[Dict[str, Any]]:
             'timeout': 15,
             'cooldown': 8,
             'weight': 1,
+        },
+        {
+            'name': 'Kraken',
+            'url': 'https://api.kraken.com/0/public/Ticker?pair=HYPEUSD',
+            'parser': _parse_kraken_hypeusd,
+            'timeout': 10,
+            'cooldown': 8,
+            'weight': 2,
+        },
+        {
+            'name': 'MEXC',
+            'url': 'https://api.mexc.com/api/v3/ticker/price?symbol=HYPEUSDT',
+            'parser': _parse_mexc_price,
+            'timeout': 10,
+            'cooldown': 8,
+            'weight': 3,
         },
     ]
 

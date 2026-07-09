@@ -1,0 +1,50 @@
+2026-07-09 00:36:54 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:37:00 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:37:06 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:37:06 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 2, 'success': 1, 'fail': 1, 'api_stats': {'CoinGecko': {'successes': 1, 'failures': 0, 'last_call': 1783571814.8372715, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:37:18 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:37:25 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:37:30 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:37:31 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 2, 'success': 1, 'fail': 1, 'api_stats': {'CoinGecko': {'successes': 1, 'failures': 0, 'last_call': 1783571839.0568511, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:37:52 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:38:00 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:38:12 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:38:19 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:38:24 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 5, 'success': 3, 'fail': 2, 'api_stats': {'CoinGecko': {'successes': 3, 'failures': 0, 'last_call': 1783571898.4283488, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:38:57 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:39:03 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:39:16 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:39:24 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:39:28 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 5, 'success': 3, 'fail': 2, 'api_stats': {'CoinGecko': {'successes': 3, 'failures': 0, 'last_call': 1783571962.17305, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:40:09 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:40:15 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:40:27 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:40:36 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:40:40 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 5, 'success': 3, 'fail': 2, 'api_stats': {'CoinGecko': {'successes': 3, 'failures': 0, 'last_call': 1783572034.1190135, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:40:57 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:41:04 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:41:16 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:41:28 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:41:40 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:41:52 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:42:04 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:42:16 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:42:24 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:42:29 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 15, 'success': 8, 'fail': 7, 'api_stats': {'CoinGecko': {'successes': 8, 'failures': 0, 'last_call': 1783572143.1560466, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:46:57 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:47:04 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:47:16 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:47:28 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:47:40 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:47:52 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:47:54 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:47:58 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 10, 'success': 5, 'fail': 5, 'api_stats': {'CoinGecko': {'successes': 5, 'failures': 0, 'last_call': 1783572466.7739577, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:48:44 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:48:51 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:49:01 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:49:03 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 3, 'success': 2, 'fail': 1, 'api_stats': {'CoinGecko': {'successes': 2, 'failures': 0, 'last_call': 1783572537.2688415, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:49:23 - HYPE-Collector - INFO - HYPE collector started (interval=6s)
+2026-07-09 00:49:30 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:49:42 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-09 00:49:50 - HYPE-Collector - INFO - Shutdown signal received
+2026-07-09 00:49:54 - HYPE-Collector - INFO - Collector stopped. Stats: {'total': 5, 'success': 3, 'fail': 2, 'api_stats': {'CoinGecko': {'successes': 3, 'failures': 0, 'last_call': 1783572588.369885, 'circuit_open': False, 'last_failure': 0}}}

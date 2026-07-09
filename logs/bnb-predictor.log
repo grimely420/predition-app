@@ -1,0 +1,94 @@
+2026-07-09 00:36:56 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:36:56 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:56 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:36:56 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:57 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:36:57 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:57 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:06 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:07 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:37:21 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:37:21 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:21 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:21 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:21 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:21 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:21 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:30 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:31 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:37:54 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:37:54 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:54 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:54 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:55 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:55 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:55 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:38:19 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:38:20 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:38:59 - DataStore - WARNING - Could not add created_at to prices: Cannot add a column with non-constant default
+2026-07-09 00:38:59 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:38:59 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:39:00 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:39:00 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:39:00 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:39:00 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:39:00 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:39:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:39:25 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:40:11 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:40:11 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:11 - PredictorLoop - INFO - [BNB:5m] Predicted 569.1034 (change 0.0015% model=fallback)
+2026-07-09 00:40:11 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:12 - PredictorLoop - INFO - [BNB:10m] Predicted 569.1034 (change 0.0015% model=fallback)
+2026-07-09 00:40:12 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:12 - PredictorLoop - INFO - [BNB:15m] Predicted 569.1034 (change 0.0015% model=fallback)
+2026-07-09 00:40:36 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:40:37 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:41:00 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:41:00 - ModelManager - ERROR - [BNB:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:00 - PredictorLoop - INFO - [BNB:5m] Predicted 569.0584 (change 0.0015% model=fallback)
+2026-07-09 00:41:00 - ModelManager - ERROR - [BNB:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:00 - PredictorLoop - INFO - [BNB:10m] Predicted 569.0584 (change 0.0015% model=fallback)
+2026-07-09 00:41:00 - ModelManager - ERROR - [BNB:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:41:00 - PredictorLoop - INFO - [BNB:15m] Predicted 569.0584 (change 0.0015% model=fallback)
+2026-07-09 00:42:00 - Validator - INFO - [BNB:5m] Validated pred 3444: predicted=574.3734, actual=568.9400, error_pct=-0.9460%
+2026-07-09 00:42:00 - Validator - INFO - [BNB:5m] Validated pred 3447: predicted=574.3734, actual=568.8300, error_pct=-0.9651%
+2026-07-09 00:42:00 - PredictorLoop - INFO - [BNB] Validated 2 predictions
+2026-07-09 00:42:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:42:25 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:47:00 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:47:00 - Validator - INFO - [BNB:10m] Validated pred 3445: predicted=574.3734, actual=569.0250, error_pct=-0.9312%
+2026-07-09 00:47:00 - Validator - INFO - [BNB:10m] Validated pred 3448: predicted=574.3734, actual=569.0250, error_pct=-0.9312%
+2026-07-09 00:47:00 - Validator - INFO - [BNB:5m] Validated pred 3462: predicted=569.0584, actual=569.0250, error_pct=-0.0059%
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 00:47:01 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:47:01 - PredictorLoop - INFO - [BNB:5m] Predicted 568.5948 (change -0.0756% model=xgboost)
+2026-07-09 00:47:01 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:47:01 - PredictorLoop - INFO - [BNB:10m] Predicted 568.0792 (change -0.1662% model=xgboost)
+2026-07-09 00:47:01 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:47:01 - PredictorLoop - INFO - [BNB:15m] Predicted 567.6742 (change -0.2374% model=xgboost)
+2026-07-09 00:47:54 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:47:56 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:48:47 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:48:47 - Validator - INFO - [BNB:10m] Validated pred 3451: predicted=574.3734, actual=569.0100, error_pct=-0.9338%
+2026-07-09 00:48:47 - Validator - INFO - [BNB:10m] Validated pred 3454: predicted=574.3734, actual=568.8550, error_pct=-0.9608%
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BNB] Validated 2 predictions
+2026-07-09 00:48:48 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:48:48 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4249 (change -0.0756% model=xgboost)
+2026-07-09 00:48:48 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:48:48 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9095 (change -0.1662% model=xgboost)
+2026-07-09 00:48:48 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:48:48 - PredictorLoop - INFO - [BNB:15m] Predicted 567.5046 (change -0.2374% model=xgboost)
+2026-07-09 00:49:01 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:03 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:49:26 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:49:26 - Validator - INFO - [BNB:10m] Validated pred 3457: predicted=574.3734, actual=569.0100, error_pct=-0.9338%
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 00:49:27 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 00:49:27 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4249 (change -0.0756% model=xgboost)
+2026-07-09 00:49:27 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 00:49:27 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9095 (change -0.1662% model=xgboost)
+2026-07-09 00:49:27 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 00:49:27 - PredictorLoop - INFO - [BNB:15m] Predicted 567.5046 (change -0.2374% model=xgboost)
+2026-07-09 00:49:50 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:52 - PredictorLoop - INFO - BNB predictor loop stopped

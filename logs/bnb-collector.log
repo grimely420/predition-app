@@ -1,0 +1,95 @@
+2026-07-09 00:36:53 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:36:53 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:36:54 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:36:59 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:36:59 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:37:04 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:37:04 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:37:06 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:37:09 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 3, 'success': 3, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 3, 'last_call': 0, 'circuit_open': False, 'last_failure': 1783571824.7765517}, 'Coinbase': {'successes': 2, 'failures': 0, 'last_call': 1783571824.9320085, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 1, 'failures': 0, 'last_call': 1783571819.5491161, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:37:17 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:37:18 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:37:18 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:37:23 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:37:23 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:37:28 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:37:28 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:37:30 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:37:33 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 3, 'success': 3, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 3, 'last_call': 0, 'circuit_open': False, 'last_failure': 1783571848.7500212}, 'Coinbase': {'successes': 2, 'failures': 0, 'last_call': 1783571848.8744886, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 1, 'failures': 0, 'last_call': 1783571843.6127312, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:37:51 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:37:51 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:37:51 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:37:57 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:37:57 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:38:02 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:38:02 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:38:07 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:38:08 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:38:13 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:38:13 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:38:13 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:38:18 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:38:19 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:38:23 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 5, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783571893.3286371}, 'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783571893.4756217, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783571898.7364767, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:38:56 - DataStore - WARNING - Could not add created_at to prices: Cannot add a column with non-constant default
+2026-07-09 00:38:56 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:38:56 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:38:57 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:39:02 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:39:02 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:39:07 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:39:07 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:39:12 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:39:13 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:39:18 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:39:18 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:39:18 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:39:23 - DataStore - ERROR - [BNB] save_price error: table prices has no column named created_at
+2026-07-09 00:39:24 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:39:28 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 5, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783571958.4468434}, 'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783571958.605333, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783571963.955965, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:40:08 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:40:08 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:40:14 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:40:19 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:40:24 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:40:30 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:40:30 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:40:36 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:40:40 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 5, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783572030.5112753}, 'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783572030.620299, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783572035.8552687, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:40:56 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:40:57 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:41:02 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:41:07 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:41:13 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:41:18 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:41:18 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:41:55 - BNB-Collector - INFO - BNB: $568.9400 (source: Kraken, total: 12)
+2026-07-09 00:42:20 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:42:20 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:42:24 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:42:26 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 17, 'success': 17, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 6, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783572140.9954798}, 'Coinbase': {'successes': 9, 'failures': 0, 'last_call': 1783572141.1209776, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 8, 'failures': 0, 'last_call': 1783572135.8059535, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:46:56 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:46:57 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:47:02 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:47:07 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:47:13 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:47:18 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:47:18 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:47:54 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:47:55 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 11, 'success': 11, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 5, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783572438.6187904}, 'Coinbase': {'successes': 6, 'failures': 0, 'last_call': 1783572470.0459738, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 5, 'failures': 0, 'last_call': 1783572464.9302459, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:48:43 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:48:44 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:48:49 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:48:54 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:00 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:01 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:49:05 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 4, 'success': 4, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 4, 'last_call': 0, 'circuit_open': False, 'last_failure': 1783572540.0362215}, 'Coinbase': {'successes': 2, 'failures': 0, 'last_call': 1783572534.877867, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 2, 'failures': 0, 'last_call': 1783572540.2616353, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:49:22 - BNB-Collector - INFO - BNB collector started (interval=5s)
+2026-07-09 00:49:23 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:28 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:33 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:39 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:44 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-09 00:49:44 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-09 00:49:50 - BNB-Collector - INFO - Shutdown signal received
+2026-07-09 00:49:55 - BNB-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Binance': {'successes': 0, 'failures': 5, 'last_call': 0, 'circuit_open': True, 'last_failure': 1783572584.7679024}, 'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783572584.8939457, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783572590.0651197, 'circuit_open': False, 'last_failure': 0}}}

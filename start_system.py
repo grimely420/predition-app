@@ -157,54 +157,37 @@ def train_models_if_needed():
 
 
 def main():
-    """Start all system components."""
+    """Start the unified multi-horizon prediction system."""
     print("=" * 60)
-    print("STARTING CRYPTOCURRENCY PREDICTION SYSTEM")
+    print("STARTING MULTI-HORIZON PREDICTION SYSTEM")
     print("=" * 60)
-    
-    # Step 1: Train models if data is available
-    print("\n[1/4] Checking and training models...")
-    train_models_if_needed()
-    
-    # Step 2: Start data collectors
-    print("\n[2/4] Starting data collectors...")
-    start_component("Bitcoin Collector", os.path.join(BASE_DIR, "bitcoin", "collector.py"))
-    start_component("BNB Collector", os.path.join(BASE_DIR, "bnb", "collector.py"))
-    
-    # Step 3: Start APIs
-    print("\n[3/4] Starting prediction APIs...")
-    start_component("Bitcoin API", os.path.join(BASE_DIR, "bitcoin", "api.py"))
-    start_component("BNB API", os.path.join(BASE_DIR, "bnb", "api.py"))
-    
-    # Wait for APIs to be ready
-    print("\n  Waiting for APIs to initialize...")
-    time.sleep(5)
-    
-    # Step 4: Start prediction generators
-    print("\n[4/4] Starting automatic prediction generators...")
-    start_component("Bitcoin Generator (15min)", os.path.join(BASE_DIR, "bitcoin", "generate_predictions.py"))
-    start_component("BNB Generator (5min)", os.path.join(BASE_DIR, "bnb", "generate_predictions.py"))
-    
-    # Summary
-    print("\n" + "=" * 60)
-    print("SYSTEM STARTED SUCCESSFULLY!")
+    print("Coins: BTC, BNB, HYPE")
+    print("Horizons: 5, 10, 15 minutes")
     print("=" * 60)
-    print("\nComponents running:")
-    print("  - Data collectors: Collecting prices every 5 seconds")
-    print("  - Prediction APIs: Ready on ports 5001 (BTC) and 5002 (BNB)")
-    print("  - Auto-predictions:")
-    print("    * Bitcoin: Every 15 minutes")
-    print("    * BNB: Every 5 minutes")
-    print("\nPress Ctrl+C to stop all components")
+
+    script = os.path.join(BASE_DIR, "prediction", "start_all.py")
+    logger.info(f"Starting unified launcher: {script}")
+
+    proc = subprocess.Popen(
+        [VENV_PYTHON, script],
+        cwd=BASE_DIR,
+        stdout=None,
+        stderr=None,
+        start_new_session=True,
+    )
+    processes.append(proc)
+
+    print(f"Unified launcher started (PID: {proc.pid})")
+    print("API: http://localhost:5000")
+    print("Logs: logs/")
+    print("Press Ctrl+C to stop all components")
     print("=" * 60)
-    
-    # Keep main process running
+
     try:
         while True:
-            # Check if any process died
-            for proc in processes:
-                if proc.poll() is not None:
-                    logger.warning(f"Process {proc.pid} exited with code {proc.returncode}")
+            if proc.poll() is not None:
+                logger.warning(f"Launcher exited with code {proc.returncode}")
+                break
             time.sleep(5)
     except KeyboardInterrupt:
         signal_handler(None, None)

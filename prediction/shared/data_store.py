@@ -44,6 +44,16 @@ class DataStore:
             CREATE INDEX IF NOT EXISTS idx_prices_id ON prices(id)
         ''')
 
+        # Backward-compatible migration for prices table
+        prices_cols = [col[1] for col in c.execute("PRAGMA table_info(prices)").fetchall()]
+        if 'created_at' not in prices_cols:
+            try:
+                # SQLite ALTER TABLE does not accept CURRENT_TIMESTAMP as a default,
+                # so add the column without a default. save_price() populates it.
+                c.execute("ALTER TABLE prices ADD COLUMN created_at TEXT")
+            except Exception as e:
+                logger.warning(f"Could not add created_at to prices: {e}")
+
         c.execute('''
             CREATE TABLE IF NOT EXISTS predictions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,

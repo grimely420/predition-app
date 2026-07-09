@@ -1,0 +1,96 @@
+2026-07-09 00:36:55 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:36:55 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:55 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:55 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:55 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:55 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:36:56 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:06 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:11 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:37:20 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:37:20 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:20 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:20 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:30 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:35 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:37:53 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:37:53 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:53 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:53 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:54 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:54 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:37:54 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:38:19 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:38:24 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:38:59 - DataStore - WARNING - Could not add created_at to prices: Cannot add a column with non-constant default
+2026-07-09 00:38:59 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:38:59 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:38:59 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:38:59 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:38:59 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:38:59 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:38:59 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:39:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:39:29 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:40:10 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:40:10 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:10 - PredictorLoop - INFO - [BTC:5m] Predicted 62214.5107 (change 0.0006% model=fallback)
+2026-07-09 00:40:10 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:10 - PredictorLoop - INFO - [BTC:10m] Predicted 62214.5107 (change 0.0006% model=fallback)
+2026-07-09 00:40:10 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:11 - PredictorLoop - INFO - [BTC:15m] Predicted 62214.5107 (change 0.0006% model=fallback)
+2026-07-09 00:40:36 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:40:41 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:40:59 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:40:59 - ModelManager - ERROR - [BTC:5m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:59 - PredictorLoop - INFO - [BTC:5m] Predicted 62226.8208 (change 0.0006% model=fallback)
+2026-07-09 00:40:59 - ModelManager - ERROR - [BTC:10m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:59 - PredictorLoop - INFO - [BTC:10m] Predicted 62226.8208 (change 0.0006% model=fallback)
+2026-07-09 00:40:59 - ModelManager - ERROR - [BTC:15m] Load failed: No module named 'xgboost'
+2026-07-09 00:40:59 - PredictorLoop - INFO - [BTC:15m] Predicted 62226.8208 (change 0.0006% model=fallback)
+2026-07-09 00:41:59 - Validator - INFO - [BTC:5m] Validated pred 1663: predicted=62252.1909, actual=62221.9000, error_pct=-0.0487%
+2026-07-09 00:41:59 - Validator - INFO - [BTC:5m] Validated pred 1664: predicted=62252.1909, actual=62221.4200, error_pct=-0.0494%
+2026-07-09 00:41:59 - Validator - INFO - [BTC:5m] Validated pred 1667: predicted=62252.1909, actual=62238.3050, error_pct=-0.0223%
+2026-07-09 00:41:59 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 00:42:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:42:29 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:46:59 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:46:59 - Validator - INFO - [BTC:10m] Validated pred 1665: predicted=62252.1909, actual=62243.7350, error_pct=-0.0136%
+2026-07-09 00:46:59 - Validator - INFO - [BTC:10m] Validated pred 1668: predicted=62252.1909, actual=62243.7350, error_pct=-0.0136%
+2026-07-09 00:46:59 - Validator - INFO - [BTC:5m] Validated pred 1670: predicted=62252.1909, actual=62240.5000, error_pct=-0.0188%
+2026-07-09 00:46:59 - Validator - INFO - [BTC:5m] Validated pred 1682: predicted=62226.8208, actual=62243.7350, error_pct=0.0272%
+2026-07-09 00:46:59 - PredictorLoop - INFO - [BTC] Validated 4 predictions
+2026-07-09 00:47:00 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BTC:5m] Predicted 62204.3253 (change -0.0633% model=xgboost)
+2026-07-09 00:47:00 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BTC:10m] Predicted 62231.7447 (change -0.0193% model=xgboost)
+2026-07-09 00:47:00 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BTC:15m] Predicted 62020.39 (change -0.3588% model=xgboost)
+2026-07-09 00:47:54 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:47:55 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:48:46 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:48:46 - Validator - INFO - [BTC:10m] Validated pred 1671: predicted=62252.1909, actual=62244.2000, error_pct=-0.0128%
+2026-07-09 00:48:46 - Validator - INFO - [BTC:10m] Validated pred 1674: predicted=62252.1909, actual=62226.6150, error_pct=-0.0411%
+2026-07-09 00:48:46 - PredictorLoop - INFO - [BTC] Validated 2 predictions
+2026-07-09 00:48:47 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BTC:5m] Predicted 62187.2162 (change -0.0633% model=xgboost)
+2026-07-09 00:48:47 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BTC:10m] Predicted 62214.628 (change -0.0193% model=xgboost)
+2026-07-09 00:48:47 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BTC:15m] Predicted 62003.3314 (change -0.3588% model=xgboost)
+2026-07-09 00:49:01 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:02 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:49:25 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:49:25 - Validator - INFO - [BTC:10m] Validated pred 1677: predicted=62252.1909, actual=62248.7850, error_pct=-0.0055%
+2026-07-09 00:49:25 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 00:49:26 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62209.3721 (change -0.0633% model=xgboost)
+2026-07-09 00:49:26 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62236.7937 (change -0.0193% model=xgboost)
+2026-07-09 00:49:26 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62025.4219 (change -0.3588% model=xgboost)
+2026-07-09 00:49:50 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:51 - PredictorLoop - INFO - BTC predictor loop stopped

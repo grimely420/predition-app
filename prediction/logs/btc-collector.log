@@ -5,3 +5,32 @@
 2026-07-08 22:07:46 - DataStore - ERROR - [BTC] save_price error: table prices has no column named created_at
 2026-07-08 22:08:05 - BTC-Collector - INFO - Shutdown signal received
 2026-07-08 22:08:05 - BTC-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-09 00:36:52 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:37:06 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:37:08 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 3, 'success': 3, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 2, 'failures': 0, 'last_call': 1783571823.3847332, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 1, 'failures': 0, 'last_call': 1783571818.2161646, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:37:16 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:37:30 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:37:32 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 3, 'success': 3, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 2, 'failures': 0, 'last_call': 1783571847.3851688, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 1, 'failures': 0, 'last_call': 1783571842.2661552, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:37:50 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:38:19 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:38:21 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783571891.3204122, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783571896.4775972, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:38:55 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:39:24 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:39:26 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783571956.5869079, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783571961.750675, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:40:07 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:40:36 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:40:38 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783572028.4038568, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783572033.5673678, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:40:55 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:41:52 - BTC-Collector - INFO - BTC: $62,235.7000 (source: Kraken, total: 12)
+2026-07-09 00:42:24 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:42:29 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 18, 'success': 18, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 9, 'failures': 0, 'last_call': 1783572138.8728592, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 9, 'failures': 0, 'last_call': 1783572144.1528363, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:46:55 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:47:53 - BTC-Collector - INFO - BTC: $62,259.1000 (source: Kraken, total: 12)
+2026-07-09 00:47:54 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:47:58 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 12, 'success': 12, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 6, 'failures': 0, 'last_call': 1783572467.9966407, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 6, 'failures': 0, 'last_call': 1783572473.3316298, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:48:42 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:49:01 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:49:03 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 4, 'success': 4, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 2, 'failures': 0, 'last_call': 1783572533.427497, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 2, 'failures': 0, 'last_call': 1783572538.6338964, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}
+2026-07-09 00:49:21 - BTC-Collector - INFO - BTC collector started (interval=5s)
+2026-07-09 00:49:50 - BTC-Collector - INFO - Shutdown signal received
+2026-07-09 00:49:53 - BTC-Collector - INFO - Collector stopped. Stats: {'total': 6, 'success': 6, 'fail': 0, 'api_stats': {'Coinbase': {'successes': 3, 'failures': 0, 'last_call': 1783572582.8337982, 'circuit_open': False, 'last_failure': 0}, 'Kraken': {'successes': 3, 'failures': 0, 'last_call': 1783572588.048968, 'circuit_open': False, 'last_failure': 0}, 'Binance': {'successes': 0, 'failures': 0, 'last_call': 0, 'circuit_open': False, 'last_failure': 0}}}

@@ -11,10 +11,6 @@ import numpy as np
 from datetime import datetime, timezone
 from typing import Optional, Tuple, List, Dict, Any
 
-import xgboost as xgb
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error
-
 from .utils import setup_logging
 
 logger = setup_logging("ModelManager")
@@ -91,6 +87,10 @@ class ModelManager:
             return False
 
         try:
+            import xgboost as xgb
+            from sklearn.model_selection import train_test_split
+            from sklearn.metrics import mean_absolute_error
+
             # Time-based split: use last 20% as validation
             n = len(X)
             split_idx = int(n * 0.85)

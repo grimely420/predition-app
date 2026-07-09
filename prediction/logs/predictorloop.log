@@ -34,3 +34,210 @@
 2026-07-08 22:08:09 - PredictorLoop - INFO - Shutdown signal received
 2026-07-08 22:08:10 - PredictorLoop - INFO - Shutdown signal received
 2026-07-08 22:08:11 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:36:33 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:36:33 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:33 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:33 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:40 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:36:43 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:36:55 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:36:55 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:55 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:56 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:36:56 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:36:56 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:36:57 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:36:57 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:36:57 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:36:57 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.388 (change 0.0564% model=fallback)
+2026-07-09 00:36:57 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.388 (change 0.0564% model=fallback)
+2026-07-09 00:36:57 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.388 (change 0.0564% model=fallback)
+2026-07-09 00:36:57 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:36:57 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:36:58 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:37:06 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:06 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:06 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:07 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:37:08 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:37:11 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:37:20 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:37:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:21 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:37:21 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:21 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:21 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:22 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:37:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.3889 (change 0.0577% model=fallback)
+2026-07-09 00:37:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.3889 (change 0.0577% model=fallback)
+2026-07-09 00:37:22 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.3889 (change 0.0577% model=fallback)
+2026-07-09 00:37:22 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:37:22 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:37:22 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:37:30 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:30 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:30 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:37:31 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:37:32 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:37:35 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:37:53 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:37:53 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:54 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:54 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:37:54 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:37:54 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:55 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:55 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:37:55 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:37:55 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.4404 (change 0.0599% model=fallback)
+2026-07-09 00:37:55 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.4404 (change 0.0599% model=fallback)
+2026-07-09 00:37:56 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.4404 (change 0.0599% model=fallback)
+2026-07-09 00:37:56 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:37:56 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:37:56 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:38:19 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:38:19 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:38:19 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:38:20 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:38:21 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:38:24 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:38:59 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:38:59 - PredictorLoop - INFO - [BTC:5m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:38:59 - PredictorLoop - INFO - [BTC:10m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:38:59 - PredictorLoop - INFO - [BTC:15m] Predicted 62252.1909 (change 0.0006% model=fallback)
+2026-07-09 00:38:59 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:39:00 - PredictorLoop - INFO - [BNB:5m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:39:00 - PredictorLoop - INFO - [BNB:10m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:39:00 - PredictorLoop - INFO - [BNB:15m] Predicted 574.3734 (change 0.0015% model=fallback)
+2026-07-09 00:39:00 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:39:01 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.5355 (change 0.0526% model=fallback)
+2026-07-09 00:39:01 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.5355 (change 0.0526% model=fallback)
+2026-07-09 00:39:01 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.5355 (change 0.0526% model=fallback)
+2026-07-09 00:39:01 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:39:01 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:39:01 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:39:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:39:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:39:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:39:25 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:39:26 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:39:29 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:40:10 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:40:10 - PredictorLoop - INFO - [BTC:5m] Predicted 62214.5107 (change 0.0006% model=fallback)
+2026-07-09 00:40:10 - PredictorLoop - INFO - [BTC:10m] Predicted 62214.5107 (change 0.0006% model=fallback)
+2026-07-09 00:40:11 - PredictorLoop - INFO - [BTC:15m] Predicted 62214.5107 (change 0.0006% model=fallback)
+2026-07-09 00:40:11 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:40:11 - PredictorLoop - INFO - [BNB:5m] Predicted 569.1034 (change 0.0015% model=fallback)
+2026-07-09 00:40:12 - PredictorLoop - INFO - [BNB:10m] Predicted 569.1034 (change 0.0015% model=fallback)
+2026-07-09 00:40:12 - PredictorLoop - INFO - [BNB:15m] Predicted 569.1034 (change 0.0015% model=fallback)
+2026-07-09 00:40:12 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:40:12 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.5413 (change 0.0463% model=fallback)
+2026-07-09 00:40:12 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.5413 (change 0.0463% model=fallback)
+2026-07-09 00:40:13 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.5413 (change 0.0463% model=fallback)
+2026-07-09 00:40:13 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:40:13 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:40:13 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:40:36 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:40:36 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:40:36 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:40:37 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:40:38 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:40:41 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:40:59 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:40:59 - PredictorLoop - INFO - [BTC:5m] Predicted 62226.8208 (change 0.0006% model=fallback)
+2026-07-09 00:40:59 - PredictorLoop - INFO - [BTC:10m] Predicted 62226.8208 (change 0.0006% model=fallback)
+2026-07-09 00:40:59 - PredictorLoop - INFO - [BTC:15m] Predicted 62226.8208 (change 0.0006% model=fallback)
+2026-07-09 00:41:00 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:41:00 - PredictorLoop - INFO - [BNB:5m] Predicted 569.0584 (change 0.0015% model=fallback)
+2026-07-09 00:41:00 - PredictorLoop - INFO - [BNB:10m] Predicted 569.0584 (change 0.0015% model=fallback)
+2026-07-09 00:41:00 - PredictorLoop - INFO - [BNB:15m] Predicted 569.0584 (change 0.0015% model=fallback)
+2026-07-09 00:41:01 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:41:01 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.5761 (change 0.0386% model=fallback)
+2026-07-09 00:41:01 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.5761 (change 0.0386% model=fallback)
+2026-07-09 00:41:01 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.5761 (change 0.0386% model=fallback)
+2026-07-09 00:41:01 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:41:01 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:41:01 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:41:59 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 00:42:00 - PredictorLoop - INFO - [BNB] Validated 2 predictions
+2026-07-09 00:42:01 - PredictorLoop - INFO - [HYPE] Validated 2 predictions
+2026-07-09 00:42:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:42:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:42:24 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:42:25 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:42:26 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:42:29 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:46:59 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:46:59 - PredictorLoop - INFO - [BTC] Validated 4 predictions
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BTC:5m] Predicted 62204.3253 (change -0.0633% model=xgboost)
+2026-07-09 00:47:00 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BTC:10m] Predicted 62231.7447 (change -0.0193% model=xgboost)
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 00:47:00 - PredictorLoop - INFO - [BTC:15m] Predicted 62020.39 (change -0.3588% model=xgboost)
+2026-07-09 00:47:01 - PredictorLoop - INFO - [BNB:5m] Predicted 568.5948 (change -0.0756% model=xgboost)
+2026-07-09 00:47:01 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:47:01 - PredictorLoop - INFO - [BNB:10m] Predicted 568.0792 (change -0.1662% model=xgboost)
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE] Validated 4 predictions
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.648 (change 0.0266% model=fallback)
+2026-07-09 00:47:01 - PredictorLoop - INFO - [BNB:15m] Predicted 567.6742 (change -0.2374% model=xgboost)
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.648 (change 0.0266% model=fallback)
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.648 (change 0.0266% model=fallback)
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:47:01 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:47:54 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:47:54 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:47:54 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:47:55 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:47:56 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:47:56 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:48:46 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:48:46 - PredictorLoop - INFO - [BTC] Validated 2 predictions
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BTC:5m] Predicted 62187.2162 (change -0.0633% model=xgboost)
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BTC:10m] Predicted 62214.628 (change -0.0193% model=xgboost)
+2026-07-09 00:48:47 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BNB] Validated 2 predictions
+2026-07-09 00:48:47 - PredictorLoop - INFO - [BTC:15m] Predicted 62003.3314 (change -0.3588% model=xgboost)
+2026-07-09 00:48:48 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4249 (change -0.0756% model=xgboost)
+2026-07-09 00:48:48 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9095 (change -0.1662% model=xgboost)
+2026-07-09 00:48:48 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE] Validated 2 predictions
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.6455 (change 0.0229% model=fallback)
+2026-07-09 00:48:48 - PredictorLoop - INFO - [BNB:15m] Predicted 567.5046 (change -0.2374% model=xgboost)
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.6455 (change 0.0229% model=fallback)
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.6455 (change 0.0229% model=fallback)
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:48:48 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:49:01 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:01 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:01 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:02 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:49:03 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:49:03 - PredictorLoop - INFO - HYPE predictor loop stopped
+2026-07-09 00:49:25 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 00:49:25 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62209.3721 (change -0.0633% model=xgboost)
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62236.7937 (change -0.0193% model=xgboost)
+2026-07-09 00:49:26 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 00:49:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62025.4219 (change -0.3588% model=xgboost)
+2026-07-09 00:49:27 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4249 (change -0.0756% model=xgboost)
+2026-07-09 00:49:27 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE] Validated 1 predictions
+2026-07-09 00:49:27 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9095 (change -0.1662% model=xgboost)
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.6444 (change 0.0213% model=fallback)
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.6444 (change 0.0213% model=fallback)
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.6444 (change 0.0213% model=fallback)
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 00:49:27 - PredictorLoop - INFO - [BNB:15m] Predicted 567.5046 (change -0.2374% model=xgboost)
+2026-07-09 00:49:27 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 00:49:50 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:50 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:50 - PredictorLoop - INFO - Shutdown signal received
+2026-07-09 00:49:51 - PredictorLoop - INFO - BTC predictor loop stopped
+2026-07-09 00:49:52 - PredictorLoop - INFO - BNB predictor loop stopped
+2026-07-09 00:49:52 - PredictorLoop - INFO - HYPE predictor loop stopped
