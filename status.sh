@@ -1,0 +1,18 @@
+#!/bin/bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "=========================================="
+echo "Prediction System Status"
+echo "=========================================="
+echo ""
+echo "Processes:"
+ps aux | grep -E "collector|api.py" | grep -v grep | awk '{print "  " $11 " " $12}'
+echo ""
+echo "BTC Count: $(python3 -c "import sqlite3; c=sqlite3.connect('$SCRIPT_DIR/bitcoin/bitcoin_prices.db').cursor(); c.execute('SELECT COUNT(*) FROM prices'); print(c.fetchone()[0])" 2>/dev/null)"
+echo "BNB Count: $(python3 -c "import sqlite3; c=sqlite3.connect('$SCRIPT_DIR/bnb/bnb_prices.db').cursor(); c.execute('SELECT COUNT(*) FROM prices'); print(c.fetchone()[0])" 2>/dev/null)"
+echo ""
+echo "BTC API: $(curl -s http://localhost:5001/health | python3 -c "import sys,json; print(json.load(sys.stdin).get('status', 'offline'))" 2>/dev/null)"
+echo "BNB API: $(curl -s http://localhost:5002/health | python3 -c "import sys,json; print(json.load(sys.stdin).get('status', 'offline'))" 2>/dev/null)"
+echo ""
+echo "Dashboards:"
+echo "  http://localhost:5001"
+echo "  http://localhost:5002"
