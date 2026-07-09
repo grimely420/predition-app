@@ -413,3 +413,1261 @@
 2026-07-09 04:36:27 - PredictorLoop - INFO - [HYPE:15m] Retraining model
 2026-07-09 04:37:11 - PredictorLoop - INFO - [BNB] Validated 1 predictions
 2026-07-09 04:37:12 - PredictorLoop - INFO - [BTC] Validated 4 predictions
+2026-07-09 04:41:11 - PredictorLoop - INFO - [BNB:5m] Predicted 572.377 (change -0.0756% model=xgboost)
+2026-07-09 04:41:11 - PredictorLoop - INFO - [BNB:10m] Predicted 571.8579 (change -0.1662% model=xgboost)
+2026-07-09 04:41:11 - PredictorLoop - INFO - [BNB:15m] Predicted 571.4502 (change -0.2374% model=xgboost)
+2026-07-09 04:41:12 - PredictorLoop - INFO - [BTC:5m] Predicted 62955.9141 (change -0.0633% model=xgboost)
+2026-07-09 04:41:12 - PredictorLoop - INFO - [BTC:10m] Predicted 62983.6648 (change -0.0193% model=xgboost)
+2026-07-09 04:41:12 - PredictorLoop - INFO - [BTC:15m] Predicted 62769.7564 (change -0.3588% model=xgboost)
+2026-07-09 04:41:17 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 04:41:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 04:41:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 04:42:11 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 04:42:12 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 04:46:12 - PredictorLoop - INFO - [BNB:5m] Predicted 572.2421 (change -0.0756% model=xgboost)
+2026-07-09 04:46:12 - PredictorLoop - INFO - [BNB:10m] Predicted 571.7231 (change -0.1662% model=xgboost)
+2026-07-09 04:46:12 - PredictorLoop - INFO - [BNB:15m] Predicted 571.3155 (change -0.2374% model=xgboost)
+2026-07-09 04:46:12 - PredictorLoop - INFO - [BTC:5m] Predicted 62917.4735 (change -0.0633% model=xgboost)
+2026-07-09 04:46:12 - PredictorLoop - INFO - [BTC:10m] Predicted 62945.2072 (change -0.0193% model=xgboost)
+2026-07-09 04:46:12 - PredictorLoop - INFO - [BTC:15m] Predicted 62731.4294 (change -0.3588% model=xgboost)
+2026-07-09 04:46:17 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 04:46:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 04:46:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 04:47:12 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 04:47:12 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 04:51:12 - PredictorLoop - INFO - [BNB:5m] Predicted 571.8374 (change -0.0756% model=xgboost)
+2026-07-09 04:51:12 - PredictorLoop - INFO - [BNB:10m] Predicted 571.3188 (change -0.1662% model=xgboost)
+2026-07-09 04:51:12 - PredictorLoop - INFO - [BNB:15m] Predicted 570.9115 (change -0.2374% model=xgboost)
+2026-07-09 04:51:12 - PredictorLoop - INFO - [BTC:5m] Predicted 62835.4904 (change -0.0633% model=xgboost)
+2026-07-09 04:51:12 - PredictorLoop - INFO - [BTC:10m] Predicted 62863.188 (change -0.0193% model=xgboost)
+2026-07-09 04:51:12 - PredictorLoop - INFO - [BTC:15m] Predicted 62649.6888 (change -0.3588% model=xgboost)
+2026-07-09 04:51:17 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 04:51:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 04:51:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 04:52:12 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 04:52:12 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 04:56:12 - PredictorLoop - INFO - [BNB:5m] Predicted 571.6875 (change -0.0756% model=xgboost)
+2026-07-09 04:56:12 - PredictorLoop - INFO - [BNB:10m] Predicted 571.1691 (change -0.1662% model=xgboost)
+2026-07-09 04:56:12 - PredictorLoop - INFO - [BNB:15m] Predicted 570.7618 (change -0.2374% model=xgboost)
+2026-07-09 04:56:12 - PredictorLoop - INFO - [BTC:5m] Predicted 62823.8978 (change -0.0633% model=xgboost)
+2026-07-09 04:56:12 - PredictorLoop - INFO - [BTC:10m] Predicted 62851.5902 (change -0.0193% model=xgboost)
+2026-07-09 04:56:12 - PredictorLoop - INFO - [BTC:15m] Predicted 62638.1304 (change -0.3588% model=xgboost)
+2026-07-09 04:56:17 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 04:56:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 04:56:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 04:57:12 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 04:57:12 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:01:12 - PredictorLoop - INFO - [BNB:5m] Predicted 571.1179 (change -0.0756% model=xgboost)
+2026-07-09 05:01:12 - PredictorLoop - INFO - [BNB:10m] Predicted 570.6 (change -0.1662% model=xgboost)
+2026-07-09 05:01:12 - PredictorLoop - INFO - [BNB:15m] Predicted 570.1932 (change -0.2374% model=xgboost)
+2026-07-09 05:01:12 - PredictorLoop - INFO - [BTC:5m] Predicted 62769.0325 (change -0.0633% model=xgboost)
+2026-07-09 05:01:13 - PredictorLoop - INFO - [BTC:10m] Predicted 62796.7008 (change -0.0193% model=xgboost)
+2026-07-09 05:01:13 - PredictorLoop - INFO - [BTC:15m] Predicted 62583.4274 (change -0.3588% model=xgboost)
+2026-07-09 05:01:17 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:01:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:01:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:02:12 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:02:13 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:06:12 - PredictorLoop - INFO - [BNB:5m] Predicted 571.1779 (change -0.0756% model=xgboost)
+2026-07-09 05:06:12 - PredictorLoop - INFO - [BNB:10m] Predicted 570.6599 (change -0.1662% model=xgboost)
+2026-07-09 05:06:12 - PredictorLoop - INFO - [BNB:15m] Predicted 570.253 (change -0.2374% model=xgboost)
+2026-07-09 05:06:13 - PredictorLoop - INFO - [BTC:5m] Predicted 62775.2136 (change -0.0633% model=xgboost)
+2026-07-09 05:06:13 - PredictorLoop - INFO - [BTC:10m] Predicted 62802.8846 (change -0.0193% model=xgboost)
+2026-07-09 05:06:13 - PredictorLoop - INFO - [BTC:15m] Predicted 62589.5902 (change -0.3588% model=xgboost)
+2026-07-09 05:06:17 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:06:22 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:06:27 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:07:12 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:07:13 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:11:12 - PredictorLoop - INFO - [BNB:5m] Predicted 570.3785 (change -0.0756% model=xgboost)
+2026-07-09 05:11:12 - PredictorLoop - INFO - [BNB:10m] Predicted 569.8612 (change -0.1662% model=xgboost)
+2026-07-09 05:11:12 - PredictorLoop - INFO - [BNB:15m] Predicted 569.4549 (change -0.2374% model=xgboost)
+2026-07-09 05:11:13 - PredictorLoop - INFO - [BTC:5m] Predicted 62744.593 (change -0.0633% model=xgboost)
+2026-07-09 05:11:13 - PredictorLoop - INFO - [BTC:10m] Predicted 62772.2505 (change -0.0193% model=xgboost)
+2026-07-09 05:11:13 - PredictorLoop - INFO - [BTC:15m] Predicted 62559.0602 (change -0.3588% model=xgboost)
+2026-07-09 05:11:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:11:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:11:28 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:12:12 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:12:13 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:16:12 - PredictorLoop - INFO - [BNB:5m] Predicted 570.7582 (change -0.0756% model=xgboost)
+2026-07-09 05:16:12 - PredictorLoop - INFO - [BNB:10m] Predicted 570.2406 (change -0.1662% model=xgboost)
+2026-07-09 05:16:13 - PredictorLoop - INFO - [BNB:15m] Predicted 569.834 (change -0.2374% model=xgboost)
+2026-07-09 05:16:13 - PredictorLoop - INFO - [BTC] Validated 2 predictions
+2026-07-09 05:16:13 - PredictorLoop - INFO - [BTC:5m] Predicted 62758.4393 (change -0.0633% model=xgboost)
+2026-07-09 05:16:13 - PredictorLoop - INFO - [BTC:10m] Predicted 62786.1028 (change -0.0193% model=xgboost)
+2026-07-09 05:16:13 - PredictorLoop - INFO - [BTC:15m] Predicted 62572.8654 (change -0.3588% model=xgboost)
+2026-07-09 05:16:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:16:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:16:28 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:17:13 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:17:13 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 05:21:13 - PredictorLoop - INFO - [BNB:5m] Predicted 570.0087 (change -0.0756% model=xgboost)
+2026-07-09 05:21:13 - PredictorLoop - INFO - [BNB:10m] Predicted 569.4919 (change -0.1662% model=xgboost)
+2026-07-09 05:21:13 - PredictorLoop - INFO - [BNB:15m] Predicted 569.0858 (change -0.2374% model=xgboost)
+2026-07-09 05:21:13 - PredictorLoop - INFO - [BTC:5m] Predicted 62771.2311 (change -0.0633% model=xgboost)
+2026-07-09 05:21:13 - PredictorLoop - INFO - [BTC:10m] Predicted 62798.9004 (change -0.0193% model=xgboost)
+2026-07-09 05:21:13 - PredictorLoop - INFO - [BTC:15m] Predicted 62585.6195 (change -0.3588% model=xgboost)
+2026-07-09 05:21:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:21:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:21:28 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:22:13 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:22:13 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:26:13 - PredictorLoop - INFO - [BNB:5m] Predicted 570.0887 (change -0.0756% model=xgboost)
+2026-07-09 05:26:13 - PredictorLoop - INFO - [BNB:10m] Predicted 569.5717 (change -0.1662% model=xgboost)
+2026-07-09 05:26:13 - PredictorLoop - INFO - [BNB:15m] Predicted 569.1656 (change -0.2374% model=xgboost)
+2026-07-09 05:26:13 - PredictorLoop - INFO - [BTC:5m] Predicted 62781.6246 (change -0.0633% model=xgboost)
+2026-07-09 05:26:13 - PredictorLoop - INFO - [BTC:10m] Predicted 62809.2984 (change -0.0193% model=xgboost)
+2026-07-09 05:26:13 - PredictorLoop - INFO - [BTC:15m] Predicted 62595.9822 (change -0.3588% model=xgboost)
+2026-07-09 05:26:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:26:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:26:28 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:27:13 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:27:13 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:31:13 - PredictorLoop - INFO - [BNB:5m] Predicted 570.2935 (change -0.0756% model=xgboost)
+2026-07-09 05:31:13 - PredictorLoop - INFO - [BNB:10m] Predicted 569.7764 (change -0.1662% model=xgboost)
+2026-07-09 05:31:13 - PredictorLoop - INFO - [BNB:15m] Predicted 569.3701 (change -0.2374% model=xgboost)
+2026-07-09 05:31:14 - PredictorLoop - INFO - [BTC:5m] Predicted 62809.9916 (change -0.0633% model=xgboost)
+2026-07-09 05:31:14 - PredictorLoop - INFO - [BTC:10m] Predicted 62837.6779 (change -0.0193% model=xgboost)
+2026-07-09 05:31:14 - PredictorLoop - INFO - [BTC:15m] Predicted 62624.2653 (change -0.3588% model=xgboost)
+2026-07-09 05:31:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:31:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:31:28 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:32:13 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:32:14 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:36:13 - PredictorLoop - INFO - [BNB:5m] Predicted 570.7332 (change -0.0756% model=xgboost)
+2026-07-09 05:36:13 - PredictorLoop - INFO - [BNB:10m] Predicted 570.2157 (change -0.1662% model=xgboost)
+2026-07-09 05:36:13 - PredictorLoop - INFO - [BNB:15m] Predicted 569.8091 (change -0.2374% model=xgboost)
+2026-07-09 05:36:13 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 05:36:13 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 05:36:13 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 05:36:14 - PredictorLoop - INFO - [BTC:5m] Predicted 62876.5194 (change -0.0633% model=xgboost)
+2026-07-09 05:36:14 - PredictorLoop - INFO - [BTC:10m] Predicted 62904.2351 (change -0.0193% model=xgboost)
+2026-07-09 05:36:14 - PredictorLoop - INFO - [BTC:15m] Predicted 62690.5965 (change -0.3588% model=xgboost)
+2026-07-09 05:36:14 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 05:36:14 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 05:36:14 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 05:36:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:36:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:36:28 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:36:28 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 05:36:28 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 05:36:28 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 05:37:13 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:37:14 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:41:13 - PredictorLoop - INFO - [BNB:5m] Predicted 570.5683 (change -0.0756% model=xgboost)
+2026-07-09 05:41:13 - PredictorLoop - INFO - [BNB:10m] Predicted 570.0509 (change -0.1662% model=xgboost)
+2026-07-09 05:41:13 - PredictorLoop - INFO - [BNB:15m] Predicted 569.6445 (change -0.2374% model=xgboost)
+2026-07-09 05:41:14 - PredictorLoop - INFO - [BTC:5m] Predicted 62868.9692 (change -0.0633% model=xgboost)
+2026-07-09 05:41:14 - PredictorLoop - INFO - [BTC:10m] Predicted 62896.6815 (change -0.0193% model=xgboost)
+2026-07-09 05:41:14 - PredictorLoop - INFO - [BTC:15m] Predicted 62683.0686 (change -0.3588% model=xgboost)
+2026-07-09 05:41:18 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:41:23 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:41:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:42:13 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:42:14 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:46:14 - PredictorLoop - INFO - [BNB:5m] Predicted 569.8838 (change -0.0756% model=xgboost)
+2026-07-09 05:46:14 - PredictorLoop - INFO - [BNB:10m] Predicted 569.3671 (change -0.1662% model=xgboost)
+2026-07-09 05:46:14 - PredictorLoop - INFO - [BNB:15m] Predicted 568.9611 (change -0.2374% model=xgboost)
+2026-07-09 05:46:14 - PredictorLoop - INFO - [BTC:5m] Predicted 62712.3684 (change -0.0633% model=xgboost)
+2026-07-09 05:46:14 - PredictorLoop - INFO - [BTC:10m] Predicted 62740.0117 (change -0.0193% model=xgboost)
+2026-07-09 05:46:14 - PredictorLoop - INFO - [BTC:15m] Predicted 62526.9309 (change -0.3588% model=xgboost)
+2026-07-09 05:46:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:46:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:46:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:47:14 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:47:14 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:51:14 - PredictorLoop - INFO - [BNB:5m] Predicted 571.1779 (change -0.0756% model=xgboost)
+2026-07-09 05:51:14 - PredictorLoop - INFO - [BNB:10m] Predicted 570.6599 (change -0.1662% model=xgboost)
+2026-07-09 05:51:14 - PredictorLoop - INFO - [BNB:15m] Predicted 570.253 (change -0.2374% model=xgboost)
+2026-07-09 05:51:14 - PredictorLoop - INFO - [BTC:5m] Predicted 62793.4521 (change -0.0633% model=xgboost)
+2026-07-09 05:51:14 - PredictorLoop - INFO - [BTC:10m] Predicted 62821.1311 (change -0.0193% model=xgboost)
+2026-07-09 05:51:14 - PredictorLoop - INFO - [BTC:15m] Predicted 62607.7747 (change -0.3588% model=xgboost)
+2026-07-09 05:51:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:51:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:51:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:52:14 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:52:14 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 05:56:14 - PredictorLoop - INFO - [BNB:5m] Predicted 572.352 (change -0.0756% model=xgboost)
+2026-07-09 05:56:14 - PredictorLoop - INFO - [BNB:10m] Predicted 571.833 (change -0.1662% model=xgboost)
+2026-07-09 05:56:14 - PredictorLoop - INFO - [BNB:15m] Predicted 571.4253 (change -0.2374% model=xgboost)
+2026-07-09 05:56:15 - PredictorLoop - INFO - [BTC:5m] Predicted 62857.3116 (change -0.0633% model=xgboost)
+2026-07-09 05:56:15 - PredictorLoop - INFO - [BTC:10m] Predicted 62885.0188 (change -0.0193% model=xgboost)
+2026-07-09 05:56:15 - PredictorLoop - INFO - [BTC:15m] Predicted 62671.4454 (change -0.3588% model=xgboost)
+2026-07-09 05:56:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 05:56:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 05:56:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 05:57:14 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 05:57:15 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:01:14 - PredictorLoop - INFO - [BNB:5m] Predicted 571.8773 (change -0.0756% model=xgboost)
+2026-07-09 06:01:14 - PredictorLoop - INFO - [BNB:10m] Predicted 571.3588 (change -0.1662% model=xgboost)
+2026-07-09 06:01:14 - PredictorLoop - INFO - [BNB:15m] Predicted 570.9514 (change -0.2374% model=xgboost)
+2026-07-09 06:01:15 - PredictorLoop - INFO - [BTC:5m] Predicted 62820.6998 (change -0.0633% model=xgboost)
+2026-07-09 06:01:15 - PredictorLoop - INFO - [BTC:10m] Predicted 62848.3908 (change -0.0193% model=xgboost)
+2026-07-09 06:01:15 - PredictorLoop - INFO - [BTC:15m] Predicted 62634.9419 (change -0.3588% model=xgboost)
+2026-07-09 06:01:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:01:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:01:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:02:14 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:02:15 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:06:14 - PredictorLoop - INFO - [BNB:5m] Predicted 571.9673 (change -0.0756% model=xgboost)
+2026-07-09 06:06:14 - PredictorLoop - INFO - [BNB:10m] Predicted 571.4486 (change -0.1662% model=xgboost)
+2026-07-09 06:06:14 - PredictorLoop - INFO - [BNB:15m] Predicted 571.0412 (change -0.2374% model=xgboost)
+2026-07-09 06:06:15 - PredictorLoop - INFO - [BTC:5m] Predicted 62839.5878 (change -0.0633% model=xgboost)
+2026-07-09 06:06:15 - PredictorLoop - INFO - [BTC:10m] Predicted 62867.2872 (change -0.0193% model=xgboost)
+2026-07-09 06:06:15 - PredictorLoop - INFO - [BTC:15m] Predicted 62653.7741 (change -0.3588% model=xgboost)
+2026-07-09 06:06:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:06:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:06:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:07:14 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:07:15 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:11:14 - PredictorLoop - INFO - [BNB:5m] Predicted 571.9073 (change -0.0756% model=xgboost)
+2026-07-09 06:11:14 - PredictorLoop - INFO - [BNB:10m] Predicted 571.3887 (change -0.1662% model=xgboost)
+2026-07-09 06:11:14 - PredictorLoop - INFO - [BNB:15m] Predicted 570.9813 (change -0.2374% model=xgboost)
+2026-07-09 06:11:15 - PredictorLoop - INFO - [BTC:5m] Predicted 62923.7695 (change -0.0633% model=xgboost)
+2026-07-09 06:11:15 - PredictorLoop - INFO - [BTC:10m] Predicted 62951.506 (change -0.0193% model=xgboost)
+2026-07-09 06:11:15 - PredictorLoop - INFO - [BTC:15m] Predicted 62737.7068 (change -0.3588% model=xgboost)
+2026-07-09 06:11:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:11:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:11:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:12:14 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:12:15 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:16:14 - PredictorLoop - INFO - [BNB:5m] Predicted 571.6175 (change -0.0756% model=xgboost)
+2026-07-09 06:16:15 - PredictorLoop - INFO - [BNB:10m] Predicted 571.0992 (change -0.1662% model=xgboost)
+2026-07-09 06:16:15 - PredictorLoop - INFO - [BNB:15m] Predicted 570.692 (change -0.2374% model=xgboost)
+2026-07-09 06:16:15 - PredictorLoop - INFO - [BTC:5m] Predicted 62892.7791 (change -0.0633% model=xgboost)
+2026-07-09 06:16:15 - PredictorLoop - INFO - [BTC:10m] Predicted 62920.502 (change -0.0193% model=xgboost)
+2026-07-09 06:16:15 - PredictorLoop - INFO - [BTC:15m] Predicted 62706.8081 (change -0.3588% model=xgboost)
+2026-07-09 06:16:19 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:16:24 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:16:29 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:17:15 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:17:15 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:21:15 - PredictorLoop - INFO - [BNB:5m] Predicted 571.4976 (change -0.0756% model=xgboost)
+2026-07-09 06:21:15 - PredictorLoop - INFO - [BNB:10m] Predicted 570.9794 (change -0.1662% model=xgboost)
+2026-07-09 06:21:15 - PredictorLoop - INFO - [BNB:15m] Predicted 570.5723 (change -0.2374% model=xgboost)
+2026-07-09 06:21:15 - PredictorLoop - INFO - [BTC:5m] Predicted 62876.1647 (change -0.0633% model=xgboost)
+2026-07-09 06:21:15 - PredictorLoop - INFO - [BTC:10m] Predicted 62903.8802 (change -0.0193% model=xgboost)
+2026-07-09 06:21:15 - PredictorLoop - INFO - [BTC:15m] Predicted 62690.2428 (change -0.3588% model=xgboost)
+2026-07-09 06:21:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:21:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:21:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:22:15 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:22:16 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:26:15 - PredictorLoop - INFO - [BNB:5m] Predicted 569.9388 (change -0.0756% model=xgboost)
+2026-07-09 06:26:15 - PredictorLoop - INFO - [BNB:10m] Predicted 569.422 (change -0.1662% model=xgboost)
+2026-07-09 06:26:15 - PredictorLoop - INFO - [BNB:15m] Predicted 569.016 (change -0.2374% model=xgboost)
+2026-07-09 06:26:16 - PredictorLoop - INFO - [BTC:5m] Predicted 62797.5145 (change -0.0633% model=xgboost)
+2026-07-09 06:26:16 - PredictorLoop - INFO - [BTC:10m] Predicted 62825.1953 (change -0.0193% model=xgboost)
+2026-07-09 06:26:16 - PredictorLoop - INFO - [BTC:15m] Predicted 62611.8251 (change -0.3588% model=xgboost)
+2026-07-09 06:26:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:26:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:26:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:27:15 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:27:16 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:31:15 - PredictorLoop - INFO - [BNB:5m] Predicted 569.7789 (change -0.0756% model=xgboost)
+2026-07-09 06:31:15 - PredictorLoop - INFO - [BNB:10m] Predicted 569.2622 (change -0.1662% model=xgboost)
+2026-07-09 06:31:15 - PredictorLoop - INFO - [BNB:15m] Predicted 568.8564 (change -0.2374% model=xgboost)
+2026-07-09 06:31:16 - PredictorLoop - INFO - [BTC:5m] Predicted 62797.9642 (change -0.0633% model=xgboost)
+2026-07-09 06:31:16 - PredictorLoop - INFO - [BTC:10m] Predicted 62825.6452 (change -0.0193% model=xgboost)
+2026-07-09 06:31:16 - PredictorLoop - INFO - [BTC:15m] Predicted 62612.2735 (change -0.3588% model=xgboost)
+2026-07-09 06:31:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:31:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:31:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:32:15 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:32:16 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:36:15 - PredictorLoop - INFO - [BNB:5m] Predicted 569.9588 (change -0.0756% model=xgboost)
+2026-07-09 06:36:15 - PredictorLoop - INFO - [BNB:10m] Predicted 569.4419 (change -0.1662% model=xgboost)
+2026-07-09 06:36:15 - PredictorLoop - INFO - [BNB:15m] Predicted 569.0359 (change -0.2374% model=xgboost)
+2026-07-09 06:36:15 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 06:36:15 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 06:36:15 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 06:36:16 - PredictorLoop - INFO - [BTC:5m] Predicted 62851.7351 (change -0.0633% model=xgboost)
+2026-07-09 06:36:16 - PredictorLoop - INFO - [BTC:10m] Predicted 62879.4399 (change -0.0193% model=xgboost)
+2026-07-09 06:36:16 - PredictorLoop - INFO - [BTC:15m] Predicted 62665.8855 (change -0.3588% model=xgboost)
+2026-07-09 06:36:16 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 06:36:16 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 06:36:16 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 06:36:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:36:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:36:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:36:30 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 06:36:30 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 06:36:30 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 06:37:15 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:37:16 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:41:15 - PredictorLoop - INFO - [BNB:5m] Predicted 569.7989 (change -0.0756% model=xgboost)
+2026-07-09 06:41:15 - PredictorLoop - INFO - [BNB:10m] Predicted 569.2822 (change -0.1662% model=xgboost)
+2026-07-09 06:41:15 - PredictorLoop - INFO - [BNB:15m] Predicted 568.8763 (change -0.2374% model=xgboost)
+2026-07-09 06:41:16 - PredictorLoop - INFO - [BTC:5m] Predicted 62790.5189 (change -0.0633% model=xgboost)
+2026-07-09 06:41:16 - PredictorLoop - INFO - [BTC:10m] Predicted 62818.1967 (change -0.0193% model=xgboost)
+2026-07-09 06:41:16 - PredictorLoop - INFO - [BTC:15m] Predicted 62604.8503 (change -0.3588% model=xgboost)
+2026-07-09 06:41:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:41:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:41:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:42:15 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:42:16 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:46:16 - PredictorLoop - INFO - [BNB:5m] Predicted 569.9188 (change -0.0756% model=xgboost)
+2026-07-09 06:46:16 - PredictorLoop - INFO - [BNB:10m] Predicted 569.402 (change -0.1662% model=xgboost)
+2026-07-09 06:46:16 - PredictorLoop - INFO - [BNB:15m] Predicted 568.996 (change -0.2374% model=xgboost)
+2026-07-09 06:46:16 - PredictorLoop - INFO - [BTC:5m] Predicted 62765.7346 (change -0.0633% model=xgboost)
+2026-07-09 06:46:16 - PredictorLoop - INFO - [BTC:10m] Predicted 62793.4014 (change -0.0193% model=xgboost)
+2026-07-09 06:46:16 - PredictorLoop - INFO - [BTC:15m] Predicted 62580.1393 (change -0.3588% model=xgboost)
+2026-07-09 06:46:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:46:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:46:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:47:16 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:47:17 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:51:16 - PredictorLoop - INFO - [BNB:5m] Predicted 569.7589 (change -0.0756% model=xgboost)
+2026-07-09 06:51:16 - PredictorLoop - INFO - [BNB:10m] Predicted 569.2423 (change -0.1662% model=xgboost)
+2026-07-09 06:51:16 - PredictorLoop - INFO - [BNB:15m] Predicted 568.8364 (change -0.2374% model=xgboost)
+2026-07-09 06:51:17 - PredictorLoop - INFO - [BTC:5m] Predicted 62723.3965 (change -0.0633% model=xgboost)
+2026-07-09 06:51:17 - PredictorLoop - INFO - [BTC:10m] Predicted 62751.0446 (change -0.0193% model=xgboost)
+2026-07-09 06:51:17 - PredictorLoop - INFO - [BTC:15m] Predicted 62537.9263 (change -0.3588% model=xgboost)
+2026-07-09 06:51:20 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:51:25 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:51:30 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:52:16 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:52:17 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 06:56:16 - PredictorLoop - INFO - [BNB:5m] Predicted 568.7397 (change -0.0756% model=xgboost)
+2026-07-09 06:56:16 - PredictorLoop - INFO - [BNB:10m] Predicted 568.224 (change -0.1662% model=xgboost)
+2026-07-09 06:56:16 - PredictorLoop - INFO - [BNB:15m] Predicted 567.8188 (change -0.2374% model=xgboost)
+2026-07-09 06:56:17 - PredictorLoop - INFO - [BTC:5m] Predicted 62633.9631 (change -0.0633% model=xgboost)
+2026-07-09 06:56:17 - PredictorLoop - INFO - [BTC:10m] Predicted 62661.5718 (change -0.0193% model=xgboost)
+2026-07-09 06:56:17 - PredictorLoop - INFO - [BTC:15m] Predicted 62448.7574 (change -0.3588% model=xgboost)
+2026-07-09 06:56:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 06:56:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 06:56:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 06:57:16 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 06:57:17 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:01:16 - PredictorLoop - INFO - [BNB:5m] Predicted 568.7497 (change -0.0756% model=xgboost)
+2026-07-09 07:01:16 - PredictorLoop - INFO - [BNB:10m] Predicted 568.234 (change -0.1662% model=xgboost)
+2026-07-09 07:01:16 - PredictorLoop - INFO - [BNB:15m] Predicted 567.8288 (change -0.2374% model=xgboost)
+2026-07-09 07:01:17 - PredictorLoop - INFO - [BTC:5m] Predicted 62704.0737 (change -0.0633% model=xgboost)
+2026-07-09 07:01:17 - PredictorLoop - INFO - [BTC:10m] Predicted 62731.7133 (change -0.0193% model=xgboost)
+2026-07-09 07:01:17 - PredictorLoop - INFO - [BTC:15m] Predicted 62518.6606 (change -0.3588% model=xgboost)
+2026-07-09 07:01:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:01:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:01:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:02:16 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:02:17 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:06:16 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:06:16 - PredictorLoop - INFO - [BNB:5m] Predicted 569.2193 (change -0.0756% model=xgboost)
+2026-07-09 07:06:16 - PredictorLoop - INFO - [BNB:10m] Predicted 568.7032 (change -0.1662% model=xgboost)
+2026-07-09 07:06:16 - PredictorLoop - INFO - [BNB:15m] Predicted 568.2977 (change -0.2374% model=xgboost)
+2026-07-09 07:06:17 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:06:17 - PredictorLoop - INFO - [BTC:5m] Predicted 62700.0612 (change -0.0633% model=xgboost)
+2026-07-09 07:06:17 - PredictorLoop - INFO - [BTC:10m] Predicted 62727.6991 (change -0.0193% model=xgboost)
+2026-07-09 07:06:17 - PredictorLoop - INFO - [BTC:15m] Predicted 62514.6601 (change -0.3588% model=xgboost)
+2026-07-09 07:06:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:06:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:06:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:11:16 - PredictorLoop - INFO - [BNB:5m] Predicted 569.0095 (change -0.0756% model=xgboost)
+2026-07-09 07:11:16 - PredictorLoop - INFO - [BNB:10m] Predicted 568.4935 (change -0.1662% model=xgboost)
+2026-07-09 07:11:16 - PredictorLoop - INFO - [BNB:15m] Predicted 568.0882 (change -0.2374% model=xgboost)
+2026-07-09 07:11:17 - PredictorLoop - INFO - [BTC:5m] Predicted 62659.5669 (change -0.0633% model=xgboost)
+2026-07-09 07:11:17 - PredictorLoop - INFO - [BTC:10m] Predicted 62687.1869 (change -0.0193% model=xgboost)
+2026-07-09 07:11:17 - PredictorLoop - INFO - [BTC:15m] Predicted 62474.2854 (change -0.3588% model=xgboost)
+2026-07-09 07:11:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:11:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:11:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:12:16 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:12:17 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:16:17 - PredictorLoop - INFO - [BNB:5m] Predicted 568.9745 (change -0.0756% model=xgboost)
+2026-07-09 07:16:17 - PredictorLoop - INFO - [BNB:10m] Predicted 568.4586 (change -0.1662% model=xgboost)
+2026-07-09 07:16:17 - PredictorLoop - INFO - [BNB:15m] Predicted 568.0533 (change -0.2374% model=xgboost)
+2026-07-09 07:16:18 - PredictorLoop - INFO - [BTC:5m] Predicted 62666.4975 (change -0.0633% model=xgboost)
+2026-07-09 07:16:18 - PredictorLoop - INFO - [BTC:10m] Predicted 62694.1206 (change -0.0193% model=xgboost)
+2026-07-09 07:16:18 - PredictorLoop - INFO - [BTC:15m] Predicted 62481.1956 (change -0.3588% model=xgboost)
+2026-07-09 07:16:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:16:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:16:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:17:17 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:17:18 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:21:17 - PredictorLoop - INFO - [BNB:5m] Predicted 568.6748 (change -0.0756% model=xgboost)
+2026-07-09 07:21:17 - PredictorLoop - INFO - [BNB:10m] Predicted 568.1591 (change -0.1662% model=xgboost)
+2026-07-09 07:21:17 - PredictorLoop - INFO - [BNB:15m] Predicted 567.754 (change -0.2374% model=xgboost)
+2026-07-09 07:21:18 - PredictorLoop - INFO - [BTC:5m] Predicted 62625.2236 (change -0.0633% model=xgboost)
+2026-07-09 07:21:18 - PredictorLoop - INFO - [BTC:10m] Predicted 62652.8285 (change -0.0193% model=xgboost)
+2026-07-09 07:21:18 - PredictorLoop - INFO - [BTC:15m] Predicted 62440.0438 (change -0.3588% model=xgboost)
+2026-07-09 07:21:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:21:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:21:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:22:17 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:22:18 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:26:17 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4999 (change -0.0756% model=xgboost)
+2026-07-09 07:26:17 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9844 (change -0.1662% model=xgboost)
+2026-07-09 07:26:17 - PredictorLoop - INFO - [BNB:15m] Predicted 567.5794 (change -0.2374% model=xgboost)
+2026-07-09 07:26:18 - PredictorLoop - INFO - [BTC:5m] Predicted 62614.4055 (change -0.0633% model=xgboost)
+2026-07-09 07:26:18 - PredictorLoop - INFO - [BTC:10m] Predicted 62642.0056 (change -0.0193% model=xgboost)
+2026-07-09 07:26:18 - PredictorLoop - INFO - [BTC:15m] Predicted 62429.2576 (change -0.3588% model=xgboost)
+2026-07-09 07:26:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:26:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:26:31 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:27:17 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:27:18 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:31:17 - PredictorLoop - INFO - [BNB:5m] Predicted 568.2151 (change -0.0756% model=xgboost)
+2026-07-09 07:31:17 - PredictorLoop - INFO - [BNB:10m] Predicted 567.6998 (change -0.1662% model=xgboost)
+2026-07-09 07:31:17 - PredictorLoop - INFO - [BNB:15m] Predicted 567.2951 (change -0.2374% model=xgboost)
+2026-07-09 07:31:18 - PredictorLoop - INFO - [BTC:5m] Predicted 62601.3338 (change -0.0633% model=xgboost)
+2026-07-09 07:31:18 - PredictorLoop - INFO - [BTC:10m] Predicted 62628.9281 (change -0.0193% model=xgboost)
+2026-07-09 07:31:18 - PredictorLoop - INFO - [BTC:15m] Predicted 62416.2245 (change -0.3588% model=xgboost)
+2026-07-09 07:31:21 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:31:26 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:31:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:32:17 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:32:18 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:36:17 - PredictorLoop - INFO - [BNB:5m] Predicted 568.2001 (change -0.0756% model=xgboost)
+2026-07-09 07:36:17 - PredictorLoop - INFO - [BNB:10m] Predicted 567.6849 (change -0.1662% model=xgboost)
+2026-07-09 07:36:17 - PredictorLoop - INFO - [BNB:15m] Predicted 567.2801 (change -0.2374% model=xgboost)
+2026-07-09 07:36:17 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 07:36:17 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 07:36:17 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 07:36:18 - PredictorLoop - INFO - [BTC:5m] Predicted 62514.2939 (change -0.0633% model=xgboost)
+2026-07-09 07:36:18 - PredictorLoop - INFO - [BTC:10m] Predicted 62541.8499 (change -0.0193% model=xgboost)
+2026-07-09 07:36:18 - PredictorLoop - INFO - [BTC:15m] Predicted 62329.4421 (change -0.3588% model=xgboost)
+2026-07-09 07:36:18 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 07:36:18 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 07:36:18 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 07:36:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:36:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:36:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:36:32 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 07:36:32 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 07:36:32 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 07:37:17 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:37:18 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:41:17 - PredictorLoop - INFO - [BNB:5m] Predicted 568.295 (change -0.0756% model=xgboost)
+2026-07-09 07:41:17 - PredictorLoop - INFO - [BNB:10m] Predicted 567.7797 (change -0.1662% model=xgboost)
+2026-07-09 07:41:17 - PredictorLoop - INFO - [BNB:15m] Predicted 567.3749 (change -0.2374% model=xgboost)
+2026-07-09 07:41:19 - PredictorLoop - INFO - [BTC:5m] Predicted 62536.5798 (change -0.0633% model=xgboost)
+2026-07-09 07:41:19 - PredictorLoop - INFO - [BTC:10m] Predicted 62564.1456 (change -0.0193% model=xgboost)
+2026-07-09 07:41:19 - PredictorLoop - INFO - [BTC:15m] Predicted 62351.662 (change -0.3588% model=xgboost)
+2026-07-09 07:41:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:41:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:41:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:42:17 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:42:19 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:46:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.0352 (change -0.0756% model=xgboost)
+2026-07-09 07:46:18 - PredictorLoop - INFO - [BNB:10m] Predicted 567.5201 (change -0.1662% model=xgboost)
+2026-07-09 07:46:18 - PredictorLoop - INFO - [BNB:15m] Predicted 567.1155 (change -0.2374% model=xgboost)
+2026-07-09 07:46:19 - PredictorLoop - INFO - [BTC:5m] Predicted 62514.4488 (change -0.0633% model=xgboost)
+2026-07-09 07:46:19 - PredictorLoop - INFO - [BTC:10m] Predicted 62542.0049 (change -0.0193% model=xgboost)
+2026-07-09 07:46:19 - PredictorLoop - INFO - [BTC:15m] Predicted 62329.5965 (change -0.3588% model=xgboost)
+2026-07-09 07:46:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:46:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:46:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:47:18 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:47:19 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:51:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4899 (change -0.0756% model=xgboost)
+2026-07-09 07:51:18 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9744 (change -0.1662% model=xgboost)
+2026-07-09 07:51:18 - PredictorLoop - INFO - [BNB:15m] Predicted 567.5694 (change -0.2374% model=xgboost)
+2026-07-09 07:51:19 - PredictorLoop - INFO - [BTC:5m] Predicted 62567.7651 (change -0.0633% model=xgboost)
+2026-07-09 07:51:19 - PredictorLoop - INFO - [BTC:10m] Predicted 62595.3446 (change -0.0193% model=xgboost)
+2026-07-09 07:51:19 - PredictorLoop - INFO - [BTC:15m] Predicted 62382.7551 (change -0.3588% model=xgboost)
+2026-07-09 07:51:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:51:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:51:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:52:18 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:52:19 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 07:56:18 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 07:56:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.6748 (change -0.0756% model=xgboost)
+2026-07-09 07:56:18 - PredictorLoop - INFO - [BNB:10m] Predicted 568.1591 (change -0.1662% model=xgboost)
+2026-07-09 07:56:18 - PredictorLoop - INFO - [BNB:15m] Predicted 567.754 (change -0.2374% model=xgboost)
+2026-07-09 07:56:19 - PredictorLoop - INFO - [BTC:5m] Predicted 62658.3027 (change -0.0633% model=xgboost)
+2026-07-09 07:56:19 - PredictorLoop - INFO - [BTC:10m] Predicted 62685.9221 (change -0.0193% model=xgboost)
+2026-07-09 07:56:19 - PredictorLoop - INFO - [BTC:15m] Predicted 62473.025 (change -0.3588% model=xgboost)
+2026-07-09 07:56:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 07:56:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 07:56:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 07:57:19 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:01:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.9096 (change -0.0756% model=xgboost)
+2026-07-09 08:01:18 - PredictorLoop - INFO - [BNB:10m] Predicted 568.3937 (change -0.1662% model=xgboost)
+2026-07-09 08:01:18 - PredictorLoop - INFO - [BNB:15m] Predicted 567.9884 (change -0.2374% model=xgboost)
+2026-07-09 08:01:19 - PredictorLoop - INFO - [BTC:5m] Predicted 62671.0946 (change -0.0633% model=xgboost)
+2026-07-09 08:01:19 - PredictorLoop - INFO - [BTC:10m] Predicted 62698.7197 (change -0.0193% model=xgboost)
+2026-07-09 08:01:19 - PredictorLoop - INFO - [BTC:15m] Predicted 62485.7791 (change -0.3588% model=xgboost)
+2026-07-09 08:01:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:01:27 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:01:32 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:02:18 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:02:19 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:06:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.6098 (change -0.0756% model=xgboost)
+2026-07-09 08:06:18 - PredictorLoop - INFO - [BNB:10m] Predicted 568.0942 (change -0.1662% model=xgboost)
+2026-07-09 08:06:18 - PredictorLoop - INFO - [BNB:15m] Predicted 567.6891 (change -0.2374% model=xgboost)
+2026-07-09 08:06:19 - PredictorLoop - INFO - [BTC:5m] Predicted 62578.4283 (change -0.0633% model=xgboost)
+2026-07-09 08:06:19 - PredictorLoop - INFO - [BTC:10m] Predicted 62606.0125 (change -0.0193% model=xgboost)
+2026-07-09 08:06:19 - PredictorLoop - INFO - [BTC:15m] Predicted 62393.3868 (change -0.3588% model=xgboost)
+2026-07-09 08:06:22 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:06:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:06:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:07:18 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:07:20 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:11:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.9096 (change -0.0756% model=xgboost)
+2026-07-09 08:11:18 - PredictorLoop - INFO - [BNB:10m] Predicted 568.3937 (change -0.1662% model=xgboost)
+2026-07-09 08:11:18 - PredictorLoop - INFO - [BNB:15m] Predicted 567.9884 (change -0.2374% model=xgboost)
+2026-07-09 08:11:20 - PredictorLoop - INFO - [BTC] Validated 2 predictions
+2026-07-09 08:11:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62734.4544 (change -0.0633% model=xgboost)
+2026-07-09 08:11:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62762.1075 (change -0.0193% model=xgboost)
+2026-07-09 08:11:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62548.9516 (change -0.3588% model=xgboost)
+2026-07-09 08:11:23 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:11:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:11:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:12:18 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:12:20 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 08:16:18 - PredictorLoop - INFO - [BNB:5m] Predicted 568.38 (change -0.0756% model=xgboost)
+2026-07-09 08:16:19 - PredictorLoop - INFO - [BNB:10m] Predicted 567.8646 (change -0.1662% model=xgboost)
+2026-07-09 08:16:19 - PredictorLoop - INFO - [BNB:15m] Predicted 567.4597 (change -0.2374% model=xgboost)
+2026-07-09 08:16:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62685.0857 (change -0.0633% model=xgboost)
+2026-07-09 08:16:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62712.717 (change -0.0193% model=xgboost)
+2026-07-09 08:16:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62499.7288 (change -0.3588% model=xgboost)
+2026-07-09 08:16:23 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:16:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:16:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:17:19 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:17:20 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:21:19 - PredictorLoop - INFO - [BNB:5m] Predicted 568.8296 (change -0.0756% model=xgboost)
+2026-07-09 08:21:19 - PredictorLoop - INFO - [BNB:10m] Predicted 568.3138 (change -0.1662% model=xgboost)
+2026-07-09 08:21:19 - PredictorLoop - INFO - [BNB:15m] Predicted 567.9086 (change -0.2374% model=xgboost)
+2026-07-09 08:21:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62665.1434 (change -0.0633% model=xgboost)
+2026-07-09 08:21:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62692.7658 (change -0.0193% model=xgboost)
+2026-07-09 08:21:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62479.8454 (change -0.3588% model=xgboost)
+2026-07-09 08:21:23 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:21:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:21:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:22:19 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:22:20 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:26:19 - PredictorLoop - INFO - [BNB:5m] Predicted 568.7097 (change -0.0756% model=xgboost)
+2026-07-09 08:26:19 - PredictorLoop - INFO - [BNB:10m] Predicted 568.194 (change -0.1662% model=xgboost)
+2026-07-09 08:26:19 - PredictorLoop - INFO - [BNB:15m] Predicted 567.7889 (change -0.2374% model=xgboost)
+2026-07-09 08:26:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62654.2603 (change -0.0633% model=xgboost)
+2026-07-09 08:26:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62681.8779 (change -0.0193% model=xgboost)
+2026-07-09 08:26:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62468.9945 (change -0.3588% model=xgboost)
+2026-07-09 08:26:23 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:26:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:26:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:27:19 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:27:20 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:31:19 - PredictorLoop - INFO - [BNB:5m] Predicted 568.8696 (change -0.0756% model=xgboost)
+2026-07-09 08:31:19 - PredictorLoop - INFO - [BNB:10m] Predicted 568.3538 (change -0.1662% model=xgboost)
+2026-07-09 08:31:19 - PredictorLoop - INFO - [BNB:15m] Predicted 567.9485 (change -0.2374% model=xgboost)
+2026-07-09 08:31:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62660.4014 (change -0.0633% model=xgboost)
+2026-07-09 08:31:20 - PredictorLoop - INFO - [BTC:10m] Predicted 62688.0217 (change -0.0193% model=xgboost)
+2026-07-09 08:31:20 - PredictorLoop - INFO - [BTC:15m] Predicted 62475.1175 (change -0.3588% model=xgboost)
+2026-07-09 08:31:23 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:31:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:31:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:32:19 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:32:20 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:36:19 - PredictorLoop - INFO - [BNB:5m] Predicted 569.1094 (change -0.0756% model=xgboost)
+2026-07-09 08:36:19 - PredictorLoop - INFO - [BNB:10m] Predicted 568.5934 (change -0.1662% model=xgboost)
+2026-07-09 08:36:19 - PredictorLoop - INFO - [BNB:15m] Predicted 568.188 (change -0.2374% model=xgboost)
+2026-07-09 08:36:19 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 08:36:19 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 08:36:19 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 08:36:20 - PredictorLoop - INFO - [BTC:5m] Predicted 62731.5563 (change -0.0633% model=xgboost)
+2026-07-09 08:36:21 - PredictorLoop - INFO - [BTC:10m] Predicted 62759.208 (change -0.0193% model=xgboost)
+2026-07-09 08:36:21 - PredictorLoop - INFO - [BTC:15m] Predicted 62546.062 (change -0.3588% model=xgboost)
+2026-07-09 08:36:21 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 08:36:21 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 08:36:21 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 08:36:23 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:36:28 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:36:33 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:36:33 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 08:36:33 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 08:36:33 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 08:37:19 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:37:21 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:41:19 - PredictorLoop - INFO - [BNB:5m] Predicted 569.4692 (change -0.0756% model=xgboost)
+2026-07-09 08:41:19 - PredictorLoop - INFO - [BNB:10m] Predicted 568.9528 (change -0.1662% model=xgboost)
+2026-07-09 08:41:19 - PredictorLoop - INFO - [BNB:15m] Predicted 568.5471 (change -0.2374% model=xgboost)
+2026-07-09 08:41:21 - PredictorLoop - INFO - [BTC:5m] Predicted 62797.6944 (change -0.0633% model=xgboost)
+2026-07-09 08:41:21 - PredictorLoop - INFO - [BTC:10m] Predicted 62825.3753 (change -0.0193% model=xgboost)
+2026-07-09 08:41:21 - PredictorLoop - INFO - [BTC:15m] Predicted 62612.0045 (change -0.3588% model=xgboost)
+2026-07-09 08:41:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:41:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:41:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:42:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:42:21 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:46:20 - PredictorLoop - INFO - [BNB:5m] Predicted 567.5356 (change -0.0756% model=xgboost)
+2026-07-09 08:46:20 - PredictorLoop - INFO - [BNB:10m] Predicted 566.996 (change -0.1662% model=xgboost)
+2026-07-09 08:46:20 - PredictorLoop - INFO - [BNB:15m] Predicted 566.5918 (change -0.2374% model=xgboost)
+2026-07-09 08:46:21 - PredictorLoop - INFO - [BTC:5m] Predicted 62398.3024 (change -0.0633% model=xgboost)
+2026-07-09 08:46:21 - PredictorLoop - INFO - [BTC:10m] Predicted 62425.8073 (change -0.0193% model=xgboost)
+2026-07-09 08:46:21 - PredictorLoop - INFO - [BTC:15m] Predicted 62213.7935 (change -0.3588% model=xgboost)
+2026-07-09 08:46:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:46:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:46:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:47:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:47:21 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:51:20 - PredictorLoop - INFO - [BNB:5m] Predicted 568.1452 (change -0.0756% model=xgboost)
+2026-07-09 08:51:20 - PredictorLoop - INFO - [BNB:10m] Predicted 567.63 (change -0.1662% model=xgboost)
+2026-07-09 08:51:20 - PredictorLoop - INFO - [BNB:15m] Predicted 567.2252 (change -0.2374% model=xgboost)
+2026-07-09 08:51:21 - PredictorLoop - INFO - [BTC:5m] Predicted 62491.5084 (change -0.0633% model=xgboost)
+2026-07-09 08:51:21 - PredictorLoop - INFO - [BTC:10m] Predicted 62519.0543 (change -0.0193% model=xgboost)
+2026-07-09 08:51:21 - PredictorLoop - INFO - [BTC:15m] Predicted 62306.7239 (change -0.3588% model=xgboost)
+2026-07-09 08:51:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:51:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:51:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:52:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:52:21 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 08:56:20 - PredictorLoop - INFO - [BNB:5m] Predicted 568.6797 (change -0.0756% model=xgboost)
+2026-07-09 08:56:20 - PredictorLoop - INFO - [BNB:10m] Predicted 568.1641 (change -0.1662% model=xgboost)
+2026-07-09 08:56:20 - PredictorLoop - INFO - [BNB:15m] Predicted 567.759 (change -0.2374% model=xgboost)
+2026-07-09 08:56:21 - PredictorLoop - INFO - [BTC:5m] Predicted 62547.273 (change -0.0633% model=xgboost)
+2026-07-09 08:56:21 - PredictorLoop - INFO - [BTC:10m] Predicted 62574.8436 (change -0.0193% model=xgboost)
+2026-07-09 08:56:21 - PredictorLoop - INFO - [BTC:15m] Predicted 62362.3236 (change -0.3588% model=xgboost)
+2026-07-09 08:56:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 08:56:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 08:56:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 08:57:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 08:57:21 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:01:20 - PredictorLoop - INFO - [BNB:5m] Predicted 568.6148 (change -0.0756% model=xgboost)
+2026-07-09 09:01:20 - PredictorLoop - INFO - [BNB:10m] Predicted 568.0992 (change -0.1662% model=xgboost)
+2026-07-09 09:01:20 - PredictorLoop - INFO - [BNB:15m] Predicted 567.6941 (change -0.2374% model=xgboost)
+2026-07-09 09:01:22 - PredictorLoop - INFO - [BTC:5m] Predicted 62553.0044 (change -0.0633% model=xgboost)
+2026-07-09 09:01:22 - PredictorLoop - INFO - [BTC:10m] Predicted 62580.5774 (change -0.0193% model=xgboost)
+2026-07-09 09:01:22 - PredictorLoop - INFO - [BTC:15m] Predicted 62368.0381 (change -0.3588% model=xgboost)
+2026-07-09 09:01:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:01:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:01:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:02:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:02:22 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:06:20 - PredictorLoop - INFO - [BNB:5m] Predicted 569.2493 (change -0.0756% model=xgboost)
+2026-07-09 09:06:20 - PredictorLoop - INFO - [BNB:10m] Predicted 568.7331 (change -0.1662% model=xgboost)
+2026-07-09 09:06:20 - PredictorLoop - INFO - [BNB:15m] Predicted 568.3276 (change -0.2374% model=xgboost)
+2026-07-09 09:06:22 - PredictorLoop - INFO - [BTC:5m] Predicted 62707.7863 (change -0.0633% model=xgboost)
+2026-07-09 09:06:22 - PredictorLoop - INFO - [BTC:10m] Predicted 62735.4276 (change -0.0193% model=xgboost)
+2026-07-09 09:06:22 - PredictorLoop - INFO - [BTC:15m] Predicted 62522.3623 (change -0.3588% model=xgboost)
+2026-07-09 09:06:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:06:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:06:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:07:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:07:22 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:11:20 - PredictorLoop - INFO - [BNB:5m] Predicted 569.3043 (change -0.0756% model=xgboost)
+2026-07-09 09:11:20 - PredictorLoop - INFO - [BNB:10m] Predicted 568.788 (change -0.1662% model=xgboost)
+2026-07-09 09:11:20 - PredictorLoop - INFO - [BNB:15m] Predicted 568.3825 (change -0.2374% model=xgboost)
+2026-07-09 09:11:22 - PredictorLoop - INFO - [BTC:5m] Predicted 62734.1546 (change -0.0633% model=xgboost)
+2026-07-09 09:11:22 - PredictorLoop - INFO - [BTC:10m] Predicted 62761.8075 (change -0.0193% model=xgboost)
+2026-07-09 09:11:22 - PredictorLoop - INFO - [BTC:15m] Predicted 62548.6526 (change -0.3588% model=xgboost)
+2026-07-09 09:11:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:11:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:11:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:12:20 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:12:22 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:16:20 - PredictorLoop - INFO - [BNB:5m] Predicted 569.1594 (change -0.0756% model=xgboost)
+2026-07-09 09:16:21 - PredictorLoop - INFO - [BNB:10m] Predicted 568.6433 (change -0.1662% model=xgboost)
+2026-07-09 09:16:21 - PredictorLoop - INFO - [BNB:15m] Predicted 568.2378 (change -0.2374% model=xgboost)
+2026-07-09 09:16:22 - PredictorLoop - INFO - [BTC:5m] Predicted 62706.3722 (change -0.0633% model=xgboost)
+2026-07-09 09:16:22 - PredictorLoop - INFO - [BTC:10m] Predicted 62734.0129 (change -0.0193% model=xgboost)
+2026-07-09 09:16:22 - PredictorLoop - INFO - [BTC:15m] Predicted 62520.9524 (change -0.3588% model=xgboost)
+2026-07-09 09:16:24 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:16:29 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:16:34 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:17:21 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:17:22 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:21:21 - PredictorLoop - INFO - [BNB:5m] Predicted 568.33 (change -0.0756% model=xgboost)
+2026-07-09 09:21:21 - PredictorLoop - INFO - [BNB:10m] Predicted 567.8147 (change -0.1662% model=xgboost)
+2026-07-09 09:21:21 - PredictorLoop - INFO - [BNB:15m] Predicted 567.4098 (change -0.2374% model=xgboost)
+2026-07-09 09:21:22 - PredictorLoop - INFO - [BTC:5m] Predicted 62665.643 (change -0.0633% model=xgboost)
+2026-07-09 09:21:22 - PredictorLoop - INFO - [BTC:10m] Predicted 62693.2657 (change -0.0193% model=xgboost)
+2026-07-09 09:21:22 - PredictorLoop - INFO - [BTC:15m] Predicted 62480.3436 (change -0.3588% model=xgboost)
+2026-07-09 09:21:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:21:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:21:35 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:22:21 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:22:22 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:26:21 - PredictorLoop - INFO - [BNB:5m] Predicted 568.6298 (change -0.0756% model=xgboost)
+2026-07-09 09:26:21 - PredictorLoop - INFO - [BNB:10m] Predicted 568.1142 (change -0.1662% model=xgboost)
+2026-07-09 09:26:21 - PredictorLoop - INFO - [BNB:15m] Predicted 567.7091 (change -0.2374% model=xgboost)
+2026-07-09 09:26:22 - PredictorLoop - INFO - [BTC:5m] Predicted 62671.9391 (change -0.0633% model=xgboost)
+2026-07-09 09:26:22 - PredictorLoop - INFO - [BTC:10m] Predicted 62699.5645 (change -0.0193% model=xgboost)
+2026-07-09 09:26:23 - PredictorLoop - INFO - [BTC:15m] Predicted 62486.621 (change -0.3588% model=xgboost)
+2026-07-09 09:26:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:26:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:26:35 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:27:21 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:27:23 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:31:21 - PredictorLoop - INFO - [BNB:5m] Predicted 567.8804 (change -0.0756% model=xgboost)
+2026-07-09 09:31:21 - PredictorLoop - INFO - [BNB:10m] Predicted 567.3654 (change -0.1662% model=xgboost)
+2026-07-09 09:31:21 - PredictorLoop - INFO - [BNB:15m] Predicted 566.9609 (change -0.2374% model=xgboost)
+2026-07-09 09:31:23 - PredictorLoop - INFO - [BTC:5m] Predicted 62580.2521 (change -0.0633% model=xgboost)
+2026-07-09 09:31:23 - PredictorLoop - INFO - [BTC:10m] Predicted 62607.8372 (change -0.0193% model=xgboost)
+2026-07-09 09:31:23 - PredictorLoop - INFO - [BTC:15m] Predicted 62395.2052 (change -0.3588% model=xgboost)
+2026-07-09 09:31:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:31:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:31:35 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:32:21 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:32:23 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:36:21 - PredictorLoop - INFO - [BNB:5m] Predicted 568.1452 (change -0.0756% model=xgboost)
+2026-07-09 09:36:21 - PredictorLoop - INFO - [BNB:10m] Predicted 567.63 (change -0.1662% model=xgboost)
+2026-07-09 09:36:21 - PredictorLoop - INFO - [BNB:15m] Predicted 567.2252 (change -0.2374% model=xgboost)
+2026-07-09 09:36:21 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 09:36:21 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 09:36:21 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 09:36:23 - PredictorLoop - INFO - [BTC:5m] Predicted 62549.5716 (change -0.0633% model=xgboost)
+2026-07-09 09:36:23 - PredictorLoop - INFO - [BTC:10m] Predicted 62577.1431 (change -0.0193% model=xgboost)
+2026-07-09 09:36:23 - PredictorLoop - INFO - [BTC:15m] Predicted 62364.6154 (change -0.3588% model=xgboost)
+2026-07-09 09:36:23 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 09:36:23 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 09:36:23 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 09:36:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:36:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:36:35 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:36:35 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 09:36:35 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 09:36:35 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 09:37:21 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:37:23 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:41:21 - PredictorLoop - INFO - [BNB:5m] Predicted 568.0302 (change -0.0756% model=xgboost)
+2026-07-09 09:41:21 - PredictorLoop - INFO - [BNB:10m] Predicted 567.5152 (change -0.1662% model=xgboost)
+2026-07-09 09:41:21 - PredictorLoop - INFO - [BNB:15m] Predicted 566.8761 (change -0.2374% model=xgboost)
+2026-07-09 09:41:23 - PredictorLoop - INFO - [BTC:5m] Predicted 62571.9124 (change -0.0633% model=xgboost)
+2026-07-09 09:41:23 - PredictorLoop - INFO - [BTC:10m] Predicted 62599.4938 (change -0.0193% model=xgboost)
+2026-07-09 09:41:23 - PredictorLoop - INFO - [BTC:15m] Predicted 62386.8902 (change -0.3588% model=xgboost)
+2026-07-09 09:41:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:41:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:41:35 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:42:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:42:23 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:46:22 - PredictorLoop - INFO - [BNB:5m] Predicted 569.3193 (change -0.0756% model=xgboost)
+2026-07-09 09:46:22 - PredictorLoop - INFO - [BNB:10m] Predicted 568.803 (change -0.1662% model=xgboost)
+2026-07-09 09:46:22 - PredictorLoop - INFO - [BNB:15m] Predicted 568.3975 (change -0.2374% model=xgboost)
+2026-07-09 09:46:23 - PredictorLoop - INFO - [BTC:5m] Predicted 62870.2284 (change -0.0633% model=xgboost)
+2026-07-09 09:46:23 - PredictorLoop - INFO - [BTC:10m] Predicted 62897.9413 (change -0.0193% model=xgboost)
+2026-07-09 09:46:23 - PredictorLoop - INFO - [BTC:15m] Predicted 62684.3241 (change -0.3588% model=xgboost)
+2026-07-09 09:46:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:46:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:46:35 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:47:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:47:23 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:51:22 - PredictorLoop - INFO - [BNB:5m] Predicted 569.2893 (change -0.0756% model=xgboost)
+2026-07-09 09:51:22 - PredictorLoop - INFO - [BNB:10m] Predicted 568.7731 (change -0.1662% model=xgboost)
+2026-07-09 09:51:22 - PredictorLoop - INFO - [BNB:15m] Predicted 568.3675 (change -0.2374% model=xgboost)
+2026-07-09 09:51:23 - PredictorLoop - INFO - [BTC:5m] Predicted 62849.0818 (change -0.0633% model=xgboost)
+2026-07-09 09:51:24 - PredictorLoop - INFO - [BTC:10m] Predicted 62876.7854 (change -0.0193% model=xgboost)
+2026-07-09 09:51:24 - PredictorLoop - INFO - [BTC:15m] Predicted 62663.24 (change -0.3588% model=xgboost)
+2026-07-09 09:51:25 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:51:30 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:51:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:52:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:52:24 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 09:56:22 - PredictorLoop - INFO - [BNB:5m] Predicted 569.9588 (change -0.0756% model=xgboost)
+2026-07-09 09:56:22 - PredictorLoop - INFO - [BNB:10m] Predicted 569.4419 (change -0.1662% model=xgboost)
+2026-07-09 09:56:22 - PredictorLoop - INFO - [BNB:15m] Predicted 569.0359 (change -0.2374% model=xgboost)
+2026-07-09 09:56:24 - PredictorLoop - INFO - [BTC:5m] Predicted 62936.7263 (change -0.0633% model=xgboost)
+2026-07-09 09:56:24 - PredictorLoop - INFO - [BTC:10m] Predicted 62964.4685 (change -0.0193% model=xgboost)
+2026-07-09 09:56:24 - PredictorLoop - INFO - [BTC:15m] Predicted 62750.6253 (change -0.3588% model=xgboost)
+2026-07-09 09:56:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 09:56:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 09:56:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 09:57:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 09:57:24 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:01:22 - PredictorLoop - INFO - [BNB:5m] Predicted 570.2386 (change -0.0756% model=xgboost)
+2026-07-09 10:01:22 - PredictorLoop - INFO - [BNB:10m] Predicted 569.7215 (change -0.1662% model=xgboost)
+2026-07-09 10:01:22 - PredictorLoop - INFO - [BNB:15m] Predicted 569.3153 (change -0.2374% model=xgboost)
+2026-07-09 10:01:24 - PredictorLoop - INFO - [BTC:5m] Predicted 62933.5533 (change -0.0633% model=xgboost)
+2026-07-09 10:01:24 - PredictorLoop - INFO - [BTC:10m] Predicted 62961.2941 (change -0.0193% model=xgboost)
+2026-07-09 10:01:24 - PredictorLoop - INFO - [BTC:15m] Predicted 62747.4617 (change -0.3588% model=xgboost)
+2026-07-09 10:01:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:01:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:01:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:02:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:02:24 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:06:22 - PredictorLoop - INFO - [BNB:5m] Predicted 570.2186 (change -0.0756% model=xgboost)
+2026-07-09 10:06:22 - PredictorLoop - INFO - [BNB:10m] Predicted 569.7015 (change -0.1662% model=xgboost)
+2026-07-09 10:06:22 - PredictorLoop - INFO - [BNB:15m] Predicted 569.2953 (change -0.2374% model=xgboost)
+2026-07-09 10:06:24 - PredictorLoop - INFO - [BTC:5m] Predicted 62949.6831 (change -0.0633% model=xgboost)
+2026-07-09 10:06:24 - PredictorLoop - INFO - [BTC:10m] Predicted 62977.431 (change -0.0193% model=xgboost)
+2026-07-09 10:06:24 - PredictorLoop - INFO - [BTC:15m] Predicted 62763.5438 (change -0.3588% model=xgboost)
+2026-07-09 10:06:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:06:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:06:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:07:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:07:24 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:11:22 - PredictorLoop - INFO - [BNB:5m] Predicted 569.629 (change -0.0756% model=xgboost)
+2026-07-09 10:11:22 - PredictorLoop - INFO - [BNB:10m] Predicted 569.1125 (change -0.1662% model=xgboost)
+2026-07-09 10:11:22 - PredictorLoop - INFO - [BNB:15m] Predicted 568.7067 (change -0.2374% model=xgboost)
+2026-07-09 10:11:24 - PredictorLoop - INFO - [BTC:5m] Predicted 62829.9939 (change -0.0633% model=xgboost)
+2026-07-09 10:11:24 - PredictorLoop - INFO - [BTC:10m] Predicted 62857.6891 (change -0.0193% model=xgboost)
+2026-07-09 10:11:24 - PredictorLoop - INFO - [BTC:15m] Predicted 62644.2085 (change -0.3588% model=xgboost)
+2026-07-09 10:11:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:11:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:11:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:12:22 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:12:24 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:16:23 - PredictorLoop - INFO - [BNB:5m] Predicted 568.0502 (change -0.0756% model=xgboost)
+2026-07-09 10:16:23 - PredictorLoop - INFO - [BNB:10m] Predicted 567.5351 (change -0.1662% model=xgboost)
+2026-07-09 10:16:23 - PredictorLoop - INFO - [BNB:15m] Predicted 567.1305 (change -0.2374% model=xgboost)
+2026-07-09 10:16:24 - PredictorLoop - INFO - [BTC:5m] Predicted 62636.3166 (change -0.0633% model=xgboost)
+2026-07-09 10:16:24 - PredictorLoop - INFO - [BTC:10m] Predicted 62663.9264 (change -0.0193% model=xgboost)
+2026-07-09 10:16:24 - PredictorLoop - INFO - [BTC:15m] Predicted 62451.1039 (change -0.3588% model=xgboost)
+2026-07-09 10:16:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:16:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:16:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:17:23 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:17:24 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:21:23 - PredictorLoop - INFO - [BNB:5m] Predicted 568.0902 (change -0.0756% model=xgboost)
+2026-07-09 10:21:23 - PredictorLoop - INFO - [BNB:10m] Predicted 567.5751 (change -0.1662% model=xgboost)
+2026-07-09 10:21:23 - PredictorLoop - INFO - [BNB:15m] Predicted 567.1704 (change -0.2374% model=xgboost)
+2026-07-09 10:21:25 - PredictorLoop - INFO - [BTC:5m] Predicted 62591.455 (change -0.0633% model=xgboost)
+2026-07-09 10:21:25 - PredictorLoop - INFO - [BTC:10m] Predicted 62619.045 (change -0.0193% model=xgboost)
+2026-07-09 10:21:25 - PredictorLoop - INFO - [BTC:15m] Predicted 62406.375 (change -0.3588% model=xgboost)
+2026-07-09 10:21:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:21:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:21:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:22:23 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:22:25 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:26:23 - PredictorLoop - INFO - [BNB:5m] Predicted 568.31 (change -0.0756% model=xgboost)
+2026-07-09 10:26:23 - PredictorLoop - INFO - [BNB:10m] Predicted 567.7947 (change -0.1662% model=xgboost)
+2026-07-09 10:26:23 - PredictorLoop - INFO - [BNB:15m] Predicted 567.3899 (change -0.2374% model=xgboost)
+2026-07-09 10:26:25 - PredictorLoop - INFO - [BTC:5m] Predicted 62661.1009 (change -0.0633% model=xgboost)
+2026-07-09 10:26:25 - PredictorLoop - INFO - [BTC:10m] Predicted 62688.7216 (change -0.0193% model=xgboost)
+2026-07-09 10:26:25 - PredictorLoop - INFO - [BTC:15m] Predicted 62475.8149 (change -0.3588% model=xgboost)
+2026-07-09 10:26:26 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:26:31 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:26:36 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:27:23 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:27:25 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:31:23 - PredictorLoop - INFO - [BNB:5m] Predicted 568.7697 (change -0.0756% model=xgboost)
+2026-07-09 10:31:23 - PredictorLoop - INFO - [BNB:10m] Predicted 568.2539 (change -0.1662% model=xgboost)
+2026-07-09 10:31:23 - PredictorLoop - INFO - [BNB:15m] Predicted 567.8488 (change -0.2374% model=xgboost)
+2026-07-09 10:31:25 - PredictorLoop - INFO - [BTC:5m] Predicted 62705.8726 (change -0.0633% model=xgboost)
+2026-07-09 10:31:25 - PredictorLoop - INFO - [BTC:10m] Predicted 62733.513 (change -0.0193% model=xgboost)
+2026-07-09 10:31:25 - PredictorLoop - INFO - [BTC:15m] Predicted 62520.4542 (change -0.3588% model=xgboost)
+2026-07-09 10:31:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:31:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:31:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:32:23 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:32:25 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:36:23 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4199 (change -0.0756% model=xgboost)
+2026-07-09 10:36:23 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9045 (change -0.1662% model=xgboost)
+2026-07-09 10:36:23 - PredictorLoop - INFO - [BNB:15m] Predicted 567.4996 (change -0.2374% model=xgboost)
+2026-07-09 10:36:23 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 10:36:23 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 10:36:23 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 10:36:25 - PredictorLoop - INFO - [BTC:5m] Predicted 62698.6421 (change -0.0633% model=xgboost)
+2026-07-09 10:36:25 - PredictorLoop - INFO - [BTC:10m] Predicted 62726.2794 (change -0.0193% model=xgboost)
+2026-07-09 10:36:25 - PredictorLoop - INFO - [BTC:15m] Predicted 62513.2451 (change -0.3588% model=xgboost)
+2026-07-09 10:36:25 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 10:36:25 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 10:36:25 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 10:36:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:36:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:36:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:36:37 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 10:36:37 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 10:36:37 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 10:37:23 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:37:25 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:41:23 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:41:23 - PredictorLoop - INFO - [BNB:5m] Predicted 568.4199 (change -0.0756% model=xgboost)
+2026-07-09 10:41:23 - PredictorLoop - INFO - [BNB:10m] Predicted 567.9045 (change -0.1662% model=xgboost)
+2026-07-09 10:41:24 - PredictorLoop - INFO - [BNB:15m] Predicted 567.4996 (change -0.2374% model=xgboost)
+2026-07-09 10:41:25 - PredictorLoop - INFO - [BTC:5m] Predicted 62824.2526 (change -0.0633% model=xgboost)
+2026-07-09 10:41:25 - PredictorLoop - INFO - [BTC:10m] Predicted 62851.9452 (change -0.0193% model=xgboost)
+2026-07-09 10:41:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62638.4841 (change -0.3588% model=xgboost)
+2026-07-09 10:41:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:41:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:41:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:42:26 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:46:24 - PredictorLoop - INFO - [BNB:5m] Predicted 569.2793 (change -0.0756% model=xgboost)
+2026-07-09 10:46:24 - PredictorLoop - INFO - [BNB:10m] Predicted 568.7631 (change -0.1662% model=xgboost)
+2026-07-09 10:46:24 - PredictorLoop - INFO - [BNB:15m] Predicted 568.3576 (change -0.2374% model=xgboost)
+2026-07-09 10:46:26 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 10:46:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62890.9553 (change -0.0633% model=xgboost)
+2026-07-09 10:46:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62918.6773 (change -0.0193% model=xgboost)
+2026-07-09 10:46:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62704.9896 (change -0.3588% model=xgboost)
+2026-07-09 10:46:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:46:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:46:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:47:24 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:47:26 - PredictorLoop - INFO - [BTC] Validated 2 predictions
+2026-07-09 10:51:24 - PredictorLoop - INFO - [BNB:5m] Predicted 570.2086 (change -0.0756% model=xgboost)
+2026-07-09 10:51:24 - PredictorLoop - INFO - [BNB:10m] Predicted 569.6915 (change -0.1662% model=xgboost)
+2026-07-09 10:51:24 - PredictorLoop - INFO - [BNB:15m] Predicted 569.2853 (change -0.2374% model=xgboost)
+2026-07-09 10:51:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62823.3981 (change -0.0633% model=xgboost)
+2026-07-09 10:51:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62851.0903 (change -0.0193% model=xgboost)
+2026-07-09 10:51:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62637.6322 (change -0.3588% model=xgboost)
+2026-07-09 10:51:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:51:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:51:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:52:24 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:52:26 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 10:56:24 - PredictorLoop - INFO - [BNB:5m] Predicted 570.3435 (change -0.0756% model=xgboost)
+2026-07-09 10:56:24 - PredictorLoop - INFO - [BNB:10m] Predicted 569.8263 (change -0.1662% model=xgboost)
+2026-07-09 10:56:24 - PredictorLoop - INFO - [BNB:15m] Predicted 569.42 (change -0.2374% model=xgboost)
+2026-07-09 10:56:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62855.3529 (change -0.0633% model=xgboost)
+2026-07-09 10:56:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62883.0592 (change -0.0193% model=xgboost)
+2026-07-09 10:56:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62669.4925 (change -0.3588% model=xgboost)
+2026-07-09 10:56:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 10:56:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 10:56:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 10:57:24 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 10:57:26 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:01:24 - PredictorLoop - INFO - [BNB:5m] Predicted 571.1329 (change -0.0756% model=xgboost)
+2026-07-09 11:01:24 - PredictorLoop - INFO - [BNB:10m] Predicted 570.615 (change -0.1662% model=xgboost)
+2026-07-09 11:01:24 - PredictorLoop - INFO - [BNB:15m] Predicted 570.2081 (change -0.2374% model=xgboost)
+2026-07-09 11:01:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62919.5022 (change -0.0633% model=xgboost)
+2026-07-09 11:01:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62947.2368 (change -0.0193% model=xgboost)
+2026-07-09 11:01:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62733.4521 (change -0.3588% model=xgboost)
+2026-07-09 11:01:27 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:01:32 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:01:37 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:02:24 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:02:26 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:06:24 - PredictorLoop - INFO - [BNB:5m] Predicted 570.6632 (change -0.0756% model=xgboost)
+2026-07-09 11:06:24 - PredictorLoop - INFO - [BNB:10m] Predicted 570.1458 (change -0.1662% model=xgboost)
+2026-07-09 11:06:24 - PredictorLoop - INFO - [BNB:15m] Predicted 569.7393 (change -0.2374% model=xgboost)
+2026-07-09 11:06:26 - PredictorLoop - INFO - [BTC:5m] Predicted 62874.3658 (change -0.0633% model=xgboost)
+2026-07-09 11:06:26 - PredictorLoop - INFO - [BTC:10m] Predicted 62902.0805 (change -0.0193% model=xgboost)
+2026-07-09 11:06:26 - PredictorLoop - INFO - [BTC:15m] Predicted 62688.4492 (change -0.3588% model=xgboost)
+2026-07-09 11:06:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:06:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:06:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:07:24 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:07:26 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:11:24 - PredictorLoop - INFO - [BNB:5m] Predicted 571.5676 (change -0.0756% model=xgboost)
+2026-07-09 11:11:24 - PredictorLoop - INFO - [BNB:10m] Predicted 571.0493 (change -0.1662% model=xgboost)
+2026-07-09 11:11:24 - PredictorLoop - INFO - [BNB:15m] Predicted 570.6421 (change -0.2374% model=xgboost)
+2026-07-09 11:11:27 - PredictorLoop - INFO - [BTC:5m] Predicted 63035.5637 (change -0.0633% model=xgboost)
+2026-07-09 11:11:27 - PredictorLoop - INFO - [BTC:10m] Predicted 63063.3494 (change -0.0193% model=xgboost)
+2026-07-09 11:11:27 - PredictorLoop - INFO - [BTC:15m] Predicted 62849.1704 (change -0.3588% model=xgboost)
+2026-07-09 11:11:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:11:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:11:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:12:25 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:12:27 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:16:25 - PredictorLoop - INFO - [BNB:5m] Predicted 571.6175 (change -0.0756% model=xgboost)
+2026-07-09 11:16:25 - PredictorLoop - INFO - [BNB:10m] Predicted 571.0992 (change -0.1662% model=xgboost)
+2026-07-09 11:16:25 - PredictorLoop - INFO - [BNB:15m] Predicted 570.692 (change -0.2374% model=xgboost)
+2026-07-09 11:16:27 - PredictorLoop - INFO - [BTC:5m] Predicted 63040.9153 (change -0.0633% model=xgboost)
+2026-07-09 11:16:27 - PredictorLoop - INFO - [BTC:10m] Predicted 63068.7034 (change -0.0193% model=xgboost)
+2026-07-09 11:16:27 - PredictorLoop - INFO - [BTC:15m] Predicted 62854.5062 (change -0.3588% model=xgboost)
+2026-07-09 11:16:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:16:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:16:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:17:25 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:17:27 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:21:25 - PredictorLoop - INFO - [BNB:5m] Predicted 571.0779 (change -0.0756% model=xgboost)
+2026-07-09 11:21:25 - PredictorLoop - INFO - [BNB:10m] Predicted 570.5601 (change -0.1662% model=xgboost)
+2026-07-09 11:21:25 - PredictorLoop - INFO - [BNB:15m] Predicted 570.1533 (change -0.2374% model=xgboost)
+2026-07-09 11:21:27 - PredictorLoop - INFO - [BTC] Validated 2 predictions
+2026-07-09 11:21:27 - PredictorLoop - INFO - [BTC:5m] Predicted 62933.8281 (change -0.0633% model=xgboost)
+2026-07-09 11:21:27 - PredictorLoop - INFO - [BTC:10m] Predicted 62961.569 (change -0.0193% model=xgboost)
+2026-07-09 11:21:27 - PredictorLoop - INFO - [BTC:15m] Predicted 62747.7357 (change -0.3588% model=xgboost)
+2026-07-09 11:21:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:21:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:21:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:22:25 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:22:27 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 11:26:25 - PredictorLoop - INFO - [BNB:5m] Predicted 571.3877 (change -0.0756% model=xgboost)
+2026-07-09 11:26:25 - PredictorLoop - INFO - [BNB:10m] Predicted 570.8696 (change -0.1662% model=xgboost)
+2026-07-09 11:26:25 - PredictorLoop - INFO - [BNB:15m] Predicted 570.4625 (change -0.2374% model=xgboost)
+2026-07-09 11:26:27 - PredictorLoop - INFO - [BTC:5m] Predicted 63022.9717 (change -0.0633% model=xgboost)
+2026-07-09 11:26:27 - PredictorLoop - INFO - [BTC:10m] Predicted 63050.7519 (change -0.0193% model=xgboost)
+2026-07-09 11:26:27 - PredictorLoop - INFO - [BTC:15m] Predicted 62836.6156 (change -0.3588% model=xgboost)
+2026-07-09 11:26:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:26:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:26:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:27:25 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:27:27 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:31:25 - PredictorLoop - INFO - [BNB:5m] Predicted 570.6632 (change -0.0756% model=xgboost)
+2026-07-09 11:31:25 - PredictorLoop - INFO - [BNB:10m] Predicted 570.1458 (change -0.1662% model=xgboost)
+2026-07-09 11:31:25 - PredictorLoop - INFO - [BNB:15m] Predicted 569.7393 (change -0.2374% model=xgboost)
+2026-07-09 11:31:27 - PredictorLoop - INFO - [BTC:5m] Predicted 62925.2686 (change -0.0633% model=xgboost)
+2026-07-09 11:31:27 - PredictorLoop - INFO - [BTC:10m] Predicted 62953.0057 (change -0.0193% model=xgboost)
+2026-07-09 11:31:27 - PredictorLoop - INFO - [BTC:15m] Predicted 62739.2014 (change -0.3588% model=xgboost)
+2026-07-09 11:31:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:31:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:31:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:32:25 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:32:27 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:36:25 - PredictorLoop - INFO - [BNB:5m] Predicted 570.0387 (change -0.0756% model=xgboost)
+2026-07-09 11:36:25 - PredictorLoop - INFO - [BNB:10m] Predicted 569.5218 (change -0.1662% model=xgboost)
+2026-07-09 11:36:25 - PredictorLoop - INFO - [BNB:15m] Predicted 569.1157 (change -0.2374% model=xgboost)
+2026-07-09 11:36:25 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 11:36:25 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 11:36:25 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 11:36:27 - PredictorLoop - INFO - [BTC:5m] Predicted 62845.5591 (change -0.0633% model=xgboost)
+2026-07-09 11:36:27 - PredictorLoop - INFO - [BTC:10m] Predicted 62873.2611 (change -0.0193% model=xgboost)
+2026-07-09 11:36:27 - PredictorLoop - INFO - [BTC:15m] Predicted 62659.7276 (change -0.3588% model=xgboost)
+2026-07-09 11:36:27 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 11:36:28 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 11:36:28 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 11:36:28 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:36:33 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:36:38 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:36:38 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 11:36:38 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 11:36:38 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 11:37:25 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:37:28 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:41:25 - PredictorLoop - INFO - [BNB:5m] Predicted 570.4184 (change -0.0756% model=xgboost)
+2026-07-09 11:41:26 - PredictorLoop - INFO - [BNB:10m] Predicted 569.9012 (change -0.1662% model=xgboost)
+2026-07-09 11:41:26 - PredictorLoop - INFO - [BNB:15m] Predicted 569.4948 (change -0.2374% model=xgboost)
+2026-07-09 11:41:28 - PredictorLoop - INFO - [BTC:5m] Predicted 62903.0476 (change -0.0633% model=xgboost)
+2026-07-09 11:41:28 - PredictorLoop - INFO - [BTC:10m] Predicted 62930.775 (change -0.0193% model=xgboost)
+2026-07-09 11:41:28 - PredictorLoop - INFO - [BTC:15m] Predicted 62717.0462 (change -0.3588% model=xgboost)
+2026-07-09 11:41:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:41:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:41:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:42:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:42:28 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:46:26 - PredictorLoop - INFO - [BNB:5m] Predicted 570.4784 (change -0.0756% model=xgboost)
+2026-07-09 11:46:26 - PredictorLoop - INFO - [BNB:10m] Predicted 569.9611 (change -0.1662% model=xgboost)
+2026-07-09 11:46:26 - PredictorLoop - INFO - [BNB:15m] Predicted 569.5547 (change -0.2374% model=xgboost)
+2026-07-09 11:46:28 - PredictorLoop - INFO - [BTC:5m] Predicted 62910.2431 (change -0.0633% model=xgboost)
+2026-07-09 11:46:28 - PredictorLoop - INFO - [BTC:10m] Predicted 62937.9736 (change -0.0193% model=xgboost)
+2026-07-09 11:46:28 - PredictorLoop - INFO - [BTC:15m] Predicted 62724.2204 (change -0.3588% model=xgboost)
+2026-07-09 11:46:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:46:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:46:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:47:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:47:28 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:51:26 - PredictorLoop - INFO - [BNB:5m] Predicted 570.5184 (change -0.0756% model=xgboost)
+2026-07-09 11:51:26 - PredictorLoop - INFO - [BNB:10m] Predicted 570.001 (change -0.1662% model=xgboost)
+2026-07-09 11:51:26 - PredictorLoop - INFO - [BNB:15m] Predicted 569.5946 (change -0.2374% model=xgboost)
+2026-07-09 11:51:28 - PredictorLoop - INFO - [BTC:5m] Predicted 62907.8396 (change -0.0633% model=xgboost)
+2026-07-09 11:51:28 - PredictorLoop - INFO - [BTC:10m] Predicted 62935.569 (change -0.0193% model=xgboost)
+2026-07-09 11:51:28 - PredictorLoop - INFO - [BTC:15m] Predicted 62721.824 (change -0.3588% model=xgboost)
+2026-07-09 11:51:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:51:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:51:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:52:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:52:28 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 11:56:26 - PredictorLoop - INFO - [BNB:5m] Predicted 569.9288 (change -0.0756% model=xgboost)
+2026-07-09 11:56:26 - PredictorLoop - INFO - [BNB:10m] Predicted 569.412 (change -0.1662% model=xgboost)
+2026-07-09 11:56:26 - PredictorLoop - INFO - [BNB:15m] Predicted 569.006 (change -0.2374% model=xgboost)
+2026-07-09 11:56:28 - PredictorLoop - INFO - [BTC:5m] Predicted 62760.2431 (change -0.0633% model=xgboost)
+2026-07-09 11:56:28 - PredictorLoop - INFO - [BTC:10m] Predicted 62787.9075 (change -0.0193% model=xgboost)
+2026-07-09 11:56:28 - PredictorLoop - INFO - [BTC:15m] Predicted 62574.664 (change -0.3588% model=xgboost)
+2026-07-09 11:56:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 11:56:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 11:56:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 11:57:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 11:57:28 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:01:26 - PredictorLoop - INFO - [BNB:5m] Predicted 570.2985 (change -0.0756% model=xgboost)
+2026-07-09 12:01:26 - PredictorLoop - INFO - [BNB:10m] Predicted 569.7814 (change -0.1662% model=xgboost)
+2026-07-09 12:01:26 - PredictorLoop - INFO - [BNB:15m] Predicted 569.3751 (change -0.2374% model=xgboost)
+2026-07-09 12:01:28 - PredictorLoop - INFO - [BTC:5m] Predicted 62805.1097 (change -0.0633% model=xgboost)
+2026-07-09 12:01:29 - PredictorLoop - INFO - [BTC:10m] Predicted 62832.7939 (change -0.0193% model=xgboost)
+2026-07-09 12:01:29 - PredictorLoop - INFO - [BTC:15m] Predicted 62619.3979 (change -0.3588% model=xgboost)
+2026-07-09 12:01:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:01:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:01:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:02:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:02:29 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:06:26 - PredictorLoop - INFO - [BNB:5m] Predicted 570.5683 (change -0.0756% model=xgboost)
+2026-07-09 12:06:26 - PredictorLoop - INFO - [BNB:10m] Predicted 570.0509 (change -0.1662% model=xgboost)
+2026-07-09 12:06:26 - PredictorLoop - INFO - [BNB:15m] Predicted 569.6445 (change -0.2374% model=xgboost)
+2026-07-09 12:06:29 - PredictorLoop - INFO - [BTC:5m] Predicted 62845.584 (change -0.0633% model=xgboost)
+2026-07-09 12:06:29 - PredictorLoop - INFO - [BTC:10m] Predicted 62873.286 (change -0.0193% model=xgboost)
+2026-07-09 12:06:29 - PredictorLoop - INFO - [BTC:15m] Predicted 62659.7526 (change -0.3588% model=xgboost)
+2026-07-09 12:06:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:06:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:06:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:07:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:07:29 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:11:26 - PredictorLoop - INFO - [BNB:5m] Predicted 569.7989 (change -0.0756% model=xgboost)
+2026-07-09 12:11:26 - PredictorLoop - INFO - [BNB:10m] Predicted 569.2822 (change -0.1662% model=xgboost)
+2026-07-09 12:11:26 - PredictorLoop - INFO - [BNB:15m] Predicted 568.8763 (change -0.2374% model=xgboost)
+2026-07-09 12:11:29 - PredictorLoop - INFO - [BTC:5m] Predicted 62782.3991 (change -0.0633% model=xgboost)
+2026-07-09 12:11:29 - PredictorLoop - INFO - [BTC:10m] Predicted 62810.0732 (change -0.0193% model=xgboost)
+2026-07-09 12:11:29 - PredictorLoop - INFO - [BTC:15m] Predicted 62596.7544 (change -0.3588% model=xgboost)
+2026-07-09 12:11:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:11:34 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:11:39 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:12:26 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:12:29 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:16:27 - PredictorLoop - INFO - [BNB:5m] Predicted 569.7889 (change -0.0756% model=xgboost)
+2026-07-09 12:16:27 - PredictorLoop - INFO - [BNB:10m] Predicted 569.2722 (change -0.1662% model=xgboost)
+2026-07-09 12:16:27 - PredictorLoop - INFO - [BNB:15m] Predicted 568.8663 (change -0.2374% model=xgboost)
+2026-07-09 12:16:29 - PredictorLoop - INFO - [BTC:5m] Predicted 62787.5158 (change -0.0633% model=xgboost)
+2026-07-09 12:16:29 - PredictorLoop - INFO - [BTC:10m] Predicted 62815.1922 (change -0.0193% model=xgboost)
+2026-07-09 12:16:29 - PredictorLoop - INFO - [BTC:15m] Predicted 62601.856 (change -0.3588% model=xgboost)
+2026-07-09 12:16:29 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:16:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:16:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:17:27 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:17:29 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:21:27 - PredictorLoop - INFO - [BNB:5m] Predicted 569.5591 (change -0.0756% model=xgboost)
+2026-07-09 12:21:27 - PredictorLoop - INFO - [BNB:10m] Predicted 569.0426 (change -0.1662% model=xgboost)
+2026-07-09 12:21:27 - PredictorLoop - INFO - [BNB:15m] Predicted 568.6369 (change -0.2374% model=xgboost)
+2026-07-09 12:21:29 - PredictorLoop - INFO - [BTC:5m] Predicted 62725.0604 (change -0.0633% model=xgboost)
+2026-07-09 12:21:29 - PredictorLoop - INFO - [BTC:10m] Predicted 62752.7093 (change -0.0193% model=xgboost)
+2026-07-09 12:21:29 - PredictorLoop - INFO - [BTC:15m] Predicted 62539.5853 (change -0.3588% model=xgboost)
+2026-07-09 12:21:30 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:21:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:21:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:22:27 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:22:29 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:26:27 - PredictorLoop - INFO - [BNB:5m] Predicted 569.2093 (change -0.0756% model=xgboost)
+2026-07-09 12:26:27 - PredictorLoop - INFO - [BNB:10m] Predicted 568.6932 (change -0.1662% model=xgboost)
+2026-07-09 12:26:27 - PredictorLoop - INFO - [BNB:15m] Predicted 568.2877 (change -0.2374% model=xgboost)
+2026-07-09 12:26:29 - PredictorLoop - INFO - [BTC:5m] Predicted 62520.8898 (change -0.0633% model=xgboost)
+2026-07-09 12:26:29 - PredictorLoop - INFO - [BTC:10m] Predicted 62548.4486 (change -0.0193% model=xgboost)
+2026-07-09 12:26:29 - PredictorLoop - INFO - [BTC:15m] Predicted 62336.0184 (change -0.3588% model=xgboost)
+2026-07-09 12:26:30 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:26:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:26:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:27:27 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:27:29 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:31:27 - PredictorLoop - INFO - [BNB:5m] Predicted 569.2093 (change -0.0756% model=xgboost)
+2026-07-09 12:31:27 - PredictorLoop - INFO - [BNB:10m] Predicted 568.6932 (change -0.1662% model=xgboost)
+2026-07-09 12:31:27 - PredictorLoop - INFO - [BNB:15m] Predicted 568.2877 (change -0.2374% model=xgboost)
+2026-07-09 12:31:30 - PredictorLoop - INFO - [BTC:5m] Predicted 62637.5558 (change -0.0633% model=xgboost)
+2026-07-09 12:31:30 - PredictorLoop - INFO - [BTC:10m] Predicted 62665.1661 (change -0.0193% model=xgboost)
+2026-07-09 12:31:30 - PredictorLoop - INFO - [BTC:15m] Predicted 62452.3395 (change -0.3588% model=xgboost)
+2026-07-09 12:31:30 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:31:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:31:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:32:27 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:32:30 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:36:27 - PredictorLoop - INFO - [BNB:5m] Predicted 569.669 (change -0.0756% model=xgboost)
+2026-07-09 12:36:27 - PredictorLoop - INFO - [BNB:10m] Predicted 569.1524 (change -0.1662% model=xgboost)
+2026-07-09 12:36:27 - PredictorLoop - INFO - [BNB:15m] Predicted 568.7466 (change -0.2374% model=xgboost)
+2026-07-09 12:36:27 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 12:36:27 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 12:36:27 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 12:36:30 - PredictorLoop - INFO - [BTC:5m] Predicted 62606.3406 (change -0.0633% model=xgboost)
+2026-07-09 12:36:30 - PredictorLoop - INFO - [BTC:10m] Predicted 62633.9372 (change -0.0193% model=xgboost)
+2026-07-09 12:36:30 - PredictorLoop - INFO - [BTC:15m] Predicted 62421.2166 (change -0.3588% model=xgboost)
+2026-07-09 12:36:30 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 12:36:30 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 12:36:30 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 12:36:30 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:36:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:36:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:36:40 - PredictorLoop - INFO - [HYPE:5m] Retraining model
+2026-07-09 12:36:40 - PredictorLoop - INFO - [HYPE:10m] Retraining model
+2026-07-09 12:36:40 - PredictorLoop - INFO - [HYPE:15m] Retraining model
+2026-07-09 12:37:27 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:37:30 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:41:27 - PredictorLoop - INFO - [BNB:5m] Predicted 569.689 (change -0.0756% model=xgboost)
+2026-07-09 12:41:28 - PredictorLoop - INFO - [BNB:10m] Predicted 569.1724 (change -0.1662% model=xgboost)
+2026-07-09 12:41:28 - PredictorLoop - INFO - [BNB:15m] Predicted 568.7666 (change -0.2374% model=xgboost)
+2026-07-09 12:41:30 - PredictorLoop - INFO - [BTC:5m] Predicted 62667.3969 (change -0.0633% model=xgboost)
+2026-07-09 12:41:30 - PredictorLoop - INFO - [BTC:10m] Predicted 62695.0204 (change -0.0193% model=xgboost)
+2026-07-09 12:41:30 - PredictorLoop - INFO - [BTC:15m] Predicted 62482.0923 (change -0.3588% model=xgboost)
+2026-07-09 12:41:30 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:41:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:41:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:42:28 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:42:30 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:46:28 - PredictorLoop - INFO - [BNB:5m] Predicted 569.709 (change -0.0756% model=xgboost)
+2026-07-09 12:46:28 - PredictorLoop - INFO - [BNB:10m] Predicted 569.1924 (change -0.1662% model=xgboost)
+2026-07-09 12:46:28 - PredictorLoop - INFO - [BNB:15m] Predicted 568.7865 (change -0.2374% model=xgboost)
+2026-07-09 12:46:30 - PredictorLoop - INFO - [BTC:5m] Predicted 62633.1186 (change -0.0633% model=xgboost)
+2026-07-09 12:46:30 - PredictorLoop - INFO - [BTC:10m] Predicted 62660.727 (change -0.0193% model=xgboost)
+2026-07-09 12:46:30 - PredictorLoop - INFO - [BTC:15m] Predicted 62447.9154 (change -0.3588% model=xgboost)
+2026-07-09 12:46:30 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:46:35 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:46:40 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:47:28 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:47:30 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 12:51:28 - PredictorLoop - INFO - [BNB:5m] Predicted 568.9096 (change -0.0756% model=xgboost)
+2026-07-09 12:51:28 - PredictorLoop - INFO - [BNB:10m] Predicted 568.3937 (change -0.1662% model=xgboost)
+2026-07-09 12:51:28 - PredictorLoop - INFO - [BNB:15m] Predicted 567.9884 (change -0.2374% model=xgboost)
+2026-07-09 12:51:30 - PredictorLoop - INFO - [BTC:5m] Predicted 62523.1733 (change -0.0633% model=xgboost)
+2026-07-09 12:51:30 - PredictorLoop - INFO - [BTC:10m] Predicted 62550.7332 (change -0.0193% model=xgboost)
+2026-07-09 12:51:30 - PredictorLoop - INFO - [BTC:15m] Predicted 62338.2952 (change -0.3588% model=xgboost)
+2026-07-09 12:51:31 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 12:51:36 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 12:51:41 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 12:52:28 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 12:52:31 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          2026-07-09 13:55:58 - PredictorLoop - INFO - BTC predictor loop started
+2026-07-09 13:55:58 - PredictorLoop - INFO - BNB predictor loop started
+2026-07-09 13:55:58 - PredictorLoop - INFO - HYPE predictor loop started
+2026-07-09 13:55:58 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 13:55:58 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 13:55:59 - PredictorLoop - INFO - [BTC:5m] Predicted 62580.452 (change -0.0633% model=xgboost)
+2026-07-09 13:55:59 - PredictorLoop - INFO - [HYPE:5m] Predicted 68.3375 (change 0.0402% model=xgboost)
+2026-07-09 13:55:59 - PredictorLoop - INFO - [BNB:5m] Predicted 569.0745 (change -0.0756% model=xgboost)
+2026-07-09 13:55:59 - PredictorLoop - INFO - [HYPE:10m] Predicted 68.3901 (change 0.1172% model=xgboost)
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BTC:10m] Predicted 62608.0372 (change -0.0193% model=xgboost)
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BNB:10m] Predicted 568.5584 (change -0.1662% model=xgboost)
+2026-07-09 13:56:00 - PredictorLoop - INFO - [HYPE:15m] Predicted 68.4061 (change 0.1407% model=xgboost)
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BTC:15m] Predicted 62395.4045 (change -0.3588% model=xgboost)
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BTC:5m] Retraining model
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BNB:15m] Predicted 568.153 (change -0.2374% model=xgboost)
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BNB:5m] Retraining model
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BNB:10m] Retraining model
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BTC:10m] Retraining model
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BNB:15m] Retraining model
+2026-07-09 13:56:00 - PredictorLoop - INFO - [BTC:15m] Retraining model
+2026-07-09 14:01:00 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.2555 (change 0.0379% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.3019 (change 0.1069% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.3264 (change 0.1434% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BNB] Validated 1 predictions
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BTC:5m] Predicted 63079.9356 (change -0.0633% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BNB:5m] Predicted 570.9181 (change -0.0756% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BTC:10m] Predicted 63107.7409 (change -0.0193% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BNB:10m] Predicted 570.4004 (change -0.1662% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BTC:15m] Predicted 62893.4111 (change -0.3588% model=xgboost)
+2026-07-09 14:01:00 - PredictorLoop - INFO - [BNB:15m] Predicted 569.9937 (change -0.2374% model=xgboost)
+2026-07-09 14:02:00 - PredictorLoop - INFO - [HYPE] Validated 1 predictions
+2026-07-09 14:02:00 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 14:06:00 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.5138 (change 0.0501% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.5522 (change 0.1069% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.5768 (change 0.1434% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BNB:5m] Predicted 570.3135 (change -0.0756% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BTC:5m] Predicted 62983.4617 (change -0.0633% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BNB:10m] Predicted 569.7964 (change -0.1662% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BTC:10m] Predicted 63011.2245 (change -0.0193% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BNB:15m] Predicted 569.3901 (change -0.2374% model=xgboost)
+2026-07-09 14:06:00 - PredictorLoop - INFO - [BTC:15m] Predicted 62797.2225 (change -0.3588% model=xgboost)
+2026-07-09 14:07:00 - PredictorLoop - INFO - [HYPE] Validated 2 predictions
+2026-07-09 14:07:00 - PredictorLoop - INFO - [BTC] Validated 1 predictions
+2026-07-09 14:07:00 - PredictorLoop - INFO - [BNB] Validated 2 predictions
+2026-07-09 14:11:00 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.7439 (change 0.0501% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.7824 (change 0.1069% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.8232 (change 0.1671% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [BNB:5m] Predicted 571.5975 (change -0.0756% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [BTC:5m] Predicted 63258.7773 (change -0.0633% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [BNB:10m] Predicted 571.0792 (change -0.1662% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [BTC:10m] Predicted 63286.6614 (change -0.0193% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [BNB:15m] Predicted 570.672 (change -0.2374% model=xgboost)
+2026-07-09 14:11:00 - PredictorLoop - INFO - [BTC:15m] Predicted 63071.724 (change -0.3588% model=xgboost)
+2026-07-09 14:12:00 - PredictorLoop - INFO - [HYPE] Validated 3 predictions
+2026-07-09 14:12:01 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 14:12:01 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 14:16:00 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.702 (change 0.0621% model=xgboost)
+2026-07-09 14:16:00 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.7393 (change 0.1172% model=xgboost)
+2026-07-09 14:16:00 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.757 (change 0.1434% model=xgboost)
+2026-07-09 14:16:01 - PredictorLoop - INFO - [BNB:5m] Predicted 572.2321 (change -0.0756% model=xgboost)
+2026-07-09 14:16:01 - PredictorLoop - INFO - [BTC:5m] Predicted 63272.4686 (change -0.0633% model=xgboost)
+2026-07-09 14:16:01 - PredictorLoop - INFO - [BNB:10m] Predicted 571.7132 (change -0.1662% model=xgboost)
+2026-07-09 14:16:01 - PredictorLoop - INFO - [BTC:10m] Predicted 63300.3588 (change -0.0193% model=xgboost)
+2026-07-09 14:16:01 - PredictorLoop - INFO - [BNB:15m] Predicted 571.3055 (change -0.2374% model=xgboost)
+2026-07-09 14:16:01 - PredictorLoop - INFO - [BTC:15m] Predicted 63085.3748 (change -0.3588% model=xgboost)
+2026-07-09 14:17:00 - PredictorLoop - INFO - [HYPE] Validated 3 predictions
+2026-07-09 14:17:01 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 14:17:01 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 14:21:00 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.722 (change 0.0621% model=xgboost)
+2026-07-09 14:21:00 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.7441 (change 0.0948% model=xgboost)
+2026-07-09 14:21:00 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.7828 (change 0.1518% model=xgboost)
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BTC:5m] Predicted 63235.437 (change -0.0633% model=xgboost)
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BNB:5m] Predicted 571.8424 (change -0.0756% model=xgboost)
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BTC:10m] Predicted 63263.3109 (change -0.0193% model=xgboost)
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BNB:10m] Predicted 571.3238 (change -0.1662% model=xgboost)
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BTC:15m] Predicted 63048.4528 (change -0.3588% model=xgboost)
+2026-07-09 14:21:01 - PredictorLoop - INFO - [BNB:15m] Predicted 570.9165 (change -0.2374% model=xgboost)
+2026-07-09 14:22:01 - PredictorLoop - INFO - [HYPE] Validated 3 predictions
+2026-07-09 14:22:01 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 14:26:01 - PredictorLoop - INFO - [HYPE:5m] Predicted 67.6209 (change 0.0456% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.6601 (change 0.1037% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.6869 (change 0.1434% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [BNB:5m] Predicted 571.6775 (change -0.0756% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [BTC:5m] Predicted 63229.9405 (change -0.0633% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [BNB:10m] Predicted 571.1591 (change -0.1662% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [BTC:10m] Predicted 63257.812 (change -0.0193% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [BNB:15m] Predicted 570.7519 (change -0.2374% model=xgboost)
+2026-07-09 14:26:01 - PredictorLoop - INFO - [BTC:15m] Predicted 63042.9725 (change -0.3588% model=xgboost)
+2026-07-09 14:27:01 - PredictorLoop - INFO - [HYPE] Validated 3 predictions
+2026-07-09 14:27:01 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 14:27:01 - PredictorLoop - INFO - [BTC] Validated 3 predictions

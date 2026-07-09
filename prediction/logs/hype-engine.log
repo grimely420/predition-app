@@ -4,3 +4,15 @@
 2026-07-09 04:28:23 - HYPE-Engine - INFO - Final feature matrix: 55 rows
 2026-07-09 04:28:23 - HYPE-Engine - INFO - X shape: (55, 14), y shape: (55,)
 2026-07-09 04:28:23 - HYPE-Engine - INFO - Features: ['ret_1m', 'ret_2m', 'ret_3m', 'ret_5m', 'ret_10m', 'volatility_5m', 'volatility_10m', 'momentum_3m', 'momentum_5m', 'momentum_10m']...
+2026-07-09 04:43:01 - HYPE-Engine - INFO - Loaded 519 price points from 2026-07-09 02:05:48.072668+00:00 to 2026-07-09 08:28:19.792646+00:00
+2026-07-09 04:43:01 - HYPE-Engine - INFO - Processing 519 raw price points
+2026-07-09 04:43:01 - HYPE-Engine - INFO - Resampled to 70 1-minute bars
+2026-07-09 04:43:01 - HYPE-Engine - INFO - Final feature matrix: 55 rows
+2026-07-09 04:43:01 - HYPE-Engine - INFO - X shape: (55, 14), y shape: (55,)
+2026-07-09 04:43:01 - HYPE-Engine - INFO - Features: ['ret_1m', 'ret_2m', 'ret_3m', 'ret_5m', 'ret_10m', 'volatility_5m', 'volatility_10m', 'momentum_3m', 'momentum_5m', 'momentum_10m']...
+2026-07-09 04:49:20 - HYPE-Engine - INFO - Loaded 519 price points from 2026-07-09 02:05:48.072668+00:00 to 2026-07-09 08:28:19.792646+00:00
+2026-07-09 04:49:20 - HYPE-Engine - INFO - Processing 519 raw price points
+2026-07-09 04:49:20 - HYPE-Engine - INFO - Resampled to 70 1-minute bars
+2026-07-09 04:49:20 - HYPE-Engine - INFO - Final feature matrix: 55 rows
+2026-07-09 04:49:20 - HYPE-Engine - INFO - X shape: (55, 14), y shape: (55,)
+2026-07-09 04:49:20 - HYPE-Engine - INFO - Features: ['ret_1m', 'ret_2m', 'ret_3m', 'ret_5m', 'ret_10m', 'volatility_5m', 'volatility_10m', 'momentum_3m', 'momentum_5m', 'momentum_10m']...
