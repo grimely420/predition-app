@@ -339,3 +339,6 @@
 2026-07-09 04:11:10 - PredictorLoop - INFO - [HYPE:10m] Predicted 67.9579 (change 0.0116% model=fallback)
 2026-07-09 04:11:10 - PredictorLoop - INFO - [BTC:15m] Predicted 62647.7308 (change -0.3588% model=xgboost)
 2026-07-09 04:11:10 - PredictorLoop - INFO - [HYPE:15m] Predicted 67.9579 (change 0.0116% model=fallback)
+2026-07-09 04:12:10 - PredictorLoop - INFO - [BNB] Validated 3 predictions
+2026-07-09 04:12:10 - PredictorLoop - INFO - [BTC] Validated 3 predictions
+2026-07-09 04:12:10 - PredictorLoop - INFO - [HYPE] Validated 3 predictions

@@ -74,3 +74,12 @@
 2026-07-09 04:07:10 - Validator - INFO - [BTC:15m] Validated pred 1706: predicted=62831.6336, actual=62891.0000, error_pct=0.0941%
 2026-07-09 04:07:10 - Validator - INFO - [BTC:10m] Validated pred 1708: predicted=62987.3791, actual=62891.0000, error_pct=-0.1530%
 2026-07-09 04:07:10 - Validator - INFO - [BTC:5m] Validated pred 1710: predicted=62878.0635, actual=62891.0000, error_pct=0.0206%
+2026-07-09 04:12:10 - Validator - INFO - [BNB:15m] Validated pred 3491: predicted=571.3604, actual=571.9700, error_pct=0.1064%
+2026-07-09 04:12:10 - Validator - INFO - [BNB:10m] Validated pred 3493: predicted=571.3238, actual=571.9700, error_pct=0.1129%
+2026-07-09 04:12:10 - Validator - INFO - [BNB:5m] Validated pred 3495: predicted=571.4876, actual=571.9700, error_pct=0.0843%
+2026-07-09 04:12:10 - Validator - INFO - [BTC:15m] Validated pred 1709: predicted=62773.4581, actual=62881.8000, error_pct=0.1720%
+2026-07-09 04:12:10 - Validator - INFO - [BTC:10m] Validated pred 1711: predicted=62905.7798, actual=62881.8000, error_pct=-0.0381%
+2026-07-09 04:12:10 - Validator - INFO - [BTC:5m] Validated pred 1713: predicted=62858.7307, actual=62881.8000, error_pct=0.0367%
+2026-07-09 04:12:10 - Validator - INFO - [HYPE:15m] Validated pred 54: predicted=67.9579, actual=67.9500, error_pct=-0.0116%
+2026-07-09 04:12:10 - Validator - INFO - [HYPE:10m] Validated pred 56: predicted=67.9779, actual=67.9500, error_pct=-0.0411%
+2026-07-09 04:12:10 - Validator - INFO - [HYPE:5m] Validated pred 58: predicted=68.0079, actual=67.9500, error_pct=-0.0852%
