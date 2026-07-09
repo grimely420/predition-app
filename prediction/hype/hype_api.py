@@ -7,7 +7,7 @@ import sqlite3
 import json
 import sys
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
 from datetime import datetime, timedelta, timezone
 import threading
@@ -21,6 +21,7 @@ sys.path.insert(0, BASE_DIR)
 from hype.config import DB_PATH, MODEL_DIR, THRESHOLD_FILE, SYMBOL, PREDICTION_HORIZON
 from shared.predictor import get_predictor
 from hype import engine as hype_engine
+from shared.dashboard import coin_dashboard_html
 from shared.utils import setup_logging
 
 app = Flask(__name__)
@@ -335,6 +336,21 @@ def data_info():
     """Get data collection information."""
     info = hype_engine.get_data_info()
     return jsonify(info)
+@app.route('/')
+@app.route('/dashboard')
+def dashboard():
+    endpoints = [
+        { 'method': 'GET', 'path': '/', 'desc': 'This dashboard page. Returns the API overview.' },
+        { 'method': 'GET', 'path': '/health', 'desc': 'Service health check with data and model status.' },
+        { 'method': 'GET', 'path': '/predict', 'desc': 'Make a single-horizon ML prediction.' },
+        { 'method': 'GET', 'path': '/current_price', 'desc': 'Latest collected price and timestamp.' },
+        { 'method': 'GET', 'path': '/accuracy_summary', 'desc': 'Accuracy and error summary over recent predictions.' },
+        { 'method': 'GET', 'path': '/recent_predictions', 'desc': 'List of recent validated predictions.' },
+        { 'method': 'GET', 'path': '/data_info', 'desc': 'Data collection and training readiness information.' },
+    ]
+    html = coin_dashboard_html('hype', 'HYPE', endpoints, coin_emoji='&#128640;', stats_endpoint='/data_info', stats_title='Data Info')
+    return Response(html, mimetype='text/html')
+
 
 if __name__ == '__main__':
     from hype.config import API_HOST, API_PORT

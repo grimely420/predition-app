@@ -1,0 +1,2 @@
+2026-07-09 04:28:23 - HYPE-Predictor - INFO - Loaded basic XGBoost model from /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_5min_latest.pkl
+2026-07-09 04:28:23 - HYPE-Predictor - ERROR - Prediction failed: Feature shape mismatch, expected: 17, got 14

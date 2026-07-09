@@ -265,3 +265,33 @@
 2026-07-09 04:11:10 - ModelManager - WARNING - [HYPE:10m] Not enough data to train (got 0 samples)
 2026-07-09 04:11:10 - ModelManager - INFO - [HYPE:15m] No model found, training...
 2026-07-09 04:11:10 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 04:16:10 - ModelManager - INFO - [HYPE:10m] No model found, training...
+2026-07-09 04:16:10 - ModelManager - INFO - [HYPE:10m] Trained model (17 features, 33 samples, val_mae=0.002102) -> /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_10min_latest.pkl
+2026-07-09 04:16:11 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 04:16:11 - ModelManager - WARNING - [HYPE:15m] Not enough data to train (got 0 samples)
+2026-07-09 04:19:35 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 04:19:35 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 04:19:35 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 04:21:11 - ModelManager - INFO - [HYPE:15m] No model found, training...
+2026-07-09 04:21:11 - ModelManager - INFO - [HYPE:15m] Trained model (17 features, 33 samples, val_mae=0.003207) -> /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_15min_latest.pkl
+2026-07-09 04:21:17 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 04:21:17 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 04:21:17 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 04:21:57 - ModelManager - INFO - [BTC:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [BTC:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [BTC:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [BNB:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [BNB:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [BNB:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [HYPE:5m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_5min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [HYPE:10m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_10min_latest.pkl
+2026-07-09 04:21:58 - ModelManager - INFO - [HYPE:15m] Loaded model (17 features) from /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_15min_latest.pkl
+2026-07-09 04:36:11 - ModelManager - INFO - [BNB:5m] Trained model (17 features, 158 samples, val_mae=0.001282) -> /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_5min_latest.pkl
+2026-07-09 04:36:11 - ModelManager - INFO - [BNB:10m] Trained model (17 features, 153 samples, val_mae=0.001844) -> /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_10min_latest.pkl
+2026-07-09 04:36:11 - ModelManager - INFO - [BNB:15m] Trained model (17 features, 148 samples, val_mae=0.001642) -> /home/chain-deaction/local_prediction/predition-app/prediction/bnb/models/xgb_15min_latest.pkl
+2026-07-09 04:36:12 - ModelManager - INFO - [BTC:5m] Trained model (17 features, 151 samples, val_mae=0.001433) -> /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_5min_latest.pkl
+2026-07-09 04:36:12 - ModelManager - INFO - [BTC:10m] Trained model (17 features, 146 samples, val_mae=0.003172) -> /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_10min_latest.pkl
+2026-07-09 04:36:12 - ModelManager - INFO - [BTC:15m] Trained model (17 features, 141 samples, val_mae=0.004526) -> /home/chain-deaction/local_prediction/predition-app/prediction/bitcoin/models/xgb_15min_latest.pkl
+2026-07-09 04:36:27 - ModelManager - INFO - [HYPE:5m] Trained model (17 features, 50 samples, val_mae=0.001659) -> /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_5min_latest.pkl
+2026-07-09 04:36:27 - ModelManager - INFO - [HYPE:10m] Trained model (17 features, 45 samples, val_mae=0.002098) -> /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_10min_latest.pkl
+2026-07-09 04:36:27 - ModelManager - INFO - [HYPE:15m] Trained model (17 features, 40 samples, val_mae=0.001963) -> /home/chain-deaction/local_prediction/predition-app/prediction/hype/models/xgb_15min_latest.pkl
