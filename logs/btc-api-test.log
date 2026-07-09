@@ -649,3 +649,54 @@ ValueError: Feature shape mismatch, expected: 17, got 27
 2026-07-09 04:39:12 - BTC-API - WARNING - No actual price found for prediction 1692 at 2026-07-09T05:04:26.130157+00:00
 2026-07-09 04:39:12 - BTC-API - WARNING - No actual price found for prediction 1693 at 2026-07-09T05:04:26.239650+00:00
 2026-07-09 04:39:12 - BTC-API - WARNING - No actual price found for prediction 1694 at 2026-07-09T05:04:26.336123+00:00
+2026-07-09 04:40:12 - BTC-API - INFO - Found 50 predictions to validate
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1504 at 2026-06-18T13:15:52.812125+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1505 at 2026-06-18T13:30:53.299043+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1506 at 2026-06-18T13:45:53.789204+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1507 at 2026-06-18T13:53:09.823773+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1508 at 2026-06-18T14:00:54.272501+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1509 at 2026-06-18T14:15:54.786695+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1510 at 2026-06-18T14:30:55.287137+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1511 at 2026-06-18T14:45:55.825000+00:00
+2026-07-09 04:40:12 - BTC-API - ERROR - Error validating prediction 1522: unsupported operand type(s) for -: 'float' and 'bytes'
+2026-07-09 04:40:12 - BTC-API - ERROR - Error validating prediction 1523: unsupported operand type(s) for -: 'float' and 'bytes'
+2026-07-09 04:40:12 - BTC-API - ERROR - Error validating prediction 1524: unsupported operand type(s) for -: 'float' and 'bytes'
+2026-07-09 04:40:12 - BTC-API - ERROR - Error validating prediction 1525: unsupported operand type(s) for -: 'float' and 'bytes'
+2026-07-09 04:40:12 - BTC-API - ERROR - Error validating prediction 1526: unsupported operand type(s) for -: 'float' and 'bytes'
+2026-07-09 04:40:12 - BTC-API - ERROR - Error validating prediction 1527: unsupported operand type(s) for -: 'float' and 'bytes'
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1570 at 2026-06-19T03:06:04.481036+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1575 at 2026-06-20T02:50:58.667563+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1650 at 2026-06-23T19:47:49.704912+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1655 at 2026-07-09T02:10:02.226938+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1651 at 2026-07-09T02:18:27.467292+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1652 at 2026-07-09T02:18:27.573460+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1653 at 2026-07-09T02:18:27.650173+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1654 at 2026-07-09T02:19:48.461488+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1657 at 2026-07-09T02:20:58.192181+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1658 at 2026-07-09T02:20:58.287019+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1659 at 2026-07-09T02:20:58.383390+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1660 at 2026-07-09T02:22:45.437385+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1661 at 2026-07-09T02:22:45.527924+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1662 at 2026-07-09T02:22:45.606601+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1666 at 2026-07-09T04:51:33.763677+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1669 at 2026-07-09T04:51:56.024950+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1672 at 2026-07-09T04:52:20.283691+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1673 at 2026-07-09T04:52:53.953435+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1675 at 2026-07-09T04:52:54.034194+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1676 at 2026-07-09T04:53:59.038092+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1678 at 2026-07-09T04:53:59.115088+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1679 at 2026-07-09T04:55:10.948435+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1680 at 2026-07-09T04:55:10.986400+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1681 at 2026-07-09T04:55:11.020225+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1683 at 2026-07-09T04:55:59.156778+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1684 at 2026-07-09T04:55:59.196732+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1685 at 2026-07-09T05:01:44.330016+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1686 at 2026-07-09T05:02:00.090874+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1687 at 2026-07-09T05:02:00.182446+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1688 at 2026-07-09T05:02:00.253190+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1689 at 2026-07-09T05:03:47.078227+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1690 at 2026-07-09T05:03:47.176760+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1691 at 2026-07-09T05:03:47.259153+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1692 at 2026-07-09T05:04:26.130157+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1693 at 2026-07-09T05:04:26.239650+00:00
+2026-07-09 04:40:12 - BTC-API - WARNING - No actual price found for prediction 1694 at 2026-07-09T05:04:26.336123+00:00

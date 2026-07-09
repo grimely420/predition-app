@@ -349,3 +349,39 @@
 2026-07-09 04:39:03 - HYPE-API - WARNING - No actual price found for prediction 73 at 2026-07-09T08:31:11.688468+00:00
 2026-07-09 04:39:03 - HYPE-API - WARNING - No actual price found for prediction 74 at 2026-07-09T08:31:11.723859+00:00
 2026-07-09 04:39:03 - HYPE-API - WARNING - No actual price found for prediction 75 at 2026-07-09T08:31:11.756007+00:00
+2026-07-09 04:40:03 - HYPE-API - INFO - Found 35 predictions to validate
+2026-07-09 04:40:03 - HYPE-API - WARNING - No actual price found for prediction 1 at 2026-07-09T02:11:02.146737+00:00
+2026-07-09 04:40:03 - HYPE-API - WARNING - No actual price found for prediction 2 at 2026-07-09T02:11:02.173720+00:00
+2026-07-09 04:40:03 - HYPE-API - WARNING - No actual price found for prediction 3 at 2026-07-09T02:11:02.198957+00:00
+2026-07-09 04:40:03 - HYPE-API - WARNING - No actual price found for prediction 4 at 2026-07-09T02:12:49.395840+00:00
+2026-07-09 04:40:03 - HYPE-API - WARNING - No actual price found for prediction 5 at 2026-07-09T02:12:49.422699+00:00
+2026-07-09 04:40:03 - HYPE-API - WARNING - No actual price found for prediction 6 at 2026-07-09T02:12:49.446759+00:00
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 9: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 12: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 15: database is locked
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 16 at 2026-07-09T04:42:55.938869+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 19 at 2026-07-09T04:44:01.011995+00:00
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 22: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 23: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 24: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 26: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 27: database is locked
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 28 at 2026-07-09T04:51:44.608943+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 29 at 2026-07-09T04:51:44.631479+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 30 at 2026-07-09T04:51:44.654801+00:00
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 31: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 32: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 33: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 35: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 36: database is locked
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 37 at 2026-07-09T04:54:27.288030+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 38 at 2026-07-09T04:54:27.316724+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 39 at 2026-07-09T04:54:27.341924+00:00
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 66: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 68: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 69: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 71: database is locked
+2026-07-09 04:40:08 - HYPE-API - ERROR - Error validating prediction 72: database is locked
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 73 at 2026-07-09T08:31:11.688468+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 74 at 2026-07-09T08:31:11.723859+00:00
+2026-07-09 04:40:08 - HYPE-API - WARNING - No actual price found for prediction 75 at 2026-07-09T08:31:11.756007+00:00
