@@ -4,8 +4,9 @@ Central configuration for all supported prediction coins.
 """
 
 import os
+import base64
 from dataclasses import dataclass, field
-from typing import List, Dict, Callable, Any
+from typing import List, Dict, Callable, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +39,36 @@ def _parse_mexc_price(data: dict) -> float:
     return float(data['price'])
 
 
+def _parse_cfbenchmarks_index(data: dict) -> float:
+    """Parse current price from a CF Benchmarks REST index response.
+
+    Response envelope: {"serverTime": "...", "payload": {...}}
+    The payload may hold the current value under several known keys.
+    """
+    payload = data.get('payload') if isinstance(data, dict) else None
+    if payload is None:
+        raise ValueError("CF Benchmarks response missing payload")
+    # /api/v1/indices returns a list in some contexts; take first item if so
+    if isinstance(payload, list):
+        payload = payload[0] if payload else None
+        if not isinstance(payload, dict):
+            raise ValueError(f"Unexpected CF Benchmarks payload: {data}")
+    for key in ('value', 'price', 'last', 'lastPrice', 'last_price', 'indexValue', 'currentValue'):
+        if key in payload and payload[key] is not None:
+            return float(payload[key])
+    raise ValueError(f"Unable to locate price in CF Benchmarks payload: {payload}")
+
+
+def _cfbenchmarks_headers() -> Optional[Dict[str, str]]:
+    """Build CF Benchmarks Basic Auth header from environment variables."""
+    user = os.environ.get('CF_API_USERNAME') or os.environ.get('CFBENCHMARKS_API_USERNAME')
+    password = os.environ.get('CF_API_PASSWORD') or os.environ.get('CFBENCHMARKS_API_PASSWORD')
+    if user and password:
+        credentials = base64.b64encode(f"{user}:{password}".encode()).decode()
+        return {"Authorization": f"Basic {credentials}"}
+    return None
+
+
 @dataclass
 class CoinConfig:
     """Configuration for a single coin."""
@@ -68,7 +99,17 @@ class CoinConfig:
 
 
 def _btc_sources() -> List[Dict[str, Any]]:
-    return [
+    cf_headers = _cfbenchmarks_headers()
+    sources = [
+        {
+            'name': 'CFBenchmarks',
+            'url': 'https://www.cfbenchmarks.com/api/v1/indices/BTCUSD_RTI',
+            'parser': _parse_cfbenchmarks_index,
+            'timeout': 10,
+            'cooldown': 6,
+            'weight': 0,
+            'headers': cf_headers,
+        },
         {
             'name': 'Coinbase',
             'url': 'https://api.coinbase.com/v2/prices/BTC-USD/spot',
@@ -94,10 +135,21 @@ def _btc_sources() -> List[Dict[str, Any]]:
             'weight': 5,
         },
     ]
+    return [s for s in sources if s.get('headers') is not None or s['name'] != 'CFBenchmarks']
 
 
 def _bnb_sources() -> List[Dict[str, Any]]:
-    return [
+    cf_headers = _cfbenchmarks_headers()
+    sources = [
+        {
+            'name': 'CFBenchmarks',
+            'url': 'https://www.cfbenchmarks.com/api/v1/indices/BNBUSD_RTI',
+            'parser': _parse_cfbenchmarks_index,
+            'timeout': 10,
+            'cooldown': 6,
+            'weight': 0,
+            'headers': cf_headers,
+        },
         {
             'name': 'Binance',
             'url': 'https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT',
@@ -123,10 +175,21 @@ def _bnb_sources() -> List[Dict[str, Any]]:
             'weight': 3,
         },
     ]
+    return [s for s in sources if s.get('headers') is not None or s['name'] != 'CFBenchmarks']
 
 
 def _hype_sources() -> List[Dict[str, Any]]:
-    return [
+    cf_headers = _cfbenchmarks_headers()
+    sources = [
+        {
+            'name': 'CFBenchmarks',
+            'url': 'https://www.cfbenchmarks.com/api/v1/indices/HYPEUSD_RTI',
+            'parser': _parse_cfbenchmarks_index,
+            'timeout': 10,
+            'cooldown': 8,
+            'weight': 0,
+            'headers': cf_headers,
+        },
         {
             'name': 'CoinGecko',
             'url': 'https://api.coingecko.com/api/v3/simple/price?ids=hyperliquid&vs_currencies=usd',
@@ -152,6 +215,7 @@ def _hype_sources() -> List[Dict[str, Any]]:
             'weight': 3,
         },
     ]
+    return [s for s in sources if s.get('headers') is not None or s['name'] != 'CFBenchmarks']
 
 
 COINS: Dict[str, CoinConfig] = {

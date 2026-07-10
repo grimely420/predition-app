@@ -7,6 +7,13 @@ VENV_PYTHON="$SCRIPT_DIR/.venv/bin/python"
 
 mkdir -p "$LOG_DIR"
 
+# Load optional environment overrides (e.g. CF Benchmarks credentials)
+if [ -f "$SCRIPT_DIR/../.env" ]; then
+    set -a
+    source "$SCRIPT_DIR/../.env"
+    set +a
+fi
+
 echo "=========================================="
 echo "Starting Prediction System"
 echo "=========================================="

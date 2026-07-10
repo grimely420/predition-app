@@ -83,7 +83,11 @@ class PriceCollector:
                 continue
             try:
                 self.logger.debug(f"Trying {src['name']}")
-                resp = requests.get(src['url'], timeout=src.get('timeout', 10))
+                resp = requests.get(
+                    src['url'],
+                    headers=src.get('headers'),
+                    timeout=src.get('timeout', 10),
+                )
                 if resp.status_code == 200:
                     data = resp.json()
                     price = src['parser'](data)

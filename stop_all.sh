@@ -7,12 +7,12 @@ PID_FILE="$SCRIPT_DIR/.running_pids"
 # Patterns that match prediction system processes
 PATTERNS=(
     "prediction/start_all.py"
-    "shared/collector.py"
-    "shared/api.py"
-    "services/predictor_loop.py"
-    "hype/hype_predictor_loop.py"
-    "bnb/bnb_predictor_loop.py"
-    "bitcoin/btc_predictor_loop.py"
+    "-m shared.collector"
+    "-m shared.api"
+    "-m services.predictor_loop"
+    "-m collector"
+    "-m api"
+    "-m predictor_loop"
 )
 
 echo "=========================================="
