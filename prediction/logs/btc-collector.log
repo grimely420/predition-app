@@ -2177,3 +2177,25 @@
 2026-07-10 17:16:06 - BTC-Collector - INFO - BTC: $63,902.8000 (source: Kraken, total: 18744)
 2026-07-10 17:17:08 - BTC-Collector - INFO - BTC: $63,918.1000 (source: Kraken, total: 18756)
 2026-07-10 17:18:12 - BTC-Collector - INFO - BTC: $63,891.2000 (source: Kraken, total: 18768)
+2026-07-10 17:19:14 - BTC-Collector - INFO - BTC: $63,902.6000 (source: Kraken, total: 18780)
+2026-07-10 17:19:52 - BTC-Collector - WARNING - Timeout from Kraken
+2026-07-10 17:20:04 - BTC-Collector - WARNING - HTTP 451 from Binance
+2026-07-10 17:20:04 - BTC-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:20:04 - BTC-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-10 17:21:05 - BTC-Collector - INFO - BTC: $63,884.6750 (source: Coinbase, total: 18792)
+2026-07-10 17:22:09 - BTC-Collector - INFO - BTC: $63,892.3150 (source: Coinbase, total: 18804)
+2026-07-10 17:22:24 - BTC-Collector - ERROR - Unexpected error from Kraken: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:22:39 - BTC-Collector - WARNING - Timeout from Binance
+2026-07-10 17:22:39 - BTC-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:22:39 - BTC-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-10 17:23:04 - BTC-Collector - ERROR - Unexpected error from Coinbase: HTTPSConnectionPool(host='api.coinbase.com', port=443): Max retries exceeded with url: /v2/prices/BTC-USD/spot (Caused by NewConnectionError("HTTPSConnection(host='api.coinbase.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+2026-07-10 17:23:50 - BTC-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:24:45 - BTC-Collector - WARNING - Timeout from Kraken
+2026-07-10 17:25:06 - BTC-Collector - ERROR - Unexpected error from Binance: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/ticker/price?symbol=BTCUSDT (Caused by NameResolutionError("HTTPSConnection(host='api.binance.com', port=443): Failed to resolve 'api.binance.com' ([Errno -3] Temporary failure in name resolution)"))
+2026-07-10 17:25:06 - BTC-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:25:06 - BTC-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-10 17:25:31 - BTC-Collector - ERROR - Unexpected error from Coinbase: HTTPSConnectionPool(host='api.coinbase.com', port=443): Max retries exceeded with url: /v2/prices/BTC-USD/spot (Caused by NewConnectionError("HTTPSConnection(host='api.coinbase.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+2026-07-10 17:26:14 - BTC-Collector - ERROR - Unexpected error from Kraken: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:26:20 - BTC-Collector - WARNING - HTTP 451 from Binance
+2026-07-10 17:26:20 - BTC-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:26:20 - BTC-Collector - WARNING - No price from any source (consecutive: 2)

@@ -3624,3 +3624,16 @@
 2026-07-10 17:16:23 - HYPE-Collector - INFO - HYPE: $67.0900 (source: Kraken, total: 15636)
 2026-07-10 17:17:38 - HYPE-Collector - INFO - HYPE: $67.1000 (source: Kraken, total: 15648)
 2026-07-10 17:18:52 - HYPE-Collector - INFO - HYPE: $67.0900 (source: Kraken, total: 15660)
+2026-07-10 17:19:53 - HYPE-Collector - ERROR - Unexpected error from CoinGecko: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:20:38 - HYPE-Collector - INFO - HYPE: $67.0800 (source: CoinGecko, total: 15672)
+2026-07-10 17:22:06 - HYPE-Collector - INFO - HYPE: $67.0900 (source: CoinGecko, total: 15684)
+2026-07-10 17:22:31 - HYPE-Collector - ERROR - Unexpected error from CoinGecko: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:22:53 - HYPE-Collector - WARNING - Timeout from Kraken
+2026-07-10 17:23:22 - HYPE-Collector - WARNING - Timeout from MEXC
+2026-07-10 17:23:22 - HYPE-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-10 17:23:55 - HYPE-Collector - ERROR - Unexpected error from CoinGecko: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:24:50 - HYPE-Collector - WARNING - Timeout from Kraken
+2026-07-10 17:25:10 - HYPE-Collector - ERROR - Unexpected error from MEXC: HTTPSConnectionPool(host='api.mexc.com', port=443): Max retries exceeded with url: /api/v3/ticker/price?symbol=HYPEUSDT (Caused by NameResolutionError("HTTPSConnection(host='api.mexc.com', port=443): Failed to resolve 'api.mexc.com' ([Errno -3] Temporary failure in name resolution)"))
+2026-07-10 17:25:10 - HYPE-Collector - WARNING - No price from any source (consecutive: 2)
+2026-07-10 17:25:36 - HYPE-Collector - ERROR - Unexpected error from CoinGecko: HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=hyperliquid&vs_currencies=usd (Caused by NameResolutionError("HTTPSConnection(host='api.coingecko.com', port=443): Failed to resolve 'api.coingecko.com' ([Errno -3] Temporary failure in name resolution)"))
+2026-07-10 17:26:12 - HYPE-Collector - ERROR - Unexpected error from Kraken: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))

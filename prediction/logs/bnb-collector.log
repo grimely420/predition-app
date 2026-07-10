@@ -6405,3 +6405,23 @@
 2026-07-10 17:18:28 - BNB-Collector - INFO - BNB: $575.6300 (source: Kraken, total: 18564)
 2026-07-10 17:18:44 - BNB-Collector - WARNING - HTTP 451 from Binance
 2026-07-10 17:18:44 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:20:02 - BNB-Collector - INFO - BNB: $575.6300 (source: Kraken, total: 18576)
+2026-07-10 17:20:07 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-10 17:20:07 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:21:11 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-10 17:21:11 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:21:25 - BNB-Collector - INFO - BNB: $575.6000 (source: Coinbase, total: 18588)
+2026-07-10 17:22:33 - BNB-Collector - WARNING - Timeout from Binance
+2026-07-10 17:22:33 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:22:51 - BNB-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:23:50 - BNB-Collector - ERROR - Unexpected error from Coinbase: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:24:45 - BNB-Collector - WARNING - Timeout from Kraken
+2026-07-10 17:24:45 - BNB-Collector - WARNING - No price from any source (consecutive: 1)
+2026-07-10 17:25:11 - BNB-Collector - ERROR - Unexpected error from Binance: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/ticker/price?symbol=BNBUSDT (Caused by NameResolutionError("HTTPSConnection(host='api.binance.com', port=443): Failed to resolve 'api.binance.com' ([Errno -3] Temporary failure in name resolution)"))
+2026-07-10 17:25:11 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:25:31 - BNB-Collector - ERROR - Unexpected error from Coinbase: HTTPSConnectionPool(host='api.coinbase.com', port=443): Max retries exceeded with url: /v2/prices/BNB-USD/spot (Caused by NewConnectionError("HTTPSConnection(host='api.coinbase.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+2026-07-10 17:26:12 - BNB-Collector - ERROR - Unexpected error from Kraken: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-07-10 17:26:12 - BNB-Collector - WARNING - No price from any source (consecutive: 2)
+2026-07-10 17:26:20 - BNB-Collector - WARNING - HTTP 451 from Binance
+2026-07-10 17:26:20 - BNB-Collector - WARNING - Circuit opened for Binance
+2026-07-10 17:26:33 - BNB-Collector - INFO - BNB: $575.9300 (source: Coinbase, total: 18600)
