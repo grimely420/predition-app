@@ -98,6 +98,30 @@ class DataStore:
             CREATE INDEX IF NOT EXISTS idx_predictions_horizon ON predictions(horizon_min)
         ''')
 
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS trades (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT NOT NULL,
+                action TEXT NOT NULL,
+                price REAL NOT NULL,
+                qty REAL,
+                amount_usd REAL,
+                signal_source TEXT,
+                prediction_id INTEGER,
+                pnl REAL,
+                pnl_pct REAL,
+                metadata TEXT,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (prediction_id) REFERENCES predictions(id)
+            )
+        ''')
+        c.execute('''
+            CREATE INDEX IF NOT EXISTS idx_trades_timestamp ON trades(timestamp DESC)
+        ''')
+        c.execute('''
+            CREATE INDEX IF NOT EXISTS idx_trades_action ON trades(action)
+        ''')
+
         conn.commit()
         conn.close()
 
@@ -368,4 +392,57 @@ class DataStore:
             return rows
         except Exception as e:
             logger.error(f"[{self.symbol}] get_recent_predictions error: {e}")
+            return []
+
+    def log_trade(self, action: str, price: float, qty: Optional[float] = None,
+                  amount_usd: Optional[float] = None, signal_source: str = '',
+                  prediction_id: Optional[int] = None,
+                  pnl: Optional[float] = None, pnl_pct: Optional[float] = None,
+                  metadata: Optional[Dict[str, Any]] = None) -> int:
+        """Store a trade executed by the connected trading bot."""
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            meta_json = json.dumps(metadata) if metadata else None
+            c.execute(
+                """INSERT INTO trades
+                   (timestamp, action, price, qty, amount_usd, signal_source,
+                    prediction_id, pnl, pnl_pct, metadata, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (now_iso(), action, price, qty, amount_usd, signal_source,
+                 prediction_id, pnl, pnl_pct, meta_json, now_iso())
+            )
+            trade_id = c.lastrowid
+            conn.commit()
+            conn.close()
+            return trade_id
+        except Exception as e:
+            logger.error(f"[{self.symbol}] log_trade error: {e}")
+            return -1
+
+    def get_recent_trades(self, limit: int = 100, action: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Retrieve recent trades recorded by the trading bot."""
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            query = """SELECT id, timestamp, action, price, qty, amount_usd,
+                              signal_source, prediction_id, pnl, pnl_pct, metadata
+                       FROM trades WHERE 1=1"""
+            params = []
+            if action:
+                query += " AND action = ?"
+                params.append(action)
+            query += " ORDER BY id DESC LIMIT ?"
+            params.append(limit)
+            c.execute(query, params)
+            rows = [dict(r) for r in c.fetchall()]
+            conn.close()
+            for row in rows:
+                try:
+                    row['metadata'] = json.loads(row['metadata']) if row['metadata'] else {}
+                except Exception:
+                    row['metadata'] = {}
+            return rows
+        except Exception as e:
+            logger.error(f"[{self.symbol}] get_recent_trades error: {e}")
             return []

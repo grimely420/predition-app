@@ -2,6 +2,7 @@
 """Unified Flask API for all coins and horizons."""
 
 from flask import Flask, Response, jsonify, request
+from datetime import datetime, timezone
 
 from .coin_config import get_coin_config, list_coins
 from .data_store import DataStore
@@ -486,6 +487,121 @@ def create_app() -> Flask:
     @app.route('/health', methods=['GET'])
     def health():
         return jsonify({'status': 'ok'})
+
+    @app.route('/feed/<coin_id>', methods=['GET'])
+    def feed(coin_id):
+        """Unified trading-bot feed with current price, predictions and trend."""
+        try:
+            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        last = ds.last_price()
+        if not last:
+            return jsonify(error='No price data'), 503
+        current_price, price_ts = last
+        by_horizon = {}
+        for h in cfg.prediction_horizons:
+            r = pred.predict(h)
+            if r:
+                by_horizon[h] = r
+        if not by_horizon:
+            return jsonify(error='No predictions available'), 503
+        primary = cfg.prediction_horizons[0]
+        primary_pred = by_horizon.get(primary, {})
+        predicted_price = primary_pred.get('predicted_price', current_price)
+        conf = primary_pred.get('confidence_interval', [current_price, current_price])
+        change_5 = by_horizon.get(5, {}).get('change_percent')
+        change_10 = by_horizon.get(10, {}).get('change_percent')
+        change_15 = by_horizon.get(15, {}).get('change_percent')
+        cp = change_5 if change_5 is not None else primary_pred.get('change_percent', 0)
+        if cp > 0.05:
+            trend = 'up'
+        elif cp < -0.05:
+            trend = 'down'
+        else:
+            trend = 'flat'
+        accuracy = {}
+        for h in cfg.prediction_horizons:
+            stats = ds.get_prediction_stats(horizon=h)
+            accuracy[h] = {
+                'accuracy_pct_1pct': stats.get('accuracy_pct_1pct', 0),
+                'avg_abs_error_pct': stats.get('avg_abs_error_pct'),
+                'total': stats.get('total', 0),
+            }
+        return jsonify({
+            'symbol': cfg.symbol,
+            'coin_id': coin_id,
+            'price': current_price,
+            'price_timestamp': price_ts,
+            'predicted_price': round(predicted_price, 4) if predicted_price else None,
+            'predicted_prices': {str(h): round(r.get('predicted_price'), 4)
+                                 for h, r in by_horizon.items()},
+            'change_5': change_5,
+            'change_10': change_10,
+            'change_15': change_15,
+            'confidence': conf,
+            'confidence_interval': conf,
+            'model': primary_pred.get('model_used'),
+            'price_trend': trend,
+            'acc_5': accuracy.get(5, {}).get('accuracy_pct_1pct'),
+            'acc_10': accuracy.get(10, {}).get('accuracy_pct_1pct'),
+            'acc_15': accuracy.get(15, {}).get('accuracy_pct_1pct'),
+            'accuracy': accuracy,
+            'confidence_multiplier': 1.0,
+            'timestamp': datetime.now(timezone.utc).isoformat()
+        })
+
+    @app.route('/history/<coin_id>', methods=['GET'])
+    def history(coin_id):
+        """Export historical prices and predictions for backtesting / model training."""
+        try:
+            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        limit = request.args.get('limit', 1000, type=int)
+        since = request.args.get('since')
+        prices = ds.get_prices(limit=limit, since=since)
+        predictions = ds.get_recent_predictions(limit=min(limit, 500))
+        return jsonify({
+            'coin_id': coin_id,
+            'symbol': cfg.symbol,
+            'price_count': len(prices),
+            'prediction_count': len(predictions),
+            'prices': prices,
+            'predictions': predictions
+        })
+
+    @app.route('/trades/<coin_id>', methods=['GET', 'POST'])
+    def trades(coin_id):
+        """Log or retrieve trades executed by the trading bot."""
+        try:
+            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        if request.method == 'POST':
+            data = request.get_json() or {}
+            missing = [f for f in ['action', 'price'] if f not in data]
+            if missing:
+                return jsonify(error=f'Missing fields: {missing}'), 400
+            trade_id = ds.log_trade(
+                action=data['action'],
+                price=float(data['price']),
+                qty=data.get('qty'),
+                amount_usd=data.get('amount_usd'),
+                signal_source=data.get('signal_source', 'bot'),
+                prediction_id=data.get('prediction_id'),
+                pnl=data.get('pnl'),
+                pnl_pct=data.get('pnl_pct'),
+                metadata=data.get('metadata')
+            )
+            return jsonify({'coin_id': coin_id, 'trade_id': trade_id})
+        limit = request.args.get('limit', 100, type=int)
+        action = request.args.get('action')
+        return jsonify({
+            'coin_id': coin_id,
+            'symbol': cfg.symbol,
+            'trades': ds.get_recent_trades(limit=limit, action=action)
+        })
 
     return app
 
