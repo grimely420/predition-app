@@ -320,6 +320,7 @@ COINS: Dict[str, CoinConfig] = {
         min_train_bars=60,
         retrain_min_bars=30,
         prediction_threshold_pct=2.0,
+        hl_features=True,
     ),
 }
 
