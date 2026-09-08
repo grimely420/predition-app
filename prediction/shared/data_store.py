@@ -27,6 +27,8 @@ class DataStore:
 
     def _init_db(self) -> None:
         conn = sqlite3.connect(self.db_path)
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA busy_timeout=5000")
         c = conn.cursor()
         c.execute('''
             CREATE TABLE IF NOT EXISTS prices (
@@ -126,8 +128,9 @@ class DataStore:
         conn.close()
 
     def _conn(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, timeout=10)
         conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA busy_timeout=5000")
         return conn
 
     def save_price(self, price: float, source: str = '') -> bool:

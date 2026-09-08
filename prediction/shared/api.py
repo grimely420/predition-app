@@ -552,6 +552,7 @@ def create_app() -> Flask:
             'coin_id': coin_id,
             'price': current_price,
             'price_timestamp': price_ts,
+            'predictions': list(by_horizon.values()),
             'predicted_price': round(predicted_price, 4) if predicted_price else None,
             'predicted_prices': {str(h): round(r.get('predicted_price'), 4)
                                  for h, r in by_horizon.items()},
