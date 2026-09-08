@@ -12,6 +12,7 @@ from .feature_engine import FeatureEngine
 from .model_manager import ModelManager
 from .predictor_core import Predictor
 from .validator import Validator
+from . import dashboard
 from .utils import setup_logging
 
 logger = setup_logging("API")
@@ -483,7 +484,7 @@ def create_app() -> Flask:
 
     @app.route('/', methods=['GET'])
     def index():
-        return Response(INDEX_HTML, mimetype='text/html')
+        return Response(dashboard.DASHBOARD_HTML, mimetype='text/html')
 
     @app.route('/coins', methods=['GET'])
     def coins():
