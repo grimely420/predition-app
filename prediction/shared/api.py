@@ -4,7 +4,7 @@
 from flask import Flask, Response, jsonify, request
 from datetime import datetime, timezone
 
-from .coin_config import get_coin_config, list_coins
+from .coin_config import STATS_SINCE, get_coin_config, list_coins
 from .data_store import DataStore
 from .feature_engine import FeatureEngine
 from .model_manager import ModelManager
@@ -82,7 +82,7 @@ def create_app() -> Flask:
             'coin_id': coin_id,
             'price_count': ds.count_prices(),
             'stats': {
-                h: ds.get_prediction_stats(horizon=h)
+                h: ds.get_prediction_stats(horizon=h, since=STATS_SINCE)
                 for h in cfg.prediction_horizons
             }
         })
@@ -522,12 +522,22 @@ def create_app() -> Flask:
             trend = 'flat'
         accuracy = {}
         for h in cfg.prediction_horizons:
-            stats = ds.get_prediction_stats(horizon=h)
+            stats = ds.get_prediction_stats(window=500, horizon=h, since=STATS_SINCE)
             accuracy[h] = {
                 'accuracy_pct_1pct': stats.get('accuracy_pct_1pct', 0),
+                'direction_accuracy_pct': stats.get('direction_accuracy_pct', 0),
+                'beat_naive_pct': stats.get('beat_naive_pct', 0),
                 'avg_abs_error_pct': stats.get('avg_abs_error_pct'),
                 'total': stats.get('total', 0),
             }
+        # Scale position sizing by how much better than a coin flip the
+        # primary horizon has been recently (0.5 .. 1.5).
+        prim_stats = accuracy.get(primary, {})
+        dir_acc = prim_stats.get('direction_accuracy_pct') or 50.0
+        if (prim_stats.get('total') or 0) < 200:
+            conf_mult = 1.0
+        else:
+            conf_mult = round(min(1.5, max(0.5, 1.0 + (dir_acc - 50.0) / 20.0)), 3)
         return jsonify({
             'symbol': cfg.symbol,
             'coin_id': coin_id,
@@ -536,18 +546,21 @@ def create_app() -> Flask:
             'predicted_price': round(predicted_price, 4) if predicted_price else None,
             'predicted_prices': {str(h): round(r.get('predicted_price'), 4)
                                  for h, r in by_horizon.items()},
+            'prediction_id': primary_pred.get('prediction_id'),
+            'prediction_ids': {str(h): r.get('prediction_id') for h, r in by_horizon.items()},
             'change_5': change_5,
             'change_10': change_10,
             'change_15': change_15,
             'confidence': conf,
             'confidence_interval': conf,
             'model': primary_pred.get('model_used'),
+            'model_version': primary_pred.get('model_version'),
             'price_trend': trend,
-            'acc_5': accuracy.get(5, {}).get('accuracy_pct_1pct'),
-            'acc_10': accuracy.get(10, {}).get('accuracy_pct_1pct'),
-            'acc_15': accuracy.get(15, {}).get('accuracy_pct_1pct'),
+            'acc_5': accuracy.get(5, {}).get('direction_accuracy_pct'),
+            'acc_10': accuracy.get(10, {}).get('direction_accuracy_pct'),
+            'acc_15': accuracy.get(15, {}).get('direction_accuracy_pct'),
             'accuracy': accuracy,
-            'confidence_multiplier': 1.0,
+            'confidence_multiplier': conf_mult,
             'timestamp': datetime.now(timezone.utc).isoformat()
         })
 
@@ -601,6 +614,48 @@ def create_app() -> Flask:
             'coin_id': coin_id,
             'symbol': cfg.symbol,
             'trades': ds.get_recent_trades(limit=limit, action=action)
+        })
+
+    @app.route('/trades/<coin_id>/markout', methods=['GET'])
+    def trade_markout(coin_id):
+        """How did price move after each trade? Positive = favourable for the side taken."""
+        try:
+            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        limit = request.args.get('limit', 2000, type=int)
+        horizons = [int(h) for h in request.args.get('horizons', '5,15,60').split(',')]
+        rows = ds.trade_markouts(limit=limit, horizons_min=horizons)
+        summary = {}
+        for h in horizons:
+            key = f'markout_{h}m_pct'
+            vals = [r[key] for r in rows if r.get(key) is not None]
+            if vals:
+                summary[str(h)] = {
+                    'n': len(vals),
+                    'avg_pct': round(sum(vals) / len(vals), 4),
+                    'win_rate_pct': round(100 * sum(1 for v in vals if v > 0) / len(vals), 2),
+                }
+        by_action = {}
+        for a in ('BUY', 'SELL'):
+            sub = [r for r in rows if r['action'] == a]
+            by_action[a] = {}
+            for h in horizons:
+                key = f'markout_{h}m_pct'
+                vals = [r[key] for r in sub if r.get(key) is not None]
+                if vals:
+                    by_action[a][str(h)] = {
+                        'n': len(vals),
+                        'avg_pct': round(sum(vals) / len(vals), 4),
+                        'win_rate_pct': round(100 * sum(1 for v in vals if v > 0) / len(vals), 2),
+                    }
+        return jsonify({
+            'coin_id': coin_id,
+            'symbol': cfg.symbol,
+            'trade_count': len(rows),
+            'summary': summary,
+            'by_action': by_action,
+            'trades': rows if request.args.get('detail') == '1' else None,
         })
 
     return app

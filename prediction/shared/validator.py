@@ -27,21 +27,31 @@ class Validator:
         target = dt + timedelta(minutes=horizon_min)
         return target.isoformat()
 
+    # If no price exists within this long after the target time, the outcome
+    # is lost for good (collector outage) and the row is retired.
+    GIVE_UP_AFTER_SECONDS = 2 * 3600
+
     def validate(self, horizon: Optional[int] = None) -> int:
         """Validate pending predictions for the given horizon (or all)."""
         rows = self.data_store.get_unvalidated_predictions()
         validated = 0
+        unresolvable = []
+        now = datetime.now(timezone.utc)
         for row in rows:
             h = row['horizon_min']
             if horizon is not None and h != horizon:
                 continue
             current_price = row['current_price']
             if current_price is None or current_price <= 0:
+                unresolvable.append(row['id'])
                 continue
             pred_time = row['prediction_time']
             target = self._target_iso(pred_time, h)
             actual = self.data_store.price_at_or_after(target, window_seconds=90)
             if actual is None:
+                target_dt = datetime.fromisoformat(target)
+                if (now - target_dt).total_seconds() > self.GIVE_UP_AFTER_SECONDS:
+                    unresolvable.append(row['id'])
                 continue
             actual_price, _ = actual
             current_price = row['current_price']
@@ -60,9 +70,12 @@ class Validator:
                 is_correct=is_correct
             )
             validated += 1
-            logger.info(
+            logger.debug(
                 f"[{self.symbol}:{h}m] Validated pred {row['id']}: "
                 f"predicted={predicted_price:.4f}, actual={actual_price:.4f}, "
                 f"error_pct={error_pct:.4f}%"
             )
+        if unresolvable:
+            n = self.data_store.mark_unresolvable(unresolvable)
+            logger.info(f"[{self.symbol}] Retired {n} unresolvable predictions")
         return validated

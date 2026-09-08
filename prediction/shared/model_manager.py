@@ -77,7 +77,7 @@ class ModelManager:
 
         X, y, feature_names = self.feature_engine.get_training_data(
             horizon=horizon,
-            limit=2000
+            lookback_hours=self.cfg.train_lookback_hours
         )
         if X is None or len(X) < 30:
             logger.warning(
@@ -87,42 +87,7 @@ class ModelManager:
             return False
 
         try:
-            import xgboost as xgb
-            from sklearn.model_selection import train_test_split
-            from sklearn.metrics import mean_absolute_error
-
-            # Time-based split: use last 20% as validation
-            n = len(X)
-            split_idx = int(n * 0.85)
-            X_train, y_train = X[:split_idx], y[:split_idx]
-            X_val, y_val = X[split_idx:], y[split_idx:]
-
-            model = xgb.XGBRegressor(
-                n_estimators=120,
-                max_depth=4,
-                learning_rate=0.08,
-                subsample=0.85,
-                colsample_bytree=0.85,
-                objective='reg:squarederror',
-                eval_metric='mae',
-                n_jobs=2,
-                random_state=42,
-                early_stopping_rounds=15,
-            )
-
-            eval_set = [(X_train, y_train), (X_val, y_val)] if len(X_val) > 0 else None
-            model.fit(
-                X_train, y_train,
-                eval_set=eval_set,
-                verbose=False
-            )
-
-            # Compute out-of-sample MAE on validation set
-            val_mae = None
-            if len(X_val) > 0:
-                preds = model.predict(X_val)
-                val_mae = mean_absolute_error(y_val, preds)
-
+            model, metrics = self.fit_model(X, y)
             path = self._model_path(horizon)
             joblib.dump((model, feature_names), path)
 
@@ -130,7 +95,7 @@ class ModelManager:
                 'model': model,
                 'feature_names': feature_names,
                 'path': path,
-                'val_mae': val_mae,
+                'val_mae': metrics['val_mae'],
                 'feature_count': len(feature_names),
             }
 
@@ -142,12 +107,54 @@ class ModelManager:
             logger.info(
                 f"[{self.symbol}:{horizon}m] Trained model "
                 f"({len(feature_names)} features, {len(X)} samples, "
-                f"val_mae={val_mae:.6f}) -> {path}"
+                f"{self.cfg.train_lookback_hours}h lookback, "
+                f"val_mae={metrics['val_mae']:.6f}, "
+                f"val_dir_acc={metrics['val_dir_acc']:.3f}, "
+                f"trees={metrics['n_trees']}) -> {path}"
             )
             return True
         except Exception as e:
             logger.error(f"[{self.symbol}:{horizon}m] Training failed: {e}")
             return False
+
+    @staticmethod
+    def fit_model(X: np.ndarray, y: np.ndarray, val_frac: float = 0.15):
+        """Fit an XGBRegressor with a time-ordered hold-out. Returns (model, metrics)."""
+        import xgboost as xgb
+        from sklearn.metrics import mean_absolute_error
+
+        n = len(X)
+        split_idx = int(n * (1 - val_frac))
+        X_train, y_train = X[:split_idx], y[:split_idx]
+        X_val, y_val = X[split_idx:], y[split_idx:]
+
+        model = xgb.XGBRegressor(
+            n_estimators=400,
+            max_depth=4,
+            learning_rate=0.03,
+            subsample=0.8,
+            colsample_bytree=0.8,
+            min_child_weight=20,
+            reg_lambda=5.0,
+            objective='reg:squarederror',
+            eval_metric='mae',
+            n_jobs=2,
+            random_state=42,
+            early_stopping_rounds=30,
+        )
+        eval_set = [(X_val, y_val)] if len(X_val) > 0 else None
+        model.fit(X_train, y_train, eval_set=eval_set, verbose=False)
+
+        metrics = {'val_mae': None, 'val_dir_acc': float('nan'), 'n_trees': 0}
+        try:
+            metrics['n_trees'] = int(model.get_booster().num_boosted_rounds())
+        except Exception:
+            pass
+        if len(X_val) > 0:
+            preds = model.predict(X_val)
+            metrics['val_mae'] = float(mean_absolute_error(y_val, preds))
+            metrics['val_dir_acc'] = float(np.mean(np.sign(preds) == np.sign(y_val)))
+        return model, metrics
 
     def load(self, horizon: int) -> Optional[Tuple]:
         """Load the model for a horizon, retraining if stale or mismatched."""
@@ -176,8 +183,7 @@ class ModelManager:
 
             # Quick feature shape check against current feature engineering
             _, current_features = self.feature_engine.get_current_features(
-                horizon=horizon,
-                limit=2000
+                horizon=horizon
             )
             if current_features is not None and \
                len(current_features) != len(feature_names):

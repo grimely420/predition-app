@@ -5,7 +5,7 @@ Generic SQLite data manager for price and prediction records.
 
 import sqlite3
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
 
 from .utils import setup_logging
@@ -134,10 +134,19 @@ class DataStore:
         try:
             conn = self._conn()
             c = conn.cursor()
-            c.execute(
-                "INSERT INTO prices (timestamp, price, source, created_at) VALUES (?, ?, ?, ?)",
-                (now_iso(), price, source, now_iso())
-            )
+            try:
+                c.execute(
+                    "INSERT INTO prices (timestamp, price, source, created_at) VALUES (?, ?, ?, ?)",
+                    (now_iso(), price, source, now_iso())
+                )
+            except sqlite3.OperationalError as e:
+                if "no column named created_at" in str(e):
+                    c.execute(
+                        "INSERT INTO prices (timestamp, price, source) VALUES (?, ?, ?)",
+                        (now_iso(), price, source)
+                    )
+                else:
+                    raise
             conn.commit()
             conn.close()
             return True
@@ -148,6 +157,11 @@ class DataStore:
     def get_prices(self, limit: Optional[int] = None,
                    since: Optional[str] = None,
                    until: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Return prices in ascending time order.
+
+        When ``limit`` is given the *newest* ``limit`` rows within the window
+        are returned (still ascending), so callers always see recent data.
+        """
         try:
             conn = self._conn()
             c = conn.cursor()
@@ -159,9 +173,11 @@ class DataStore:
             if until:
                 query += " AND timestamp <= ?"
                 params.append(until)
-            query += " ORDER BY timestamp ASC"
             if limit:
-                query += f" LIMIT {int(limit)}"
+                query = (f"SELECT * FROM ({query} ORDER BY timestamp DESC LIMIT {int(limit)}) "
+                         "ORDER BY timestamp ASC")
+            else:
+                query += " ORDER BY timestamp ASC"
             c.execute(query, params)
             rows = c.fetchall()
             conn.close()
@@ -265,8 +281,13 @@ class DataStore:
             logger.error(f"[{self.symbol}] log_prediction error: {e}")
             return -1
 
-    def get_unvalidated_predictions(self, max_age_minutes: int = 120) -> List[Dict[str, Any]]:
-        """Get predictions that are ready to be validated (target time has passed)."""
+    def get_unvalidated_predictions(self, max_age_minutes: int = 120,
+                                    limit: int = 500) -> List[Dict[str, Any]]:
+        """Get predictions that are ready to be validated (target time has passed).
+
+        Newest first, so a backlog of unresolvable rows can never starve
+        validation of fresh predictions.
+        """
         try:
             conn = self._conn()
             c = conn.cursor()
@@ -277,9 +298,9 @@ class DataStore:
                    FROM predictions
                    WHERE checked = 0
                    AND datetime(prediction_time, '+'||horizon_min||' minutes') <= datetime(?)
-                   ORDER BY id ASC
-                   LIMIT 200""",
-                (cutoff,)
+                   ORDER BY id DESC
+                   LIMIT ?""",
+                (cutoff, limit)
             )
             rows = [dict(r) for r in c.fetchall()]
             conn.close()
@@ -287,6 +308,23 @@ class DataStore:
         except Exception as e:
             logger.error(f"[{self.symbol}] get_unvalidated_predictions error: {e}")
             return []
+
+    def mark_unresolvable(self, pred_ids: List[int]) -> int:
+        """Flag predictions whose outcome can no longer be determined (checked = -1)."""
+        if not pred_ids:
+            return 0
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.executemany("UPDATE predictions SET checked = -1 WHERE id = ? AND checked = 0",
+                          [(i,) for i in pred_ids])
+            n = c.rowcount
+            conn.commit()
+            conn.close()
+            return n
+        except Exception as e:
+            logger.error(f"[{self.symbol}] mark_unresolvable error: {e}")
+            return 0
 
     def update_prediction(self, pred_id: int, actual_price: float,
                           error: float, error_pct: float,
@@ -309,63 +347,54 @@ class DataStore:
             return False
 
     def get_prediction_stats(self, window: int = 100,
-                             horizon: Optional[int] = None) -> Dict[str, Any]:
+                             horizon: Optional[int] = None,
+                             since: Optional[str] = None) -> Dict[str, Any]:
+        """Accuracy of the most recent ``window`` validated predictions.
+
+        ``direction_accuracy_pct`` (did we call up/down correctly) and
+        ``beat_naive_pct`` (were we closer than "price won't change") are the
+        metrics that matter for trading; ``accuracy_pct_1pct`` is kept for
+        backwards compatibility but is nearly always ~100% at short horizons.
+        """
         try:
             conn = self._conn()
             c = conn.cursor()
-            query = """SELECT
-                          COUNT(*) as n,
-                          AVG(ABS(error_pct)) as avg_abs_err,
-                          AVG(error_pct) as avg_err,
-                          MAX(ABS(error_pct)) as max_abs_err,
-                          SUM(CASE WHEN ABS(error_pct) < ? THEN 1 ELSE 0 END) as within
-                       FROM predictions
-                       WHERE checked = 1 AND actual_price IS NOT NULL"""
-            params = [1.0]
-            if horizon:
-                query += " AND horizon_min = ?"
-                params.append(horizon)
-            query += " ORDER BY id DESC LIMIT ?"
-            params.append(window)
-            # NOTE: LIMIT in subquery is safer; this works on SQLite but does not limit efficiently.
-            # Use subquery wrapper to limit rows before aggregating.
-            wrapped = f"""SELECT
-                              COUNT(*) as n,
-                              AVG(ABS(error_pct)) as avg_abs_err,
-                              AVG(error_pct) as avg_err,
-                              MAX(ABS(error_pct)) as max_abs_err,
-                              SUM(CASE WHEN ABS(error_pct) < ? THEN 1 ELSE 0 END) as within
-                           FROM ({query.replace('ORDER BY id DESC LIMIT ?', 'ORDER BY id DESC LIMIT ?')}) tmp"""
-            # Simpler direct:
             c.execute(
                 """SELECT
                       COUNT(*),
                       AVG(ABS(error_pct)),
                       AVG(error_pct),
                       MAX(ABS(error_pct)),
-                      SUM(CASE WHEN ABS(error_pct) < 1.0 THEN 1 ELSE 0 END)
+                      SUM(CASE WHEN ABS(error_pct) < 1.0 THEN 1 ELSE 0 END),
+                      SUM(CASE WHEN (predicted_price - current_price) * (actual_price - current_price) > 0
+                               THEN 1 ELSE 0 END),
+                      SUM(CASE WHEN ABS(actual_price - predicted_price) < ABS(actual_price - current_price)
+                               THEN 1 ELSE 0 END),
+                      AVG(ABS(actual_price - current_price) / current_price * 100)
                    FROM (
-                       SELECT error_pct FROM predictions
-                       WHERE checked = 1 AND actual_price IS NOT NULL
+                       SELECT error_pct, predicted_price, current_price, actual_price
+                       FROM predictions
+                       WHERE checked = 1 AND actual_price IS NOT NULL AND current_price > 0
                        AND horizon_min = COALESCE(?, horizon_min)
+                       AND prediction_time >= COALESCE(?, prediction_time)
                        ORDER BY id DESC LIMIT ?
                    ) tmp""",
-                (horizon if horizon else 0, window)
+                (horizon, since, window)
             )
             row = c.fetchone()
             conn.close()
             n = row[0] or 0
-            avg_abs = round(row[1] or 0, 4) if n else None
-            avg = round(row[2] or 0, 4) if n else None
-            max_abs = round(row[3] or 0, 4) if n else None
-            within = row[4] or 0
+            pct = lambda x: round(100 * (x or 0) / n, 2) if n else 0
             return {
                 'total': n,
-                'avg_abs_error_pct': avg_abs,
-                'avg_error_pct': avg,
-                'max_abs_error_pct': max_abs,
-                'within_threshold_1pct': within,
-                'accuracy_pct_1pct': round(100 * within / n, 2) if n else 0,
+                'avg_abs_error_pct': round(row[1] or 0, 4) if n else None,
+                'avg_error_pct': round(row[2] or 0, 4) if n else None,
+                'max_abs_error_pct': round(row[3] or 0, 4) if n else None,
+                'within_threshold_1pct': row[4] or 0,
+                'accuracy_pct_1pct': pct(row[4]),
+                'direction_accuracy_pct': pct(row[5]),
+                'beat_naive_pct': pct(row[6]),
+                'naive_abs_error_pct': round(row[7] or 0, 4) if n else None,
             }
         except Exception as e:
             logger.error(f"[{self.symbol}] get_prediction_stats error: {e}")
@@ -446,3 +475,76 @@ class DataStore:
         except Exception as e:
             logger.error(f"[{self.symbol}] get_recent_trades error: {e}")
             return []
+
+    def trade_markouts(self, limit: int = 2000,
+                       horizons_min: List[int] = (5, 15, 60)) -> List[Dict[str, Any]]:
+        """For each trade, the signed % price move N minutes later (positive = good for the side)."""
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute("""SELECT id, timestamp, action, price, qty, amount_usd, prediction_id
+                         FROM trades ORDER BY id DESC LIMIT ?""", (limit,))
+            trades = [dict(r) for r in c.fetchall()]
+            for t in trades:
+                t0 = datetime.fromisoformat(t['timestamp'].replace('Z', '+00:00'))
+                sign = 1.0 if t['action'].upper() == 'BUY' else -1.0
+                for h in horizons_min:
+                    target = (t0 + timedelta(minutes=h)).isoformat()
+                    c.execute("SELECT price, timestamp FROM prices WHERE timestamp >= ? "
+                              "ORDER BY timestamp ASC LIMIT 1", (target,))
+                    row = c.fetchone()
+                    key = f'markout_{h}m_pct'
+                    if row and self._dt_diff_seconds(row['timestamp'], target) <= 120:
+                        t[key] = round(sign * (row['price'] - t['price']) / t['price'] * 100, 4)
+                    else:
+                        t[key] = None
+            conn.close()
+            return trades
+        except Exception as e:
+            logger.error(f"[{self.symbol}] trade_markouts error: {e}")
+            return []
+
+    def bulk_validate(self, window_seconds: int = 90, give_up_after_seconds: int = 7200) -> Dict[str, int]:
+        """Resolve every pending prediction in one pass (used for backfills).
+
+        Loads all price timestamps into memory and uses binary search rather
+        than one query per prediction.
+        """
+        import bisect
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute("SELECT timestamp, price FROM prices ORDER BY timestamp ASC")
+            ts_list, px_list = [], []
+            for ts, px in c.fetchall():
+                ts_list.append(datetime.fromisoformat(ts.replace('Z', '+00:00')).timestamp())
+                px_list.append(px)
+            c.execute("""SELECT id, prediction_time, horizon_min, current_price, predicted_price
+                         FROM predictions
+                         WHERE checked = 0
+                         AND datetime(prediction_time, '+'||horizon_min||' minutes') <= datetime('now')""")
+            pending = c.fetchall()
+            now = datetime.now(timezone.utc).timestamp()
+            updates, retire = [], []
+            for pid, pt, h, cur, predicted in pending:
+                if not cur or cur <= 0:
+                    retire.append((pid,))
+                    continue
+                target = datetime.fromisoformat(pt.replace('Z', '+00:00')).timestamp() + h * 60
+                i = bisect.bisect_left(ts_list, target)
+                if i < len(ts_list) and ts_list[i] - target <= window_seconds:
+                    actual = px_list[i]
+                    err = actual - predicted
+                    err_pct = err / cur * 100
+                    updates.append((actual, err, err_pct, 1 if abs(err_pct) <= 1.0 else 0, pid))
+                elif now - target > give_up_after_seconds:
+                    retire.append((pid,))
+            c.executemany("""UPDATE predictions SET actual_price=?, error=?, error_pct=?,
+                             checked=1, is_correct=? WHERE id=?""", updates)
+            c.executemany("UPDATE predictions SET checked=-1 WHERE id=?", retire)
+            conn.commit()
+            conn.close()
+            return {'pending': len(pending), 'validated': len(updates), 'retired': len(retire)}
+        except Exception as e:
+            logger.error(f"[{self.symbol}] bulk_validate error: {e}")
+            return {'pending': 0, 'validated': 0, 'retired': 0, 'error': str(e)}

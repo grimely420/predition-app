@@ -56,7 +56,7 @@ class Predictor:
             logger.warning(f"[{self.symbol}:{horizon}m] Price {current_price} outside sanity range")
 
         model_info = self.model_manager.load(horizon)
-        features, feature_names = self.feature_engine.get_current_features(horizon=horizon, limit=2000)
+        features, feature_names = self.feature_engine.get_current_features(horizon=horizon)
 
         fallback = False
         model_used = 'xgboost'

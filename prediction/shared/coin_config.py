@@ -10,6 +10,11 @@ from typing import List, Dict, Callable, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Predictions logged before this (UTC) came from a pipeline that trained and
+# predicted on stale June data, so they say nothing about the current models.
+# Accuracy statistics exclude them.
+STATS_SINCE = '2026-09-08T03:20:00+00:00'
+
 
 def _parse_binance_price(data: dict) -> float:
     return float(data.get('price', 0))
@@ -59,6 +64,40 @@ def _parse_cfbenchmarks_index(data: dict) -> float:
     raise ValueError(f"Unable to locate price in CF Benchmarks payload: {payload}")
 
 
+
+
+def _alpaca_headers() -> Optional[Dict[str, str]]:
+    """Build Alpaca API auth headers from environment variables."""
+    api_key = os.environ.get('ALPACA_API_KEY')
+    secret_key = os.environ.get('ALPACA_SECRET_KEY')
+    if api_key and secret_key:
+        return {"APCA-API-KEY-ID": api_key, "APCA-API-SECRET-KEY": secret_key}
+    return None
+
+
+def _parse_alpaca_quote(data: dict, pair: str) -> float:
+    q = data.get('quotes', {}).get(pair)
+    if q is None:
+        raise ValueError(f"Alpaca quote missing for {pair}")
+    ask = float(q.get('ap', 0) or 0)
+    bid = float(q.get('bp', 0) or 0)
+    if ask > 0 and bid > 0:
+        return (ask + bid) / 2
+    if ask > 0:
+        return ask
+    if bid > 0:
+        return bid
+    raise ValueError(f"Alpaca bid/ask missing for {pair}")
+
+
+def _parse_alpaca_btc(data: dict) -> float:
+    return _parse_alpaca_quote(data, "BTC/USD")
+
+
+def _parse_alpaca_bnb(data: dict) -> float:
+    return _parse_alpaca_quote(data, "BNB/USD")
+
+
 def _cfbenchmarks_headers() -> Optional[Dict[str, str]]:
     """Build CF Benchmarks Basic Auth header from environment variables."""
     user = os.environ.get('CF_API_USERNAME') or os.environ.get('CFBENCHMARKS_API_USERNAME')
@@ -82,6 +121,7 @@ class CoinConfig:
     prediction_horizons: List[int] = field(default_factory=lambda: [5, 10, 15])
     min_train_bars: int = 60
     retrain_min_bars: int = 30
+    train_lookback_hours: int = 24 * 14
     prediction_threshold_pct: float = 1.0
     api_port: int = 5000
 
@@ -101,6 +141,16 @@ class CoinConfig:
 def _btc_sources() -> List[Dict[str, Any]]:
     cf_headers = _cfbenchmarks_headers()
     sources = [
+        {
+            'name': 'Alpaca',
+            'url': 'https://data.alpaca.markets/v1beta3/crypto/us/latest/quotes?symbols=BTC%2FUSD',
+            'parser': _parse_alpaca_btc,
+            'timeout': 10,
+            'cooldown': 1,
+            'weight': -1,
+            'headers': _alpaca_headers(),
+        },
+
         {
             'name': 'CFBenchmarks',
             'url': 'https://www.cfbenchmarks.com/api/v1/indices/BTCUSD_RTI',
@@ -141,6 +191,16 @@ def _btc_sources() -> List[Dict[str, Any]]:
 def _bnb_sources() -> List[Dict[str, Any]]:
     cf_headers = _cfbenchmarks_headers()
     sources = [
+        {
+            'name': 'Alpaca',
+            'url': 'https://data.alpaca.markets/v1beta3/crypto/us/latest/quotes?symbols=BNB%2FUSD',
+            'parser': _parse_alpaca_bnb,
+            'timeout': 10,
+            'cooldown': 1,
+            'weight': -1,
+            'headers': _alpaca_headers(),
+        },
+
         {
             'name': 'CFBenchmarks',
             'url': 'https://www.cfbenchmarks.com/api/v1/indices/BNBUSD_RTI',

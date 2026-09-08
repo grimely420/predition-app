@@ -6,6 +6,7 @@ Shared utility functions for prediction systems.
 import os
 import sqlite3
 import logging
+import logging.handlers
 from datetime import datetime, timezone
 from typing import Optional, Any
 
@@ -36,8 +37,10 @@ def setup_logging(name: str, log_file: Optional[str] = None) -> logging.Logger:
     if logger.handlers:
         return logger
     
-    # File handler
-    file_handler = logging.FileHandler(log_file)
+    # File handler (rotates at 20 MB, keeps 5 generations)
+    file_handler = logging.handlers.RotatingFileHandler(
+        log_file, maxBytes=20 * 1024 * 1024, backupCount=5
+    )
     file_handler.setLevel(logging.INFO)
     
     # Console handler
