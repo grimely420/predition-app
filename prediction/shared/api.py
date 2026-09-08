@@ -26,6 +26,9 @@ def get_components(coin_id: str):
         cfg = get_coin_config(key)
         ds = DataStore(cfg.db_path, cfg.symbol)
         fe = FeatureEngine(ds, cfg.symbol)
+        if getattr(cfg, 'hl_features', False):
+            from .hl_features import attach_extras
+            attach_extras(fe, cfg.db_name, micro=getattr(cfg, 'hl_micro', False))
         mm = ModelManager(cfg, ds, fe)
         pred = Predictor(cfg, ds, fe, mm)
         val = Validator(cfg, ds)
@@ -540,6 +543,9 @@ def create_app() -> Flask:
             conf_mult = 1.0
         else:
             conf_mult = round(min(1.5, max(0.5, 1.0 + (dir_acc - 50.0) / 20.0)), 3)
+        signal_5 = by_horizon.get(5, {}).get('signal_strength')
+        signal_10 = by_horizon.get(10, {}).get('signal_strength')
+        signal_15 = by_horizon.get(15, {}).get('signal_strength')
         return jsonify({
             'symbol': cfg.symbol,
             'coin_id': coin_id,
@@ -553,6 +559,21 @@ def create_app() -> Flask:
             'change_5': change_5,
             'change_10': change_10,
             'change_15': change_15,
+            'raw_change_5': by_horizon.get(5, {}).get('raw_change_percent'),
+            'raw_change_10': by_horizon.get(10, {}).get('raw_change_percent'),
+            'raw_change_15': by_horizon.get(15, {}).get('raw_change_percent'),
+            'signal_5': signal_5,
+            'signal_10': signal_10,
+            'signal_15': signal_15,
+            'prob_up_5': by_horizon.get(5, {}).get('prob_up'),
+            'prob_up_10': by_horizon.get(10, {}).get('prob_up'),
+            'prob_up_15': by_horizon.get(15, {}).get('prob_up'),
+            'prob_down_5': by_horizon.get(5, {}).get('prob_down'),
+            'prob_down_10': by_horizon.get(10, {}).get('prob_down'),
+            'prob_down_15': by_horizon.get(15, {}).get('prob_down'),
+            'expected_pnl_5': by_horizon.get(5, {}).get('expected_pnl_pct'),
+            'expected_pnl_10': by_horizon.get(10, {}).get('expected_pnl_pct'),
+            'expected_pnl_15': by_horizon.get(15, {}).get('expected_pnl_pct'),
             'confidence': conf,
             'confidence_interval': conf,
             'model': primary_pred.get('model_used'),

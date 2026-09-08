@@ -69,6 +69,7 @@ class PredictorLoop:
                 if self.mm.should_train(h):
                     logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
                     self.mm.train(h, force=False)
+                    self.mm.train_classifier(h, force=False)
         except Exception as e:
             logger.error(f"[{self.cfg.symbol}] Retraining failed: {e}")
 

@@ -127,6 +127,8 @@ class CoinConfig:
     # Merge Hyperliquid market data (volume, funding, book) into features.
     hl_features: bool = False
     hl_micro: bool = False
+    # Round-trip cost used by the fee-aware classifier (percent).
+    fee_pct: float = 0.05
 
     @property
     def db_path(self) -> str:

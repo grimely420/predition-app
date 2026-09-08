@@ -97,9 +97,24 @@ class FeatureEngine:
             feats[f'return_{w}'] = close.pct_change(w)
             feats[f'volatility_{w}'] = returns.rolling(w, min_periods=10).std()
         feats['vol_ratio_5_60'] = feats['volatility_5'] / (feats['volatility_60'] + 1e-10)
+
+        for lag in [1, 5, 15]:
+            feats[f'autocorr_{lag}'] = returns.rolling(60, min_periods=30).corr(returns.shift(lag))
+
+        # Volatility regime flags using only past data (no future leak)
+        vol_60 = feats['volatility_60']
+        vol_high = vol_60.rolling(1000, min_periods=200).quantile(0.75)
+        vol_low = vol_60.rolling(1000, min_periods=200).quantile(0.25)
+        feats['regime_low'] = (vol_60 < vol_low).astype(float)
+        feats['regime_high'] = (vol_60 > vol_high).astype(float)
+
+        # Time cyclicals
         hour = bars.index.hour + bars.index.minute / 60.0
         feats['hour_sin'] = np.sin(2 * np.pi * hour / 24)
         feats['hour_cos'] = np.cos(2 * np.pi * hour / 24)
+        dow = bars.index.dayofweek
+        feats['dow_sin'] = np.sin(2 * np.pi * dow / 7)
+        feats['dow_cos'] = np.cos(2 * np.pi * dow / 7)
 
         feats['target'] = (close.shift(-horizon) - close) / (close + 1e-10)
         return feats

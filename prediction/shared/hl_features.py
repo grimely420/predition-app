@@ -45,12 +45,22 @@ def hl_extras(bars: pd.DataFrame, store: HLStore, micro: bool = False) -> Option
         extra["hl_nt_chg"] = c["n"].pct_change()
         r = c["c"].pct_change()
         extra["hl_volu_vol_20"] = (r * vol).rolling(20, min_periods=5).std()
+        extra["hl_range_volume"] = extra["hl_range"] * vol
+        extra["hl_candle_trend_5"] = (c["c"] - c["c"].rolling(5, min_periods=3).mean()) / (c["c"] + 1e-10)
+        extra["hl_volume_z_60"] = (vol - vol.rolling(60, min_periods=20).mean()) / (vol.rolling(60, min_periods=20).std() + 1e-10)
+        extra["hl_volume_z_240"] = (vol - vol.rolling(240, min_periods=60).mean()) / (vol.rolling(240, min_periods=60).std() + 1e-10)
 
     funding = store.funding_frame(since=since)
     if not funding.empty:
         f = funding.reindex(funding.index.union(bars.index)).ffill().reindex(bars.index)
         extra["hl_funding"] = f["funding_rate"]
         extra["hl_premium"] = f["premium"]
+        fr = f["funding_rate"].astype(float)
+        pm = f["premium"].astype(float)
+        extra["hl_funding_premium_diff"] = fr - pm
+        extra["hl_funding_ma_24h"] = fr.rolling(1440, min_periods=360).mean()
+        extra["hl_funding_z_24h"] = (fr - fr.rolling(1440, min_periods=360).mean()) / (fr.rolling(1440, min_periods=360).std() + 1e-10)
+        extra["hl_premium_z_24h"] = (pm - pm.rolling(1440, min_periods=360).mean()) / (pm.rolling(1440, min_periods=360).std() + 1e-10)
 
     if micro:
         snaps = store.snapshots_frame(since=since)

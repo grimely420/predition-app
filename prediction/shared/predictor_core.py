@@ -56,13 +56,18 @@ class Predictor:
             logger.warning(f"[{self.symbol}:{horizon}m] Price {current_price} outside sanity range")
 
         model_info = self.model_manager.load(horizon)
+        clf_info = self.model_manager.load_classifier(horizon)
         features, feature_names = self.feature_engine.get_current_features(horizon=horizon)
 
         fallback = False
         model_used = 'xgboost'
         model_version = 'v1'
         val_mae = None
+        raw_return = 0.0
         predicted_return = 0.0
+        signal_strength = 1.0
+        probs = {'up': 1/3, 'down': 1/3, 'flat': 1/3}
+        expected_pnl_pct = -0.05
 
         if model_info is None or features is None:
             fallback = True
@@ -87,8 +92,25 @@ class Predictor:
 
                 if not fallback:
                     X = np.array(features).reshape(1, -1)
-                    predicted_return = float(mdl.predict(X)[0])
+                    raw_return = float(mdl.predict(X)[0])
                     model_version = str(int(os.path.getmtime(model_info['path'])))
+
+                    # Blend with classifier probability
+                    if clf_info is not None:
+                        clf = clf_info['model']
+                        le = clf_info['le']
+                        prob = clf.predict_proba(X)[0]
+                        class_to_prob = {int(c): float(p) for c, p in zip(le.classes_, prob)}
+                        probs = {
+                            'up': class_to_prob.get(1, 0.0),
+                            'down': class_to_prob.get(-1, 0.0),
+                            'flat': class_to_prob.get(0, 0.0),
+                        }
+                        signal_strength = probs['up'] - probs['down']
+                        # Regressor magnitude scaled by classifier directional confidence
+                        predicted_return = float(np.clip(raw_return * signal_strength, -0.05, 0.05))
+                    else:
+                        predicted_return = float(np.clip(raw_return, -0.05, 0.05))
             except Exception as e:
                 logger.error(f"[{self.symbol}:{horizon}m] Prediction error: {e}")
                 fallback = True
@@ -97,9 +119,12 @@ class Predictor:
         if fallback:
             predicted_return = self._trend_fallback()
 
+        fee_pct = getattr(self.cfg, 'fee_pct', 0.05)
         predicted_return = float(np.clip(predicted_return, -0.05, 0.05))
         predicted_price = float(current_price * (1.0 + predicted_return))
         change_pct = round(predicted_return * 100, 4)
+        raw_change_pct = round(np.clip(raw_return, -0.05, 0.05) * 100, 4)
+        expected_pnl_pct = round(predicted_return * 100 - fee_pct, 4)
 
         if val_mae is None or not np.isfinite(val_mae):
             val_mae = 0.002
@@ -121,6 +146,12 @@ class Predictor:
             'current_price': round(float(current_price), 4),
             'predicted_price': round(float(predicted_price), 4),
             'change_percent': float(change_pct),
+            'raw_change_percent': float(raw_change_pct),
+            'signal_strength': round(float(signal_strength), 4),
+            'prob_up': round(float(probs['up']), 4),
+            'prob_down': round(float(probs['down']), 4),
+            'prob_flat': round(float(probs['flat']), 4),
+            'expected_pnl_pct': float(expected_pnl_pct),
             'confidence_interval': [
                 round(float(predicted_price - width), 4),
                 round(float(predicted_price + width), 4)
