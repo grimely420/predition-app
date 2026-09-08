@@ -124,6 +124,9 @@ class CoinConfig:
     train_lookback_hours: int = 24 * 14
     prediction_threshold_pct: float = 1.0
     api_port: int = 5000
+    # Merge Hyperliquid market data (volume, funding, book) into features.
+    hl_features: bool = False
+    hl_micro: bool = False
 
     @property
     def db_path(self) -> str:

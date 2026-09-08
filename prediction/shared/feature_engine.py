@@ -58,6 +58,9 @@ class FeatureEngine:
     def __init__(self, data_store, symbol: str):
         self.data_store = data_store
         self.symbol = symbol
+        # Optional callable(bars) -> DataFrame aligned to bars.index with
+        # extra feature columns (e.g. Hyperliquid market data). None = off.
+        self.extras_fn = None
 
     def _build_features(self, bars: pd.DataFrame, horizon: int) -> pd.DataFrame:
         close = bars['close']
@@ -110,6 +113,13 @@ class FeatureEngine:
     def features_from_bars(self, bars: pd.DataFrame, horizon: int):
         """Return (feature_frame, feature_cols) with NaN feature rows dropped."""
         feats = self._build_features(bars, horizon)
+        if self.extras_fn is not None:
+            try:
+                extra = self.extras_fn(bars)
+                if extra is not None and not extra.empty:
+                    feats = feats.join(extra)
+            except Exception as e:
+                logger.warning(f"extras loader failed: {e}")
         feature_cols = [c for c in feats.columns if c != 'target']
         return feats.dropna(subset=feature_cols), feature_cols
 

@@ -49,10 +49,16 @@ def _score(y_true: np.ndarray, y_pred: np.ndarray, fee_pct: float, thresholds):
 
 
 def run(coin_id: str, days: int, train_hours: int, step_hours: int, horizons,
-        fee_pct: float, thresholds):
+        fee_pct: float, thresholds, hl: bool = False, micro: bool = False):
     cfg = get_coin_config(coin_id)
     ds = DataStore(cfg.db_path, cfg.symbol)
     fe = FeatureEngine(ds, cfg.symbol)
+    if hl:
+        from .hl_features import attach_extras
+        if attach_extras(fe, cfg.db_name, micro=micro):
+            print(f"[{cfg.symbol}] Hyperliquid features enabled (micro={micro})", flush=True)
+        else:
+            print(f"[{cfg.symbol}] WARNING: no Hyperliquid data found, running price-only", flush=True)
 
     end = datetime.now(timezone.utc).replace(second=0, microsecond=0)
     start = end - timedelta(days=days)
@@ -113,10 +119,12 @@ def main():
     p.add_argument('--horizons', default='5,10,15')
     p.add_argument('--fee-pct', type=float, default=0.05, help='round-trip cost per trade, in percent')
     p.add_argument('--thresholds', default='0.05,0.1,0.2')
+    p.add_argument('--hl', action='store_true', help='add Hyperliquid volume/funding features')
+    p.add_argument('--micro', action='store_true', help='also add book/trade-flow features (needs live collector data)')
     a = p.parse_args()
     run(a.coin, a.days, a.train_hours, a.step_hours,
         [int(x) for x in a.horizons.split(',')], a.fee_pct,
-        [float(x) for x in a.thresholds.split(',')])
+        [float(x) for x in a.thresholds.split(',')], hl=a.hl, micro=a.micro)
 
 
 if __name__ == '__main__':

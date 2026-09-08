@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Unified Flask API for all coins and horizons."""
 
+import os
+
 from flask import Flask, Response, jsonify, request
 from datetime import datetime, timezone
 
@@ -657,6 +659,34 @@ def create_app() -> Flask:
             'by_action': by_action,
             'trades': rows if request.args.get('detail') == '1' else None,
         })
+
+    @app.route('/hl/<coin_id>', methods=['GET'])
+    def hl_data(coin_id):
+        """Hyperliquid market data: latest snapshot, candles, funding, freshness."""
+        try:
+            cfg = get_coin_config(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        from .hyperliquid import HLStore, hl_db_path
+        path = hl_db_path(cfg.db_name)
+        if not os.path.exists(path):
+            return jsonify(error=f'no Hyperliquid data for {coin_id}'), 404
+        try:
+            store = HLStore(path)
+            status = store.status()
+            latest = store.latest_snapshot()
+            candles = store.candles_frame().tail(60)
+            funding = store.funding_frame().tail(24)
+            return jsonify({
+                'coin_id': coin_id,
+                'symbol': cfg.symbol,
+                'latest_snapshot': latest,
+                'candles_1m_tail': candles.reset_index().to_dict('records') if not candles.empty else [],
+                'funding_tail': funding.reset_index().to_dict('records') if not funding.empty else [],
+                'table_status': status,
+            })
+        except Exception as e:
+            return jsonify(error=f'Hyperliquid data unavailable: {e}'), 503
 
     return app
 

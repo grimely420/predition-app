@@ -25,6 +25,11 @@ class PredictorLoop:
         self.cfg = get_coin_config(coin_id)
         self.ds = DataStore(self.cfg.db_path, self.cfg.symbol)
         self.fe = FeatureEngine(self.ds, self.cfg.symbol)
+        if getattr(self.cfg, 'hl_features', False):
+            from shared.hl_features import attach_extras
+            if attach_extras(self.fe, self.cfg.db_name, micro=getattr(self.cfg, 'hl_micro', False)):
+                logger.info(f"[{self.cfg.symbol}] Hyperliquid features enabled "
+                            f"(micro={getattr(self.cfg, 'hl_micro', False)})")
         self.mm = ModelManager(self.cfg, self.ds, self.fe)
         self.predictor = Predictor(self.cfg, self.ds, self.fe, self.mm)
         self.validator = Validator(self.cfg, self.ds)
