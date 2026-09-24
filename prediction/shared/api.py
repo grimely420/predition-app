@@ -516,11 +516,13 @@ def create_app() -> Flask:
         current_price, _ = last
         kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
 
+        predictions_list = []
         predicted_returns = {}
         classifier_probs = {}
         for h in cfg.prediction_horizons:
             r = pred.predict(h, current_price=current_price)
             if r:
+                predictions_list.append(r)
                 predicted_returns[h] = r.get('change_percent', 0.0) / 100.0
                 classifier_probs[h] = {
                     'up': r.get('prob_up', 0.33),
@@ -530,6 +532,7 @@ def create_app() -> Flask:
 
         news_feats = get_news_engine().get_features(cfg.symbol)
         analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+        analysis['predictions'] = predictions_list
         return jsonify(analysis)
 
     @app.route('/kalshi', methods=['GET'])
@@ -544,11 +547,13 @@ def create_app() -> Flask:
                     continue
                 current_price, _ = last
                 kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
+                predictions_list = []
                 predicted_returns = {}
                 classifier_probs = {}
                 for h in cfg.prediction_horizons:
                     r = pred.predict(h, current_price=current_price)
                     if r:
+                        predictions_list.append(r)
                         predicted_returns[h] = r.get('change_percent', 0.0) / 100.0
                         classifier_probs[h] = {
                             'up': r.get('prob_up', 0.33),
@@ -556,7 +561,9 @@ def create_app() -> Flask:
                             'flat': r.get('prob_flat', 0.33)
                         }
                 news_feats = get_news_engine().get_features(cfg.symbol)
-                results[cid] = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+                analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+                analysis['predictions'] = predictions_list
+                results[cid] = analysis
             except Exception as e:
                 logger.error(f"Error in kalshi_all for {cid}: {e}")
         return jsonify(results)

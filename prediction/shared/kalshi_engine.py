@@ -43,6 +43,7 @@ class KalshiRoundTracker:
         self.rti_name = self.RTI_NAME_MAP.get(self.coin_id, f"CFB {self.coin_id.upper()} RTI")
         self._analysis_cache: Optional[Dict[str, Any]] = None
         self._analysis_cache_time: float = 0.0
+        self._prev_prob: Dict[str, float] = {}
 
     def get_round_timing(self, now: Optional[datetime] = None) -> Dict[str, Any]:
         """Compute current and next 15-minute round timing aligned to :00, :15, :30, :45."""
@@ -162,12 +163,8 @@ class KalshiRoundTracker:
         total_expected_return = model_drift + news_drift
         projected_settlement_price = current_price * (1.0 + total_expected_return)
 
-        # Probability calculation: Dual-Phase Engine
-        # Phase 1 (Mins 0 - 6.5): Prime Early Entry Window (Kalshi contracts 40c - 60c)
-        # Phase 2 (Mins 6.5 - 15): Settlement Tracking & Lock-in (Distance from Strike)
-        diff_from_open_pct = (projected_settlement_price - round_open) / round_open
-        z_score = diff_from_open_pct / max(1e-5, sigma_rem)
-        physics_prob = normal_cdf(z_score)
+        # Distance from Strike (Log Return)
+        log_ratio = math.log(max(1e-4, current_price) / max(1e-4, round_open))
 
         # Binary normalization of classifier (removes ternary 'flat' dilution)
         clf_15 = classifier_probs.get(15, {})
@@ -176,73 +173,61 @@ class KalshiRoundTracker:
         total_dir = up_raw + down_raw
         norm_clf_up = (up_raw / total_dir) if total_dir > 0.05 else 0.50
 
-        elapsed_min = cur_rnd["elapsed_minutes"]
-        is_entry_window = elapsed_min <= 6.5
+        # Normalized multi-horizon drift: model + news + classifier
+        model_bias = (pred_5 + pred_10 + pred_15) / 3.0
+        news_bias = news_sentiment * 0.0015
+        clf_bias = (norm_clf_up - 0.50) * 0.0025
+        total_drift = model_bias + news_bias + clf_bias
 
-        if is_entry_window:
-            # EARLY ENTRY PHASE: Leading signals drive entry before price runs away
-            news_boost = news_sentiment * 0.12  # News shock impact
-            prob_up = 0.55 * norm_clf_up + 0.25 * (0.50 + news_boost) + 0.20 * physics_prob
-            # Multi-horizon consensus boost
-            if pred_5 > 0 and pred_10 > 0 and pred_15 > 0:
-                prob_up += 0.04
-            elif pred_5 < 0 and pred_10 < 0 and pred_15 < 0:
-                prob_up -= 0.04
+        # Continuous Digital Option Model:
+        # z = [ln(S_t/S_0) + drift * (tau/15)] / sigma_rem
+        z_score = (log_ratio + total_drift * (rem_min / 15.0)) / max(1e-5, sigma_rem)
+        raw_prob_up = normal_cdf(z_score)
+
+        # Exponential Moving Average filter (alpha=0.35)
+        # Prevents fast flipping/jitter across 5-second tick noise
+        prev_p = self._prev_prob.get(self.coin_id)
+        if prev_p is not None and cur_rnd["elapsed_seconds"] > 10:
+            prob_up = 0.35 * raw_prob_up + 0.65 * prev_p
         else:
-            # SETTLEMENT PHASE: Actual delta vs round open strike governs
-            prob_up = 0.65 * physics_prob + 0.25 * norm_clf_up + 0.10 * (0.50 + news_sentiment * 0.10)
+            prob_up = raw_prob_up
+        self._prev_prob[self.coin_id] = prob_up
 
-        prob_up = max(0.04, min(0.96, prob_up))
+        prob_up = max(0.01, min(0.99, prob_up))
         prob_down = round(1.0 - prob_up, 4)
         prob_up = round(prob_up, 4)
 
-        # Generate Actionable Kalshi Recommendation
-        confidence = round(abs(prob_up - 0.50) * 200.0, 1)
+        # Exact Kalshi Cents Pricing (1c to 99c)
+        yes_cents = int(round(prob_up * 100))
+        no_cents = 100 - yes_cents
 
-        if is_entry_window:
-            phase_label = "EARLY ENTRY WINDOW (Mins 0–6)"
-            if prob_up >= 0.58:
-                decision = "STRONG EARLY ENTRY: BUY YES"
-                bias = "UP"
-                color = "#10b981"
-            elif prob_up >= 0.53:
-                decision = "EARLY ENTRY: BUY YES"
-                bias = "UP"
-                color = "#34d399"
-            elif prob_down >= 0.58:
-                decision = "STRONG EARLY ENTRY: BUY NO"
-                bias = "DOWN"
-                color = "#ef4444"
-            elif prob_down >= 0.53:
-                decision = "EARLY ENTRY: BUY NO"
-                bias = "DOWN"
-                color = "#f87171"
-            else:
-                decision = "WAIT FOR BREAKOUT (ENTRY WINDOW)"
-                bias = "NEUTRAL"
-                color = "#f59e0b"
+        edge = round(abs(prob_up - 0.50) * 100.0, 1)
+        confidence = round(edge * 2.0, 1)
+
+        elapsed_min = cur_rnd["elapsed_minutes"]
+        is_entry_window = elapsed_min <= 6.5
+        phase_label = "EARLY ENTRY WINDOW (Mins 0–6)" if is_entry_window else "SETTLEMENT TRACKING (Mins 7–15)"
+
+        if yes_cents >= 60:
+            decision = f"BUY YES (TARGET {yes_cents}¢)"
+            bias = "UP"
+            color = "#10b981"
+        elif yes_cents >= 53:
+            decision = f"LEAN BUY YES ({yes_cents}¢)"
+            bias = "UP"
+            color = "#34d399"
+        elif no_cents >= 60:
+            decision = f"BUY NO (TARGET {no_cents}¢)"
+            bias = "DOWN"
+            color = "#ef4444"
+        elif no_cents >= 53:
+            decision = f"LEAN BUY NO ({no_cents}¢)"
+            bias = "DOWN"
+            color = "#f87171"
         else:
-            phase_label = "SETTLEMENT PHASE (Mins 7–15)"
-            if prob_up >= 0.68:
-                decision = "SETTLEMENT CONFIRMED: HOLD YES"
-                bias = "UP"
-                color = "#10b981"
-            elif prob_up >= 0.56:
-                decision = "LEAN YES (EXPIRY TRACKING)"
-                bias = "UP"
-                color = "#34d399"
-            elif prob_down >= 0.68:
-                decision = "SETTLEMENT CONFIRMED: HOLD NO"
-                bias = "DOWN"
-                color = "#ef4444"
-            elif prob_down >= 0.56:
-                decision = "LEAN NO (EXPIRY TRACKING)"
-                bias = "DOWN"
-                color = "#f87171"
-            else:
-                decision = "VOLATILITY PINNED (HIGH RISK)"
-                bias = "NEUTRAL"
-                color = "#9ca3af"
+            decision = f"STRIKE CHOP ({yes_cents}¢ / {no_cents}¢)"
+            bias = "NEUTRAL"
+            color = "#f59e0b"
 
         # Analysis of Next Upcoming Round (5-17 minute span)
         next_model_ret = pred_15
@@ -273,17 +258,21 @@ class KalshiRoundTracker:
                 "delta_usd": round(delta_usd, 4),
                 "delta_pct": round(delta_pct, 4),
                 "projected_settlement": round(projected_settlement_price, 4),
+                "yes_cents": yes_cents,
+                "no_cents": no_cents,
             },
             "decision": {
                 "recommendation": decision,
                 "bias": bias,
                 "phase_label": phase_label,
                 "is_entry_window": is_entry_window,
+                "yes_cents": yes_cents,
+                "no_cents": no_cents,
                 "confidence_pct": confidence,
                 "badge_color": color,
                 "prob_yes_up": prob_up,
                 "prob_no_down": prob_down,
-                "edge_pct": round(abs(prob_up - 0.50) * 100.0, 2),
+                "edge_pct": edge,
                 "model_drift_pct": round(model_drift * 100.0, 4),
                 "news_drift_pct": round(news_drift * 100.0, 4),
             },

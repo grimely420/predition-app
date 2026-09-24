@@ -565,7 +565,8 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 
     <script>
         const COINS = ['btc', 'bnb', 'hype'];
-        const REFRESH_INTERVAL_MS = 5000;
+        const REFRESH_INTERVAL_MS = 2500;
+        let currentRemainingSeconds = null;
 
         function fmt(n, d=2) {
             if (n == null || isNaN(n)) return '-';
@@ -588,36 +589,59 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             drawer.style.display = drawer.style.display === 'block' ? 'none' : 'block';
         }
 
-        function renderCoinCard(coin, feed, kalshi) {
+        function updateCountdownDisplay(sec) {
+            if (sec == null || isNaN(sec)) return;
+            const remSec = Math.max(0, Math.floor(sec));
+            const remMin = Math.floor(remSec / 60);
+            const remS = remSec % 60;
+            const countdownStr = `${String(remMin).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
+            const el1 = document.getElementById('round-countdown');
+            const el2 = document.getElementById('next-round-countdown');
+            if (el1) el1.textContent = countdownStr;
+            if (el2) el2.textContent = countdownStr;
+            const prog = Math.min(100, Math.max(0, ((900 - remSec) / 900) * 100));
+            const bar = document.getElementById('round-progress');
+            if (bar) bar.style.width = prog + '%';
+        }
+
+        // Local 1-second continuous tick loop so countdown never freezes or jumps
+        setInterval(() => {
+            if (currentRemainingSeconds != null && currentRemainingSeconds > 0) {
+                currentRemainingSeconds--;
+                updateCountdownDisplay(currentRemainingSeconds);
+            }
+        }, 1000);
+
+        function renderCoinCard(coin, kalshi) {
             const timing = kalshi && kalshi.timing ? kalshi.timing.current_round : {};
             const nextTiming = kalshi && kalshi.timing ? kalshi.timing.next_round : {};
             const pricing = kalshi && kalshi.pricing ? kalshi.pricing : {};
             const decision = kalshi && kalshi.decision ? kalshi.decision : {};
             const nextOutlook = kalshi && kalshi.next_round_outlook ? kalshi.next_round_outlook : {};
-            const phaseLabel = decision.phase_label || (timing.elapsed_minutes <= 6.5 ? 'EARLY ENTRY WINDOW (Mins 0–6)' : 'SETTLEMENT PHASE (Mins 7–15)');
+            const phaseLabel = decision.phase_label || (timing.elapsed_minutes <= 6.5 ? 'EARLY ENTRY WINDOW (Mins 0–6)' : 'SETTLEMENT TRACKING (Mins 7–15)');
             const isEntry = decision.is_entry_window !== false && timing.elapsed_minutes <= 6.5;
 
-            const curPrice = pricing.current_price || (feed ? feed.price : 0);
+            const curPrice = pricing.current_price || 0;
             const openPrice = pricing.round_open_price || curPrice;
             const deltaUsd = pricing.delta_usd || 0;
             const deltaPct = pricing.delta_pct || 0;
             const deltaCls = deltaUsd >= 0 ? 'up' : 'down';
 
-            const rec = decision.recommendation || 'CALCULATING...';
-            const recColor = decision.badge_color || '#8b92a5';
-            const probYes = decision.prob_yes_up != null ? decision.prob_yes_up : 0.50;
-            const probNo = decision.prob_no_down != null ? decision.prob_no_down : 0.50;
-            const edge = decision.edge_pct != null ? decision.edge_pct : 0.0;
-            const conf = decision.confidence_pct != null ? decision.confidence_pct : 0;
+            const yesCents = decision.yes_cents != null ? decision.yes_cents : Math.round((decision.prob_yes_up || 0.5) * 100);
+            const noCents = decision.no_cents != null ? decision.no_cents : (100 - yesCents);
+            const rec = decision.recommendation || `ODDS: ${yesCents}¢ / ${noCents}¢`;
+            const recColor = decision.badge_color || (yesCents >= 53 ? 'var(--up)' : (noCents >= 53 ? 'var(--down)' : '#f59e0b'));
+            const edge = decision.edge_pct != null ? decision.edge_pct : Math.abs(yesCents - 50);
+            const conf = decision.confidence_pct != null ? decision.confidence_pct : (edge * 2);
 
             const series = kalshi ? kalshi.series : `KX${coin.toUpperCase()}15M`;
             const rtiName = kalshi ? kalshi.benchmark_index : 'CF Benchmarks RTI';
 
             // Multi-horizon rows (5m, 10m, 15m)
-            const horizons = [5, 10, 15];
+            const predictions = kalshi.predictions || [];
             let rows = '';
-            for (const h of horizons) {
-                const pred = feed && feed.predictions ? feed.predictions.find(p => p.horizon_minutes === h) : null;
+            for (const h of [5, 10, 15]) {
+                const pred = predictions.find(p => p.horizon_minutes === h);
                 const pPrice = pred ? pred.predicted_price : '-';
                 const chg = pred ? pred.change_percent : 0;
                 const chgCls = chg > 0 ? 'up' : (chg < 0 ? 'down' : 'neutral');
@@ -652,24 +676,28 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 
                 <!-- Actionable Kalshi Decision Box -->
                 <div class="decision-box">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                        <span style="font-size:0.72rem; color:var(--muted); font-weight:600; text-transform:uppercase;">${phaseLabel}</span>
-                        ${isEntry ? '<span class="badge" style="background:rgba(99,102,241,0.2); color:#818cf8; border:1px solid rgba(99,102,241,0.4);">&#9889; PRIME ENTRY WINDOW</span>' : '<span class="badge" style="background:rgba(107,114,128,0.2); color:#9ca3af;">&#9203; SETTLEMENT PHASE</span>'}
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                        <span style="font-size:0.75rem; color:var(--muted); font-weight:700; text-transform:uppercase;">${phaseLabel}</span>
+                        ${isEntry ? '<span class="badge" style="background:rgba(99,102,241,0.2); color:#818cf8; border:1px solid rgba(99,102,241,0.4);">&#9889; PRIME ENTRY WINDOW</span>' : '<span class="badge" style="background:rgba(107,114,128,0.2); color:#9ca3af;">&#9203; SETTLEMENT TRACKING</span>'}
                     </div>
+
                     <div class="decision-header">
-                        <span class="decision-badge" style="background:${recColor}22; color:${recColor}; border:1px solid ${recColor}55;">
+                        <span class="decision-badge" style="background:${recColor}22; color:${recColor}; border:1px solid ${recColor}55; font-size:0.95rem; padding:6px 14px;">
                             ${rec}
                         </span>
-                        <span class="decision-edge">Edge: +${edge.toFixed(1)}% (Conviction ${conf}%)</span>
+                        <div style="text-align:right;">
+                            <div style="font-family:'JetBrains Mono', monospace; font-size:1.35rem; font-weight:800; letter-spacing:0.5px;">
+                                <span style="color:var(--up);">YES ${yesCents}¢</span>
+                                <span style="color:var(--muted); font-size:0.95rem;"> / </span>
+                                <span style="color:var(--down);">NO ${noCents}¢</span>
+                            </div>
+                            <span class="decision-edge">Edge: +${edge.toFixed(1)}% (Conviction ${conf}%)</span>
+                        </div>
                     </div>
 
                     <div class="prob-bar-group">
-                        <div class="prob-bar-labels">
-                            <span style="color:var(--up);">YES (UP): ${(probYes * 100).toFixed(1)}%</span>
-                            <span style="color:var(--down);">NO (DOWN): ${(probNo * 100).toFixed(1)}%</span>
-                        </div>
                         <div class="prob-bar">
-                            <div class="prob-bar-yes" style="width: ${probYes * 100}%;"></div>
+                            <div class="prob-bar-yes" style="width: ${yesCents}%;"></div>
                         </div>
                     </div>
                 </div>
@@ -682,7 +710,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
                     </div>
                     <div class="metric-cell">
                         <span class="metric-label">Current Round Delta</span>
-                        <span class="metric-val" style="color:var(--${deltaCls});">
+                        <span class="metric-val" style="color:var(--${deltaCls}); font-weight:700;">
                             ${deltaUsd >= 0 ? '+' : ''}${fmtUsd(deltaUsd, coin === 'hype' ? 4 : 2)} (${pct(deltaPct, 3)})
                         </span>
                     </div>
@@ -782,56 +810,43 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 
         async function fetchAll() {
             try {
-                // Fetch news
-                const newsPromise = fetch('/news').then(r => r.ok ? r.json() : {});
+                // Fetch all kalshi round data and news in 2 fast parallel calls
+                const [kalshiAll, newsData] = await Promise.all([
+                    fetch('/kalshi').then(r => r.ok ? r.json() : {}),
+                    fetch('/news').then(r => r.ok ? r.json() : {})
+                ]);
 
-                // Fetch coins and Kalshi data in parallel
-                const coinPromises = COINS.map(async coin => {
-                    const [feedRes, kalshiRes] = await Promise.all([
-                        fetch(`/feed/${coin}`),
-                        fetch(`/kalshi/${coin}`)
-                    ]);
-                    const feed = feedRes.ok ? await feedRes.json() : null;
-                    const kalshi = kalshiRes.ok ? await kalshiRes.json() : null;
-                    return { coin, feed, kalshi };
-                });
-
-                const [newsData, coinResults] = await Promise.all([newsPromise, Promise.all(coinPromises)]);
-
-                // Render Top Round Countdown from the first coin's timing
-                if (coinResults[0] && coinResults[0].kalshi && coinResults[0].kalshi.timing) {
-                    const timing = coinResults[0].kalshi.timing.current_round;
-                    const nextTiming = coinResults[0].kalshi.timing.next_round;
-
+                // Update countdown target from first coin's timing
+                const firstCoin = kalshiAll['btc'] || kalshiAll[Object.keys(kalshiAll)[0]];
+                if (firstCoin && firstCoin.timing) {
+                    const timing = firstCoin.timing.current_round;
                     document.getElementById('round-window').textContent = timing.label;
-                    const remSec = timing.remaining_seconds || 0;
-                    const remMin = Math.floor(remSec / 60);
-                    const remS = remSec % 60;
-                    const countdownStr = `${String(remMin).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
-                    document.getElementById('round-countdown').textContent = countdownStr;
-                    document.getElementById('next-round-countdown').textContent = countdownStr;
+                    currentRemainingSeconds = timing.remaining_seconds || 0;
+                    updateCountdownDisplay(currentRemainingSeconds);
 
-                    const prog = timing.progress_pct || 0;
-                    document.getElementById('round-progress').style.width = prog + '%';
-
-                    if (remSec <= 60) {
+                    if (currentRemainingSeconds <= 60) {
                         document.getElementById('round-state').innerHTML = '<span style="color:var(--neutral); font-weight:700;">FINAL 60s TWAP SETTLEMENT IN PROGRESS</span>';
                     } else {
-                        document.getElementById('round-state').textContent = `${(15 - (remSec/60)).toFixed(1)} mins elapsed into round`;
+                        document.getElementById('round-state').textContent = `${(15 - (currentRemainingSeconds/60)).toFixed(1)} mins elapsed into round`;
                     }
                 }
 
                 // Render Coin Cards
                 let cardsHtml = '';
-                for (const { coin, feed, kalshi } of coinResults) {
-                    cardsHtml += renderCoinCard(coin, feed, kalshi);
+                for (const coin of COINS) {
+                    const kalshi = kalshiAll[coin];
+                    if (kalshi) {
+                        cardsHtml += renderCoinCard(coin, kalshi);
+                    }
                 }
-                document.getElementById('coins-container').innerHTML = cardsHtml;
+                if (cardsHtml) {
+                    document.getElementById('coins-container').innerHTML = cardsHtml;
+                }
 
                 // Render News
                 renderNews(newsData);
 
-                document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+                document.getElementById('last-updated').textContent = 'Live · ' + new Date().toLocaleTimeString();
 
                 // Render optional Hyperliquid details
                 renderHL();
