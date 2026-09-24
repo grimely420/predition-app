@@ -594,6 +594,8 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             const pricing = kalshi && kalshi.pricing ? kalshi.pricing : {};
             const decision = kalshi && kalshi.decision ? kalshi.decision : {};
             const nextOutlook = kalshi && kalshi.next_round_outlook ? kalshi.next_round_outlook : {};
+            const phaseLabel = decision.phase_label || (timing.elapsed_minutes <= 6.5 ? 'EARLY ENTRY WINDOW (Mins 0–6)' : 'SETTLEMENT PHASE (Mins 7–15)');
+            const isEntry = decision.is_entry_window !== false && timing.elapsed_minutes <= 6.5;
 
             const curPrice = pricing.current_price || (feed ? feed.price : 0);
             const openPrice = pricing.round_open_price || curPrice;
@@ -650,6 +652,10 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 
                 <!-- Actionable Kalshi Decision Box -->
                 <div class="decision-box">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                        <span style="font-size:0.72rem; color:var(--muted); font-weight:600; text-transform:uppercase;">${phaseLabel}</span>
+                        ${isEntry ? '<span class="badge" style="background:rgba(99,102,241,0.2); color:#818cf8; border:1px solid rgba(99,102,241,0.4);">&#9889; PRIME ENTRY WINDOW</span>' : '<span class="badge" style="background:rgba(107,114,128,0.2); color:#9ca3af;">&#9203; SETTLEMENT PHASE</span>'}
+                    </div>
                     <div class="decision-header">
                         <span class="decision-badge" style="background:${recColor}22; color:${recColor}; border:1px solid ${recColor}55;">
                             ${rec}

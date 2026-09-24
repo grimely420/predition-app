@@ -6,6 +6,7 @@ tracks CF Benchmarks Real-Time Index (BRTI & RTIs) round open and current delta,
 and generates actionable trading signals for the current and upcoming 5-17 minute rounds.
 """
 
+import time
 import math
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Any, Optional
@@ -40,6 +41,8 @@ class KalshiRoundTracker:
         self.coin_id = coin_id.lower()
         self.series = self.SERIES_MAP.get(self.coin_id, f"KX{self.coin_id.upper()}15M")
         self.rti_name = self.RTI_NAME_MAP.get(self.coin_id, f"CFB {self.coin_id.upper()} RTI")
+        self._analysis_cache: Optional[Dict[str, Any]] = None
+        self._analysis_cache_time: float = 0.0
 
     def get_round_timing(self, now: Optional[datetime] = None) -> Dict[str, Any]:
         """Compute current and next 15-minute round timing aligned to :00, :15, :30, :45."""
@@ -103,9 +106,14 @@ class KalshiRoundTracker:
                       current_price: float,
                       predicted_returns: Dict[int, float],
                       classifier_probs: Dict[int, Dict[str, float]],
-                      news_features: Optional[Dict[str, float]] = None) -> Dict[str, Any]:
+                      news_features: Optional[Dict[str, float]] = None,
+                      now: Optional[datetime] = None) -> Dict[str, Any]:
         """Generate full Kalshi round analysis, probabilities, and actionable trading decision."""
-        timing = self.get_round_timing()
+        now_ts = time.time()
+        if now is None and (now_ts - self._analysis_cache_time < 2.5) and self._analysis_cache is not None:
+            return self._analysis_cache
+
+        timing = self.get_round_timing(now)
         cur_rnd = timing["current_round"]
         next_rnd = timing["next_round"]
 
@@ -154,59 +162,97 @@ class KalshiRoundTracker:
         total_expected_return = model_drift + news_drift
         projected_settlement_price = current_price * (1.0 + total_expected_return)
 
-        # Probability calculation: What is P(S_settle > S_open)?
-        # S_settle = current_price * (1 + total_expected_return + epsilon), where epsilon ~ N(0, sigma_rem^2)
-        # S_settle > round_open <=> epsilon > (round_open - current_price*(1 + total_expected_return)) / current_price
+        # Probability calculation: Dual-Phase Engine
+        # Phase 1 (Mins 0 - 6.5): Prime Early Entry Window (Kalshi contracts 40c - 60c)
+        # Phase 2 (Mins 6.5 - 15): Settlement Tracking & Lock-in (Distance from Strike)
         diff_from_open_pct = (projected_settlement_price - round_open) / round_open
         z_score = diff_from_open_pct / max(1e-5, sigma_rem)
+        physics_prob = normal_cdf(z_score)
 
-        # Cap z_score to reasonable probability bounds [0.03, 0.97]
-        prob_up = normal_cdf(z_score)
-        prob_up = max(0.04, min(0.96, prob_up))
-
-        # Blend with model classifier probabilities if available
+        # Binary normalization of classifier (removes ternary 'flat' dilution)
         clf_15 = classifier_probs.get(15, {})
-        clf_up = clf_15.get('up')
-        if clf_up is not None:
-            # Weighted ensemble: 60% physics/delta trajectory + 40% classifier
-            prob_up = round(0.60 * prob_up + 0.40 * clf_up, 4)
+        up_raw = clf_15.get('up', 0.33)
+        down_raw = clf_15.get('down', 0.33)
+        total_dir = up_raw + down_raw
+        norm_clf_up = (up_raw / total_dir) if total_dir > 0.05 else 0.50
 
+        elapsed_min = cur_rnd["elapsed_minutes"]
+        is_entry_window = elapsed_min <= 6.5
+
+        if is_entry_window:
+            # EARLY ENTRY PHASE: Leading signals drive entry before price runs away
+            news_boost = news_sentiment * 0.12  # News shock impact
+            prob_up = 0.55 * norm_clf_up + 0.25 * (0.50 + news_boost) + 0.20 * physics_prob
+            # Multi-horizon consensus boost
+            if pred_5 > 0 and pred_10 > 0 and pred_15 > 0:
+                prob_up += 0.04
+            elif pred_5 < 0 and pred_10 < 0 and pred_15 < 0:
+                prob_up -= 0.04
+        else:
+            # SETTLEMENT PHASE: Actual delta vs round open strike governs
+            prob_up = 0.65 * physics_prob + 0.25 * norm_clf_up + 0.10 * (0.50 + news_sentiment * 0.10)
+
+        prob_up = max(0.04, min(0.96, prob_up))
         prob_down = round(1.0 - prob_up, 4)
         prob_up = round(prob_up, 4)
 
-        # Generate Kalshi Actionable Recommendation
-        confidence = round(abs(prob_up - 0.50) * 200.0, 1)  # 0% to 100%
+        # Generate Actionable Kalshi Recommendation
+        confidence = round(abs(prob_up - 0.50) * 200.0, 1)
 
-        if prob_up >= 0.65:
-            decision = "STRONG BUY YES (UP)"
-            bias = "UP"
-            color = "#10b981"
-        elif prob_up >= 0.56:
-            decision = "LEAN BUY YES (UP)"
-            bias = "UP"
-            color = "#34d399"
-        elif prob_down >= 0.65:
-            decision = "STRONG BUY NO (DOWN)"
-            bias = "DOWN"
-            color = "#ef4444"
-        elif prob_down >= 0.56:
-            decision = "LEAN BUY NO (DOWN)"
-            bias = "DOWN"
-            color = "#f87171"
+        if is_entry_window:
+            phase_label = "EARLY ENTRY WINDOW (Mins 0–6)"
+            if prob_up >= 0.58:
+                decision = "STRONG EARLY ENTRY: BUY YES"
+                bias = "UP"
+                color = "#10b981"
+            elif prob_up >= 0.53:
+                decision = "EARLY ENTRY: BUY YES"
+                bias = "UP"
+                color = "#34d399"
+            elif prob_down >= 0.58:
+                decision = "STRONG EARLY ENTRY: BUY NO"
+                bias = "DOWN"
+                color = "#ef4444"
+            elif prob_down >= 0.53:
+                decision = "EARLY ENTRY: BUY NO"
+                bias = "DOWN"
+                color = "#f87171"
+            else:
+                decision = "WAIT FOR BREAKOUT (ENTRY WINDOW)"
+                bias = "NEUTRAL"
+                color = "#f59e0b"
         else:
-            decision = "NEUTRAL / NO EDGE (SKIP)"
-            bias = "NEUTRAL"
-            color = "#9ca3af"
+            phase_label = "SETTLEMENT PHASE (Mins 7–15)"
+            if prob_up >= 0.68:
+                decision = "SETTLEMENT CONFIRMED: HOLD YES"
+                bias = "UP"
+                color = "#10b981"
+            elif prob_up >= 0.56:
+                decision = "LEAN YES (EXPIRY TRACKING)"
+                bias = "UP"
+                color = "#34d399"
+            elif prob_down >= 0.68:
+                decision = "SETTLEMENT CONFIRMED: HOLD NO"
+                bias = "DOWN"
+                color = "#ef4444"
+            elif prob_down >= 0.56:
+                decision = "LEAN NO (EXPIRY TRACKING)"
+                bias = "DOWN"
+                color = "#f87171"
+            else:
+                decision = "VOLATILITY PINNED (HIGH RISK)"
+                bias = "NEUTRAL"
+                color = "#9ca3af"
 
         # Analysis of Next Upcoming Round (5-17 minute span)
         next_model_ret = pred_15
         next_news_impact = news_sentiment * 0.0020
         next_composite_ret = round((next_model_ret + next_news_impact) * 100.0, 4)
 
-        if next_composite_ret > 0.08:
+        if next_composite_ret > 0.06:
             next_bias = "BULLISH (UP)"
             next_action = "PREPARE BUY YES"
-        elif next_composite_ret < -0.08:
+        elif next_composite_ret < -0.06:
             next_bias = "BEARISH (DOWN)"
             next_action = "PREPARE BUY NO"
         else:
@@ -217,6 +263,10 @@ class KalshiRoundTracker:
             "series": self.series,
             "benchmark_index": self.rti_name,
             "timing": timing,
+            "phase": {
+                "label": phase_label,
+                "is_entry_window": is_entry_window,
+            },
             "pricing": {
                 "current_price": round(current_price, 4),
                 "round_open_price": round(round_open, 4),
@@ -227,6 +277,8 @@ class KalshiRoundTracker:
             "decision": {
                 "recommendation": decision,
                 "bias": bias,
+                "phase_label": phase_label,
+                "is_entry_window": is_entry_window,
                 "confidence_pct": confidence,
                 "badge_color": color,
                 "prob_yes_up": prob_up,
@@ -243,3 +295,6 @@ class KalshiRoundTracker:
                 "starts_in_min": next_rnd["starts_in_minutes"]
             }
         }
+        self._analysis_cache = result
+        self._analysis_cache_time = time.time()
+        return result

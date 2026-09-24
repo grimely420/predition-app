@@ -83,13 +83,13 @@ class PredictorLoop:
             if now - last_validate >= 30:
                 self._validate()
                 last_validate = now
-            if now - last_predict >= 30:
+            if now - last_predict >= 15:
                 self._predict_all()
                 last_predict = now
             if now - last_retrain >= 1800:
                 self._maybe_retrain()
                 last_retrain = now
-            time.sleep(5)
+            time.sleep(2)
         logger.info(f"{self.cfg.symbol} predictor loop stopped")
 
 
