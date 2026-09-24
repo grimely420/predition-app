@@ -3,6 +3,7 @@
 Feature engineering shared by all coins and prediction horizons.
 """
 
+import time
 import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta, timezone
@@ -72,6 +73,8 @@ class FeatureEngine:
         # Optional callable(bars) -> DataFrame aligned to bars.index with
         # extra feature columns (e.g. Hyperliquid market data). None = off.
         self.extras_fn = None
+        self._bars_cache: Optional[pd.DataFrame] = None
+        self._bars_cache_time: float = 0.0
 
     def _build_features(self, bars: pd.DataFrame, horizon: int) -> pd.DataFrame:
         close = bars['close']
@@ -147,8 +150,16 @@ class FeatureEngine:
     def build_bars(self, since: Optional[str] = None, until: Optional[str] = None,
                    limit: Optional[int] = None) -> Optional[pd.DataFrame]:
         """Fetch ticks in a window and resample to 1-minute OHLC bars."""
+        # Short cache for concurrent prediction requests without specific time range
+        if since is None and until is None and (time.time() - self._bars_cache_time < 4.0) and self._bars_cache is not None:
+            return self._bars_cache.copy()
+
         records = self.data_store.get_prices(limit=limit, since=since, until=until)
-        return resample_ohlc(to_dataframe(records), freq='1min')
+        bars = resample_ohlc(to_dataframe(records), freq='1min')
+        if since is None and until is None and bars is not None:
+            self._bars_cache = bars.copy()
+            self._bars_cache_time = time.time()
+        return bars
 
     def features_from_bars(self, bars: pd.DataFrame, horizon: int):
         """Return (feature_frame, feature_cols) with NaN feature rows dropped."""

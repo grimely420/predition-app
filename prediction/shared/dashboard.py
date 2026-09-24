@@ -565,7 +565,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 
     <script>
         const COINS = ['btc', 'bnb', 'hype'];
-        const REFRESH_INTERVAL_MS = 3000;
+        const REFRESH_INTERVAL_MS = 5000;
 
         function fmt(n, d=2) {
             if (n == null || isNaN(n)) return '-';

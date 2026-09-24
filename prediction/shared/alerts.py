@@ -85,8 +85,8 @@ def send_telegram(message: str, disable_notification: bool = False) -> bool:
 class SystemAlerter:
     """Poll the system and send state-change alerts to Telegram (read-only)."""
 
-    def __init__(self, api_base: str = "http://192.168.0.58:5000", heartbeat_min: int = 30):
-        self.api_base = api_base
+    def __init__(self, api_base: str = "http://127.0.0.1:5000", heartbeat_min: int = 240):
+        self.api_base = os.environ.get("API_BASE", api_base)
         self.heartbeat_min = heartbeat_min
         self.last_state: Dict[str, Any] = {}
         self.last_heartbeat = 0
@@ -136,10 +136,13 @@ class SystemAlerter:
         data = self._api(f"/feed/{coin}")
         if data is None:
             key = f"feed:{coin}"
-            if self.last_state.get(key) != "down":
+            fails = self.last_state.get(f"{key}:fails", 0) + 1
+            self.last_state[f"{key}:fails"] = fails
+            if fails >= 2 and self.last_state.get(key) != "down":
                 self.last_state[key] = "down"
                 return [f"⚠️ `/feed/{coin}` is unreachable"]
             return []
+        self.last_state[f"feed:{coin}:fails"] = 0
         self.last_state[f"feed:{coin}"] = "ok"
 
         alerts = []
@@ -155,20 +158,21 @@ class SystemAlerter:
             except Exception:
                 pass
 
-        # Alert on very strong negative expected PnL or high-confidence signal
+        # Alert on directional mismatch: strong positive signal with negative return or vice versa
         for h in [5, 10, 15]:
             epnl = data.get(f"expected_pnl_{h}")
             signal = data.get(f"signal_{h}")
-            if epnl is not None and epnl < -0.1 and abs(signal or 0) > 0.4:
-                key = f"badsignal:{coin}:{h}"
-                if not self.last_state.get(key):
-                    alerts.append(
-                        f"🔻 {coin.upper()} {h}m signal {signal:+.4f} has "
-                        f"expected PnL {epnl:.4f}%"
-                    )
-                self.last_state[key] = True
-            else:
-                self.last_state[f"badsignal:{coin}:{h}"] = False
+            if signal is not None and epnl is not None:
+                if signal > 0.4 and epnl < -0.2:
+                    key = f"badsignal:{coin}:{h}"
+                    if not self.last_state.get(key):
+                        alerts.append(
+                            f"⚠️ {coin.upper()} {h}m signal conflict: signal={signal:+.2f} "
+                            f"but expected PnL={epnl:+.2f}%"
+                        )
+                    self.last_state[key] = True
+                else:
+                    self.last_state[f"badsignal:{coin}:{h}"] = False
 
         return alerts
 
@@ -176,10 +180,13 @@ class SystemAlerter:
         data = self._api("/hl/hype")
         if data is None:
             key = "hl:reach"
-            if self.last_state.get(key) != "down":
+            fails = self.last_state.get(f"{key}:fails", 0) + 1
+            self.last_state[f"{key}:fails"] = fails
+            if fails >= 2 and self.last_state.get(key) != "down":
                 self.last_state[key] = "down"
                 return ["⚠️ `/hl/hype` is unreachable"]
             return []
+        self.last_state["hl:reach:fails"] = 0
         self.last_state["hl:reach"] = "ok"
 
         latest = data.get("latest_snapshot") or {}
@@ -189,7 +196,7 @@ class SystemAlerter:
             try:
                 age = (datetime.now(timezone.utc) - datetime.fromisoformat(ts)).total_seconds()
                 key = "hl:stale"
-                stale = age > 120
+                stale = age > 240
                 if stale and not self.last_state.get(key):
                     alerts.append(f"⏱️ HYPE Hyperliquid snapshot is {int(age)}s stale")
                 self.last_state[key] = stale
@@ -202,7 +209,7 @@ class SystemAlerter:
             try:
                 age = (datetime.now(timezone.utc) - datetime.fromisoformat(last_candle)).total_seconds()
                 key = "hl:candle_stale"
-                stale = age > 120
+                stale = age > 300
                 if stale and not self.last_state.get(key):
                     alerts.append(f"⏱️ HYPE 1m HL candle is {int(age)}s stale")
                 self.last_state[key] = stale

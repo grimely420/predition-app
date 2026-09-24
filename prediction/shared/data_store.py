@@ -99,6 +99,9 @@ class DataStore:
         c.execute('''
             CREATE INDEX IF NOT EXISTS idx_predictions_horizon ON predictions(horizon_min)
         ''')
+        c.execute('''
+            CREATE INDEX IF NOT EXISTS idx_predictions_perf ON predictions(checked, horizon_min, prediction_time DESC, id DESC)
+        ''')
 
         c.execute('''
             CREATE TABLE IF NOT EXISTS trades (
