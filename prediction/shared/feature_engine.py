@@ -14,24 +14,35 @@ logger = setup_logging("FeatureEngine")
 
 
 def to_dataframe(records: List[Dict[str, Any]],
-                 single_source: bool = True) -> Optional[pd.DataFrame]:
-    """Convert raw price records into a DataFrame.
-
-    Different exchanges/aggregators quote slightly different prices and some
-    lag others by a minute or more. Mixing them inside one bar series creates
-    fake mean-reversion that a model will happily "learn" but that cannot be
-    traded. With ``single_source`` we keep only the most frequent source in
-    the window.
+                 single_source: bool = False) -> Optional[pd.DataFrame]:
+    """Convert raw price records into a continuous DataFrame.
+    Prioritizes official CF Benchmarks and primary feeds without dropping
+    entire months of historical data from other sources.
     """
     if not records:
         return None
     df = pd.DataFrame(records)
-    if single_source and 'source' in df.columns and df['source'].notna().any():
-        top = df['source'].value_counts().idxmax()
-        df = df[df['source'] == top]
     df['timestamp'] = pd.to_datetime(df['timestamp'], utc=True, format='ISO8601')
-    df = df.sort_values('timestamp').set_index('timestamp')
-    df = df[~df.index.duplicated(keep='last')]
+    if 'source' in df.columns:
+        source_rank = {
+            'CFBenchmarks-BRTI': 1,
+            'CFBenchmarks-RTI': 1,
+            'CFBenchmarks-BNB-RTI': 1,
+            'CFBenchmarks-HYPE-RTI': 1,
+            'CFBenchmarks': 2,
+            'Alpaca': 3,
+            'Coinbase': 4,
+            'Kraken': 5,
+            'Binance': 6,
+            'MEXC': 7,
+            'CoinGecko': 8
+        }
+        df['rank'] = df['source'].map(lambda s: source_rank.get(s, 10))
+        df = df.sort_values(['timestamp', 'rank']).drop_duplicates(subset=['timestamp'], keep='first')
+        df = df.drop(columns=['rank'])
+    else:
+        df = df.sort_values('timestamp').drop_duplicates(subset=['timestamp'], keep='last')
+    df = df.set_index('timestamp')
     df['price'] = pd.to_numeric(df['price'], errors='coerce')
     df = df.dropna(subset=['price'])
     return df
@@ -108,13 +119,27 @@ class FeatureEngine:
         feats['regime_low'] = (vol_60 < vol_low).astype(float)
         feats['regime_high'] = (vol_60 > vol_high).astype(float)
 
-        # Time cyclicals
+        # Time cyclicals & Kalshi 15-minute round alignment
         hour = bars.index.hour + bars.index.minute / 60.0
         feats['hour_sin'] = np.sin(2 * np.pi * hour / 24)
         feats['hour_cos'] = np.cos(2 * np.pi * hour / 24)
         dow = bars.index.dayofweek
         feats['dow_sin'] = np.sin(2 * np.pi * dow / 7)
         feats['dow_cos'] = np.cos(2 * np.pi * dow / 7)
+
+        # 15-minute Kalshi round cycle phase (0 to 14 minutes)
+        min_in_15 = bars.index.minute % 15
+        feats['round_15m_phase'] = min_in_15 / 15.0
+        feats['round_15m_sin'] = np.sin(2 * np.pi * min_in_15 / 15.0)
+        feats['round_15m_cos'] = np.cos(2 * np.pi * min_in_15 / 15.0)
+
+        # Real-time News Sentiment signal feature
+        try:
+            from .news_engine import get_news_engine
+            news_feats = get_news_engine().get_features(self.symbol)
+            feats['news_sentiment'] = float(news_feats.get('news_compound_signal', 0.0))
+        except Exception:
+            feats['news_sentiment'] = 0.0
 
         feats['target'] = (close.shift(-horizon) - close) / (close + 1e-10)
         return feats

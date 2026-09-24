@@ -44,6 +44,22 @@ def _parse_mexc_price(data: dict) -> float:
     return float(data['price'])
 
 
+def _parse_kraken_futures_rti(data: dict) -> float:
+    """Parse real-time CF Benchmarks index price (BRTI/RTI) from Kraken Futures.
+    Kalshi settles against the 60-second TWAP of this exact index.
+    """
+    tickers = data.get('tickers', [])
+    if not tickers:
+        raise ValueError("Kraken Futures response missing tickers")
+    t = tickers[0]
+    for key in ('indexPrice', 'markPrice', 'last'):
+        if t.get(key) is not None:
+            val = float(t[key])
+            if val > 0:
+                return val
+    raise ValueError(f"Unable to locate price in Kraken Futures response: {t}")
+
+
 def _parse_cfbenchmarks_index(data: dict) -> float:
     """Parse current price from a CF Benchmarks REST index response.
 
@@ -119,9 +135,9 @@ class CoinConfig:
     max_price: float = 1e12
     collection_interval: int = 5
     prediction_horizons: List[int] = field(default_factory=lambda: [5, 10, 15])
-    min_train_bars: int = 60
-    retrain_min_bars: int = 30
-    train_lookback_hours: int = 24 * 14
+    min_train_bars: int = 120
+    retrain_min_bars: int = 360
+    train_lookback_hours: int = 24 * 60
     prediction_threshold_pct: float = 1.0
     api_port: int = 5000
     # Merge Hyperliquid market data (volume, funding, book) into features.
@@ -144,8 +160,15 @@ class CoinConfig:
 
 
 def _btc_sources() -> List[Dict[str, Any]]:
-    cf_headers = _cfbenchmarks_headers()
     sources = [
+        {
+            'name': 'CFBenchmarks-BRTI',
+            'url': 'https://futures.kraken.com/derivatives/api/v3/tickers?symbol=PF_XBTUSD',
+            'parser': _parse_kraken_futures_rti,
+            'timeout': 6,
+            'cooldown': 2,
+            'weight': -2,
+        },
         {
             'name': 'Alpaca',
             'url': 'https://data.alpaca.markets/v1beta3/crypto/us/latest/quotes?symbols=BTC%2FUSD',
@@ -154,16 +177,6 @@ def _btc_sources() -> List[Dict[str, Any]]:
             'cooldown': 1,
             'weight': -1,
             'headers': _alpaca_headers(),
-        },
-
-        {
-            'name': 'CFBenchmarks',
-            'url': 'https://www.cfbenchmarks.com/api/v1/indices/BTCUSD_RTI',
-            'parser': _parse_cfbenchmarks_index,
-            'timeout': 10,
-            'cooldown': 6,
-            'weight': 0,
-            'headers': cf_headers,
         },
         {
             'name': 'Coinbase',
@@ -190,12 +203,19 @@ def _btc_sources() -> List[Dict[str, Any]]:
             'weight': 5,
         },
     ]
-    return [s for s in sources if s.get('headers') is not None or s['name'] != 'CFBenchmarks']
+    return sources
 
 
 def _bnb_sources() -> List[Dict[str, Any]]:
-    cf_headers = _cfbenchmarks_headers()
     sources = [
+        {
+            'name': 'CFBenchmarks-BNB-RTI',
+            'url': 'https://futures.kraken.com/derivatives/api/v3/tickers?symbol=PF_BNBUSD',
+            'parser': _parse_kraken_futures_rti,
+            'timeout': 6,
+            'cooldown': 2,
+            'weight': -2,
+        },
         {
             'name': 'Alpaca',
             'url': 'https://data.alpaca.markets/v1beta3/crypto/us/latest/quotes?symbols=BNB%2FUSD',
@@ -204,16 +224,6 @@ def _bnb_sources() -> List[Dict[str, Any]]:
             'cooldown': 1,
             'weight': -1,
             'headers': _alpaca_headers(),
-        },
-
-        {
-            'name': 'CFBenchmarks',
-            'url': 'https://www.cfbenchmarks.com/api/v1/indices/BNBUSD_RTI',
-            'parser': _parse_cfbenchmarks_index,
-            'timeout': 10,
-            'cooldown': 6,
-            'weight': 0,
-            'headers': cf_headers,
         },
         {
             'name': 'Binance',
@@ -240,34 +250,32 @@ def _bnb_sources() -> List[Dict[str, Any]]:
             'weight': 3,
         },
     ]
-    return [s for s in sources if s.get('headers') is not None or s['name'] != 'CFBenchmarks']
+    return sources
 
 
 def _hype_sources() -> List[Dict[str, Any]]:
-    cf_headers = _cfbenchmarks_headers()
     sources = [
         {
-            'name': 'CFBenchmarks',
-            'url': 'https://www.cfbenchmarks.com/api/v1/indices/HYPEUSD_RTI',
-            'parser': _parse_cfbenchmarks_index,
-            'timeout': 10,
-            'cooldown': 8,
-            'weight': 0,
-            'headers': cf_headers,
-        },
-        {
-            'name': 'CoinGecko',
-            'url': 'https://api.coingecko.com/api/v3/simple/price?ids=hyperliquid&vs_currencies=usd',
-            'parser': _parse_coingecko_hype,
-            'timeout': 15,
-            'cooldown': 8,
-            'weight': 1,
+            'name': 'CFBenchmarks-HYPE-RTI',
+            'url': 'https://futures.kraken.com/derivatives/api/v3/tickers?symbol=PF_HYPEUSD',
+            'parser': _parse_kraken_futures_rti,
+            'timeout': 6,
+            'cooldown': 2,
+            'weight': -2,
         },
         {
             'name': 'Kraken',
             'url': 'https://api.kraken.com/0/public/Ticker?pair=HYPEUSD',
             'parser': _parse_kraken_hypeusd,
             'timeout': 10,
+            'cooldown': 6,
+            'weight': 1,
+        },
+        {
+            'name': 'CoinGecko',
+            'url': 'https://api.coingecko.com/api/v3/simple/price?ids=hyperliquid&vs_currencies=usd',
+            'parser': _parse_coingecko_hype,
+            'timeout': 15,
             'cooldown': 8,
             'weight': 2,
         },
@@ -280,7 +288,7 @@ def _hype_sources() -> List[Dict[str, Any]]:
             'weight': 3,
         },
     ]
-    return [s for s in sources if s.get('headers') is not None or s['name'] != 'CFBenchmarks']
+    return sources
 
 
 COINS: Dict[str, CoinConfig] = {

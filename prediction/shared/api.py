@@ -12,6 +12,8 @@ from .feature_engine import FeatureEngine
 from .model_manager import ModelManager
 from .predictor_core import Predictor
 from .validator import Validator
+from .kalshi_engine import KalshiRoundTracker
+from .news_engine import get_news_engine
 from . import dashboard
 from .utils import setup_logging
 
@@ -33,7 +35,8 @@ def get_components(coin_id: str):
         mm = ModelManager(cfg, ds, fe)
         pred = Predictor(cfg, ds, fe, mm)
         val = Validator(cfg, ds)
-        _CACHE[key] = (cfg, ds, fe, mm, pred, val)
+        kt = KalshiRoundTracker(ds, cfg.symbol)
+        _CACHE[key] = (cfg, ds, fe, mm, pred, val, kt)
     return _CACHE[key]
 
 
@@ -44,7 +47,7 @@ def create_app() -> Flask:
     @app.route('/predict/<coin_id>/<int:horizon>', methods=['GET'])
     def predict_one(coin_id, horizon):
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         if horizon not in cfg.prediction_horizons:
@@ -57,7 +60,7 @@ def create_app() -> Flask:
     @app.route('/predict/<coin_id>', methods=['GET'])
     def predict_all(coin_id):
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         results = []
@@ -72,7 +75,7 @@ def create_app() -> Flask:
     @app.route('/validate/<coin_id>', methods=['POST'])
     def validate_coin(coin_id):
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         n = val.validate()
@@ -81,7 +84,7 @@ def create_app() -> Flask:
     @app.route('/stats/<coin_id>', methods=['GET'])
     def stats(coin_id):
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         return jsonify({
@@ -494,11 +497,75 @@ def create_app() -> Flask:
     def health():
         return jsonify({'status': 'ok'})
 
+    @app.route('/news', methods=['GET'])
+    def news():
+        """Real-time crypto news sentiment summary and headlines."""
+        engine = get_news_engine()
+        return jsonify(engine.get_summary())
+
+    @app.route('/kalshi/<coin_id>', methods=['GET'])
+    def kalshi_coin(coin_id):
+        """Kalshi 15-minute round analysis, timing, open strike, delta, and trading decision."""
+        try:
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        last = ds.last_price()
+        if not last:
+            return jsonify(error='No price data'), 503
+        current_price, _ = last
+        kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
+
+        predicted_returns = {}
+        classifier_probs = {}
+        for h in cfg.prediction_horizons:
+            r = pred.predict(h, current_price=current_price)
+            if r:
+                predicted_returns[h] = r.get('change_percent', 0.0) / 100.0
+                classifier_probs[h] = {
+                    'up': r.get('prob_up', 0.33),
+                    'down': r.get('prob_down', 0.33),
+                    'flat': r.get('prob_flat', 0.33)
+                }
+
+        news_feats = get_news_engine().get_features(cfg.symbol)
+        analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+        return jsonify(analysis)
+
+    @app.route('/kalshi', methods=['GET'])
+    def kalshi_all():
+        """Kalshi 15-minute round analysis for all supported coins."""
+        results = {}
+        for cid in list_coins():
+            try:
+                cfg, ds, fe, mm, pred, val, *rest = get_components(cid)
+                last = ds.last_price()
+                if not last:
+                    continue
+                current_price, _ = last
+                kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
+                predicted_returns = {}
+                classifier_probs = {}
+                for h in cfg.prediction_horizons:
+                    r = pred.predict(h, current_price=current_price)
+                    if r:
+                        predicted_returns[h] = r.get('change_percent', 0.0) / 100.0
+                        classifier_probs[h] = {
+                            'up': r.get('prob_up', 0.33),
+                            'down': r.get('prob_down', 0.33),
+                            'flat': r.get('prob_flat', 0.33)
+                        }
+                news_feats = get_news_engine().get_features(cfg.symbol)
+                results[cid] = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+            except Exception as e:
+                logger.error(f"Error in kalshi_all for {cid}: {e}")
+        return jsonify(results)
+
     @app.route('/feed/<coin_id>', methods=['GET'])
     def feed(coin_id):
         """Unified trading-bot feed with current price, predictions and trend."""
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         last = ds.last_price()
@@ -547,6 +614,14 @@ def create_app() -> Flask:
         signal_5 = by_horizon.get(5, {}).get('signal_strength')
         signal_10 = by_horizon.get(10, {}).get('signal_strength')
         signal_15 = by_horizon.get(15, {}).get('signal_strength')
+        kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
+        news_feats = get_news_engine().get_features(cfg.symbol)
+        kalshi_round = kt.analyze_round(
+            current_price=current_price,
+            predicted_returns={h: by_horizon[h].get('change_percent', 0.0) / 100.0 for h in by_horizon},
+            classifier_probs={h: {'up': by_horizon[h].get('prob_up', 0.33), 'down': by_horizon[h].get('prob_down', 0.33)} for h in by_horizon},
+            news_features=news_feats
+        )
         return jsonify({
             'symbol': cfg.symbol,
             'coin_id': coin_id,
@@ -558,6 +633,8 @@ def create_app() -> Flask:
                                  for h, r in by_horizon.items()},
             'prediction_id': primary_pred.get('prediction_id'),
             'prediction_ids': {str(h): r.get('prediction_id') for h, r in by_horizon.items()},
+            'kalshi_round': kalshi_round,
+            'news_sentiment': news_feats,
             'change_5': change_5,
             'change_10': change_10,
             'change_15': change_15,
@@ -593,7 +670,7 @@ def create_app() -> Flask:
     def history(coin_id):
         """Export historical prices and predictions for backtesting / model training."""
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         limit = request.args.get('limit', 1000, type=int)
@@ -613,7 +690,7 @@ def create_app() -> Flask:
     def trades(coin_id):
         """Log or retrieve trades executed by the trading bot."""
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         if request.method == 'POST':
@@ -645,7 +722,7 @@ def create_app() -> Flask:
     def trade_markout(coin_id):
         """How did price move after each trade? Positive = favourable for the side taken."""
         try:
-            cfg, ds, fe, mm, pred, val = get_components(coin_id)
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
         except Exception as e:
             return jsonify(error=str(e)), 400
         limit = request.args.get('limit', 2000, type=int)

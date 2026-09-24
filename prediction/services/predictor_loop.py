@@ -80,13 +80,13 @@ class PredictorLoop:
         last_retrain = 0
         while self.running:
             now = time.time()
-            if now - last_validate >= 60:
+            if now - last_validate >= 30:
                 self._validate()
                 last_validate = now
-            if now - last_predict >= 300:
+            if now - last_predict >= 30:
                 self._predict_all()
                 last_predict = now
-            if now - last_retrain >= 3600:
+            if now - last_retrain >= 1800:
                 self._maybe_retrain()
                 last_retrain = now
             time.sleep(5)
