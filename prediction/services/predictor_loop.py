@@ -30,6 +30,15 @@ class PredictorLoop:
             if attach_extras(self.fe, self.cfg.db_name, micro=getattr(self.cfg, 'hl_micro', False)):
                 logger.info(f"[{self.cfg.symbol}] Hyperliquid features enabled "
                             f"(micro={getattr(self.cfg, 'hl_micro', False)})")
+        # Cross-asset lead-lag: BTC drives short-horizon moves in BNB/HYPE.
+        if coin_id.lower() != 'btc':
+            btc_cfg = get_coin_config('btc')
+            btc_ds = DataStore(btc_cfg.db_path, btc_cfg.symbol)
+            btc_fe = FeatureEngine(btc_ds, btc_cfg.symbol)
+            self.fe.cross_bars_fn = lambda bars: btc_fe.build_bars(
+                since=bars.index[0].isoformat(),
+                until=bars.index[-1].isoformat())
+            logger.info(f"[{self.cfg.symbol}] BTC lead-lag features enabled")
         self.mm = ModelManager(self.cfg, self.ds, self.fe)
         self.predictor = Predictor(self.cfg, self.ds, self.fe, self.mm)
         self.validator = Validator(self.cfg, self.ds)
@@ -70,6 +79,9 @@ class PredictorLoop:
                     logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
                     self.mm.train(h, force=False)
                     self.mm.train_classifier(h, force=False)
+            if self.mm.should_train_contract():
+                logger.info(f"[{self.cfg.symbol}] Retraining Kalshi contract model")
+                self.mm.train_contract(force=False)
         except Exception as e:
             logger.error(f"[{self.cfg.symbol}] Retraining failed: {e}")
 

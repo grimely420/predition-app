@@ -32,6 +32,14 @@ def get_components(coin_id: str):
         if getattr(cfg, 'hl_features', False):
             from .hl_features import attach_extras
             attach_extras(fe, cfg.db_name, micro=getattr(cfg, 'hl_micro', False))
+        # Cross-asset lead-lag: BTC drives short-horizon moves in BNB/HYPE.
+        if key != 'btc':
+            btc_cfg = get_coin_config('btc')
+            btc_ds = DataStore(btc_cfg.db_path, btc_cfg.symbol)
+            btc_fe = FeatureEngine(btc_ds, btc_cfg.symbol)
+            fe.cross_bars_fn = lambda bars: btc_fe.build_bars(
+                since=bars.index[0].isoformat(),
+                until=bars.index[-1].isoformat())
         mm = ModelManager(cfg, ds, fe)
         pred = Predictor(cfg, ds, fe, mm)
         val = Validator(cfg, ds)
@@ -531,7 +539,9 @@ def create_app() -> Flask:
                 }
 
         news_feats = get_news_engine().get_features(cfg.symbol)
-        analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+        contract_prob = pred.get_contract_prob()
+        analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs,
+                                    news_feats, contract_prob=contract_prob)
         analysis['predictions'] = predictions_list
         return jsonify(analysis)
 
@@ -561,7 +571,9 @@ def create_app() -> Flask:
                             'flat': r.get('prob_flat', 0.33)
                         }
                 news_feats = get_news_engine().get_features(cfg.symbol)
-                analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs, news_feats)
+                contract_prob = pred.get_contract_prob()
+                analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs,
+                                            news_feats, contract_prob=contract_prob)
                 analysis['predictions'] = predictions_list
                 results[cid] = analysis
             except Exception as e:
@@ -627,7 +639,8 @@ def create_app() -> Flask:
             current_price=current_price,
             predicted_returns={h: by_horizon[h].get('change_percent', 0.0) / 100.0 for h in by_horizon},
             classifier_probs={h: {'up': by_horizon[h].get('prob_up', 0.33), 'down': by_horizon[h].get('prob_down', 0.33)} for h in by_horizon},
-            news_features=news_feats
+            news_features=news_feats,
+            contract_prob=pred.get_contract_prob()
         )
         return jsonify({
             'symbol': cfg.symbol,

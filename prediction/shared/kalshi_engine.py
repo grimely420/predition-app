@@ -44,6 +44,7 @@ class KalshiRoundTracker:
         self._analysis_cache: Optional[Dict[str, Any]] = None
         self._analysis_cache_time: float = 0.0
         self._prev_prob: Dict[str, float] = {}
+        self._last_round_start: Optional[str] = None
 
     def get_round_timing(self, now: Optional[datetime] = None) -> Dict[str, Any]:
         """Compute current and next 15-minute round timing aligned to :00, :15, :30, :45."""
@@ -124,11 +125,80 @@ class KalshiRoundTracker:
             "hype": 0.0018
         }.get(self.coin_id, 0.0010)
 
+    def _tick_volatility(self, limit: int = 120) -> float:
+        """Per-tick return volatility for the settlement-TWAP engine."""
+        try:
+            records = self.data_store.get_prices(limit=limit)
+            if records and len(records) >= 10:
+                prices = [float(r['price']) for r in records if r.get('price')]
+                rets = [(prices[i] - prices[i-1]) / prices[i-1]
+                        for i in range(1, len(prices)) if prices[i-1] > 0]
+                if len(rets) >= 8:
+                    mean_r = sum(rets) / len(rets)
+                    var_r = sum((r - mean_r) ** 2 for r in rets) / len(rets)
+                    return max(1e-6, math.sqrt(var_r))
+        except Exception:
+            pass
+        return 0.0003
+
+    def _settlement_projection(self, cur_rnd: Dict[str, Any],
+                               current_price: float,
+                               round_open: float) -> Optional[Dict[str, Any]]:
+        """Kalshi final-60s settlement TWAP engine.
+
+        Kalshi settles on the time-weighted average RTI over the last 60
+        seconds of the round. Once that window opens, the observed samples are
+        locked into the average — only the unobserved tail is uncertain, so the
+        contract probability converges to certainty as the clock runs out.
+
+        Returns None when we are more than 75s from settlement.
+        """
+        remaining_sec = cur_rnd.get("remaining_seconds", 999)
+        if remaining_sec > 75:
+            return None
+        try:
+            round_end = datetime.fromisoformat(cur_rnd["end_time"])
+            window_start = (round_end - timedelta(seconds=60)).isoformat()
+            ticks = self.data_store.get_prices(since=window_start)
+            prices = [float(r['price']) for r in ticks if r.get('price')]
+            if not prices:
+                return None
+
+            n_obs = len(prices)
+            twap_partial = sum(prices) / n_obs
+
+            # Estimate ticks remaining: assume ~current collection cadence
+            elapsed_in_window = max(1.0, 60.0 - remaining_sec)
+            cadence = max(2.0, elapsed_in_window / max(1, n_obs))
+            n_rem = max(0.0, remaining_sec / cadence)
+
+            # Future ticks centred on current price; only they carry variance
+            final_est = (twap_partial * n_obs + current_price * n_rem) / (n_obs + n_rem)
+            sigma_tick = self._tick_volatility()
+            std_final = sigma_tick * math.sqrt(max(n_rem, 0.0)) / (n_obs + n_rem) * current_price
+            std_final = max(std_final, 1e-6)
+
+            z = (final_est - round_open) / std_final
+            p_up = normal_cdf(z)
+            return {
+                'p_up': max(0.001, min(0.999, p_up)),
+                'twap_partial': round(twap_partial, 4),
+                'twap_projected': round(final_est, 4),
+                'ticks_observed': n_obs,
+                'est_ticks_remaining': round(n_rem, 1),
+                'std_remaining': round(std_final, 4),
+                'seconds_left': remaining_sec,
+            }
+        except Exception as e:
+            logger.debug(f"settlement projection error: {e}")
+            return None
+
     def analyze_round(self,
                       current_price: float,
                       predicted_returns: Dict[int, float],
                       classifier_probs: Dict[int, Dict[str, float]],
                       news_features: Optional[Dict[str, float]] = None,
+                      contract_prob: Optional[Dict[str, Any]] = None,
                       now: Optional[datetime] = None) -> Dict[str, Any]:
         """Generate full Kalshi round analysis, probabilities, and actionable trading decision."""
         now_ts = time.time()
@@ -196,16 +266,36 @@ class KalshiRoundTracker:
         clf_bias = (norm_clf_up - 0.50) * 0.0025
         total_drift = model_bias + news_bias + clf_bias
 
-        # Continuous Digital Option Model:
+        # Continuous Digital Option Model (theoretical prior):
         # z = [ln(S_t/S_0) + drift * (tau/15)] / sigma_rem
         z_score = (log_ratio + total_drift * (rem_min / 15.0)) / max(1e-5, sigma_rem)
-        raw_prob_up = normal_cdf(z_score)
+        bs_prob_up = normal_cdf(z_score)
 
-        # Exponential Moving Average filter (alpha=0.35)
-        # Prevents fast flipping/jitter across 5-second tick noise
+        # Settlement TWAP engine takes over inside the final 75 seconds —
+        # observed samples are locked into the settlement average, so this
+        # dominates every other signal once the window opens.
+        settlement = self._settlement_projection(cur_rnd, current_price, round_open)
+        prob_source = 'bs_digital'
+        if settlement is not None:
+            raw_prob_up = settlement['p_up']
+            prob_source = 'settlement_twap'
+        elif contract_prob and contract_prob.get('p_up') is not None:
+            # Strike-aware learned model is primary; BS digital is the prior
+            raw_prob_up = 0.65 * contract_prob['p_up'] + 0.35 * bs_prob_up
+            prob_source = 'contract_model'
+        else:
+            raw_prob_up = bs_prob_up
+
+        # Adaptive EMA: fast tracking on real moves, smoothing on tick noise.
+        # alpha scales with how far the raw probability jumped this tick.
+        round_changed = self._last_round_start != cur_rnd["start_time"]
+        if round_changed:
+            self._last_round_start = cur_rnd["start_time"]
+            self._prev_prob.pop(self.coin_id, None)
         prev_p = self._prev_prob.get(self.coin_id)
         if prev_p is not None and cur_rnd["elapsed_seconds"] > 10:
-            prob_up = 0.35 * raw_prob_up + 0.65 * prev_p
+            alpha = min(0.95, max(0.35, abs(raw_prob_up - prev_p) / 0.08))
+            prob_up = alpha * raw_prob_up + (1.0 - alpha) * prev_p
         else:
             prob_up = raw_prob_up
         self._prev_prob[self.coin_id] = prob_up
@@ -223,21 +313,46 @@ class KalshiRoundTracker:
 
         elapsed_min = cur_rnd["elapsed_minutes"]
         is_entry_window = elapsed_min <= 6.5
-        phase_label = "EARLY ENTRY WINDOW (Mins 0–6)" if is_entry_window else "SETTLEMENT TRACKING (Mins 7–15)"
+        is_settlement_window = cur_rnd["remaining_seconds"] <= 75
+        phase_label = ("EARLY ENTRY WINDOW (Mins 0–6)" if is_entry_window
+                       else "FINAL SETTLEMENT TWAP (Last 75s)" if is_settlement_window
+                       else "SETTLEMENT TRACKING (Mins 7–15)")
 
-        if yes_cents >= 60:
+        # Do the strike-aware contract model and the theoretical digital model
+        # agree on direction? Agreement is a meaningful confidence booster.
+        model_agreement = True
+        if contract_prob and contract_prob.get('p_up') is not None:
+            model_agreement = (contract_prob['p_up'] - 0.5) * (bs_prob_up - 0.5) >= 0
+
+        # Kalshi entry caps: the maximum price worth paying while keeping a
+        # 3-cent edge buffer (covers fees ~1.75¢ max + slippage + margin).
+        edge_buffer = 3
+        max_yes_entry = max(1, yes_cents - edge_buffer)
+        max_no_entry = max(1, no_cents - edge_buffer)
+
+        if is_settlement_window and settlement is not None:
+            if prob_up >= 0.90:
+                decision = f"SETTLEMENT LOCK: YES ({yes_cents}¢)"
+                bias, color = "UP", "#10b981"
+            elif prob_up <= 0.10:
+                decision = f"SETTLEMENT LOCK: NO ({no_cents}¢)"
+                bias, color = "DOWN", "#ef4444"
+            else:
+                decision = f"SETTLEMENT UNCERTAIN ({yes_cents}¢/{no_cents}¢)"
+                bias, color = "NEUTRAL", "#f59e0b"
+        elif yes_cents >= 60:
             decision = f"BUY YES (TARGET {yes_cents}¢)"
             bias = "UP"
-            color = "#10b981"
-        elif yes_cents >= 53:
+            color = "#10b981" if model_agreement else "#34d399"
+        elif yes_cents >= 54:
             decision = f"LEAN BUY YES ({yes_cents}¢)"
             bias = "UP"
             color = "#34d399"
         elif no_cents >= 60:
             decision = f"BUY NO (TARGET {no_cents}¢)"
             bias = "DOWN"
-            color = "#ef4444"
-        elif no_cents >= 53:
+            color = "#ef4444" if model_agreement else "#f87171"
+        elif no_cents >= 54:
             decision = f"LEAN BUY NO ({no_cents}¢)"
             bias = "DOWN"
             color = "#f87171"
@@ -261,13 +376,14 @@ class KalshiRoundTracker:
             next_bias = "RANGE-BOUND"
             next_action = "WAIT FOR BREAKOUT"
 
-        return {
+        result = {
             "series": self.series,
             "benchmark_index": self.rti_name,
             "timing": timing,
             "phase": {
                 "label": phase_label,
                 "is_entry_window": is_entry_window,
+                "is_settlement_window": is_settlement_window,
             },
             "pricing": {
                 "current_price": round(current_price, 4),
@@ -277,6 +393,12 @@ class KalshiRoundTracker:
                 "projected_settlement": round(projected_settlement_price, 4),
                 "yes_cents": yes_cents,
                 "no_cents": no_cents,
+            },
+            "settlement": settlement,
+            "contract_model": {
+                "p_up": round(contract_prob['p_up'], 4) if contract_prob else None,
+                "val_acc": contract_prob.get('val_acc') if contract_prob else None,
+                "val_brier": contract_prob.get('val_brier') if contract_prob else None,
             },
             "decision": {
                 "recommendation": decision,
@@ -292,6 +414,13 @@ class KalshiRoundTracker:
                 "edge_pct": edge,
                 "model_drift_pct": round(model_drift * 100.0, 4),
                 "news_drift_pct": round(news_drift * 100.0, 4),
+                "prob_source": prob_source,
+                "model_agreement": model_agreement,
+                "fair_yes_cents": yes_cents,
+                "fair_no_cents": no_cents,
+                "max_yes_entry_cents": max_yes_entry,
+                "max_no_entry_cents": max_no_entry,
+                "min_edge_cents": edge_buffer,
             },
             "next_round_outlook": {
                 "label": next_rnd["label"],

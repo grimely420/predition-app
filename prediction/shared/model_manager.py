@@ -34,15 +34,29 @@ class EnsembleRegressor:
         return p1
 
 
-class EnsembleBinaryClassifier:
-    """Ensemble binary classifier for high-accuracy Kalshi directional probability."""
+def _sigmoid(z):
+    z = np.clip(z, -30.0, 30.0)
+    return 1.0 / (1.0 + np.exp(-z))
 
-    def __init__(self, xgb_m, lgb_m=None, classes=None):
+
+class EnsembleBinaryClassifier:
+    """Ensemble binary classifier for high-accuracy Kalshi directional probability.
+
+    Optionally carries Platt calibration parameters (a, b) fitted on a held-out
+    calibration slice: p_calibrated = sigmoid(a * logit(p_raw) + b). Raw tree
+    ensemble probabilities are systematically over/under-confident; the Platt
+    map converts them into probabilities you can price contracts against.
+    """
+
+    def __init__(self, xgb_m, lgb_m=None, classes=None,
+                 platt_a: float = 1.0, platt_b: float = 0.0):
         self.xgb_m = xgb_m
         self.lgb_m = lgb_m
         self.classes_ = np.array(classes if classes is not None else [0, 1])
+        self.platt_a = platt_a
+        self.platt_b = platt_b
 
-    def predict_proba(self, X):
+    def predict_raw_proba(self, X):
         p1 = self.xgb_m.predict_proba(X)
         if self.lgb_m is not None:
             try:
@@ -52,9 +66,30 @@ class EnsembleBinaryClassifier:
                 pass
         return p1
 
+    def predict_proba(self, X):
+        proba = self.predict_raw_proba(X)
+        if self.platt_a != 1.0 or self.platt_b != 0.0:
+            p = np.clip(proba[:, 1], 1e-4, 1.0 - 1e-4)
+            p_cal = _sigmoid(self.platt_a * np.log(p / (1.0 - p)) + self.platt_b)
+            proba = np.column_stack([1.0 - p_cal, p_cal])
+        return proba
+
     def predict(self, X):
         proba = self.predict_proba(X)
         return (proba[:, 1] >= 0.50).astype(int)
+
+
+def _fit_platt(p_raw: np.ndarray, y: np.ndarray):
+    """Fit Platt scaling (a, b) on held-out probabilities via logistic regression."""
+    try:
+        from sklearn.linear_model import LogisticRegression
+        p = np.clip(p_raw, 1e-4, 1.0 - 1e-4)
+        logit = np.log(p / (1.0 - p)).reshape(-1, 1)
+        lr = LogisticRegression(C=1e10, solver='lbfgs', max_iter=500)
+        lr.fit(logit, y)
+        return float(lr.coef_[0][0]), float(lr.intercept_[0])
+    except Exception:
+        return 1.0, 0.0
 
 
 class ModelManager:
@@ -67,6 +102,7 @@ class ModelManager:
         self.feature_engine = feature_engine
         self.models: Dict[int, Dict[str, Any]] = {}
         self.classifiers: Dict[int, Dict[str, Any]] = {}
+        self.contract_model: Optional[Dict[str, Any]] = None
         self.model_dir = coin_cfg.model_dir
         os.makedirs(self.model_dir, exist_ok=True)
         self.last_train_counts = self._load_counts()
@@ -296,13 +332,17 @@ class ModelManager:
         le = LabelEncoder()
         y_enc = le.fit_transform(y_bin)
 
+        # 3-way time-ordered split: 70% train / 15% early-stop / 15% calibration.
+        # Keeping calibration strictly out-of-sample prevents Platt overfit.
         n = len(X)
-        split_idx = int(n * (1 - val_frac))
-        X_train, y_train = X[:split_idx], y_enc[:split_idx]
-        X_val, y_val = X[split_idx:], y_enc[split_idx:]
+        split1 = int(n * 0.70)
+        split2 = int(n * 0.85)
+        X_train, y_train = X[:split1], y_enc[:split1]
+        X_val, y_val = X[split1:split2], y_enc[split1:split2]
+        X_cal, y_cal = X[split2:], y_enc[split2:]
 
         # Weight higher-magnitude moves more heavily during training
-        sample_weight = np.maximum(np.abs(y[:split_idx]) * 100, 0.1)
+        sample_weight = np.maximum(np.abs(y[:split1]) * 100, 0.1)
 
         # 1. XGBoost Binary Classifier
         xgb_m = xgb.XGBClassifier(
@@ -348,21 +388,37 @@ class ModelManager:
         except Exception as e:
             logger.debug(f"LightGBM classifier skipped: {e}")
 
-        model = EnsembleBinaryClassifier(xgb_m, lgb_m, classes=le.classes_.tolist())
+        # Platt calibration on the strictly-held-out calibration slice
+        platt_a, platt_b = 1.0, 0.0
+        if len(X_cal) > 50:
+            try:
+                raw = EnsembleBinaryClassifier(xgb_m, lgb_m,
+                                               classes=le.classes_.tolist())
+                p_raw = raw.predict_raw_proba(X_cal)[:, 1]
+                platt_a, platt_b = _fit_platt(p_raw, y_cal)
+            except Exception as e:
+                logger.debug(f"Platt calibration skipped: {e}")
+
+        model = EnsembleBinaryClassifier(xgb_m, lgb_m, classes=le.classes_.tolist(),
+                                         platt_a=platt_a, platt_b=platt_b)
 
         metrics = {'val_logloss': None, 'val_acc': float('nan'), 'val_auc': float('nan'),
-                   'n_trees': 0, 'classes': le.classes_.tolist()}
+                   'val_brier': float('nan'), 'n_trees': 0, 'classes': le.classes_.tolist(),
+                   'platt_a': platt_a, 'platt_b': platt_b}
         try:
             metrics['n_trees'] = int(xgb_m.get_booster().num_boosted_rounds())
         except Exception:
             pass
-        if len(X_val) > 0:
-            proba = model.predict_proba(X_val)
-            metrics['val_logloss'] = float(log_loss(y_val, proba))
-            preds = model.predict(X_val)
-            metrics['val_acc'] = float(accuracy_score(y_val, preds))
+        # Final metrics measured on the calibration slice (out-of-sample)
+        X_eval, y_eval = (X_cal, y_cal) if len(X_cal) > 0 else (X_val, y_val)
+        if len(X_eval) > 0:
+            proba = model.predict_proba(X_eval)
+            metrics['val_logloss'] = float(log_loss(y_eval, proba))
+            preds = model.predict(X_eval)
+            metrics['val_acc'] = float(accuracy_score(y_eval, preds))
+            metrics['val_brier'] = float(np.mean((proba[:, 1] - y_eval) ** 2))
             try:
-                metrics['val_auc'] = float(roc_auc_score(y_val, proba[:, 1]))
+                metrics['val_auc'] = float(roc_auc_score(y_eval, proba[:, 1]))
             except Exception:
                 pass
         return model, metrics, le
@@ -453,4 +509,121 @@ class ModelManager:
             return self.classifiers[horizon]
         except Exception as e:
             logger.error(f"[{self.symbol}:{horizon}m] Classifier load failed: {e}")
+            return None
+
+    # ------------------------------------------------------------------
+    # Kalshi 15-minute contract model (strike-aware binary classifier)
+    # ------------------------------------------------------------------
+
+    def _contract_path(self) -> str:
+        return os.path.join(self.model_dir, "kalshi_contract_latest.pkl")
+
+    def should_train_contract(self) -> bool:
+        if not os.path.exists(self._contract_path()):
+            return True
+        current_count = self.data_store.count_prices()
+        last_count = self.last_train_counts.get('contract', 0)
+        if current_count - last_count >= self.cfg.retrain_min_bars:
+            return True
+        last_time = self.last_train_times.get('contract')
+        if last_time and (time.time() - last_time) > 3600:
+            return True
+        return False
+
+    def train_contract(self, force: bool = False) -> bool:
+        """Train the strike-aware Kalshi contract classifier.
+
+        Target: 1 if the quarter-hour round settles strictly above the round
+        open, 0 otherwise. Features include dist_to_strike and mins_remaining,
+        so the model learns P(YES | position vs strike, time left, regime).
+        """
+        if not force and not self.should_train_contract():
+            logger.info(f"[{self.symbol}] No contract model retrain needed")
+            return True
+
+        X, y, feature_names = self.feature_engine.get_contract_training_data(
+            lookback_hours=self.cfg.train_lookback_hours
+        )
+        if X is None or len(X) < 200:
+            logger.warning(
+                f"[{self.symbol}] Not enough data to train contract model "
+                f"(got {0 if X is None else len(X)} samples)"
+            )
+            return False
+
+        try:
+            # y is already 0/1 floats; fit_classifier binarizes consistently
+            model, metrics, le = self.fit_classifier(
+                X, y, fee_pct=getattr(self.cfg, 'fee_pct', 0.05)
+            )
+            path = self._contract_path()
+            joblib.dump((model, feature_names, le, metrics), path)
+
+            self.contract_model = {
+                'model': model,
+                'feature_names': feature_names,
+                'le': le,
+                'path': path,
+                'metrics': metrics,
+                'feature_count': len(feature_names),
+            }
+
+            self.last_train_counts['contract'] = self.data_store.count_prices()
+            self.last_train_times['contract'] = time.time()
+            self._save_counts()
+
+            logger.info(
+                f"[{self.symbol}] Trained Kalshi contract model "
+                f"({len(feature_names)} features, {len(X)} samples, "
+                f"val_acc={metrics['val_acc']:.3f}, "
+                f"val_logloss={metrics.get('val_logloss')}, "
+                f"val_brier={metrics.get('val_brier')}, "
+                f"val_auc={metrics.get('val_auc')}, "
+                f"platt=({metrics.get('platt_a'):.3f},{metrics.get('platt_b'):.3f})) -> {path}"
+            )
+            return True
+        except Exception as e:
+            logger.error(f"[{self.symbol}] Contract model training failed: {e}")
+            return False
+
+    def load_contract(self) -> Optional[Dict[str, Any]]:
+        """Load the Kalshi contract model, training on first use."""
+        if getattr(self, 'contract_model', None) is not None:
+            return self.contract_model
+
+        path = self._contract_path()
+        if not os.path.exists(path):
+            logger.info(f"[{self.symbol}] No contract model found, training...")
+            if self.train_contract(force=True):
+                return getattr(self, 'contract_model', None)
+            return None
+
+        try:
+            model, feature_names, le, metrics = joblib.load(path)
+            self.contract_model = {
+                'model': model,
+                'feature_names': feature_names,
+                'le': le,
+                'path': path,
+                'metrics': metrics,
+                'feature_count': len(feature_names),
+            }
+            logger.info(
+                f"[{self.symbol}] Loaded contract model "
+                f"({len(feature_names)} features, acc={metrics.get('val_acc')})"
+            )
+
+            _, current_features = self.feature_engine.get_current_contract_features()
+            if current_features is not None and \
+               len(current_features) != len(feature_names):
+                logger.warning(
+                    f"[{self.symbol}] Contract feature mismatch "
+                    f"(saved={len(feature_names)}, current={len(current_features)}). "
+                    f"Retraining..."
+                )
+                return None if not self.train_contract(force=True) \
+                    else self.contract_model
+            return self.contract_model
+        except Exception as e:
+            logger.error(f"[{self.symbol}] Contract model load failed: {e}")
             return None

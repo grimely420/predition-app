@@ -73,6 +73,9 @@ class FeatureEngine:
         # Optional callable(bars) -> DataFrame aligned to bars.index with
         # extra feature columns (e.g. Hyperliquid market data). None = off.
         self.extras_fn = None
+        # Optional callable(bars) -> DataFrame of the leader asset's 1m bars
+        # (BTC). Used for cross-asset lead-lag features on BNB/HYPE.
+        self.cross_bars_fn = None
         self._bars_cache: Optional[pd.DataFrame] = None
         self._bars_cache_time: float = 0.0
 
@@ -152,6 +155,30 @@ class FeatureEngine:
         feats['stoch_k'] = stoch_k
         feats['stoch_d'] = stoch_k.rolling(3, min_periods=1).mean()
 
+        # Trend regime: ADX-14, directional index spread, normalized ATR
+        up_move = high.diff()
+        down_move = -low.diff()
+        plus_dm = pd.Series(np.where((up_move > down_move) & (up_move > 0), up_move, 0.0), index=bars.index)
+        minus_dm = pd.Series(np.where((down_move > up_move) & (down_move > 0), down_move, 0.0), index=bars.index)
+        tr = pd.concat([(high - low),
+                        (high - close.shift()).abs(),
+                        (low - close.shift()).abs()], axis=1).max(axis=1)
+        atr_14 = tr.ewm(alpha=1.0 / 14, min_periods=5).mean()
+        feats['atr_pct'] = atr_14 / (close + 1e-10)
+        plus_di = 100 * plus_dm.ewm(alpha=1.0 / 14, min_periods=5).mean() / (atr_14 + 1e-10)
+        minus_di = 100 * minus_dm.ewm(alpha=1.0 / 14, min_periods=5).mean() / (atr_14 + 1e-10)
+        dx = 100 * (plus_di - minus_di).abs() / (plus_di + minus_di + 1e-10)
+        feats['adx_14'] = dx.ewm(alpha=1.0 / 14, min_periods=5).mean()
+        feats['di_diff'] = (plus_di - minus_di) / 100.0
+
+        # In-round return: how far price has already travelled since round open.
+        # Strongly predictive for Kalshi contract settlement.
+        round_id_series = pd.Series(bars.index.floor('15min'), index=bars.index)
+        round_open_px = bars.groupby(round_id_series)['open'].transform('first')
+        feats['dist_to_strike'] = np.log(close / (round_open_px + 1e-10))
+        feats['mins_remaining'] = (14 - (bars.index.minute % 15)).astype(float)
+        feats['mins_elapsed'] = (bars.index.minute % 15).astype(float)
+
         for lag in [1, 5, 15]:
             feats[f'autocorr_{lag}'] = returns.rolling(60, min_periods=30).corr(returns.shift(lag))
 
@@ -201,18 +228,101 @@ class FeatureEngine:
             self._bars_cache_time = time.time()
         return bars
 
-    def features_from_bars(self, bars: pd.DataFrame, horizon: int):
-        """Return (feature_frame, feature_cols) with NaN feature rows dropped."""
-        feats = self._build_features(bars, horizon)
+    def _join_extras(self, feats: pd.DataFrame, bars: pd.DataFrame) -> pd.DataFrame:
+        """Join external feature blocks (Hyperliquid extras, BTC cross-asset).
+
+        Missing external values are zero-filled rather than row-dropped so that
+        periods without coverage (e.g. before the HL micro collector existed)
+        still contribute training rows for the base features. Zero is a neutral
+        value for imbalance/flow/basis style features.
+        """
         if self.extras_fn is not None:
             try:
                 extra = self.extras_fn(bars)
                 if extra is not None and not extra.empty:
-                    feats = feats.join(extra)
+                    feats = feats.join(extra.fillna(0.0))
             except Exception as e:
                 logger.warning(f"extras loader failed: {e}")
+
+        if self.cross_bars_fn is not None and self.symbol != 'BTC':
+            try:
+                xb = self.cross_bars_fn(bars)
+                if xb is not None and not xb.empty:
+                    xc = xb['close']
+                    xr = xc.pct_change()
+                    x = pd.DataFrame(index=xb.index)
+                    x['btc_ret_1'] = xr
+                    x['btc_ret_3'] = xc.pct_change(3)
+                    x['btc_ret_5'] = xc.pct_change(5)
+                    x['btc_ret_15'] = xc.pct_change(15)
+                    x['btc_mom_5'] = (xc - xc.shift(5)) / (xc.shift(5) + 1e-10)
+                    x['btc_vol_10'] = xr.rolling(10, min_periods=3).std()
+                    x = x.reindex(feats.index).ffill(limit=5).fillna(0.0)
+                    feats = feats.join(x)
+            except Exception as e:
+                logger.warning(f"cross-asset features failed: {e}")
+        return feats
+
+    def features_from_bars(self, bars: pd.DataFrame, horizon: int):
+        """Return (feature_frame, feature_cols) with NaN feature rows dropped."""
+        feats = self._build_features(bars, horizon)
+        feats = self._join_extras(feats, bars)
         feature_cols = [c for c in feats.columns if c != 'target']
         return feats.dropna(subset=feature_cols), feature_cols
+
+    def contract_frame_from_bars(self, bars: pd.DataFrame,
+                                 for_training: bool = True):
+        """Build the Kalshi 15-minute contract dataset.
+
+        For every 1-minute bar inside a quarter-hour round (:00/:15/:30/:45):
+          features = market features + dist_to_strike + mins_remaining
+          target   = 1 if the round settles strictly above the round-open strike
+
+        This is the exact question a Kalshi 15-minute contract asks, learned
+        directly instead of approximated by a rolling-horizon regression.
+        """
+        feats = self._build_features(bars, horizon=15)
+        feats = self._join_extras(feats, bars)
+        if 'target' in feats.columns:
+            feats = feats.drop(columns=['target'])
+
+        round_series = pd.Series(bars.index.floor('15min'), index=bars.index)
+        grouped = bars.groupby(round_series)
+        round_open = grouped['open'].transform('first')
+        settle = grouped['close'].transform('last')
+        feats['contract_target'] = (settle > round_open).astype(float)
+
+        feature_cols = [c for c in feats.columns if c != 'contract_target']
+        feats = feats.dropna(subset=feature_cols)
+        if for_training:
+            # Drop the first and last rounds in the window: the first may be
+            # truncated (no true open) and the last has no settlement yet.
+            rs = round_series.loc[feats.index]
+            feats = feats[(rs > rs.iloc[0]) & (rs < rs.iloc[-1])]
+        return feats, feature_cols
+
+    def get_contract_training_data(self, lookback_hours: int = 1440,
+                                   until: Optional[str] = None):
+        """(X, y_contract, feature_names) for the strike-aware contract model."""
+        end = datetime.fromisoformat(until) if until else datetime.now(timezone.utc)
+        since = (end - timedelta(hours=lookback_hours)).isoformat()
+        bars = self.build_bars(since=since, until=until)
+        if bars is None or len(bars) < 120:
+            return None, None, None
+        feats, feature_cols = self.contract_frame_from_bars(bars, for_training=True)
+        if len(feats) < 200:
+            return None, None, None
+        return feats[feature_cols].values, feats['contract_target'].values, feature_cols
+
+    def get_current_contract_features(self, limit: int = 8000):
+        """Feature vector for the live in-progress round (last bar)."""
+        bars = self.build_bars(limit=limit)
+        if bars is None or len(bars) < 60:
+            return None, None
+        feats, feature_cols = self.contract_frame_from_bars(bars, for_training=False)
+        if len(feats) == 0:
+            return None, None
+        return feats.iloc[-1][feature_cols].values, feature_cols
 
     def get_training_data(self, horizon: int, lookback_hours: int = 168,
                           until: Optional[str] = None):

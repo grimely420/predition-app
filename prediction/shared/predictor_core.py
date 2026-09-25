@@ -2,8 +2,9 @@
 """Single-coin, single-horizon prediction endpoint."""
 
 import os
+import time
 import numpy as np
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Tuple
 
 from .coin_config import CoinConfig
 from .data_store import DataStore
@@ -25,6 +26,11 @@ class Predictor:
         self.data_store = data_store
         self.feature_engine = feature_engine
         self.model_manager = model_manager
+        # Short-lived in-memory caches: API/dashboard polls reuse the latest
+        # prediction instead of re-computing and re-logging DB rows on every hit.
+        self._pred_cache: Dict[int, Tuple[float, Dict[str, Any]]] = {}
+        self._contract_cache: Tuple[float, Optional[Dict[str, Any]]] = (0.0, None)
+        self.pred_cache_ttl = float(os.environ.get('PRED_CACHE_TTL', '10'))
 
     def _current_price(self) -> Optional[float]:
         last = self.data_store.last_price()
@@ -46,7 +52,50 @@ class Predictor:
             logger.debug(f"[{self.symbol}] trend fallback error: {e}")
         return 0.0
 
+    def get_contract_prob(self) -> Optional[Dict[str, Any]]:
+        """Calibrated P(current Kalshi 15m round settles above its strike).
+
+        Uses the dedicated strike-aware contract model (dist_to_strike +
+        mins_remaining features). Returns None when no model is available.
+        """
+        now_ts = time.time()
+        if now_ts - self._contract_cache[0] < 5.0 and self._contract_cache[1] is not None:
+            return self._contract_cache[1]
+
+        info = self.model_manager.load_contract()
+        if info is None:
+            return None
+        features, feature_names = self.feature_engine.get_current_contract_features()
+        if features is None:
+            return None
+        fnames = info.get('feature_names') or feature_names
+        if len(features) != len(fnames):
+            logger.warning(f"[{self.symbol}] Contract feature mismatch at inference")
+            return None
+        try:
+            X = np.array(features).reshape(1, -1)
+            prob = info['model'].predict_proba(X)[0]
+            le = info.get('le')
+            class_to_prob = {int(c): float(p) for c, p in zip(le.classes_, prob)} if le is not None \
+                else {0: float(prob[0]), 1: float(prob[1])}
+            result = {
+                'p_up': class_to_prob.get(1, 0.5),
+                'p_down': class_to_prob.get(0, 0.5),
+                'model_version': str(int(os.path.getmtime(info['path']))),
+                'val_acc': (info.get('metrics') or {}).get('val_acc'),
+                'val_brier': (info.get('metrics') or {}).get('val_brier'),
+            }
+            self._contract_cache = (now_ts, result)
+            return result
+        except Exception as e:
+            logger.error(f"[{self.symbol}] Contract prediction error: {e}")
+            return None
+
     def predict(self, horizon: int, current_price: Optional[float] = None) -> Optional[Dict[str, Any]]:
+        cached = self._pred_cache.get(horizon)
+        if cached is not None and (time.time() - cached[0]) < self.pred_cache_ttl:
+            return cached[1]
+
         if current_price is None:
             current_price = self._current_price()
         if current_price is None:
@@ -169,7 +218,7 @@ class Predictor:
             model_version=model_version
         )
 
-        return {
+        result = {
             'success': True,
             'coin_id': self.cfg.db_name,
             'symbol': self.symbol,
@@ -193,3 +242,5 @@ class Predictor:
             'threshold_pct': self.cfg.prediction_threshold_pct,
             'prediction_id': pred_id
         }
+        self._pred_cache[horizon] = (time.time(), result)
+        return result
