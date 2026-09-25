@@ -37,9 +37,20 @@ def get_components(coin_id: str):
             btc_cfg = get_coin_config('btc')
             btc_ds = DataStore(btc_cfg.db_path, btc_cfg.symbol)
             btc_fe = FeatureEngine(btc_ds, btc_cfg.symbol)
-            fe.cross_bars_fn = lambda bars: btc_fe.build_bars(
-                since=bars.index[0].isoformat(),
-                until=bars.index[-1].isoformat())
+
+            def _btc_bars_for(bars, _fe=btc_fe):
+                import time as _t
+                try:
+                    age = abs(_t.time() - bars.index[-1].timestamp())
+                except Exception:
+                    age = 1e9
+                if age < 900:
+                    return _fe.build_bars(limit=12000)
+                return _fe.build_bars(
+                    since=bars.index[0].isoformat(),
+                    until=bars.index[-1].isoformat())
+
+            fe.cross_bars_fn = _btc_bars_for
         mm = ModelManager(cfg, ds, fe)
         pred = Predictor(cfg, ds, fe, mm)
         val = Validator(cfg, ds)

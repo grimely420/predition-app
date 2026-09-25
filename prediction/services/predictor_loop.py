@@ -35,9 +35,22 @@ class PredictorLoop:
             btc_cfg = get_coin_config('btc')
             btc_ds = DataStore(btc_cfg.db_path, btc_cfg.symbol)
             btc_fe = FeatureEngine(btc_ds, btc_cfg.symbol)
-            self.fe.cross_bars_fn = lambda bars: btc_fe.build_bars(
-                since=bars.index[0].isoformat(),
-                until=bars.index[-1].isoformat())
+
+            def _btc_bars_for(bars):
+                # Live window (last bar is fresh): reuse BTC's 4s bar cache via
+                # the limit path instead of re-querying per call.
+                try:
+                    age = abs(time.time() - bars.index[-1].timestamp())
+                except Exception:
+                    age = 1e9
+                if age < 900:
+                    return btc_fe.build_bars(limit=12000)
+                # Historical/training window: fetch the exact matching range.
+                return btc_fe.build_bars(
+                    since=bars.index[0].isoformat(),
+                    until=bars.index[-1].isoformat())
+
+            self.fe.cross_bars_fn = _btc_bars_for
             logger.info(f"[{self.cfg.symbol}] BTC lead-lag features enabled")
         self.mm = ModelManager(self.cfg, self.ds, self.fe)
         self.predictor = Predictor(self.cfg, self.ds, self.fe, self.mm)

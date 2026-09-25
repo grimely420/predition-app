@@ -78,8 +78,24 @@ class FeatureEngine:
         self.cross_bars_fn = None
         self._bars_cache: Optional[pd.DataFrame] = None
         self._bars_cache_time: float = 0.0
+        # Base-feature frame cache: the heavy rolling-indicator computation is
+        # identical across horizons (only the target column differs), so it is
+        # shared. Keyed on the bar set identity incl. the latest close.
+        self._base_feats_cache: Optional[Tuple[Any, pd.DataFrame]] = None
+        # External extras (Hyperliquid) are minute-aggregated; recompute at most
+        # once per new minute bar rather than on every request.
+        self._extras_cache_key: Any = None
+        self._extras_cache: Optional[pd.DataFrame] = None
 
-    def _build_features(self, bars: pd.DataFrame, horizon: int) -> pd.DataFrame:
+    def _base_features(self, bars: pd.DataFrame) -> pd.DataFrame:
+        key = (bars.index[0], bars.index[-1], len(bars), float(bars['close'].iloc[-1]))
+        if self._base_feats_cache is not None and self._base_feats_cache[0] == key:
+            return self._base_feats_cache[1]
+        feats = self._compute_base_features(bars)
+        self._base_feats_cache = (key, feats)
+        return feats
+
+    def _compute_base_features(self, bars: pd.DataFrame) -> pd.DataFrame:
         close = bars['close']
         high = bars['high']
         low = bars['low']
@@ -211,6 +227,11 @@ class FeatureEngine:
         except Exception:
             feats['news_sentiment'] = 0.0
 
+        return feats
+
+    def _build_features(self, bars: pd.DataFrame, horizon: int) -> pd.DataFrame:
+        feats = self._base_features(bars).copy()
+        close = bars['close']
         feats['target'] = (close.shift(-horizon) - close) / (close + 1e-10)
         return feats
 
@@ -238,9 +259,15 @@ class FeatureEngine:
         """
         if self.extras_fn is not None:
             try:
-                extra = self.extras_fn(bars)
-                if extra is not None and not extra.empty:
-                    feats = feats.join(extra.fillna(0.0))
+                # extras are minute-resampled upstream; one reload per new bar
+                if self._extras_cache_key != bars.index[-1]:
+                    extra = self.extras_fn(bars)
+                    self._extras_cache = extra.fillna(0.0) \
+                        if extra is not None and not extra.empty else None
+                    self._extras_cache_key = bars.index[-1]
+                if self._extras_cache is not None:
+                    feats = feats.join(
+                        self._extras_cache.reindex(feats.index).fillna(0.0))
             except Exception as e:
                 logger.warning(f"extras loader failed: {e}")
 
@@ -281,10 +308,8 @@ class FeatureEngine:
         This is the exact question a Kalshi 15-minute contract asks, learned
         directly instead of approximated by a rolling-horizon regression.
         """
-        feats = self._build_features(bars, horizon=15)
+        feats = self._base_features(bars).copy()
         feats = self._join_extras(feats, bars)
-        if 'target' in feats.columns:
-            feats = feats.drop(columns=['target'])
 
         round_series = pd.Series(bars.index.floor('15min'), index=bars.index)
         grouped = bars.groupby(round_series)
@@ -314,7 +339,7 @@ class FeatureEngine:
             return None, None, None
         return feats[feature_cols].values, feats['contract_target'].values, feature_cols
 
-    def get_current_contract_features(self, limit: int = 8000):
+    def get_current_contract_features(self, limit: int = 4000):
         """Feature vector for the live in-progress round (last bar)."""
         bars = self.build_bars(limit=limit)
         if bars is None or len(bars) < 60:
@@ -341,7 +366,7 @@ class FeatureEngine:
         y = train['target'].values
         return X, y, feature_cols
 
-    def get_current_features(self, horizon: int, limit: int = 8000):
+    def get_current_features(self, horizon: int, limit: int = 4000):
         bars = self.build_bars(limit=limit)
         if bars is None or len(bars) < max(20, horizon) + 5:
             return None, None
