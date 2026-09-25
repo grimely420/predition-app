@@ -127,6 +127,36 @@ class DataStore:
             CREATE INDEX IF NOT EXISTS idx_trades_action ON trades(action)
         ''')
 
+        # Kalshi contract signals: one logged call per round per phase,
+        # resolved later against the true settlement TWAP.
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS contract_signals (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                round_start TEXT NOT NULL,
+                round_end TEXT NOT NULL,
+                phase TEXT NOT NULL,
+                call_time TEXT NOT NULL,
+                mins_elapsed REAL,
+                mins_remaining REAL,
+                strike_price REAL NOT NULL,
+                current_price REAL NOT NULL,
+                prob_yes REAL,
+                bias TEXT,
+                source TEXT,
+                model_version TEXT,
+                settle_price REAL,
+                outcome INTEGER,
+                is_correct INTEGER,
+                resolved INTEGER DEFAULT 0,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(round_start, phase)
+            )
+        ''')
+        c.execute('''
+            CREATE INDEX IF NOT EXISTS idx_signals_resolved
+            ON contract_signals(resolved, round_end)
+        ''')
+
         conn.commit()
         conn.close()
 
@@ -454,6 +484,167 @@ class DataStore:
         except Exception as e:
             logger.error(f"[{self.symbol}] log_trade error: {e}")
             return -1
+
+    def log_contract_signal(self, round_start: str, round_end: str, phase: str,
+                            mins_elapsed: float, mins_remaining: float,
+                            strike_price: float, current_price: float,
+                            prob_yes: float, bias: str, source: str,
+                            model_version: str = '') -> bool:
+        """Log a contract call; UNIQUE(round_start, phase) dedupes writers."""
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute(
+                """INSERT OR IGNORE INTO contract_signals
+                   (round_start, round_end, phase, call_time, mins_elapsed,
+                    mins_remaining, strike_price, current_price, prob_yes,
+                    bias, source, model_version, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (round_start, round_end, phase, now_iso(), mins_elapsed,
+                 mins_remaining, strike_price, current_price, prob_yes,
+                 bias, source, model_version, now_iso())
+            )
+            n = c.rowcount
+            conn.commit()
+            conn.close()
+            return n > 0
+        except Exception as e:
+            logger.error(f"[{self.symbol}] log_contract_signal error: {e}")
+            return False
+
+    def get_unresolved_signals(self, settled_before_iso: str,
+                               limit: int = 200) -> List[Dict[str, Any]]:
+        """Signals whose round ended before the cutoff (TWAP window elapsed)."""
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute(
+                """SELECT id, round_start, round_end, phase, strike_price,
+                          current_price, prob_yes, bias
+                   FROM contract_signals
+                   WHERE resolved = 0 AND round_end <= ?
+                   ORDER BY round_end ASC LIMIT ?""",
+                (settled_before_iso, limit)
+            )
+            rows = [dict(r) for r in c.fetchall()]
+            conn.close()
+            return rows
+        except Exception as e:
+            logger.error(f"[{self.symbol}] get_unresolved_signals error: {e}")
+            return []
+
+    def resolve_contract_signal(self, sig_id: int, settle_price: float,
+                                outcome: int, is_correct: Optional[int]) -> bool:
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute(
+                """UPDATE contract_signals
+                   SET settle_price = ?, outcome = ?, is_correct = ?, resolved = 1
+                   WHERE id = ?""",
+                (settle_price, outcome, is_correct, sig_id)
+            )
+            conn.commit()
+            conn.close()
+            return True
+        except Exception as e:
+            logger.error(f"[{self.symbol}] resolve_contract_signal error: {e}")
+            return False
+
+    def get_contract_signal_stats(self, window: int = 500) -> Dict[str, Any]:
+        """Win rate + probability calibration of resolved contract signals."""
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute(
+                """SELECT phase, prob_yes, bias, outcome, is_correct,
+                          strike_price, settle_price, round_start
+                   FROM contract_signals WHERE resolved = 1
+                   ORDER BY id DESC LIMIT ?""",
+                (window,)
+            )
+            rows = [dict(r) for r in c.fetchall()]
+            c.execute(
+                """SELECT phase, prob_yes, bias, mins_elapsed, strike_price,
+                          current_price, round_start, call_time
+                   FROM contract_signals WHERE resolved = 0
+                   ORDER BY id DESC LIMIT 30"""
+            )
+            pending = [dict(r) for r in c.fetchall()]
+            conn.close()
+        except Exception as e:
+            logger.error(f"[{self.symbol}] get_contract_signal_stats error: {e}")
+            return {'total': 0}
+
+        directional = [r for r in rows if r['bias'] in ('UP', 'DOWN')
+                       and r['is_correct'] is not None]
+        by_phase: Dict[str, Any] = {}
+        for r in directional:
+            ph = by_phase.setdefault(r['phase'], {'n': 0, 'wins': 0, 'probs': []})
+            ph['n'] += 1
+            ph['wins'] += int(r['is_correct'])
+            ph['probs'].append(float(r['prob_yes'] or 0.5))
+
+        phase_out = {}
+        for ph, v in by_phase.items():
+            phase_out[ph] = {
+                'n': v['n'],
+                'win_rate_pct': round(100 * v['wins'] / v['n'], 1),
+                'avg_prob_yes': round(sum(v['probs']) / v['n'], 3),
+            }
+
+        # Calibration: side probability bucket vs empirical win rate
+        buckets: Dict[str, Any] = {}
+        for r in directional:
+            side_p = float(r['prob_yes'] or 0.5)
+            if r['bias'] == 'DOWN':
+                side_p = 1.0 - side_p
+            if side_p < 0.55:
+                b = '50-55'
+            elif side_p < 0.65:
+                b = '55-65'
+            elif side_p < 0.75:
+                b = '65-75'
+            elif side_p < 0.85:
+                b = '75-85'
+            else:
+                b = '85-99'
+            v = buckets.setdefault(b, {'n': 0, 'wins': 0, 'probs': []})
+            v['n'] += 1
+            v['wins'] += int(r['is_correct'])
+            v['probs'].append(side_p)
+
+        calibration = {}
+        for b, v in buckets.items():
+            calibration[b] = {
+                'n': v['n'],
+                'avg_side_prob': round(sum(v['probs']) / v['n'], 3),
+                'empirical_win_pct': round(100 * v['wins'] / v['n'], 1),
+            }
+
+        n_dir = len(directional)
+        wins = sum(int(r['is_correct']) for r in directional)
+        return {
+            'total_resolved': len(rows),
+            'directional_signals': n_dir,
+            'win_rate_pct': round(100 * wins / n_dir, 1) if n_dir else None,
+            'by_phase': phase_out,
+            'calibration': calibration,
+            'pending_signals': len(pending),
+            'recent': [
+                {
+                    'round_start': r['round_start'],
+                    'phase': r['phase'],
+                    'bias': r['bias'],
+                    'prob_yes': r['prob_yes'],
+                    'strike': r['strike_price'],
+                    'settle': r['settle_price'],
+                    'outcome': 'UP' if r['outcome'] == 1 else 'DOWN',
+                    'correct': r['is_correct'],
+                }
+                for r in rows[:20]
+            ],
+        }
 
     def get_recent_trades(self, limit: int = 100, action: Optional[str] = None) -> List[Dict[str, Any]]:
         """Retrieve recent trades recorded by the trading bot."""

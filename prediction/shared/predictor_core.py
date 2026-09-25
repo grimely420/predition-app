@@ -11,6 +11,7 @@ from .data_store import DataStore
 from .feature_engine import FeatureEngine
 from .model_manager import ModelManager
 from .news_engine import get_news_engine
+from .kalshi_engine import KalshiRoundTracker
 from .utils import setup_logging
 
 logger = setup_logging("PredictorCore")
@@ -31,6 +32,111 @@ class Predictor:
         self._pred_cache: Dict[int, Tuple[float, Dict[str, Any]]] = {}
         self._contract_cache: Tuple[float, Optional[Dict[str, Any]]] = (0.0, None)
         self.pred_cache_ttl = float(os.environ.get('PRED_CACHE_TTL', '10'))
+        self._round_tracker: Optional[KalshiRoundTracker] = None
+
+    def _kt(self) -> KalshiRoundTracker:
+        if self._round_tracker is None:
+            self._round_tracker = KalshiRoundTracker(self.data_store, self.symbol)
+        return self._round_tracker
+
+    # ------------------------------------------------------------------
+    # Live contract-signal scoring (measure the real Kalshi edge)
+    # ------------------------------------------------------------------
+
+    def maybe_log_contract_signal(self) -> None:
+        """Log one contract call per round per phase bucket (entry/mid/late).
+
+        INSERT OR IGNORE on (round_start, phase) makes this idempotent across
+        the 15s predictor loop cadence; each phase's first call wins.
+        """
+        try:
+            timing = self._kt().get_round_timing()
+            cur = timing['current_round']
+            elapsed_min = cur['elapsed_minutes']
+            phase = ('entry' if elapsed_min <= 6.5
+                     else 'mid' if elapsed_min <= 13.0
+                     else 'late')
+            cp = self.get_contract_prob()
+            if cp is None:
+                return
+            current_price = self._current_price()
+            if current_price is None:
+                return
+            strike = self._kt().get_round_open_price(cur['start_time'])
+            if strike is None or strike <= 0:
+                return
+            p = float(cp['p_up'])
+            bias = 'UP' if p >= 0.54 else ('DOWN' if p <= 0.46 else 'NEUTRAL')
+            logged = self.data_store.log_contract_signal(
+                round_start=cur['start_time'],
+                round_end=cur['end_time'],
+                phase=phase,
+                mins_elapsed=elapsed_min,
+                mins_remaining=cur['remaining_minutes'],
+                strike_price=strike,
+                current_price=current_price,
+                prob_yes=round(p, 4),
+                bias=bias,
+                source='contract_model',
+                model_version=str(cp.get('model_version', '')),
+            )
+            if logged:
+                logger.info(
+                    f"[{self.symbol}] Contract signal {phase}: "
+                    f"p_yes={p:.3f} bias={bias} strike={strike:.4f}"
+                )
+        except Exception as e:
+            logger.debug(f"[{self.symbol}] contract signal log failed: {e}")
+
+    def _settlement_twap(self, round_end_iso: str) -> Optional[float]:
+        """Mean of ticks inside the round's final 60s — Kalshi settlement proxy."""
+        try:
+            from datetime import datetime, timedelta
+            end = datetime.fromisoformat(round_end_iso.replace('Z', '+00:00'))
+            start = (end - timedelta(seconds=60)).isoformat()
+            ticks = self.data_store.get_prices(since=start, until=round_end_iso)
+            prices = [float(r['price']) for r in ticks if r.get('price')]
+            if prices:
+                return sum(prices) / len(prices)
+        except Exception as e:
+            logger.debug(f"[{self.symbol}] settlement twap error: {e}")
+        return None
+
+    def resolve_due_signals(self) -> int:
+        """Resolve logged signals whose round has fully settled."""
+        try:
+            from datetime import datetime, timedelta, timezone
+            cutoff = (datetime.now(timezone.utc)
+                      - timedelta(seconds=90)).isoformat()
+            rows = self.data_store.get_unresolved_signals(cutoff)
+            resolved = 0
+            for r in rows:
+                settle = self._settlement_twap(r['round_end'])
+                if settle is None:
+                    back = self.data_store.price_at_or_before(
+                        r['round_end'], window_seconds=120)
+                    if back:
+                        settle = float(back[0])
+                if settle is None:
+                    continue
+                strike = float(r['strike_price'])
+                outcome = 1 if settle > strike else 0
+                bias = r['bias']
+                is_correct = None
+                if bias in ('UP', 'DOWN'):
+                    is_correct = int((bias == 'UP') == (outcome == 1))
+                self.data_store.resolve_contract_signal(
+                    r['id'], settle, outcome, is_correct)
+                resolved += 1
+                logger.info(
+                    f"[{self.symbol}] Signal resolved: {r['phase']} "
+                    f"bias={bias} strike={strike:.4f} settle={settle:.4f} "
+                    f"outcome={'UP' if outcome else 'DOWN'} correct={is_correct}"
+                )
+            return resolved
+        except Exception as e:
+            logger.error(f"[{self.symbol}] resolve_due_signals failed: {e}")
+            return 0
 
     def _current_price(self) -> Optional[float]:
         last = self.data_store.last_price()

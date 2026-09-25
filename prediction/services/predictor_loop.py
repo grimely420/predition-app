@@ -76,12 +76,16 @@ class PredictorLoop:
                     )
             except Exception as e:
                 logger.error(f"[{self.cfg.symbol}:{h}m] Prediction failed: {e}")
+        self.predictor.maybe_log_contract_signal()
 
     def _validate(self):
         try:
             n = self.validator.validate()
             if n:
                 logger.info(f"[{self.cfg.symbol}] Validated {n} predictions")
+            m = self.predictor.resolve_due_signals()
+            if m:
+                logger.info(f"[{self.cfg.symbol}] Resolved {m} contract signals")
         except Exception as e:
             logger.error(f"[{self.cfg.symbol}] Validation failed: {e}")
 

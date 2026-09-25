@@ -591,6 +591,19 @@ def create_app() -> Flask:
                 logger.error(f"Error in kalshi_all for {cid}: {e}")
         return jsonify(results)
 
+    @app.route('/contract_stats/<coin_id>', methods=['GET'])
+    def contract_stats(coin_id):
+        """Live-scored Kalshi contract calls: win rate by phase + calibration."""
+        try:
+            cfg, ds, fe, mm, pred, val, *rest = get_components(coin_id)
+        except Exception as e:
+            return jsonify(error=str(e)), 400
+        return jsonify({
+            'coin_id': coin_id,
+            'symbol': cfg.symbol,
+            **ds.get_contract_signal_stats()
+        })
+
     @app.route('/feed/<coin_id>', methods=['GET'])
     def feed(coin_id):
         """Unified trading-bot feed with current price, predictions and trend."""
