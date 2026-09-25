@@ -16,6 +16,47 @@ from .utils import setup_logging
 logger = setup_logging("ModelManager")
 
 
+class EnsembleRegressor:
+    """Ensemble of XGBoost and LightGBM regressors for return forecasting."""
+
+    def __init__(self, xgb_m, lgb_m=None):
+        self.xgb_m = xgb_m
+        self.lgb_m = lgb_m
+
+    def predict(self, X):
+        p1 = self.xgb_m.predict(X)
+        if self.lgb_m is not None:
+            try:
+                p2 = self.lgb_m.predict(X)
+                return 0.50 * p1 + 0.50 * p2
+            except Exception:
+                pass
+        return p1
+
+
+class EnsembleBinaryClassifier:
+    """Ensemble binary classifier for high-accuracy Kalshi directional probability."""
+
+    def __init__(self, xgb_m, lgb_m=None, classes=None):
+        self.xgb_m = xgb_m
+        self.lgb_m = lgb_m
+        self.classes_ = np.array(classes if classes is not None else [0, 1])
+
+    def predict_proba(self, X):
+        p1 = self.xgb_m.predict_proba(X)
+        if self.lgb_m is not None:
+            try:
+                p2 = self.lgb_m.predict_proba(X)
+                return 0.50 * p1 + 0.50 * p2
+            except Exception:
+                pass
+        return p1
+
+    def predict(self, X):
+        proba = self.predict_proba(X)
+        return (proba[:, 1] >= 0.50).astype(int)
+
+
 class ModelManager:
     """Trains/loads XGBoost models per horizon and handles feature mismatch."""
 
@@ -175,7 +216,7 @@ class ModelManager:
 
     @staticmethod
     def fit_model(X: np.ndarray, y: np.ndarray, val_frac: float = 0.15):
-        """Fit an XGBRegressor with a time-ordered hold-out. Returns (model, metrics)."""
+        """Fit an ensemble of XGBRegressor + LGBMRegressor with a time-ordered hold-out."""
         import xgboost as xgb
         from sklearn.metrics import mean_absolute_error
 
@@ -184,14 +225,15 @@ class ModelManager:
         X_train, y_train = X[:split_idx], y[:split_idx]
         X_val, y_val = X[split_idx:], y[split_idx:]
 
-        model = xgb.XGBRegressor(
-            n_estimators=400,
+        # 1. XGBoost Regressor
+        xgb_m = xgb.XGBRegressor(
+            n_estimators=350,
             max_depth=4,
-            learning_rate=0.03,
-            subsample=0.8,
-            colsample_bytree=0.8,
-            min_child_weight=20,
-            reg_lambda=5.0,
+            learning_rate=0.025,
+            subsample=0.85,
+            colsample_bytree=0.85,
+            min_child_weight=15,
+            reg_lambda=3.0,
             objective='reg:squarederror',
             eval_metric='mae',
             n_jobs=2,
@@ -199,11 +241,37 @@ class ModelManager:
             early_stopping_rounds=30,
         )
         eval_set = [(X_val, y_val)] if len(X_val) > 0 else None
-        model.fit(X_train, y_train, eval_set=eval_set, verbose=False)
+        xgb_m.fit(X_train, y_train, eval_set=eval_set, verbose=False)
+
+        # 2. LightGBM Regressor
+        lgb_m = None
+        try:
+            import lightgbm as lgb
+            lgb_m = lgb.LGBMRegressor(
+                n_estimators=350,
+                max_depth=4,
+                num_leaves=15,
+                learning_rate=0.025,
+                subsample=0.85,
+                colsample_bytree=0.85,
+                min_child_samples=20,
+                reg_lambda=3.0,
+                objective='regression',
+                random_state=42,
+                verbose=-1,
+                n_jobs=2,
+            )
+            eval_lgb = [(X_val, y_val)] if len(X_val) > 0 else None
+            cbs = [lgb.early_stopping(30, verbose=False)] if eval_lgb else None
+            lgb_m.fit(X_train, y_train, eval_set=eval_lgb, callbacks=cbs)
+        except Exception as e:
+            logger.debug(f"LightGBM regressor skipped: {e}")
+
+        model = EnsembleRegressor(xgb_m, lgb_m)
 
         metrics = {'val_mae': None, 'val_dir_acc': float('nan'), 'n_trees': 0}
         try:
-            metrics['n_trees'] = int(model.get_booster().num_boosted_rounds())
+            metrics['n_trees'] = int(xgb_m.get_booster().num_boosted_rounds())
         except Exception:
             pass
         if len(X_val) > 0:
@@ -215,51 +283,77 @@ class ModelManager:
     @staticmethod
     def fit_classifier(X: np.ndarray, y: np.ndarray, fee_pct: float = 0.05,
                        val_frac: float = 0.15):
-        """Fit an XGBClassifier for ternary up/flat/down after fees.
+        """Fit an ensemble of XGBClassifier + LGBMClassifier for binary direction (Up vs Down).
 
         Returns (model, metrics, label_encoder).
         """
         import xgboost as xgb
-        from sklearn.metrics import log_loss, accuracy_score
+        from sklearn.metrics import log_loss, accuracy_score, roc_auc_score
         from sklearn.preprocessing import LabelEncoder
 
-        # Fee-aware label: did the move clear the round-trip cost?
-        y_label = np.where(y > fee_pct / 100, 1,
-                           np.where(y < -fee_pct / 100, -1, 0))
+        # Binary direction for Kalshi contracts: 1 = Up (return > 0), 0 = Down (return <= 0)
+        y_bin = (y > 0).astype(int)
         le = LabelEncoder()
-        y_enc = le.fit_transform(y_label)
+        y_enc = le.fit_transform(y_bin)
 
         n = len(X)
         split_idx = int(n * (1 - val_frac))
         X_train, y_train = X[:split_idx], y_enc[:split_idx]
         X_val, y_val = X[split_idx:], y_enc[split_idx:]
 
-        # Focus learning on moves that actually matter after costs
-        sample_weight = np.maximum(np.abs(y[:split_idx]) * 100 - fee_pct, 0)
-        if sample_weight.sum() == 0:
-            sample_weight = None
+        # Weight higher-magnitude moves more heavily during training
+        sample_weight = np.maximum(np.abs(y[:split_idx]) * 100, 0.1)
 
-        model = xgb.XGBClassifier(
-            n_estimators=400,
+        # 1. XGBoost Binary Classifier
+        xgb_m = xgb.XGBClassifier(
+            n_estimators=350,
             max_depth=4,
-            learning_rate=0.03,
-            subsample=0.8,
-            colsample_bytree=0.8,
-            min_child_weight=20,
-            reg_lambda=5.0,
-            objective='multi:softprob',
+            learning_rate=0.025,
+            subsample=0.85,
+            colsample_bytree=0.85,
+            min_child_weight=15,
+            reg_lambda=3.0,
+            objective='binary:logistic',
+            eval_metric='logloss',
             n_jobs=2,
             random_state=42,
             early_stopping_rounds=30,
         )
         eval_set = [(X_val, y_val)] if len(y_val) > 0 else None
-        model.fit(X_train, y_train, sample_weight=sample_weight,
+        xgb_m.fit(X_train, y_train, sample_weight=sample_weight,
                   eval_set=eval_set, verbose=False)
 
-        metrics = {'val_logloss': None, 'val_acc': float('nan'),
+        # 2. LightGBM Binary Classifier
+        lgb_m = None
+        try:
+            import lightgbm as lgb
+            lgb_m = lgb.LGBMClassifier(
+                n_estimators=350,
+                max_depth=4,
+                num_leaves=15,
+                learning_rate=0.025,
+                subsample=0.85,
+                colsample_bytree=0.85,
+                min_child_samples=20,
+                reg_lambda=3.0,
+                objective='binary',
+                random_state=42,
+                verbose=-1,
+                n_jobs=2,
+            )
+            eval_lgb = [(X_val, y_val)] if len(y_val) > 0 else None
+            cbs = [lgb.early_stopping(30, verbose=False)] if eval_lgb else None
+            lgb_m.fit(X_train, y_train, sample_weight=sample_weight,
+                      eval_set=eval_lgb, callbacks=cbs)
+        except Exception as e:
+            logger.debug(f"LightGBM classifier skipped: {e}")
+
+        model = EnsembleBinaryClassifier(xgb_m, lgb_m, classes=le.classes_.tolist())
+
+        metrics = {'val_logloss': None, 'val_acc': float('nan'), 'val_auc': float('nan'),
                    'n_trees': 0, 'classes': le.classes_.tolist()}
         try:
-            metrics['n_trees'] = int(model.get_booster().num_boosted_rounds())
+            metrics['n_trees'] = int(xgb_m.get_booster().num_boosted_rounds())
         except Exception:
             pass
         if len(X_val) > 0:
@@ -267,6 +361,10 @@ class ModelManager:
             metrics['val_logloss'] = float(log_loss(y_val, proba))
             preds = model.predict(X_val)
             metrics['val_acc'] = float(accuracy_score(y_val, preds))
+            try:
+                metrics['val_auc'] = float(roc_auc_score(y_val, proba[:, 1]))
+            except Exception:
+                pass
         return model, metrics, le
 
     def load(self, horizon: int) -> Optional[Tuple]:

@@ -112,6 +112,46 @@ class FeatureEngine:
             feats[f'volatility_{w}'] = returns.rolling(w, min_periods=10).std()
         feats['vol_ratio_5_60'] = feats['volatility_5'] / (feats['volatility_60'] + 1e-10)
 
+        # EMA Trend Alignment (Fast & Medium term)
+        ema_9 = close.ewm(span=9).mean()
+        ema_21 = close.ewm(span=21).mean()
+        ema_50 = close.ewm(span=50).mean()
+        feats['ema_diff_9_21'] = (ema_9 - ema_21) / (close + 1e-10)
+        feats['ema_diff_21_50'] = (ema_21 - ema_50) / (close + 1e-10)
+        feats['price_above_ema50'] = (close > ema_50).astype(float)
+
+        # MACD (Moving Average Convergence Divergence) & Acceleration
+        ema_12 = close.ewm(span=12).mean()
+        ema_26 = close.ewm(span=26).mean()
+        macd_line = (ema_12 - ema_26) / (close + 1e-10)
+        macd_signal = macd_line.ewm(span=9).mean()
+        macd_hist = macd_line - macd_signal
+        feats['macd_line'] = macd_line
+        feats['macd_hist'] = macd_hist
+        feats['macd_hist_slope'] = macd_hist - macd_hist.shift(2)
+
+        # Bollinger Bands (%B and Bandwidth squeeze)
+        bb_ma20 = close.rolling(20, min_periods=5).mean()
+        bb_std20 = close.rolling(20, min_periods=5).std()
+        bb_upper = bb_ma20 + 2.0 * bb_std20
+        bb_lower = bb_ma20 - 2.0 * bb_std20
+        feats['bb_pct_b'] = (close - bb_lower) / (bb_upper - bb_lower + 1e-10)
+        feats['bb_bandwidth'] = (bb_upper - bb_lower) / (close + 1e-10)
+
+        # Donchian 15-Minute Support/Resistance Channel
+        high_15 = high.rolling(15, min_periods=5).max()
+        low_15 = low.rolling(15, min_periods=5).min()
+        feats['donchian_pos_15'] = (close - low_15) / (high_15 - low_15 + 1e-10)
+        feats['breakout_high_15'] = (close >= high_15.shift(1)).astype(float)
+        feats['breakout_low_15'] = (close <= low_15.shift(1)).astype(float)
+
+        # Stochastic Oscillator %K and %D (14-period)
+        low_14 = low.rolling(14, min_periods=5).min()
+        high_14 = high.rolling(14, min_periods=5).max()
+        stoch_k = 100 * (close - low_14) / (high_14 - low_14 + 1e-10)
+        feats['stoch_k'] = stoch_k
+        feats['stoch_d'] = stoch_k.rolling(3, min_periods=1).mean()
+
         for lag in [1, 5, 15]:
             feats[f'autocorr_{lag}'] = returns.rolling(60, min_periods=30).corr(returns.shift(lag))
 

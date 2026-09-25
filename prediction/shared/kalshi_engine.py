@@ -103,6 +103,27 @@ class KalshiRoundTracker:
             logger.warning(f"Error getting round open price: {e}")
         return None
 
+    def get_realized_volatility(self) -> float:
+        """Calculate live realized 1-minute volatility from recent price records."""
+        try:
+            records = self.data_store.get_prices(limit=60)
+            if records and len(records) >= 15:
+                prices = [float(r['price']) for r in records if r.get('price')]
+                if len(prices) >= 15:
+                    rets = [(prices[i] - prices[i-1]) / prices[i-1] for i in range(1, len(prices))]
+                    mean_r = sum(rets) / len(rets)
+                    var_r = sum((r - mean_r) ** 2 for r in rets) / len(rets)
+                    std_r = math.sqrt(var_r)
+                    if 0.0002 <= std_r <= 0.008:
+                        return std_r
+        except Exception as e:
+            logger.debug(f"Error calculating realized vol: {e}")
+        return {
+            "btc": 0.0008,
+            "bnb": 0.0012,
+            "hype": 0.0018
+        }.get(self.coin_id, 0.0010)
+
     def analyze_round(self,
                       current_price: float,
                       predicted_returns: Dict[int, float],
@@ -131,12 +152,8 @@ class KalshiRoundTracker:
         if news_features:
             news_sentiment = news_features.get("news_compound_signal", 0.0)
 
-        # Baseline per-minute volatility estimate (approximate 0.08% for BTC, 0.12% for BNB, 0.18% for HYPE)
-        base_vol_1m = {
-            "btc": 0.0008,
-            "bnb": 0.0012,
-            "hype": 0.0018
-        }.get(self.coin_id, 0.0010)
+        # Dynamic live realized 1-minute volatility from recent market ticks
+        base_vol_1m = self.get_realized_volatility()
 
         rem_min = max(0.2, cur_rnd["remaining_minutes"])
         sigma_rem = base_vol_1m * math.sqrt(rem_min)

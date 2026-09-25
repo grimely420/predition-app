@@ -102,11 +102,18 @@ class Predictor:
                         le = clf_info['le']
                         prob = clf.predict_proba(X)[0]
                         class_to_prob = {int(c): float(p) for c, p in zip(le.classes_, prob)}
-                        probs = {
-                            'up': class_to_prob.get(1, 0.0),
-                            'down': class_to_prob.get(-1, 0.0),
-                            'flat': class_to_prob.get(0, 0.0),
-                        }
+                        if len(le.classes_) == 2 and 0 in class_to_prob and 1 in class_to_prob:
+                            probs = {
+                                'up': class_to_prob.get(1, 0.5),
+                                'down': class_to_prob.get(0, 0.5),
+                                'flat': 0.0,
+                            }
+                        else:
+                            probs = {
+                                'up': class_to_prob.get(1, 0.0),
+                                'down': class_to_prob.get(-1, 0.0),
+                                'flat': class_to_prob.get(0, 0.0),
+                            }
                         signal_strength = probs['up'] - probs['down']
                         # Correct directional consensus (NEVER invert negative * negative):
                         reg_dir = 1.0 if raw_return > 0 else (-1.0 if raw_return < 0 else 0.0)
