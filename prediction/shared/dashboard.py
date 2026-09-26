@@ -239,6 +239,25 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             text-align: right;
         }
 
+        /* Round Price Chart */
+        .chart-box {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px 6px;
+        }
+        .chart-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .round-chart { width: 100%; height: 96px; display: block; }
+
         /* Decision Box */
         .decision-box {
             background: var(--surface-2);
@@ -589,6 +608,47 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             drawer.style.display = drawer.style.display === 'block' ? 'none' : 'block';
         }
 
+        function renderRoundChart(series, coin) {
+            const W = 360, H = 88, PAD = 6;
+            const pts = (series && series.points) || [];
+            const strike = series ? series.strike : null;
+            if (pts.length < 2) {
+                return `<div style="color:var(--muted); font-size:0.75rem; padding:8px 0;">Collecting ticks...</div>`;
+            }
+            let lo = Infinity, hi = -Infinity;
+            for (const p of pts) { if (p[1] < lo) lo = p[1]; if (p[1] > hi) hi = p[1]; }
+            if (strike != null) { lo = Math.min(lo, strike); hi = Math.max(hi, strike); }
+            const span = (hi - lo) || 1e-9;
+            lo -= span * 0.10; hi += span * 0.10;
+            const rnd = 900;
+            const x = s => PAD + Math.min(1, Math.max(0, s / rnd)) * (W - 2 * PAD);
+            const y = p => (H - PAD) - ((p - lo) / (hi - lo)) * (H - 2 * PAD);
+            const d = pts.map((p, i) => (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ',' + y(p[1]).toFixed(1)).join(' ');
+            const lastPt = pts[pts.length - 1];
+            const last = lastPt[1];
+            const up = strike != null ? last >= strike : true;
+            const color = up ? '#10b981' : '#ef4444';
+            const sy = strike != null ? y(strike) : null;
+            const dec = coin === 'hype' ? 3 : 1;
+            // area fill under the line
+            const area = d + ` L${x(lastPt[0]).toFixed(1)},${H - PAD} L${x(pts[0][0]).toFixed(1)},${H - PAD} Z`;
+            const gid = `g-${coin}`;
+            return `<svg viewBox="0 0 ${W} ${H}" class="round-chart" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="${color}" stop-opacity="0.25"/>
+                        <stop offset="100%" stop-color="${color}" stop-opacity="0.02"/>
+                    </linearGradient>
+                </defs>
+                ${sy != null ? `<line x1="${PAD}" y1="${sy.toFixed(1)}" x2="${W - PAD}" y2="${sy.toFixed(1)}" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4 3" opacity="0.85"/>
+                <text x="${W - PAD - 4}" y="${(sy - 3).toFixed(1)}" fill="#f59e0b" font-size="8" font-family="JetBrains Mono, monospace" text-anchor="end">STRIKE ${Number(strike).toFixed(dec)}</text>` : ''}
+                <path d="${area}" fill="url(#${gid})" stroke="none"/>
+                <path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="${x(lastPt[0]).toFixed(1)}" cy="${y(last).toFixed(1)}" r="3" fill="${color}"/>
+                <text x="${PAD + 2}" y="${(PAD + 9).toFixed(1)}" fill="${color}" font-size="8" font-family="JetBrains Mono, monospace">NOW ${Number(last).toFixed(dec)}</text>
+            </svg>`;
+        }
+
         function updateCountdownDisplay(sec) {
             if (sec == null || isNaN(sec)) return;
             const remSec = Math.max(0, Math.floor(sec));
@@ -672,6 +732,15 @@ DASHBOARD_HTML = """<!DOCTYPE html>
                         <div class="coin-price">${fmtUsd(curPrice, coin === 'hype' ? 4 : 2)}</div>
                         <div class="benchmark-label">Live Benchmark Index</div>
                     </div>
+                </div>
+
+                <!-- Live Round Price Path vs Strike -->
+                <div class="chart-box">
+                    <div class="chart-label">
+                        <span>Round Price Path vs Strike</span>
+                        <span id="chart-tickcount-${coin}" style="font-family:'JetBrains Mono', monospace;">${(kalshi.round_series && kalshi.round_series.points) ? kalshi.round_series.points.length + ' ticks' : ''}</span>
+                    </div>
+                    ${renderRoundChart(kalshi.round_series, coin)}
                 </div>
 
                 <!-- Actionable Kalshi Decision Box -->

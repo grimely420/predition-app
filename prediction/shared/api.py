@@ -22,6 +22,30 @@ logger = setup_logging("API")
 _CACHE = {}
 
 
+def _round_series_payload(ds, analysis, max_pts=220):
+    """RTI ticks since the current round opened, for the price-vs-strike chart."""
+    try:
+        start_iso = analysis.get("timing", {}).get("current_round", {}).get("start_time")
+        strike = analysis.get("pricing", {}).get("round_open_price")
+        if not start_iso:
+            return None
+        rows = ds.get_prices(since=start_iso)
+        t0 = datetime.fromisoformat(start_iso.replace("Z", "+00:00")).timestamp()
+        pts = []
+        for r in rows:
+            try:
+                ts = datetime.fromisoformat(str(r["timestamp"]).replace("Z", "+00:00")).timestamp()
+                pts.append([round(ts - t0, 1), float(r["price"])])
+            except Exception:
+                continue
+        if len(pts) > max_pts:
+            step = len(pts) / max_pts
+            pts = [pts[int(i * step)] for i in range(max_pts)]
+        return {"strike": strike, "round_seconds": 900, "points": pts}
+    except Exception:
+        return None
+
+
 def get_components(coin_id: str):
     """Return cached components for a coin."""
     key = coin_id.lower()
@@ -554,6 +578,7 @@ def create_app() -> Flask:
         analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs,
                                     news_feats, contract_prob=contract_prob)
         analysis['predictions'] = predictions_list
+        analysis['round_series'] = _round_series_payload(ds, analysis)
         return jsonify(analysis)
 
     @app.route('/kalshi', methods=['GET'])
@@ -586,6 +611,7 @@ def create_app() -> Flask:
                 analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs,
                                             news_feats, contract_prob=contract_prob)
                 analysis['predictions'] = predictions_list
+                analysis['round_series'] = _round_series_payload(ds, analysis)
                 results[cid] = analysis
             except Exception as e:
                 logger.error(f"Error in kalshi_all for {cid}: {e}")
