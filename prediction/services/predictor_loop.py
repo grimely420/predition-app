@@ -91,11 +91,15 @@ class PredictorLoop:
 
     def _maybe_retrain(self):
         try:
-            for h in self.cfg.prediction_horizons:
-                if self.mm.should_train(h):
-                    logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
-                    self.mm.train(h, force=False)
-                    self.mm.train_classifier(h, force=False)
+            # Snapshot due-ness BEFORE train() consumes the tick counter —
+            # otherwise train_classifier's should_train() always sees delta=0
+            # and the direction classifiers silently never retrain.
+            due = [h for h in self.cfg.prediction_horizons
+                   if self.mm.should_train(h)]
+            for h in due:
+                logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
+                self.mm.train(h, force=True)
+                self.mm.train_classifier(h, force=True)
             if self.mm.should_train_contract():
                 logger.info(f"[{self.cfg.symbol}] Retraining Kalshi contract model")
                 self.mm.train_contract(force=False)
