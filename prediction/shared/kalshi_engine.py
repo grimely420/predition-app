@@ -27,7 +27,13 @@ class KalshiRoundTracker:
     SERIES_MAP = {
         "btc": "KXBTC15M",
         "bnb": "KXBNB15M",
-        "hype": "KXHYPE15M"
+        "hype": "KXHYPE15M",
+        "eth": "KXETH15M",
+        "sol": "KXSOL15M",
+        "xrp": "KXXRP15M",
+        "doge": "KXDOGE15M",
+        "near": "KXNEAR15M",
+        "zec": "KXZEC15M"
     }
 
     RTI_NAME_MAP = {

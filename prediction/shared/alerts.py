@@ -19,16 +19,18 @@ logger = setup_logging("Alerts")
 
 BASE_URL = "https://api.telegram.org/bot{token}/sendMessage"
 
-SERVICES = [
-    "prediction-api",
-    "prediction-collector@btc",
-    "prediction-collector@bnb",
-    "prediction-collector@hype",
-    "prediction-predictor@btc",
-    "prediction-predictor@bnb",
-    "prediction-predictor@hype",
-    "prediction-hl-collector@hype",
-]
+def _service_list() -> list:
+    """All prediction services, derived from the configured coin set."""
+    from .coin_config import list_coins
+    svcs = ["prediction-api"]
+    for c in list_coins():
+        svcs.append(f"prediction-collector@{c}")
+        svcs.append(f"prediction-predictor@{c}")
+    svcs.append("prediction-hl-collector@hype")
+    return svcs
+
+
+SERVICES = _service_list()
 
 
 def _load_env():
@@ -227,7 +229,8 @@ class SystemAlerter:
     def run_once(self) -> list:
         alerts = []
         alerts.extend(self._check_services())
-        for coin in ["btc", "bnb", "hype"]:
+        from .coin_config import list_coins
+        for coin in list_coins():
             alerts.extend(self._check_feed(coin))
         alerts.extend(self._check_hl())
         alerts.extend(self._heartbeat())

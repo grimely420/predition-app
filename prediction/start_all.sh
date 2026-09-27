@@ -33,7 +33,7 @@ start_component() {
     sleep 2
 }
 
-COINS="btc bnb hype"
+COINS="btc eth sol bnb xrp doge hype near zec"
 
 echo ""
 echo "[1/3] Starting data collectors..."

@@ -23,7 +23,7 @@ BASE_DIR = PREDICTION_DIR.parent
 LOG_DIR = BASE_DIR / "logs"
 PID_FILE = BASE_DIR / ".running_pids"
 
-COINS = ["btc", "bnb", "hype"]
+COINS = ["btc", "eth", "sol", "bnb", "xrp", "doge", "hype", "near", "zec"]
 
 VENV_PYTHON = BASE_DIR / ".venv" / "bin" / "python"
 PYTHON = str(VENV_PYTHON if VENV_PYTHON.exists() else sys.executable)

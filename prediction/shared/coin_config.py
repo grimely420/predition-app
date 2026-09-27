@@ -44,6 +44,63 @@ def _parse_mexc_price(data: dict) -> float:
     return float(data['price'])
 
 
+def _parse_kraken_spot(pair_key: str) -> Callable[[dict], float]:
+    """Factory: Kraken spot ticker parser for a given internal pair key."""
+    def parse(data: dict) -> float:
+        return float(data['result'][pair_key]['c'][0])
+    return parse
+
+
+def _generic_sources(symbol: str, pf_symbol: str, kraken_pair: str,
+                     kraken_key: str, binance_sym: str, coinbase_pair: str,
+                     gecko_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Standard source set for a Kalshi 15m coin: CFB RTI primary + spot fallbacks."""
+    sources = [
+        {
+            'name': f'CFBenchmarks-{symbol}-RTI',
+            'url': f'https://futures.kraken.com/derivatives/api/v3/tickers?symbol={pf_symbol}',
+            'parser': _parse_kraken_futures_rti,
+            'timeout': 6,
+            'cooldown': 2,
+            'weight': -2,
+        },
+        {
+            'name': 'Kraken',
+            'url': f'https://api.kraken.com/0/public/Ticker?pair={kraken_pair}',
+            'parser': _parse_kraken_spot(kraken_key),
+            'timeout': 10,
+            'cooldown': 6,
+            'weight': 1,
+        },
+        {
+            'name': 'Coinbase',
+            'url': f'https://api.coinbase.com/v2/prices/{coinbase_pair}/spot',
+            'parser': _parse_coinbase_price,
+            'timeout': 10,
+            'cooldown': 6,
+            'weight': 2,
+        },
+        {
+            'name': 'Binance',
+            'url': f'https://api.binance.com/api/v3/ticker/price?symbol={binance_sym}',
+            'parser': _parse_binance_price,
+            'timeout': 10,
+            'cooldown': 6,
+            'weight': 3,
+        },
+    ]
+    if gecko_id:
+        sources.append({
+            'name': 'CoinGecko',
+            'url': f'https://api.coingecko.com/api/v3/simple/price?ids={gecko_id}&vs_currencies=usd',
+            'parser': lambda d, _g=gecko_id: float(d[_g]['usd']),
+            'timeout': 15,
+            'cooldown': 8,
+            'weight': 4,
+        })
+    return sources
+
+
 def _parse_kraken_futures_rti(data: dict) -> float:
     """Parse real-time CF Benchmarks index price (BRTI/RTI) from Kraken Futures.
     Kalshi settles against the 60-second TWAP of this exact index.
@@ -332,6 +389,84 @@ COINS: Dict[str, CoinConfig] = {
         prediction_threshold_pct=2.0,
         hl_features=True,
         hl_micro=True,
+    ),
+    'eth': CoinConfig(
+        symbol='ETH',
+        display_name='Ethereum',
+        db_name='eth',
+        price_sources=_generic_sources(
+            'ETH', 'PF_ETHUSD', 'ETHUSD', 'XETHZUSD', 'ETHUSDT', 'ETH-USD'),
+        min_price=100.0,
+        max_price=100_000.0,
+        collection_interval=2,
+        min_train_bars=60,
+        retrain_min_bars=30,
+        prediction_threshold_pct=1.0,
+    ),
+    'sol': CoinConfig(
+        symbol='SOL',
+        display_name='Solana',
+        db_name='sol',
+        price_sources=_generic_sources(
+            'SOL', 'PF_SOLUSD', 'SOLUSD', 'SOLUSD', 'SOLUSDT', 'SOL-USD'),
+        min_price=1.0,
+        max_price=10_000.0,
+        collection_interval=2,
+        min_train_bars=60,
+        retrain_min_bars=30,
+        prediction_threshold_pct=1.0,
+    ),
+    'xrp': CoinConfig(
+        symbol='XRP',
+        display_name='XRP',
+        db_name='xrp',
+        price_sources=_generic_sources(
+            'XRP', 'PF_XRPUSD', 'XRPUSD', 'XXRPZUSD', 'XRPUSDT', 'XRP-USD'),
+        min_price=0.05,
+        max_price=1_000.0,
+        collection_interval=2,
+        min_train_bars=60,
+        retrain_min_bars=30,
+        prediction_threshold_pct=1.5,
+    ),
+    'doge': CoinConfig(
+        symbol='DOGE',
+        display_name='Dogecoin',
+        db_name='doge',
+        price_sources=_generic_sources(
+            'DOGE', 'PF_DOGEUSD', 'DOGEUSD', 'XDGUSD', 'DOGEUSDT', 'DOGE-USD'),
+        min_price=0.005,
+        max_price=100.0,
+        collection_interval=2,
+        min_train_bars=60,
+        retrain_min_bars=30,
+        prediction_threshold_pct=1.5,
+    ),
+    'near': CoinConfig(
+        symbol='NEAR',
+        display_name='NEAR Protocol',
+        db_name='near',
+        price_sources=_generic_sources(
+            'NEAR', 'PF_NEARUSD', 'NEARUSD', 'NEARUSD', 'NEARUSDT', 'NEAR-USD'),
+        min_price=0.1,
+        max_price=1_000.0,
+        collection_interval=2,
+        min_train_bars=60,
+        retrain_min_bars=30,
+        prediction_threshold_pct=1.5,
+    ),
+    'zec': CoinConfig(
+        symbol='ZEC',
+        display_name='Zcash',
+        db_name='zec',
+        price_sources=_generic_sources(
+            'ZEC', 'PF_ZECUSD', 'ZECUSD', 'XZECZUSD', 'ZECUSDT', 'ZEC-USD'),
+        min_price=10.0,
+        max_price=100_000.0,
+        collection_interval=2,
+        min_train_bars=60,
+        retrain_min_bars=30,
+        prediction_threshold_pct=1.5,
     ),
 }
 

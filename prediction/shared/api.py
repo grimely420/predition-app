@@ -337,7 +337,7 @@ def create_app() -> Flask:
     </div>
 
     <script>
-        const COINS = ['btc', 'bnb', 'hype'];
+        const COINS = ['btc', 'eth', 'sol', 'bnb', 'xrp', 'doge', 'hype', 'near', 'zec'];
 
         function buildEndpoints() {
             const endpoints = [

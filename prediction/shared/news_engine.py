@@ -57,7 +57,13 @@ BEARISH_KEYWORDS = {
 COIN_KEYWORDS = {
     "btc": ["bitcoin", "btc", "satoshi", "halving", "spot btc"],
     "bnb": ["bnb", "binance", "cz", "bsc", "build and build", "binance coin"],
-    "hype": ["hyperliquid", "hype", "purr", "hyperbft", "hl foundation"]
+    "hype": ["hyperliquid", "hype", "purr", "hyperbft", "hl foundation"],
+    "eth": ["ethereum", "ether", "eth", "vitalik", "erc-20", "erc20"],
+    "sol": ["solana", "sol", "phantom wallet", "solana network"],
+    "xrp": ["xrp", "ripple", "xrp ledger", "xrpl"],
+    "doge": ["dogecoin", "doge", "doge army"],
+    "near": ["near protocol", "near token", "$near"],
+    "zec": ["zcash", "zec", "z-address", "shielded pool"],
 }
 
 MACRO_KEYWORDS = [
@@ -254,8 +260,8 @@ class NewsEngine:
         global_weight = 0.0
         global_weighted_score = 0.0
 
-        coin_weights = {"btc": 0.0, "bnb": 0.0, "hype": 0.0}
-        coin_scores = {"btc": 0.0, "bnb": 0.0, "hype": 0.0}
+        coin_weights = {c: 0.0 for c in COIN_KEYWORDS}
+        coin_scores = {c: 0.0 for c in COIN_KEYWORDS}
 
         recent_15m_count = 0
         recent_30m_count = 0
@@ -278,7 +284,7 @@ class NewsEngine:
             coins = a['coins']
             if not coins and a['is_macro']:
                 # Macro news affects all coins
-                coins = ["btc", "bnb", "hype"]
+                coins = list(COIN_KEYWORDS)
 
             for c in coins:
                 if c in coin_scores:
@@ -287,7 +293,7 @@ class NewsEngine:
 
         global_sentiment = (global_weighted_score / global_weight) if global_weight > 0 else 0.0
         coin_sentiment = {}
-        for c in ["btc", "bnb", "hype"]:
+        for c in COIN_KEYWORDS:
             # Blend coin-specific sentiment with global sentiment (70% coin, 30% global)
             specific = (coin_scores[c] / coin_weights[c]) if coin_weights[c] > 0 else 0.0
             blended = 0.7 * specific + 0.3 * global_sentiment if coin_weights[c] > 0 else global_sentiment

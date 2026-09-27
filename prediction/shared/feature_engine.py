@@ -26,11 +26,6 @@ def to_dataframe(records: List[Dict[str, Any]],
     df['timestamp'] = pd.to_datetime(df['timestamp'], utc=True, format='ISO8601')
     if 'source' in df.columns:
         source_rank = {
-            'CFBenchmarks-BRTI': 1,
-            'CFBenchmarks-RTI': 1,
-            'CFBenchmarks-BNB-RTI': 1,
-            'CFBenchmarks-HYPE-RTI': 1,
-            'CFBenchmarks': 2,
             'Alpaca': 3,
             'Coinbase': 4,
             'Kraken': 5,
@@ -38,7 +33,8 @@ def to_dataframe(records: List[Dict[str, Any]],
             'MEXC': 7,
             'CoinGecko': 8
         }
-        df['rank'] = df['source'].map(lambda s: source_rank.get(s, 10))
+        df['rank'] = df['source'].map(
+            lambda s: 1 if str(s).startswith('CFBenchmarks') else source_rank.get(s, 10))
         df = df.sort_values(['timestamp', 'rank']).drop_duplicates(subset=['timestamp'], keep='first')
         df = df.drop(columns=['rank'])
     else:

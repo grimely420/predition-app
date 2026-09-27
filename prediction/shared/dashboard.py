@@ -583,7 +583,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
     </div>
 
     <script>
-        const COINS = ['btc', 'bnb', 'hype'];
+        const COINS = ['btc', 'eth', 'sol', 'bnb', 'xrp', 'doge', 'hype', 'near', 'zec'];
         const REFRESH_INTERVAL_MS = 2500;
         let currentRemainingSeconds = null;
 
@@ -595,6 +595,14 @@ DASHBOARD_HTML = """<!DOCTYPE html>
         function fmtUsd(n, d=2) {
             if (n == null || isNaN(n)) return '-';
             return '$' + fmt(n, d);
+        }
+
+        function decFor(n) {
+            const v = Math.abs(Number(n) || 0);
+            if (v < 1) return 5;
+            if (v < 10) return 4;
+            if (v < 1000) return 3;
+            return 2;
         }
 
         function pct(n, d=2) {
@@ -629,7 +637,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             const up = strike != null ? last >= strike : true;
             const color = up ? '#10b981' : '#ef4444';
             const sy = strike != null ? y(strike) : null;
-            const dec = coin === 'hype' ? 3 : 1;
+            const dec = decFor(last);
             // area fill under the line
             const area = d + ` L${x(lastPt[0]).toFixed(1)},${H - PAD} L${x(pts[0][0]).toFixed(1)},${H - PAD} Z`;
             const gid = `g-${coin}`;
@@ -710,7 +718,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
                 const newsSig = pred && pred.news_sentiment != null ? pred.news_sentiment : 0;
                 rows += `<tr>
                     <td><strong>${h}m</strong></td>
-                    <td class="num">${fmtUsd(pPrice, coin === 'hype' ? 4 : 2)}</td>
+                    <td class="num">${fmtUsd(pPrice, decFor(pPrice))}</td>
                     <td class="num"><span class="badge ${chgCls}">${pct(chg, 3)}</span></td>
                     <td class="num" style="color:var(--up);">${pUp}</td>
                     <td class="num" style="color:var(--down);">${pDown}</td>
@@ -729,7 +737,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
                         <div style="font-size:0.75rem; color:var(--muted); margin-top:2px;">${rtiName}</div>
                     </div>
                     <div>
-                        <div class="coin-price">${fmtUsd(curPrice, coin === 'hype' ? 4 : 2)}</div>
+                        <div class="coin-price">${fmtUsd(curPrice, decFor(curPrice))}</div>
                         <div class="benchmark-label">Live Benchmark Index</div>
                     </div>
                 </div>
@@ -775,17 +783,17 @@ DASHBOARD_HTML = """<!DOCTYPE html>
                 <div class="round-metrics">
                     <div class="metric-cell">
                         <span class="metric-label">Round Open (Strike)</span>
-                        <span class="metric-val">${fmtUsd(openPrice, coin === 'hype' ? 4 : 2)}</span>
+                        <span class="metric-val">${fmtUsd(openPrice, decFor(openPrice))}</span>
                     </div>
                     <div class="metric-cell">
                         <span class="metric-label">Current Round Delta</span>
                         <span class="metric-val" style="color:var(--${deltaCls}); font-weight:700;">
-                            ${deltaUsd >= 0 ? '+' : ''}${fmtUsd(deltaUsd, coin === 'hype' ? 4 : 2)} (${pct(deltaPct, 3)})
+                            ${deltaUsd >= 0 ? '+' : ''}${fmtUsd(deltaUsd, decFor(deltaUsd))} (${pct(deltaPct, 3)})
                         </span>
                     </div>
                     <div class="metric-cell">
                         <span class="metric-label">Projected Settlement</span>
-                        <span class="metric-val">${fmtUsd(pricing.projected_settlement || curPrice, coin === 'hype' ? 4 : 2)}</span>
+                        <span class="metric-val">${fmtUsd(pricing.projected_settlement || curPrice, decFor(pricing.projected_settlement || curPrice))}</span>
                     </div>
                     <div class="metric-cell">
                         <span class="metric-label">News Drift Factor</span>
