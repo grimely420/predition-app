@@ -556,6 +556,7 @@ class ModelManager:
             model, metrics, le = self.fit_classifier(
                 X, y, fee_pct=getattr(self.cfg, 'fee_pct', 0.05)
             )
+            metrics['n_samples'] = len(X)
             path = self._contract_path()
             joblib.dump((model, feature_names, le, metrics), path)
 

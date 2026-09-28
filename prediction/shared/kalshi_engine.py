@@ -286,8 +286,14 @@ class KalshiRoundTracker:
             raw_prob_up = settlement['p_up']
             prob_source = 'settlement_twap'
         elif contract_prob and contract_prob.get('p_up') is not None:
-            # Strike-aware learned model is primary; BS digital is the prior
-            raw_prob_up = 0.65 * contract_prob['p_up'] + 0.35 * bs_prob_up
+            # Strike-aware learned model is primary; BS digital is the prior.
+            # Scale contract weight by data maturity: a coin with only a few
+            # hours of 1m bars gets a model we don't fully trust yet; ~33h+
+            # of bars (2000) earns the full 65% weight.
+            n_bars = contract_prob.get('train_bars')
+            maturity = 1.0 if n_bars is None else min(1.0, n_bars / 2000.0)
+            w_contract = 0.65 * maturity
+            raw_prob_up = w_contract * contract_prob['p_up'] + (1.0 - w_contract) * bs_prob_up
             prob_source = 'contract_model'
         else:
             raw_prob_up = bs_prob_up
@@ -328,7 +334,9 @@ class KalshiRoundTracker:
         # agree on direction? Agreement is a meaningful confidence booster.
         model_agreement = True
         if contract_prob and contract_prob.get('p_up') is not None:
-            model_agreement = (contract_prob['p_up'] - 0.5) * (bs_prob_up - 0.5) >= 0
+            n_bars = contract_prob.get('train_bars')
+            mature = n_bars is None or n_bars >= 1000
+            model_agreement = (contract_prob['p_up'] - 0.5) * (bs_prob_up - 0.5) >= 0 if mature else True
 
         # Kalshi entry caps: the maximum price worth paying while keeping a
         # 3-cent edge buffer (covers fees ~1.75¢ max + slippage + margin).

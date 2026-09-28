@@ -74,6 +74,7 @@ class FeatureEngine:
         self.cross_bars_fn = None
         self._bars_cache: Optional[pd.DataFrame] = None
         self._bars_cache_time: float = 0.0
+        self._live_bars_count: int = 0
         # Base-feature frame cache: the heavy rolling-indicator computation is
         # identical across horizons (only the target column differs), so it is
         # shared. Keyed on the bar set identity incl. the latest close.
@@ -340,6 +341,7 @@ class FeatureEngine:
         bars = self.build_bars(limit=limit)
         if bars is None or len(bars) < 60:
             return None, None
+        self._live_bars_count = len(bars)
         feats, feature_cols = self.contract_frame_from_bars(bars, for_training=False)
         if len(feats) == 0:
             return None, None

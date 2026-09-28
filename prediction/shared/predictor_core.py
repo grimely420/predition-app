@@ -190,6 +190,7 @@ class Predictor:
                 'model_version': str(int(os.path.getmtime(info['path']))),
                 'val_acc': (info.get('metrics') or {}).get('val_acc'),
                 'val_brier': (info.get('metrics') or {}).get('val_brier'),
+                'train_bars': getattr(self.feature_engine, '_live_bars_count', None),
             }
             self._contract_cache = (now_ts, result)
             return result
