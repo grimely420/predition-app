@@ -77,6 +77,17 @@ class PredictorLoop:
             except Exception as e:
                 logger.error(f"[{self.cfg.symbol}:{h}m] Prediction failed: {e}")
         self.predictor.maybe_log_contract_signal()
+        self._log_news()
+
+    def _log_news(self):
+        """Persist news-engine features so training frames can join them by
+        timestamp (they were previously constant across all history)."""
+        try:
+            from shared.news_engine import get_news_engine
+            self.ds.log_news_features(
+                get_news_engine().get_features(self.cfg.symbol))
+        except Exception as e:
+            logger.debug(f"[{self.cfg.symbol}] news log failed: {e}")
 
     def _validate(self):
         try:

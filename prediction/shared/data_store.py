@@ -157,6 +157,24 @@ class DataStore:
             ON contract_signals(resolved, round_end)
         ''')
 
+        # Time series of news-engine features, one row per predictor cycle.
+        # Lets training frames join sentiment by timestamp instead of seeing
+        # the live value smeared across all history.
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS news_features (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT NOT NULL,
+                coin_sentiment REAL,
+                global_sentiment REAL,
+                velocity_15m REAL,
+                compound REAL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        c.execute('''
+            CREATE INDEX IF NOT EXISTS idx_news_ts ON news_features(timestamp)
+        ''')
+
         conn.commit()
         conn.close()
 
@@ -189,6 +207,40 @@ class DataStore:
         except Exception as e:
             logger.error(f"[{self.symbol}] save_price error: {e}")
             return False
+
+    def log_news_features(self, feats: Dict[str, float]) -> bool:
+        """Append one news-feature sample (called per predictor cycle)."""
+        try:
+            conn = self._conn()
+            conn.execute(
+                "INSERT INTO news_features (timestamp, coin_sentiment, "
+                "global_sentiment, velocity_15m, compound) VALUES (?, ?, ?, ?, ?)",
+                (now_iso(),
+                 float(feats.get('news_coin_sentiment', 0.0)),
+                 float(feats.get('news_global_sentiment', 0.0)),
+                 float(feats.get('news_15m_velocity', 0.0)),
+                 float(feats.get('news_compound_signal', 0.0))))
+            conn.commit()
+            conn.close()
+            return True
+        except Exception as e:
+            logger.error(f"[{self.symbol}] log_news_features error: {e}")
+            return False
+
+    def get_news_features(self, limit: int = 60000) -> List[Dict[str, Any]]:
+        """Return news-feature rows ascending by time (newest `limit` rows)."""
+        try:
+            conn = self._conn()
+            rows = conn.execute(
+                "SELECT * FROM (SELECT timestamp, coin_sentiment, "
+                "global_sentiment, velocity_15m, compound FROM news_features "
+                "ORDER BY timestamp DESC LIMIT ?) ORDER BY timestamp ASC",
+                (int(limit),)).fetchall()
+            conn.close()
+            return [dict(r) for r in rows]
+        except Exception as e:
+            logger.error(f"[{self.symbol}] get_news_features error: {e}")
+            return []
 
     def get_prices(self, limit: Optional[int] = None,
                    since: Optional[str] = None,

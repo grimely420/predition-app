@@ -75,6 +75,8 @@ class FeatureEngine:
         self._bars_cache: Optional[pd.DataFrame] = None
         self._bars_cache_time: float = 0.0
         self._live_bars_count: int = 0
+        self._news_cache: Optional[pd.DataFrame] = None
+        self._news_cache_time: float = 0.0
         # Base-feature frame cache: the heavy rolling-indicator computation is
         # identical across horizons (only the target column differs), so it is
         # shared. Keyed on the bar set identity incl. the latest close.
@@ -216,13 +218,36 @@ class FeatureEngine:
         feats['round_15m_sin'] = np.sin(2 * np.pi * min_in_15 / 15.0)
         feats['round_15m_cos'] = np.cos(2 * np.pi * min_in_15 / 15.0)
 
-        # Real-time News Sentiment signal feature
-        try:
-            from .news_engine import get_news_engine
-            news_feats = get_news_engine().get_features(self.symbol)
-            feats['news_sentiment'] = float(news_feats.get('news_compound_signal', 0.0))
-        except Exception:
+        # News features joined by bar timestamp from the logged news series.
+        # Previously every bar in the frame got the *live* value — a constant
+        # the model could never learn from. merge_asof attaches each bar to the
+        # most recent logged sample within 30 min; older bars (pre-logging)
+        # get neutral zeros.
+        news = self._news_series()
+        if news is not None and len(news) > 0:
+            try:
+                feats = feats.reset_index()
+                ts_col = feats.columns[0]
+                feats = feats.rename(columns={ts_col: 'timestamp'})
+                feats = feats.sort_values('timestamp')
+                feats = pd.merge_asof(
+                    feats, news, on='timestamp',
+                    direction='backward', tolerance=pd.Timedelta('30min'))
+                feats = feats.set_index('timestamp').sort_index()
+                for c in ('news_sentiment', 'news_global', 'news_velocity'):
+                    if c not in feats.columns:
+                        feats[c] = 0.0
+                feats[['news_sentiment', 'news_global', 'news_velocity']] = \
+                    feats[['news_sentiment', 'news_global', 'news_velocity']].fillna(0.0)
+            except Exception as e:
+                logger.warning(f"news join failed: {e}")
+                feats['news_sentiment'] = feats.get('news_sentiment', 0.0)
+                feats['news_global'] = feats.get('news_global', 0.0)
+                feats['news_velocity'] = feats.get('news_velocity', 0.0)
+        else:
             feats['news_sentiment'] = 0.0
+            feats['news_global'] = 0.0
+            feats['news_velocity'] = 0.0
 
         return feats
 
@@ -231,6 +256,30 @@ class FeatureEngine:
         close = bars['close']
         feats['target'] = (close.shift(-horizon) - close) / (close + 1e-10)
         return feats
+
+    def _news_series(self) -> Optional[pd.DataFrame]:
+        """Logged news features as a timestamped frame (cached ~60s)."""
+        now = time.time()
+        if self._news_cache is not None and (now - self._news_cache_time) < 60.0:
+            return self._news_cache
+        try:
+            rows = self.data_store.get_news_features()
+            if not rows:
+                return None
+            df = pd.DataFrame(rows)
+            df['timestamp'] = pd.to_datetime(df['timestamp'], utc=True, format='ISO8601')
+            df = df.rename(columns={
+                'compound': 'news_sentiment',
+                'global_sentiment': 'news_global',
+                'velocity_15m': 'news_velocity',
+            })[['timestamp', 'news_sentiment', 'news_global', 'news_velocity']]
+            df = df.sort_values('timestamp')
+            self._news_cache = df
+            self._news_cache_time = now
+            return df
+        except Exception as e:
+            logger.warning(f"news series load failed: {e}")
+            return None
 
     def build_bars(self, since: Optional[str] = None, until: Optional[str] = None,
                    limit: Optional[int] = None) -> Optional[pd.DataFrame]:
