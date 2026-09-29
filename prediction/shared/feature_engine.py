@@ -345,6 +345,21 @@ class FeatureEngine:
         feats, feature_cols = self.contract_frame_from_bars(bars, for_training=False)
         if len(feats) == 0:
             return None, None
+        # At inference, sharpen the two highest-signal features with exact
+        # wall-clock values: bar-level mins_remaining is quantized to whole
+        # minutes (up to 60s stale at round edges).
+        now = datetime.now(timezone.utc)
+        secs_in_round = (now.minute % 15) * 60 + now.second
+        if 'mins_remaining' in feats.columns:
+            feats.iloc[-1, feats.columns.get_loc('mins_remaining')] = (900 - secs_in_round) / 60.0
+        if 'mins_elapsed' in feats.columns:
+            feats.iloc[-1, feats.columns.get_loc('mins_elapsed')] = secs_in_round / 60.0
+        if 'round_15m_phase' in feats.columns:
+            feats.iloc[-1, feats.columns.get_loc('round_15m_phase')] = secs_in_round / 900.0
+        if 'round_15m_sin' in feats.columns:
+            feats.iloc[-1, feats.columns.get_loc('round_15m_sin')] = np.sin(2 * np.pi * secs_in_round / 900.0)
+        if 'round_15m_cos' in feats.columns:
+            feats.iloc[-1, feats.columns.get_loc('round_15m_cos')] = np.cos(2 * np.pi * secs_in_round / 900.0)
         return feats.iloc[-1][feature_cols].values, feature_cols
 
     def get_training_data(self, horizon: int, lookback_hours: int = 168,

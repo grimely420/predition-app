@@ -51,6 +51,35 @@ class KalshiRoundTracker:
         self._analysis_cache_time: float = 0.0
         self._prev_prob: Dict[str, float] = {}
         self._last_round_start: Optional[str] = None
+        self._calib_stats: Optional[Dict[str, Any]] = None
+        self._calib_time: float = 0.0
+
+    def _calib_win_rate(self, side_prob: float) -> Optional[float]:
+        """Empirical win rate for the probability bucket containing side_prob.
+
+        Reads the resolved contract-signal calibration table (cached 60s).
+        Returns None when the bucket is too thin to trust (<15 samples).
+        """
+        now = time.time()
+        if now - self._calib_time > 60.0 or self._calib_stats is None:
+            try:
+                self._calib_stats = self.data_store.get_contract_signal_stats()
+                self._calib_time = now
+            except Exception:
+                return None
+        buckets = (self._calib_stats or {}).get('calibration') or {}
+        for rng, b in buckets.items():
+            try:
+                lo, hi = (float(x) for x in str(rng).split('-'))
+            except Exception:
+                continue
+            if lo <= side_prob * 100.0 < hi:
+                n = b.get('n') or 0
+                w = b.get('empirical_win_pct')
+                if n >= 15 and w is not None:
+                    return float(w) / 100.0
+                return None
+        return None
 
     def get_round_timing(self, now: Optional[datetime] = None) -> Dict[str, Any]:
         """Compute current and next 15-minute round timing aligned to :00, :15, :30, :45."""
@@ -111,24 +140,39 @@ class KalshiRoundTracker:
         return None
 
     def get_realized_volatility(self) -> float:
-        """Calculate live realized 1-minute volatility from recent price records."""
+        """Live realized 1-minute volatility, correctly scaled from tick cadence.
+
+        The last ~90 ticks are ~2.3s apart, so their per-tick return std is
+        a *per-tick* vol — it must be scaled by sqrt(60/cadence) to become a
+        per-minute vol before being used in sigma * sqrt(minutes). Previously
+        the raw per-tick std was used directly, understating sigma ~5x and
+        over-inflating z-scores into false 90c+ conviction.
+        """
         try:
-            records = self.data_store.get_prices(limit=60)
+            records = self.data_store.get_prices(limit=90)
             if records and len(records) >= 15:
                 prices = [float(r['price']) for r in records if r.get('price')]
+                # actual sampling cadence in seconds
+                t_first = datetime.fromisoformat(
+                    str(records[0]['timestamp']).replace('Z', '+00:00')).timestamp()
+                t_last = datetime.fromisoformat(
+                    str(records[-1]['timestamp']).replace('Z', '+00:00')).timestamp()
+                cadence = (t_last - t_first) / max(1, len(records) - 1)
+                cadence = max(0.5, min(30.0, cadence))
                 if len(prices) >= 15:
                     rets = [(prices[i] - prices[i-1]) / prices[i-1] for i in range(1, len(prices))]
                     mean_r = sum(rets) / len(rets)
                     var_r = sum((r - mean_r) ** 2 for r in rets) / len(rets)
-                    std_r = math.sqrt(var_r)
-                    if 0.0002 <= std_r <= 0.008:
-                        return std_r
+                    std_tick = math.sqrt(var_r)
+                    std_1m = std_tick * math.sqrt(60.0 / cadence)
+                    if 0.0002 <= std_1m <= 0.02:
+                        return std_1m
         except Exception as e:
             logger.debug(f"Error calculating realized vol: {e}")
         return {
-            "btc": 0.0008,
-            "bnb": 0.0012,
-            "hype": 0.0018
+            "btc": 0.0008, "eth": 0.0011, "sol": 0.0014,
+            "bnb": 0.0012, "xrp": 0.0014, "doge": 0.0016,
+            "hype": 0.0018, "near": 0.0016, "zec": 0.0020,
         }.get(self.coin_id, 0.0010)
 
     def _tick_volatility(self, limit: int = 120) -> float:
@@ -375,6 +419,19 @@ class KalshiRoundTracker:
             bias = "NEUTRAL"
             color = "#f59e0b"
 
+        # Calibration gate: the contract-signal ledger knows which cent
+        # buckets have actually been winning. If this side's probability lands
+        # in a bucket that empirically wins <52% (coin flip + fees = losing
+        # trade), suppress the BUY and mark it as a measured no-edge zone.
+        calib_wr = None
+        if not is_settlement_window and 'BUY' in decision:
+            side_p = prob_up if yes_cents >= 50 else prob_down
+            calib_wr = self._calib_win_rate(side_p)
+            if calib_wr is not None and calib_wr < 0.52:
+                decision = f"SKIP — BUCKET WIN {calib_wr * 100:.0f}% ({yes_cents}¢/{no_cents}¢)"
+                bias = "NEUTRAL"
+                color = "#9ca3af"
+
         # Analysis of Next Upcoming Round (5-17 minute span)
         next_model_ret = pred_15
         next_news_impact = news_sentiment * 0.0020
@@ -435,6 +492,7 @@ class KalshiRoundTracker:
                 "max_yes_entry_cents": max_yes_entry,
                 "max_no_entry_cents": max_no_entry,
                 "min_edge_cents": edge_buffer,
+                "bucket_win_pct": round(calib_wr * 100.0, 1) if calib_wr is not None else None,
             },
             "next_round_outlook": {
                 "label": next_rnd["label"],
