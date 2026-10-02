@@ -103,24 +103,65 @@ class Predictor:
         return None
 
     def resolve_due_signals(self) -> int:
-        """Resolve logged signals whose round has fully settled."""
+        """Resolve logged signals whose round has fully settled.
+
+        Prefers Kalshi's official `result` (the actual contract outcome the
+        app settles on) over our own TWAP estimate. Falls back to the
+        tick-based settlement TWAP if Kalshi hasn't posted a result within
+        ~12 minutes of round close.
+        """
         try:
             from datetime import datetime, timedelta, timezone
-            cutoff = (datetime.now(timezone.utc)
-                      - timedelta(seconds=90)).isoformat()
+            from .kalshi_markets import get_kalshi_markets
+            now = datetime.now(timezone.utc)
+            cutoff = (now - timedelta(seconds=90)).isoformat()
             rows = self.data_store.get_unresolved_signals(cutoff)
+            km = get_kalshi_markets()
             resolved = 0
             for r in rows:
-                settle = self._settlement_twap(r['round_end'])
-                if settle is None:
-                    back = self.data_store.price_at_or_before(
-                        r['round_end'], window_seconds=120)
-                    if back:
-                        settle = float(back[0])
-                if settle is None:
-                    continue
                 strike = float(r['strike_price'])
-                outcome = 1 if settle > strike else 0
+                outcome = None
+                settle = None
+
+                # 1) Official Kalshi result — ground truth
+                try:
+                    rs = datetime.fromisoformat(
+                        str(r['round_start']).replace('Z', '+00:00'))
+                    re_ = datetime.fromisoformat(
+                        str(r['round_end']).replace('Z', '+00:00'))
+                    if (now - re_) < timedelta(minutes=12):
+                        off = km.get_official_result(
+                            getattr(self.cfg, 'kalshi_series', None)
+                            or f"KX{self.cfg.symbol}15M",
+                            rs, re_)
+                        if off and off.get('result') in ('yes', 'no'):
+                            outcome = 1 if off['result'] == 'yes' else 0
+                            sv = off.get('settlement')
+                            settle = float(sv) if sv is not None else None
+                except Exception:
+                    pass
+
+                # 2) Fallback: own tick TWAP over final 60s
+                if outcome is None:
+                    try:
+                        if (now - datetime.fromisoformat(
+                                str(r['round_end']).replace('Z', '+00:00'))) \
+                                < timedelta(minutes=12):
+                            continue  # give Kalshi time to post the result
+                    except Exception:
+                        pass
+                    settle = self._settlement_twap(r['round_end'])
+                    if settle is None:
+                        back = self.data_store.price_at_or_before(
+                            r['round_end'], window_seconds=120)
+                        if back:
+                            settle = float(back[0])
+                    if settle is None:
+                        continue
+                    outcome = 1 if settle > strike else 0
+
+                if settle is None:
+                    settle = self._settlement_twap(r['round_end']) or strike
                 bias = r['bias']
                 is_correct = None
                 if bias in ('UP', 'DOWN'):

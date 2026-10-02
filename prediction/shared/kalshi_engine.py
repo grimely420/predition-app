@@ -125,7 +125,28 @@ class KalshiRoundTracker:
         }
 
     def get_round_open_price(self, round_start_iso: str) -> Optional[float]:
-        """Find the RTI price at or nearest after the start of the 15m round."""
+        """Round strike — Kalshi's official floor_strike when available.
+
+        Kalshi publishes the exact strike on the market object at open;
+        our tick-derived value lags the official CF Benchmarks print by a
+        few seconds (~$14 systematic offset on BTC) and can miss entirely
+        on boundary hiccups. Official value keeps the dashboard identical
+        to the trading app; tick lookup is the offline fallback.
+        """
+        try:
+            rs = datetime.fromisoformat(
+                str(round_start_iso).replace('Z', '+00:00'))
+            now = datetime.now(timezone.utc)
+            # Only worth asking while the market is near-open; a stale round
+            # strike stays valid for the whole round via _strike_cache.
+            if now >= rs and (now - rs) < timedelta(minutes=15):
+                from .kalshi_markets import get_kalshi_markets
+                strike = get_kalshi_markets().get_official_strike(
+                    self.series, rs)
+                if strike is not None:
+                    return strike
+        except Exception as e:
+            logger.debug(f"official strike lookup failed: {e}")
         try:
             # Query price at or immediately after round start (within 90s)
             res = self.data_store.price_at_or_after(round_start_iso, window_seconds=90)
