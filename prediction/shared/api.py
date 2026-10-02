@@ -22,7 +22,7 @@ logger = setup_logging("API")
 _CACHE = {}
 
 
-def _round_series_payload(ds, analysis, max_pts=220):
+def _round_series_payload(ds, analysis, max_pts=1500):
     """RTI ticks since the current round opened, for the price-vs-strike chart."""
     try:
         start_iso = analysis.get("timing", {}).get("current_round", {}).get("start_time")
