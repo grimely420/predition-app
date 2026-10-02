@@ -667,6 +667,21 @@ class DataStore:
             logger.error(f"[{self.symbol}] resolve_contract_signal error: {e}")
             return False
 
+    def void_contract_signal(self, sig_id: int) -> bool:
+        """Mark a signal unresolvable (resolved=-1) — excluded from stats,
+        out of the pending queue."""
+        try:
+            conn = self._conn()
+            conn.execute(
+                "UPDATE contract_signals SET resolved = -1 WHERE id = ?",
+                (sig_id,))
+            conn.commit()
+            conn.close()
+            return True
+        except Exception as e:
+            logger.error(f"[{self.symbol}] void_contract_signal error: {e}")
+            return False
+
     def get_contract_signal_stats(self, window: int = 500) -> Dict[str, Any]:
         """Win rate + probability calibration of resolved contract signals."""
         try:

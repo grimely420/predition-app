@@ -340,15 +340,12 @@ class KalshiRoundTracker:
         total_dir = up_raw + down_raw
         norm_clf_up = (up_raw / total_dir) if total_dir > 0.05 else 0.50
 
-        # Normalized multi-horizon drift: model + news + classifier
-        model_bias = (pred_5 + pred_10 + pred_15) / 3.0
-        news_bias = news_sentiment * 0.0015
-        clf_bias = (norm_clf_up - 0.50) * 0.0025
-        total_drift = model_bias + news_bias + clf_bias
-
         # Continuous Digital Option Model (theoretical prior):
-        # z = [ln(S_t/S_0) + drift * (tau/15)] / sigma_rem
-        z_score = (log_ratio + total_drift * (rem_min / 15.0)) / max(1e-5, sigma_rem)
+        # z = [ln(S_t/S_0) + E[r over remaining span]] / sigma_rem
+        # total_expected_return is already scaled to the remaining minutes;
+        # the small classifier term is a bounded conviction nudge.
+        clf_bias = (norm_clf_up - 0.50) * 0.0025 * (rem_min / 15.0)
+        z_score = (log_ratio + total_expected_return + clf_bias) / max(1e-5, sigma_rem)
         bs_prob_up = normal_cdf(z_score)
 
         # Settlement TWAP engine takes over inside the final 75 seconds —

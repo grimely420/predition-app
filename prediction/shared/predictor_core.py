@@ -121,6 +121,17 @@ class Predictor:
             km = get_kalshi_markets()
             resolved = 0
             for r in rows:
+                # Void rows older than a day — no Kalshi result and no ticks
+                # to settle against; they'd sit unresolved forever otherwise.
+                try:
+                    re_dt = datetime.fromisoformat(
+                        str(r['round_end']).replace('Z', '+00:00'))
+                    if (now - re_dt) > timedelta(hours=24):
+                        self.data_store.void_contract_signal(r['id'])
+                        resolved += 1
+                        continue
+                except Exception:
+                    pass
                 strike = float(r['strike_price'])
                 outcome = None
                 settle = None
