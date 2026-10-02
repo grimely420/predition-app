@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 APP = '/home/chain-deaction/local_prediction/predition-app/prediction'
 STATE_FILE = '/var/lib/prediction-system/watchdog_state.json'
 TICK_MAX_AGE_S = 180        # collector writes every ~3s; 3 min = hung
-PRED_MAX_AGE_S = 300        # predictor logs news every ~15s; 5 min = hung
+PRED_MAX_AGE_S = 600        # heartbeat every ~2s; 10 min tolerates retrains
 RESTART_COOLDOWN_S = 900
 
 DIR_TO_COIN = {'bitcoin': 'btc'}
@@ -90,9 +90,6 @@ def main():
             tick = con.execute(
                 "SELECT timestamp FROM prices ORDER BY id DESC LIMIT 1"
             ).fetchone()
-            news = con.execute(
-                "SELECT timestamp FROM news_features ORDER BY id DESC "
-                "LIMIT 1").fetchone()
             con.close()
         except Exception as e:
             log(f"{coin}: db read failed: {e}")
@@ -101,8 +98,16 @@ def main():
         if tick and age_seconds(tick[0]) > TICK_MAX_AGE_S:
             log(f"{coin}: last tick {age_seconds(tick[0]):.0f}s old")
             restart(f'prediction-collector@{coin}.service', state, now_ts)
-        if news and age_seconds(news[0]) > PRED_MAX_AGE_S:
-            log(f"{coin}: last news log {age_seconds(news[0]):.0f}s old")
+
+        # Predictor liveness = heartbeat file mtime, NOT DB writes — a
+        # predictor mid-retrain stops logging news for minutes but is alive.
+        hb = os.path.join(os.path.dirname(db), 'predictor.heartbeat')
+        try:
+            hb_age = now_ts - os.path.getmtime(hb)
+        except OSError:
+            hb_age = 1e9
+        if hb_age > PRED_MAX_AGE_S:
+            log(f"{coin}: heartbeat {hb_age:.0f}s old")
             restart(f'prediction-predictor@{coin}.service', state, now_ts)
 
     try:

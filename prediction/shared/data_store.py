@@ -347,40 +347,45 @@ class DataStore:
             logger.error(f"[{self.symbol}] last_price error: {e}")
             return None
 
-    def price_at_or_after(self, target_iso: str, window_seconds: int = 60) -> Optional[Tuple[float, str]]:
-        """Return the price nearest to target time (after target, within window)."""
+    def price_at_or_after(self, target_iso: str, window_seconds: int = 60,
+                          source_like: Optional[str] = None) -> Optional[Tuple[float, str]]:
+        """Return the price nearest to target time (after target, within window).
+
+        ``source_like`` (SQL LIKE pattern, e.g. 'CFBenchmarks%') restricts to
+        the settlement-relevant feed — spot fallback ticks must not serve as
+        round strikes when the RTI feed hiccups.
+        """
+        sql = "SELECT price, timestamp FROM prices WHERE timestamp >= ?"
+        params: list = [target_iso]
+        if source_like:
+            sql += " AND source LIKE ?"
+            params.append(source_like)
+        sql += " ORDER BY timestamp ASC LIMIT 1"
         try:
             conn = self._conn()
-            c = conn.cursor()
-            c.execute(
-                "SELECT price, timestamp FROM prices WHERE timestamp >= ? ORDER BY timestamp ASC LIMIT 1",
-                (target_iso,)
-            )
-            row = c.fetchone()
+            row = conn.execute(sql, params).fetchone()
             conn.close()
-            if row:
-                ts = row['timestamp']
-                if abs(self._dt_diff_seconds(ts, target_iso)) <= window_seconds:
-                    return float(row['price']), ts
+            if row and abs(self._dt_diff_seconds(row['timestamp'], target_iso)) <= window_seconds:
+                return float(row['price']), row['timestamp']
             return None
         except Exception as e:
             logger.error(f"[{self.symbol}] price_at_or_after error: {e}")
             return None
 
-    def price_at_or_before(self, target_iso: str, window_seconds: int = 60) -> Optional[Tuple[float, str]]:
+    def price_at_or_before(self, target_iso: str, window_seconds: int = 60,
+                           source_like: Optional[str] = None) -> Optional[Tuple[float, str]]:
+        sql = "SELECT price, timestamp FROM prices WHERE timestamp <= ?"
+        params: list = [target_iso]
+        if source_like:
+            sql += " AND source LIKE ?"
+            params.append(source_like)
+        sql += " ORDER BY timestamp DESC LIMIT 1"
         try:
             conn = self._conn()
-            c = conn.cursor()
-            c.execute(
-                "SELECT price, timestamp FROM prices WHERE timestamp <= ? ORDER BY timestamp DESC LIMIT 1",
-                (target_iso,)
-            )
-            row = c.fetchone()
+            row = conn.execute(sql, params).fetchone()
             conn.close()
-            if row:
-                ts = row['timestamp']
-                if abs(self._dt_diff_seconds(ts, target_iso)) <= window_seconds:
-                    return float(row['price']), ts
+            if row and abs(self._dt_diff_seconds(row['timestamp'], target_iso)) <= window_seconds:
+                return float(row['price']), row['timestamp']
             return None
         except Exception as e:
             logger.error(f"[{self.symbol}] price_at_or_before error: {e}")
@@ -633,16 +638,28 @@ class DataStore:
             return []
 
     def resolve_contract_signal(self, sig_id: int, settle_price: float,
-                                outcome: int, is_correct: Optional[int]) -> bool:
+                                outcome: int, is_correct: Optional[int],
+                                official_strike: Optional[float] = None) -> bool:
         try:
             conn = self._conn()
             c = conn.cursor()
-            c.execute(
-                """UPDATE contract_signals
-                   SET settle_price = ?, outcome = ?, is_correct = ?, resolved = 1
-                   WHERE id = ?""",
-                (settle_price, outcome, is_correct, sig_id)
-            )
+            if official_strike is not None:
+                # Kalshi's official floor_strike supersedes our tick-derived
+                # strike so the ledger reflects the real contract terms.
+                c.execute(
+                    """UPDATE contract_signals
+                       SET settle_price = ?, outcome = ?, is_correct = ?,
+                           resolved = 1, strike_price = ?
+                       WHERE id = ?""",
+                    (settle_price, outcome, is_correct, official_strike, sig_id)
+                )
+            else:
+                c.execute(
+                    """UPDATE contract_signals
+                       SET settle_price = ?, outcome = ?, is_correct = ?, resolved = 1
+                       WHERE id = ?""",
+                    (settle_price, outcome, is_correct, sig_id)
+                )
             conn.commit()
             conn.close()
             return True

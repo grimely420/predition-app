@@ -148,12 +148,15 @@ class KalshiRoundTracker:
         except Exception as e:
             logger.debug(f"official strike lookup failed: {e}")
         try:
-            # Query price at or immediately after round start (within 90s)
-            res = self.data_store.price_at_or_after(round_start_iso, window_seconds=90)
+            # RTI feed only — a spot fallback tick must never pose as strike
+            res = self.data_store.price_at_or_after(
+                round_start_iso, window_seconds=90,
+                source_like='CFBenchmarks%')
             if res:
                 return float(res[0])
-            # Fallback to nearest before
-            res_before = self.data_store.price_at_or_before(round_start_iso, window_seconds=90)
+            res_before = self.data_store.price_at_or_before(
+                round_start_iso, window_seconds=90,
+                source_like='CFBenchmarks%')
             if res_before:
                 return float(res_before[0])
         except Exception as e:
@@ -171,6 +174,9 @@ class KalshiRoundTracker:
         """
         try:
             records = self.data_store.get_prices(limit=90)
+            rti = [r for r in records if str(r.get('source', '')).startswith('CFBenchmarks')]
+            if len(rti) >= 15:
+                records = rti  # spot fallbacks must not contaminate vol
             if records and len(records) >= 15:
                 prices = [float(r['price']) for r in records if r.get('price')]
                 # actual sampling cadence in seconds
@@ -200,6 +206,9 @@ class KalshiRoundTracker:
         """Per-tick return volatility for the settlement-TWAP engine."""
         try:
             records = self.data_store.get_prices(limit=limit)
+            rti = [r for r in records if str(r.get('source', '')).startswith('CFBenchmarks')]
+            if len(rti) >= 10:
+                records = rti
             if records and len(records) >= 10:
                 prices = [float(r['price']) for r in records if r.get('price')]
                 rets = [(prices[i] - prices[i-1]) / prices[i-1]

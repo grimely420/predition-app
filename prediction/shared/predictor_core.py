@@ -95,7 +95,9 @@ class Predictor:
             end = datetime.fromisoformat(round_end_iso.replace('Z', '+00:00'))
             start = (end - timedelta(seconds=60)).isoformat()
             ticks = self.data_store.get_prices(since=start, until=round_end_iso)
-            prices = [float(r['price']) for r in ticks if r.get('price')]
+            rti = [float(r['price']) for r in ticks
+                   if r.get('price') and 'CFBenchmarks' in str(r.get('source', ''))]
+            prices = rti or [float(r['price']) for r in ticks if r.get('price')]
             if prices:
                 return sum(prices) / len(prices)
         except Exception as e:
@@ -123,21 +125,25 @@ class Predictor:
                 outcome = None
                 settle = None
 
-                # 1) Official Kalshi result — ground truth
+                # 1) Official Kalshi result — ground truth. Always try it
+                # (even for old rounds); only the *waiting* is time-gated.
+                official_strike = None
                 try:
                     rs = datetime.fromisoformat(
                         str(r['round_start']).replace('Z', '+00:00'))
                     re_ = datetime.fromisoformat(
                         str(r['round_end']).replace('Z', '+00:00'))
-                    if (now - re_) < timedelta(minutes=12):
-                        off = km.get_official_result(
-                            getattr(self.cfg, 'kalshi_series', None)
-                            or f"KX{self.cfg.symbol}15M",
-                            rs, re_)
-                        if off and off.get('result') in ('yes', 'no'):
-                            outcome = 1 if off['result'] == 'yes' else 0
-                            sv = off.get('settlement')
-                            settle = float(sv) if sv is not None else None
+                    off = km.get_official_result(
+                        getattr(self.cfg, 'kalshi_series', None)
+                        or f"KX{self.cfg.symbol}15M",
+                        rs, re_)
+                    if off and off.get('result') in ('yes', 'no'):
+                        outcome = 1 if off['result'] == 'yes' else 0
+                        sv = off.get('settlement')
+                        settle = float(sv) if sv is not None else None
+                        if off.get('strike') is not None:
+                            official_strike = float(off['strike'])
+                            strike = official_strike
                 except Exception:
                     pass
 
@@ -167,7 +173,8 @@ class Predictor:
                 if bias in ('UP', 'DOWN'):
                     is_correct = int((bias == 'UP') == (outcome == 1))
                 self.data_store.resolve_contract_signal(
-                    r['id'], settle, outcome, is_correct)
+                    r['id'], settle, outcome, is_correct,
+                    official_strike=official_strike)
                 resolved += 1
                 logger.info(
                     f"[{self.symbol}] Signal resolved: {r['phase']} "

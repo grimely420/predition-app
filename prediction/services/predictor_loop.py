@@ -115,6 +115,16 @@ class PredictorLoop:
         except Exception as e:
             logger.error(f"[{self.cfg.symbol}] Validation failed: {e}")
 
+    def _heartbeat(self):
+        """Touch a liveness file the watchdog checks — safe during retrains."""
+        try:
+            hb = os.path.join(os.path.dirname(self.cfg.db_path),
+                              'predictor.heartbeat')
+            with open(hb, 'w') as f:
+                f.write(str(time.time()))
+        except Exception:
+            pass
+
     def _maybe_retrain(self):
         try:
             # Snapshot due-ness BEFORE train() consumes the tick counter —
@@ -124,11 +134,15 @@ class PredictorLoop:
                    if self.mm.should_train(h)]
             for h in due:
                 logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
+                self._heartbeat()
                 self.mm.train(h, force=True)
+                self._heartbeat()
                 self.mm.train_classifier(h, force=True)
             if self.mm.should_train_contract():
                 logger.info(f"[{self.cfg.symbol}] Retraining Kalshi contract model")
+                self._heartbeat()
                 self.mm.train_contract(force=False)
+            self._heartbeat()
         except Exception as e:
             logger.error(f"[{self.cfg.symbol}] Retraining failed: {e}")
 
@@ -138,6 +152,7 @@ class PredictorLoop:
         last_validate = 0
         last_retrain = 0
         while self.running:
+            self._heartbeat()
             now = time.time()
             if now - last_validate >= 30:
                 self._validate()

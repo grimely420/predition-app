@@ -137,7 +137,10 @@ class ModelManager:
                 shutil.copy2(path, prev_path)
             except Exception as e:
                 logger.warning(f"[{self.symbol}] prev snapshot failed: {e}")
-        joblib.dump(payload, path)
+        # atomic write: tmp + rename so a kill mid-dump can't corrupt latest
+        tmp_path = path + '.tmp'
+        joblib.dump(payload, tmp_path)
+        os.replace(tmp_path, path)
         if acc_metric is not None and prev_acc is not None \
                 and acc_metric < prev_acc - 0.03:
             logger.warning(
