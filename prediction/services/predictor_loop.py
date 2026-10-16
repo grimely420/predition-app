@@ -5,6 +5,9 @@ import os
 import sys
 import time
 import signal
+import fcntl
+import faulthandler
+import subprocess
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,6 +25,7 @@ logger = setup_logging("PredictorLoop")
 
 class PredictorLoop:
     def __init__(self, coin_id: str):
+        self.coin_id = coin_id
         self.cfg = get_coin_config(coin_id)
         self.ds = DataStore(self.cfg.db_path, self.cfg.symbol)
         self.fe = FeatureEngine(self.ds, self.cfg.symbol)
@@ -125,26 +129,98 @@ class PredictorLoop:
         except Exception:
             pass
 
-    def _maybe_retrain(self):
+    _RETRAIN_LOCK = '/tmp/prediction-retrain.lock'
+
+    def retrain_due(self) -> bool:
+        """Train whatever is due (models, classifiers, contract model).
+
+        Runs inside the --train-only worker process. Returns False on any
+        failure so the parent can tell a crash apart from a clean run.
+        Serialized across coins via flock: after a mass restart every
+        predictor wants to retrain at once, and ~9 concurrent native
+        trainers (each ~1.5-2GB) can OOM this box.
+        """
         try:
-            # Snapshot due-ness BEFORE train() consumes the tick counter —
-            # otherwise train_classifier's should_train() always sees delta=0
-            # and the direction classifiers silently never retrain.
-            due = [h for h in self.cfg.prediction_horizons
-                   if self.mm.should_train(h)]
-            for h in due:
-                logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
+            with open(self._RETRAIN_LOCK, 'w') as lock:
+                fcntl.flock(lock, fcntl.LOCK_EX)
+                # Re-read shared state AFTER queueing — earlier workers may
+                # have shifted due-ness while we waited.
+                self.mm.last_train_counts = self.mm._load_counts()
+                # Snapshot due-ness BEFORE train() consumes the tick counter —
+                # otherwise train_classifier's should_train() always sees
+                # delta=0 and the direction classifiers silently never retrain.
+                due = [h for h in self.cfg.prediction_horizons
+                       if self.mm.should_train(h)]
+                for h in due:
+                    logger.info(f"[{self.cfg.symbol}:{h}m] Retraining model")
+                    self._heartbeat()
+                    self.mm.train(h, force=True)
+                    self._heartbeat()
+                    self.mm.train_classifier(h, force=True)
+                if self.mm.should_train_contract():
+                    logger.info(f"[{self.cfg.symbol}] Retraining Kalshi contract model")
+                    self._heartbeat()
+                    self.mm.train_contract(force=False)
                 self._heartbeat()
-                self.mm.train(h, force=True)
-                self._heartbeat()
-                self.mm.train_classifier(h, force=True)
-            if self.mm.should_train_contract():
-                logger.info(f"[{self.cfg.symbol}] Retraining Kalshi contract model")
-                self._heartbeat()
-                self.mm.train_contract(force=False)
-            self._heartbeat()
+            return True
         except Exception as e:
             logger.error(f"[{self.cfg.symbol}] Retraining failed: {e}")
+            return False
+
+    def _maybe_retrain(self):
+        """Run retraining in a child process.
+
+        The native trainers (xgboost/lightgbm) occasionally die with SIGSEGV,
+        which no in-process try/except can catch — previously that killed this
+        loop and knocked the coin off the dashboard until systemd restarted it.
+        A worker process confines the crash to the retrain itself; on failure
+        we simply keep serving the existing model.
+        """
+        try:
+            # Refresh due-ness from disk — worker runs update the shared
+            # counts/times file, so the parent's in-memory view may be stale.
+            self.mm.last_train_counts = self.mm._load_counts()
+            due = [h for h in self.cfg.prediction_horizons
+                   if self.mm.should_train(h)]
+            if not due and not self.mm.should_train_contract():
+                return
+        except Exception as e:
+            logger.error(f"[{self.cfg.symbol}] Retrain check failed: {e}")
+            return
+
+        app_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        cmd = [sys.executable, '-m', 'services.predictor_loop',
+               self.coin_id, '--train-only']
+        logger.info(f"[{self.cfg.symbol}] Spawning retrain worker "
+                    f"(horizons={due})")
+        try:
+            proc = subprocess.Popen(cmd, cwd=app_dir)
+            deadline = time.time() + 1800  # hard cap: 30 min
+            while proc.poll() is None:
+                self._heartbeat()  # watchdog liveness while child trains
+                if time.time() > deadline:
+                    proc.kill()
+                    logger.error(f"[{self.cfg.symbol}] Retrain worker "
+                                 f"timed out; killed")
+                    return
+                time.sleep(10)
+        except Exception as e:
+            logger.error(f"[{self.cfg.symbol}] Retrain worker failed: {e}")
+            return
+
+        if proc.returncode != 0:
+            logger.error(f"[{self.cfg.symbol}] Retrain worker exited "
+                         f"rc={proc.returncode}; keeping existing models")
+            return
+
+        # Worker wrote fresh artifacts + train counts — drop in-memory caches
+        # so the next predict() reloads the new models from disk.
+        self.mm.last_train_counts = self.mm._load_counts()
+        self.mm.models.clear()
+        self.mm.classifiers.clear()
+        self.mm.contract_model = None
+        logger.info(f"[{self.cfg.symbol}] Retrain worker finished; "
+                    f"models reloaded on next predict")
 
     def run(self):
         logger.info(f"{self.cfg.symbol} predictor loop started")
@@ -168,8 +244,14 @@ class PredictorLoop:
 
 
 def main():
-    coin_id = sys.argv[1] if len(sys.argv) > 1 else 'btc'
+    faulthandler.enable()  # dump a Python traceback on native crashes (SIGSEGV)
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    coin_id = args[0] if args else 'btc'
     loop = PredictorLoop(coin_id)
+    if '--train-only' in sys.argv:
+        # Worker mode: run due retrains once, then exit. A native crash here
+        # exits nonzero and cannot take the parent's prediction loop down.
+        sys.exit(0 if loop.retrain_due() else 1)
     loop.run()
 
 

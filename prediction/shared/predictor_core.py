@@ -65,8 +65,56 @@ class Predictor:
             strike = self._kt().get_round_open_price(cur['start_time'])
             if strike is None or strike <= 0:
                 return
+
+            # Strike gate: don't log a call until Kalshi's official
+            # floor_strike is confirmed — in the first seconds after open
+            # the only available value is a tick approximation that can be
+            # dollars off, which permanently contaminates the row's
+            # prob_yes/bias/edge (the row is scored against the real
+            # contract, not the approximation). Wait up to 60s for the
+            # listing; log degraded after that rather than never.
+            if elapsed_min < 1.0:
+                try:
+                    from datetime import datetime as _dt
+                    from .kalshi_markets import get_kalshi_markets
+                    rs_dt = _dt.fromisoformat(
+                        str(cur['start_time']).replace('Z', '+00:00'))
+                    off = get_kalshi_markets().get_official_strike(
+                        self._kt().series, rs_dt)
+                except Exception:
+                    off = None
+                if off is None:
+                    return
+                strike = float(off)
             p = float(cp['p_up'])
             bias = 'UP' if p >= 0.54 else ('DOWN' if p <= 0.46 else 'NEUTRAL')
+
+            # Order-book snapshot at call time — non-behavioral; this is the
+            # data the audit needs to measure fair-vs-ask edge.
+            book = None
+            try:
+                from .kalshi_markets import get_kalshi_markets
+                from datetime import datetime, timezone
+                rs = datetime.fromisoformat(
+                    str(cur['start_time']).replace('Z', '+00:00'))
+                re_ = datetime.fromisoformat(
+                    str(cur['end_time']).replace('Z', '+00:00'))
+                b = get_kalshi_markets().get_book_snapshot(
+                    self._kt().series, rs, re_)
+                if b is None:
+                    logger.info(f"[{self.symbol}] orderbook: no market/book "
+                                f"for {rs.isoformat()}->{re_.isoformat()}")
+                if b:
+                    book = dict(b)
+                    # edge = model fair (cents) - executable ask for the
+                    # favored side; positive => theoretically +EV at the ask.
+                    if bias == 'UP' and b.get('yes_ask') is not None:
+                        book['edge_cents'] = round(p * 100 - b['yes_ask'], 1)
+                    elif bias == 'DOWN' and b.get('no_ask') is not None:
+                        book['edge_cents'] = round((1 - p) * 100 - b['no_ask'], 1)
+            except Exception as e:
+                logger.info(f"[{self.symbol}] orderbook snapshot: {e}")
+
             logged = self.data_store.log_contract_signal(
                 round_start=cur['start_time'],
                 round_end=cur['end_time'],
@@ -79,12 +127,17 @@ class Predictor:
                 bias=bias,
                 source='contract_model',
                 model_version=str(cp.get('model_version', '')),
+                book=book,
             )
             if logged:
                 logger.info(
                     f"[{self.symbol}] Contract signal {phase}: "
                     f"p_yes={p:.3f} bias={bias} strike={strike:.4f}"
                 )
+            elif book:
+                # Row already exists for (round, phase) — backfill book cols.
+                self.data_store.update_signal_book(
+                    cur['start_time'], phase, book)
         except Exception as e:
             logger.debug(f"[{self.symbol}] contract signal log failed: {e}")
 
@@ -217,6 +270,26 @@ class Predictor:
             logger.debug(f"[{self.symbol}] trend fallback error: {e}")
         return 0.0
 
+    def _phase_platt(self) -> Optional[Dict[str, list]]:
+        """Per-phase Platt params from <coin>/phase_platt.json (mtime-cached)."""
+        path = os.path.join(os.path.dirname(self.cfg.db_path),
+                            'phase_platt.json')
+        try:
+            mt = os.path.getmtime(path)
+            cached = getattr(self, '_platt_cache', None)
+            if cached and cached[0] == mt:
+                return cached[1]
+            import json
+            with open(path) as f:
+                data = json.load(f).get('platt', {})
+            self._platt_cache = (mt, data)
+            return data
+        except FileNotFoundError:
+            self._platt_cache = (0, None)
+            return None
+        except Exception:
+            return getattr(self, '_platt_cache', (0, None))[1]
+
     def get_contract_prob(self) -> Optional[Dict[str, Any]]:
         """Calibrated P(current Kalshi 15m round settles above its strike).
 
@@ -224,7 +297,7 @@ class Predictor:
         mins_remaining features). Returns None when no model is available.
         """
         now_ts = time.time()
-        if now_ts - self._contract_cache[0] < 5.0 and self._contract_cache[1] is not None:
+        if now_ts - self._contract_cache[0] < 3.0 and self._contract_cache[1] is not None:
             return self._contract_cache[1]
 
         info = self.model_manager.load_contract()
@@ -243,13 +316,39 @@ class Predictor:
             le = info.get('le')
             class_to_prob = {int(c): float(p) for c, p in zip(le.classes_, prob)} if le is not None \
                 else {0: float(prob[0]), 1: float(prob[1])}
+            p_up = class_to_prob.get(1, 0.5)
+
+            # Per-phase Platt recalibration (audit: the single contract model
+            # is miscalibrated by phase — entry overconfident, late under).
+            # <coin>/phase_platt.json absent => identity (raw p), so deleting
+            # the file fully reverts this behavior.
+            try:
+                platt = self._phase_platt()
+                timing = self._kt().get_round_timing()
+                elapsed = timing['current_round']['elapsed_minutes']
+                ph = ('entry' if elapsed <= 6.5
+                      else 'mid' if elapsed <= 13.0 else 'late')
+                ab = platt.get(ph) if platt else None
+                if ab:
+                    pc = min(1 - 1e-4, max(1e-4, p_up))
+                    lo = np.log(pc / (1 - pc))
+                    p_up = float(1.0 / (1.0 + np.exp(-(ab[0] * lo + ab[1]))))
+            except Exception:
+                pass
+
             result = {
-                'p_up': class_to_prob.get(1, 0.5),
+                'p_up': p_up,
+                'generated_at': now_ts,
                 'p_down': class_to_prob.get(0, 0.5),
                 'model_version': str(int(os.path.getmtime(info['path']))),
                 'val_acc': (info.get('metrics') or {}).get('val_acc'),
                 'val_brier': (info.get('metrics') or {}).get('val_brier'),
-                'train_bars': getattr(self.feature_engine, '_live_bars_count', None),
+                # Data-maturity signal must reflect the model's actual
+                # training rows (contract-model artifacts store n_samples),
+                # not the live bars buffer — build_bars(limit=4000) yields
+                # ~83 one-minute bars at 1.25s tick cadence, which was
+                # collapsing w_contract to ~0.03 and muting the model.
+                'train_bars': (info.get('metrics') or {}).get('n_samples'),
             }
             self._contract_cache = (now_ts, result)
             return result

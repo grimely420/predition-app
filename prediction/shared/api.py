@@ -21,6 +21,97 @@ logger = setup_logging("API")
 
 _CACHE = {}
 
+# Bounded worker pool for /kalshi fan-out. A persistent pool is essential:
+# creating an executor per request + fut.result(timeout) leaves hung workers
+# running, and repeated dashboard polls used to accumulate 100s of blocked
+# threads until the API wedged.
+import time as _time_mod
+
+# Last-good /kalshi analysis per coin — served (flagged stale) when a
+# coin's worker times out so its card doesn't vanish from the dashboard.
+# A background daemon refreshes these every few seconds so the HTTP
+# endpoint itself never blocks on model inference or Kalshi HTTP calls.
+_kalshi_last_good = {}
+_kalshi_refresher_started = False
+
+
+def _analyze_kalshi_coin(cid):
+    cfg, ds, fe, mm, pred, val, *rest = get_components(cid)
+    last = ds.last_price()
+    if not last:
+        return cid, None
+    current_price, _ = last
+    kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
+    predictions_list = []
+    predicted_returns = {}
+    classifier_probs = {}
+    for h in cfg.prediction_horizons:
+        r = pred.predict(h, current_price=current_price)
+        if r:
+            predictions_list.append(r)
+            predicted_returns[h] = r.get('change_percent', 0.0) / 100.0
+            classifier_probs[h] = {
+                'up': r.get('prob_up', 0.33),
+                'down': r.get('prob_down', 0.33),
+                'flat': r.get('prob_flat', 0.33)
+            }
+    news_feats = get_news_engine().get_features(cfg.symbol)
+    contract_prob = pred.get_contract_prob()
+    analysis = kt.analyze_round(current_price, predicted_returns,
+                                classifier_probs, news_feats,
+                                contract_prob=contract_prob)
+    analysis['predictions'] = predictions_list
+    analysis['round_series'] = _round_series_payload(ds, analysis)
+    _attach_staleness(analysis, last[1])
+    return cid, analysis
+
+
+def _kalshi_snapshot():
+    """Dashboard payload from per-coin last-goods (<90s old), flagged."""
+    out = {}
+    now = _time_mod.time()
+    for cid, ent in _kalshi_last_good.items():
+        analysis, ts = ent
+        if now - ts > 120:
+            continue
+        if now - ts > 30:
+            analysis = dict(analysis)
+            analysis['_stale'] = True
+        out[cid] = analysis
+    return out
+
+
+def _kalshi_coin_loop(cid):
+    """Self-paced refresh for one coin — no coin gates the others.
+
+    Each coin sleeps ~half its own analysis duration, so a fast coin
+    refreshes every ~5s while a heavy one (HYPE ~17s) backs off to ~25s
+    periods instead of forcing every coin to wait for the slowest.
+    """
+    _time_mod.sleep(list_coins().index(cid) * 0.7)  # stagger startup
+    while True:
+        t0 = _time_mod.time()
+        try:
+            _, analysis = _analyze_kalshi_coin(cid)
+            if analysis is not None:
+                _kalshi_last_good[cid] = (analysis, _time_mod.time())
+        except Exception as e:
+            logger.error(f"kalshi refresh {cid}: {e}")
+        dur = _time_mod.time() - t0
+        _time_mod.sleep(max(3.0, min(12.0, dur * 0.5)))
+
+
+def _start_kalshi_refresher():
+    global _kalshi_refresher_started
+    if _kalshi_refresher_started:
+        return
+    _kalshi_refresher_started = True
+
+    import threading
+    for cid in list_coins():
+        threading.Thread(target=_kalshi_coin_loop, args=(cid,),
+                         daemon=True, name=f'kalshi-refresh-{cid}').start()
+
 
 def _round_series_payload(ds, analysis, max_pts=1500):
     """RTI ticks since the current round opened, for the price-vs-strike chart."""
@@ -44,6 +135,19 @@ def _round_series_payload(ds, analysis, max_pts=1500):
         return {"strike": strike, "round_seconds": 900, "points": pts}
     except Exception:
         return None
+
+
+def _attach_staleness(analysis: dict, price_ts) -> None:
+    """Record the age of the underlying tick the analysis was computed from —
+    lets the dashboard show how stale the displayed fair actually is."""
+    try:
+        if not price_ts:
+            return
+        ts = datetime.fromisoformat(str(price_ts).replace('Z', '+00:00'))
+        age = (datetime.now(timezone.utc) - ts).total_seconds()
+        analysis.setdefault('diagnostics', {})['data_age_s'] = round(age, 1)
+    except Exception:
+        pass
 
 
 def get_components(coin_id: str):
@@ -579,43 +683,22 @@ def create_app() -> Flask:
                                     news_feats, contract_prob=contract_prob)
         analysis['predictions'] = predictions_list
         analysis['round_series'] = _round_series_payload(ds, analysis)
+        _attach_staleness(analysis, last[1])
         return jsonify(analysis)
 
     @app.route('/kalshi', methods=['GET'])
     def kalshi_all():
-        """Kalshi 15-minute round analysis for all supported coins."""
-        results = {}
-        for cid in list_coins():
-            try:
-                cfg, ds, fe, mm, pred, val, *rest = get_components(cid)
-                last = ds.last_price()
-                if not last:
-                    continue
-                current_price, _ = last
-                kt = rest[0] if rest else KalshiRoundTracker(ds, cfg.symbol)
-                predictions_list = []
-                predicted_returns = {}
-                classifier_probs = {}
-                for h in cfg.prediction_horizons:
-                    r = pred.predict(h, current_price=current_price)
-                    if r:
-                        predictions_list.append(r)
-                        predicted_returns[h] = r.get('change_percent', 0.0) / 100.0
-                        classifier_probs[h] = {
-                            'up': r.get('prob_up', 0.33),
-                            'down': r.get('prob_down', 0.33),
-                            'flat': r.get('prob_flat', 0.33)
-                        }
-                news_feats = get_news_engine().get_features(cfg.symbol)
-                contract_prob = pred.get_contract_prob()
-                analysis = kt.analyze_round(current_price, predicted_returns, classifier_probs,
-                                            news_feats, contract_prob=contract_prob)
-                analysis['predictions'] = predictions_list
-                analysis['round_series'] = _round_series_payload(ds, analysis)
-                results[cid] = analysis
-            except Exception as e:
-                logger.error(f"Error in kalshi_all for {cid}: {e}")
-        return jsonify(results)
+        """Kalshi 15-minute round analysis for all supported coins.
+
+        Per-coin work (3 model predicts + contract model + Kalshi HTTP +
+        tick-series read) is run in a thread pool — sequential processing was
+        40-60s under load, which made the dashboard's per-coin round clocks
+        visibly diverge and the page feel stale/off.
+        """
+        # Serve whatever the per-coin background refreshers last produced —
+        # the request thread never blocks on model inference or Kalshi HTTP.
+        _start_kalshi_refresher()
+        return jsonify(_kalshi_snapshot())
 
     @app.route('/contract_stats/<coin_id>', methods=['GET'])
     def contract_stats(coin_id):
@@ -845,8 +928,8 @@ def create_app() -> Flask:
             store = HLStore(path)
             status = store.status()
             latest = store.latest_snapshot()
-            candles = store.candles_frame().tail(60)
-            funding = store.funding_frame().tail(24)
+            candles = store.candles_frame(limit=60)
+            funding = store.funding_frame(limit=24)
             return jsonify({
                 'coin_id': coin_id,
                 'symbol': cfg.symbol,

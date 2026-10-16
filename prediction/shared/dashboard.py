@@ -6,6 +6,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalshi Crypto Prediction & Decision Terminal | CF Benchmarks BRTI</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23090b0e'/%3E%3Crect x='14' y='30' width='9' height='22' rx='2' fill='%2334d399'/%3E%3Crect x='18' y='24' width='1.6' height='34' fill='%2334d399'/%3E%3Crect x='28' y='18' width='9' height='26' rx='2' fill='%2322d3ee'/%3E%3Crect x='32' y='12' width='1.6' height='36' fill='%2322d3ee'/%3E%3Crect x='42' y='36' width='9' height='16' rx='2' fill='%23f87171'/%3E%3Crect x='46' y='30' width='1.6' height='26' fill='%23f87171'/%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -698,6 +699,16 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             const yesCents = decision.yes_cents != null ? decision.yes_cents : Math.round((decision.prob_yes_up || 0.5) * 100);
             const noCents = decision.no_cents != null ? decision.no_cents : (100 - yesCents);
             const rec = decision.recommendation || `ODDS: ${yesCents}¢ / ${noCents}¢`;
+            const mkt = kalshi && kalshi.market;
+            const mktLine = (mkt && mkt.yes_ask != null && mkt.no_ask != null)
+                ? `MKT: YES ${Math.round(mkt.yes_ask)}¢ / NO ${Math.round(mkt.no_ask)}¢ (mid ${Math.round(mkt.mid_yes)}¢)`
+                : 'MKT: —';
+            const dg = kalshi && kalshi.diagnostics ? kalshi.diagnostics : {};
+            const ageParts = [];
+            if (dg.data_age_s != null) ageParts.push(`tick ${dg.data_age_s}s`);
+            if (dg.model_age_s != null) ageParts.push(`model ${dg.model_age_s}s`);
+            const staleLine = ageParts.length ? `LAG: ${ageParts.join(' · ')}` : '';
+            const stale = kalshi && kalshi._stale === true;
             const recColor = decision.badge_color || (yesCents >= 53 ? 'var(--up)' : (noCents >= 53 ? 'var(--down)' : '#f59e0b'));
             const edge = decision.edge_pct != null ? decision.edge_pct : Math.abs(yesCents - 50);
             const conf = decision.confidence_pct != null ? decision.confidence_pct : (edge * 2);
@@ -727,12 +738,13 @@ DASHBOARD_HTML = """<!DOCTYPE html>
             }
 
             return `
-            <div class="coin-card" id="card-${coin}">
+            <div class="coin-card" id="card-${coin}"${stale ? ' style="opacity:0.45;"' : ''}>
                 <div class="coin-header">
                     <div>
                         <div class="coin-title-group">
                             <span class="coin-sym">${coin.toUpperCase()}</span>
                             <span class="coin-series-tag">${series}</span>
+                            ${stale ? '<span class="badge" style="background:rgba(245,158,11,0.2); color:#f59e0b; border:1px solid rgba(245,158,11,0.4);">STALE</span>' : ''}
                         </div>
                         <div style="font-size:0.75rem; color:var(--muted); margin-top:2px;">${rtiName}</div>
                     </div>
@@ -769,6 +781,8 @@ DASHBOARD_HTML = """<!DOCTYPE html>
                                 <span style="color:var(--down);">NO ${noCents}¢</span>
                             </div>
                             <span class="decision-edge">Edge: +${edge.toFixed(1)}% (Conviction ${conf}%)</span>
+                            <div style="font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--cyan); margin-top:2px;">${mktLine}</div>
+                            ${staleLine ? `<div style="font-family:'JetBrains Mono', monospace; font-size:0.66rem; color:${(dg.data_age_s || 0) > 5 ? 'var(--down)' : 'var(--muted)'}; margin-top:1px;">${staleLine}</div>` : ''}
                         </div>
                     </div>
 

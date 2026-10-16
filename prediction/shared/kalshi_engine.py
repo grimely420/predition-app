@@ -53,6 +53,63 @@ class KalshiRoundTracker:
         self._last_round_start: Optional[str] = None
         self._calib_stats: Optional[Dict[str, Any]] = None
         self._calib_time: float = 0.0
+        self._blend_cache = None
+
+    def _blend_lr(self) -> Optional[Dict[str, Any]]:
+        """Trained model+market blend params from <coin>/blend_lr.json.
+
+        Written by scripts/train_blend_model.py only when it beats raw
+        model, market mid, and the fixed blend out-of-sample. Missing file
+        => None => callers keep the fixed 70/30 anchor (reversible).
+        """
+        import os, json
+        path = os.path.join(os.path.dirname(self.data_store.db_path),
+                            'blend_lr.json')
+        try:
+            mt = os.path.getmtime(path)
+            if self._blend_cache and self._blend_cache[0] == mt:
+                return self._blend_cache[1]
+            with open(path) as f:
+                data = json.load(f)
+            if 'coef' not in data or 'intercept' not in data:
+                self._blend_cache = (mt, None)
+                return None
+            self._blend_cache = (mt, data)
+            return data
+        except FileNotFoundError:
+            self._blend_cache = (0, None)
+            return None
+        except Exception:
+            return self._blend_cache[1] if self._blend_cache else None
+
+    def _settle_surface(self) -> Optional[Dict[str, Any]]:
+        """Empirical P(YES | z) surface from <coin>/settle_surface.json.
+
+        Built by scripts/build_settlement_surface.py from ~15-18k REAL
+        settled Kalshi markets joined to archived RTI ticks. Measured OOS:
+        beats the contract model on all 9 coins (e.g. DOGE 0.155 vs 0.183).
+        """
+        import os, json
+        path = os.path.join(os.path.dirname(self.data_store.db_path),
+                            'settle_surface.json')
+        try:
+            mt = os.path.getmtime(path)
+            cached = getattr(self, '_surf_cache', None)
+            if cached and cached[0] == mt:
+                return cached[1]
+            with open(path) as f:
+                data = json.load(f)
+            if 'z' not in data or 'p' not in data:
+                self._surf_cache = (mt, None)
+                return None
+            self._surf_cache = (mt, data)
+            return data
+        except FileNotFoundError:
+            self._surf_cache = (0, None)
+            return None
+        except Exception:
+            c = getattr(self, '_surf_cache', None)
+            return c[1] if c else None
 
     def _calib_win_rate(self, side_prob: float) -> Optional[float]:
         """Empirical win rate for the probability bucket containing side_prob.
@@ -148,17 +205,20 @@ class KalshiRoundTracker:
         except Exception as e:
             logger.debug(f"official strike lookup failed: {e}")
         try:
-            # RTI feed only — a spot fallback tick must never pose as strike
-            res = self.data_store.price_at_or_after(
-                round_start_iso, window_seconds=90,
-                source_like='CFBenchmarks%')
-            if res:
-                return float(res[0])
+            # RTI feed only — a spot fallback tick must never pose as
+            # strike. Kalshi strikes from the :00:00 index print, so the
+            # LAST tick before open approximates it far better than the
+            # first tick after (in fast tape that gap is several dollars).
             res_before = self.data_store.price_at_or_before(
                 round_start_iso, window_seconds=90,
                 source_like='CFBenchmarks%')
             if res_before:
                 return float(res_before[0])
+            res = self.data_store.price_at_or_after(
+                round_start_iso, window_seconds=90,
+                source_like='CFBenchmarks%')
+            if res:
+                return float(res[0])
         except Exception as e:
             logger.warning(f"Error getting round open price: {e}")
         return None
@@ -348,6 +408,28 @@ class KalshiRoundTracker:
         z_score = (log_ratio + total_expected_return + clf_bias) / max(1e-5, sigma_rem)
         bs_prob_up = normal_cdf(z_score)
 
+        # Empirical settlement surface: measured P(YES | z) from ~15-18k
+        # real settled Kalshi markets — beats the contract model OOS on all
+        # 9 coins, so it replaces the theoretical BS prior when available.
+        surf = self._settle_surface()
+        if surf:
+            try:
+                z_emp = log_ratio / math.sqrt(max(rem_min, 0.05))
+                zs, ps = surf['z'], surf['p']
+                if z_emp <= zs[0]:
+                    emp_p = ps[0]
+                elif z_emp >= zs[-1]:
+                    emp_p = ps[-1]
+                else:
+                    i = 0
+                    while i < len(zs) - 2 and zs[i + 1] < z_emp:
+                        i += 1
+                    w = (z_emp - zs[i]) / max(1e-9, zs[i + 1] - zs[i])
+                    emp_p = ps[i] + w * (ps[i + 1] - ps[i])
+                bs_prob_up = float(emp_p)
+            except Exception:
+                pass
+
         # Settlement TWAP engine takes over inside the final 75 seconds —
         # observed samples are locked into the settlement average, so this
         # dominates every other signal once the window opens.
@@ -369,6 +451,43 @@ class KalshiRoundTracker:
         else:
             raw_prob_up = bs_prob_up
 
+        # Market anchor: the live order-book mid is a highly calibrated
+        # crowd estimate of the same binary event. When blend_lr.json exists
+        # (trained on this coin's resolved signals, OOS-gated), a logistic
+        # over [logit(model), logit(mkt), mins_remaining] decides how much
+        # market to trust per situation — learned rather than fixed. The
+        # ledger still logs the pure contract-model prob, so edge
+        # measurement is unaffected. Skipped once settlement TWAP takes over.
+        mkt = None
+        try:
+            from .kalshi_markets import get_kalshi_markets
+            _rs = datetime.fromisoformat(cur_rnd["start_time"])
+            _re = datetime.fromisoformat(cur_rnd["end_time"])
+            mkt = get_kalshi_markets().get_book_snapshot(self.series, _rs, _re)
+        except Exception:
+            mkt = None
+        if settlement is None and mkt and mkt.get('mid_yes') is not None:
+            pm = min(1 - 1e-4, max(1e-4, mkt['mid_yes'] / 100.0))
+            blend = self._blend_lr()
+            if blend:
+                try:
+                    pc = min(1 - 1e-4, max(1e-4, raw_prob_up))
+                    z = (blend['coef'][0] * math.log(pc / (1 - pc))
+                         + blend['coef'][1] * math.log(pm / (1 - pm))
+                         + blend['coef'][2] * rem_min
+                         + blend['intercept'])
+                    raw_prob_up = 1.0 / (1.0 + math.exp(-max(-30.0, min(30.0, z))))
+                    prob_source += '+blend'
+                except Exception:
+                    raw_prob_up = 0.70 * raw_prob_up + 0.30 * pm
+                    prob_source += '+mkt'
+            else:
+                # OOS blend audit (scripts/train_blend_model.py): market mid
+                # beat raw model on Brier for all 9 coins, so the fallback
+                # anchor weights it 50/50 rather than 70/30.
+                raw_prob_up = 0.50 * raw_prob_up + 0.50 * pm
+                prob_source += '+mkt'
+
         # Adaptive EMA: fast tracking on real moves, smoothing on tick noise.
         # alpha scales with how far the raw probability jumped this tick.
         round_changed = self._last_round_start != cur_rnd["start_time"]
@@ -377,7 +496,7 @@ class KalshiRoundTracker:
             self._prev_prob.pop(self.coin_id, None)
         prev_p = self._prev_prob.get(self.coin_id)
         if prev_p is not None and cur_rnd["elapsed_seconds"] > 10:
-            alpha = min(0.95, max(0.35, abs(raw_prob_up - prev_p) / 0.08))
+            alpha = min(0.95, max(0.50, abs(raw_prob_up - prev_p) / 0.08))
             prob_up = alpha * raw_prob_up + (1.0 - alpha) * prev_p
         else:
             prob_up = raw_prob_up
@@ -459,6 +578,15 @@ class KalshiRoundTracker:
                 bias = "NEUTRAL"
                 color = "#9ca3af"
 
+        # Entry-phase hard filter (audit: entry calls ran -10c to -27c EV).
+        # Block BUY recommendations in mins 0-6.5 unless KALSHI_ALLOW_ENTRY=1.
+        import os as _os
+        if (is_entry_window and 'BUY' in decision
+                and _os.environ.get('KALSHI_ALLOW_ENTRY', '0') != '1'):
+            decision = f"SKIP — ENTRY PHASE ({yes_cents}¢/{no_cents}¢)"
+            bias = "NEUTRAL"
+            color = "#9ca3af"
+
         # Analysis of Next Upcoming Round (5-17 minute span)
         next_model_ret = pred_15
         next_news_impact = news_sentiment * 0.0020
@@ -474,9 +602,12 @@ class KalshiRoundTracker:
             next_bias = "RANGE-BOUND"
             next_action = "WAIT FOR BREAKOUT"
 
+        # Live Kalshi order book (fetched above for the market anchor);
+        # also surfaced so the page shows executable prices next to fair.
         result = {
             "series": self.series,
             "benchmark_index": self.rti_name,
+            "market": mkt,
             "timing": timing,
             "phase": {
                 "label": phase_label,
@@ -497,6 +628,22 @@ class KalshiRoundTracker:
                 "p_up": round(contract_prob['p_up'], 4) if contract_prob else None,
                 "val_acc": contract_prob.get('val_acc') if contract_prob else None,
                 "val_brier": contract_prob.get('val_brier') if contract_prob else None,
+            },
+            "diagnostics": {
+                # Where the displayed fair probability comes from:
+                #   blend = w_contract * contract_p + (1-w) * bs_prob_up, EMA-smoothed
+                "bs_prob_up": round(bs_prob_up, 4),
+                "z_score": round(z_score, 3),
+                "sigma_rem": round(sigma_rem, 6),
+                "log_ratio": round(log_ratio, 6),
+                "total_drift": round(total_expected_return, 6),
+                "w_contract": round(w_contract, 3) if contract_prob and contract_prob.get('p_up') is not None and settlement is None else None,
+                "raw_prob_up": round(raw_prob_up, 4),
+                # Pipeline staleness: how old the model prob was when used.
+                # The contract result is served from a ~5s cache, so a fast
+                # market can move several cents before the model re-fires.
+                "model_age_s": round(time.time() - contract_prob['generated_at'], 1)
+                if contract_prob and contract_prob.get('generated_at') else None,
             },
             "decision": {
                 "recommendation": decision,

@@ -106,8 +106,8 @@ class ModelManager:
         self.contract_model: Optional[Dict[str, Any]] = None
         self.model_dir = coin_cfg.model_dir
         os.makedirs(self.model_dir, exist_ok=True)
+        self.last_train_times: Dict[Any, float] = {}
         self.last_train_counts = self._load_counts()
-        self.last_train_times: Dict[int, float] = {}
 
     def _model_path(self, horizon: int) -> str:
         return os.path.join(self.model_dir, f"xgb_{horizon}min_latest.pkl")
@@ -123,6 +123,10 @@ class ModelManager:
         lower validation accuracy, but the warning makes it visible).
         """
         prev_path = path.replace('_latest.pkl', '_prev.pkl')
+        if prev_path == path:
+            # Non-'latest' artifacts (e.g. xgb_5min_clf.pkl) still need a
+            # rollback copy — append _prev before the extension.
+            prev_path = os.path.splitext(path)[0] + '_prev.pkl'
         prev_acc = None
         if os.path.exists(path):
             try:
@@ -153,11 +157,25 @@ class ModelManager:
     def _clf_path(self, horizon: int) -> str:
         return os.path.join(self.model_dir, f"xgb_{horizon}min_clf.pkl")
 
+    @staticmethod
+    def _destringify_keys(d: Dict) -> Dict:
+        """JSON object keys are strings; restore int horizons ('5' -> 5)
+        while leaving named entries ('contract') alone."""
+        out = {}
+        for k, v in d.items():
+            out[int(k) if isinstance(k, str) and k.lstrip('-').isdigit() else k] = v
+        return out
+
     def _load_counts(self) -> Dict[str, int]:
         try:
             if os.path.exists(self._counts_path()):
                 with open(self._counts_path(), "r") as f:
-                    return json.load(f)
+                    data = json.load(f)
+                if isinstance(data, dict) and 'counts' in data:
+                    self.last_train_times = self._destringify_keys(
+                        data.get('times') or {})
+                    return data['counts']
+                return data  # legacy format: bare counts dict
         except Exception as e:
             logger.warning(f"[{self.symbol}] Could not load train counts: {e}")
         return {}
@@ -165,7 +183,8 @@ class ModelManager:
     def _save_counts(self) -> None:
         try:
             with open(self._counts_path(), "w") as f:
-                json.dump(self.last_train_counts, f)
+                json.dump({'counts': self.last_train_counts,
+                           'times': self.last_train_times}, f)
         except Exception as e:
             logger.warning(f"[{self.symbol}] Could not save train counts: {e}")
 
@@ -177,7 +196,10 @@ class ModelManager:
 
         current_count = self.data_store.count_prices()
         last_count = self.last_train_counts.get(str(horizon), 0)
-        if current_count - last_count >= self.cfg.retrain_min_bars:
+        # Count can go *backwards* after retention pruning — treat that as
+        # data having changed enough to warrant a retrain too.
+        if current_count < last_count or \
+                current_count - last_count >= self.cfg.retrain_min_bars:
             return True
 
         last_time = self.last_train_times.get(horizon)
@@ -288,11 +310,31 @@ class ModelManager:
             return False
 
     @staticmethod
+    def _sanitize_xy(X: np.ndarray, y: np.ndarray):
+        """Force clean float64 arrays for native trainers.
+
+        Non-finite values and exotic dtypes have been implicated in native
+        (xgboost/lightgbm) segfaults — normalize here so .fit() always sees
+        a well-typed, finite frame. Rows with non-finite targets are dropped.
+        """
+        X = np.asarray(X, dtype=np.float64)
+        y = np.asarray(y, dtype=np.float64)
+        bad_X = ~np.isfinite(X)
+        if bad_X.any():
+            X = X.copy()
+            X[bad_X] = np.nan  # xgboost/lightgbm treat NaN as missing
+        good_y = np.isfinite(y)
+        if not good_y.all():
+            X, y = X[good_y], y[good_y]
+        return X, y
+
+    @staticmethod
     def fit_model(X: np.ndarray, y: np.ndarray, val_frac: float = 0.15):
         """Fit an ensemble of XGBRegressor + LGBMRegressor with a time-ordered hold-out."""
         import xgboost as xgb
         from sklearn.metrics import mean_absolute_error
 
+        X, y = ModelManager._sanitize_xy(X, y)
         n = len(X)
         split_idx = int(n * (1 - val_frac))
         X_train, y_train = X[:split_idx], y[:split_idx]
@@ -364,6 +406,7 @@ class ModelManager:
         from sklearn.metrics import log_loss, accuracy_score, roc_auc_score
         from sklearn.preprocessing import LabelEncoder
 
+        X, y = ModelManager._sanitize_xy(X, y)
         # Binary direction for Kalshi contracts: 1 = Up (return > 0), 0 = Down (return <= 0)
         y_bin = (y > 0).astype(int)
         le = LabelEncoder()
@@ -560,7 +603,8 @@ class ModelManager:
             return True
         current_count = self.data_store.count_prices()
         last_count = self.last_train_counts.get('contract', 0)
-        if current_count - last_count >= self.cfg.retrain_min_bars:
+        if current_count < last_count or \
+                current_count - last_count >= self.cfg.retrain_min_bars:
             return True
         last_time = self.last_train_times.get('contract')
         if last_time and (time.time() - last_time) > 3600:

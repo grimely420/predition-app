@@ -221,33 +221,45 @@ class HLStore:
         return dict(r) if r else None
 
     # ----- frames for feature building -----
-    def candles_frame(self, since: Optional[str] = None) -> pd.DataFrame:
+    def candles_frame(self, since: Optional[str] = None,
+                      limit: Optional[int] = None) -> pd.DataFrame:
         conn = self._conn()
         q = "SELECT timestamp, o, h, l, c, v, n FROM hl_candles_1m"
         params = []
         if since:
             q += " WHERE timestamp >= ?"
             params.append(since)
-        df = pd.read_sql(q + " ORDER BY t", conn, params=params)
+        if limit:
+            q += f" ORDER BY t DESC LIMIT {int(limit)}"
+        else:
+            q += " ORDER BY t"
+        df = pd.read_sql(q, conn, params=params)
         conn.close()
         if df.empty:
             return df
         df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True, format="ISO8601")
-        return df.set_index("timestamp")
+        df = df.set_index("timestamp")
+        return df.iloc[::-1] if limit else df
 
-    def funding_frame(self, since: Optional[str] = None) -> pd.DataFrame:
+    def funding_frame(self, since: Optional[str] = None,
+                      limit: Optional[int] = None) -> pd.DataFrame:
         conn = self._conn()
         q = "SELECT timestamp, funding_rate, premium FROM hl_funding"
         params = []
         if since:
             q += " WHERE timestamp >= ?"
             params.append(since)
-        df = pd.read_sql(q + " ORDER BY time_ms", conn, params=params)
+        if limit:
+            q += f" ORDER BY time_ms DESC LIMIT {int(limit)}"
+        else:
+            q += " ORDER BY time_ms"
+        df = pd.read_sql(q, conn, params=params)
         conn.close()
         if df.empty:
             return df
         df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True, format="ISO8601")
-        return df.set_index("timestamp")
+        df = df.set_index("timestamp")
+        return df.iloc[::-1] if limit else df
 
     def snapshots_frame(self, since: Optional[str] = None) -> pd.DataFrame:
         conn = self._conn()

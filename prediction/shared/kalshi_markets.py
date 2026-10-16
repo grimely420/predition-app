@@ -42,6 +42,80 @@ class KalshiMarketClient:
         self._strike_cache: Dict[tuple, float] = {}
         # (series, round_end_iso) -> {'result': 'yes'/'no', 'settlement': float|None}
         self._result_cache: Dict[tuple, Dict[str, Any]] = {}
+        # ticker -> (fetched_at, book snapshot dict)
+        self._book_cache: Dict[str, tuple] = {}
+        # (series, round_start_iso) -> ticker — once a round's market is
+        # discovered it never changes, so cache it permanently and skip the
+        # market-list scans on every subsequent call.
+        self._round_ticker: Dict[tuple, str] = {}
+
+    def _find_market(self, series: str, round_start: datetime,
+                     round_end: datetime) -> Optional[dict]:
+        """Market dict for the round, matching open+close within 30s."""
+        tkey = (series, round_start.isoformat())
+        cached = self._round_ticker.get(tkey)
+        if cached:
+            return {'ticker': cached}
+        for status in ('open', 'settled'):
+            for m in self._fetch_markets(series, status=status):
+                ot, ct = _parse_ts(m.get('open_time')), _parse_ts(m.get('close_time'))
+                if ot and ct and \
+                        abs((ot - round_start).total_seconds()) <= 30 and \
+                        abs((ct - round_end).total_seconds()) <= 30:
+                    if m.get('ticker'):
+                        self._round_ticker[tkey] = m['ticker']
+                    return m
+        return None
+
+    def get_book_snapshot(self, series: str, round_start: datetime,
+                          round_end: datetime) -> Optional[Dict[str, Any]]:
+        """Best bid/ask + mid for the live round's market, in cents.
+
+        Kalshi's public orderbook returns resting *bids* in fixed-point
+        dollars per side. Best asks are derived from the opposite side:
+            yes_ask = 100 - best_no_bid,   no_ask = 100 - best_yes_bid.
+        Returns None when the market/book is unavailable (thin books legit-
+        imately return None on a side).
+        """
+        if round_start.tzinfo is None:
+            round_start = round_start.replace(tzinfo=timezone.utc)
+        if round_end.tzinfo is None:
+            round_end = round_end.replace(tzinfo=timezone.utc)
+        m = self._find_market(series, round_start, round_end)
+        if not m or not m.get('ticker'):
+            return None
+        ticker = m['ticker']
+        ent = self._book_cache.get(ticker)
+        if ent and (time.time() - ent[0]) < 2.0:
+            return ent[1]
+        try:
+            r = requests.get(f"{BASE_URL}/{ticker}/orderbook",
+                             headers={'User-Agent': 'predition-app/1.0'},
+                             timeout=8)
+            r.raise_for_status()
+            ob = (r.json().get('orderbook_fp')
+                  or r.json().get('orderbook') or {})
+
+            def best_bid(side):
+                rows = ob.get(f'{side}_dollars') or []
+                px = [float(p) for p, _q in rows]
+                return max(px) * 100.0 if px else None  # cents
+
+            yes_bid = best_bid('yes')
+            no_bid = best_bid('no')
+            yes_ask = 100.0 - no_bid if no_bid is not None else None
+            no_ask = 100.0 - yes_bid if yes_bid is not None else None
+            mid = None
+            if yes_bid is not None and yes_ask is not None:
+                mid = (yes_bid + yes_ask) / 2.0
+            out = {'yes_bid': yes_bid, 'yes_ask': yes_ask,
+                   'no_bid': no_bid, 'no_ask': no_ask,
+                   'mid_yes': mid, 'ticker': ticker}
+            self._book_cache[ticker] = (time.time(), out)
+            return out
+        except Exception as e:
+            logger.debug(f"orderbook {ticker}: {e}")
+            return ent[1] if ent else None
 
     def _fetch_markets(self, series: str,
                        status: Optional[str] = None) -> list:

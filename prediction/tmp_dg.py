@@ -1,0 +1,6 @@
+import json,urllib.request
+d=json.load(urllib.request.urlopen('http://localhost:5000/kalshi',timeout=60))
+for cid,v in d.items():
+    cm=v.get('contract_model') or {}; dg=v.get('diagnostics') or {}
+    dec=v.get('decision') or {}; m=v.get('market') or {}
+    print(f'{cid:5s} contract={str(cm.get("p_up")):>7s} bs={str(dg.get("bs_prob_up")):>7s} z={str(dg.get("z_score")):>7s} sig={str(dg.get("sigma_rem")):>9s} drift={str(dg.get("total_drift")):>9s} w={str(dg.get("w_contract")):>5s} raw={str(dg.get("raw_prob_up")):>7s} shown={dec.get("prob_yes_up")} mkt={m.get("mid_yes")}')

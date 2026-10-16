@@ -152,6 +152,19 @@ class DataStore:
                 UNIQUE(round_start, phase)
             )
         ''')
+        # Market-price columns (order book at signal time) — needed to
+        # measure real edge (model fair vs executable ask) rather than
+        # direction accuracy alone. Migration: ADD COLUMN if missing.
+        sig_cols = [col[1] for col in
+                    c.execute("PRAGMA table_info(contract_signals)").fetchall()]
+        for col in ('yes_bid', 'yes_ask', 'no_bid', 'no_ask',
+                    'mid_yes', 'edge_cents'):
+            if col not in sig_cols:
+                try:
+                    c.execute(f"ALTER TABLE contract_signals ADD COLUMN {col} REAL")
+                except Exception as e:
+                    logger.warning(f"Could not add contract_signals.{col}: {e}")
+
         c.execute('''
             CREATE INDEX IF NOT EXISTS idx_signals_resolved
             ON contract_signals(resolved, round_end)
@@ -593,8 +606,15 @@ class DataStore:
                             mins_elapsed: float, mins_remaining: float,
                             strike_price: float, current_price: float,
                             prob_yes: float, bias: str, source: str,
-                            model_version: str = '') -> bool:
-        """Log a contract call; UNIQUE(round_start, phase) dedupes writers."""
+                            model_version: str = '',
+                            book: Optional[Dict[str, Any]] = None) -> bool:
+        """Log a contract call; UNIQUE(round_start, phase) dedupes writers.
+
+        ``book`` carries the Kalshi order-book snapshot at call time
+        ({yes_bid, yes_ask, no_bid, no_ask, mid_yes}) — the market price
+        needed to measure real edge, not just accuracy.
+        """
+        book = book or {}
         try:
             conn = self._conn()
             c = conn.cursor()
@@ -602,11 +622,16 @@ class DataStore:
                 """INSERT OR IGNORE INTO contract_signals
                    (round_start, round_end, phase, call_time, mins_elapsed,
                     mins_remaining, strike_price, current_price, prob_yes,
-                    bias, source, model_version, created_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    bias, source, model_version, yes_bid, yes_ask, no_bid,
+                    no_ask, mid_yes, edge_cents, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (round_start, round_end, phase, now_iso(), mins_elapsed,
                  mins_remaining, strike_price, current_price, prob_yes,
-                 bias, source, model_version, now_iso())
+                 bias, source, model_version,
+                 book.get('yes_bid'), book.get('yes_ask'),
+                 book.get('no_bid'), book.get('no_ask'),
+                 book.get('mid_yes'), book.get('edge_cents'),
+                 now_iso())
             )
             n = c.rowcount
             conn.commit()
@@ -614,6 +639,36 @@ class DataStore:
             return n > 0
         except Exception as e:
             logger.error(f"[{self.symbol}] log_contract_signal error: {e}")
+            return False
+
+    def update_signal_book(self, round_start: str, phase: str,
+                           book: Dict[str, Any]) -> bool:
+        """Backfill order-book columns on an already-logged signal.
+
+        Kalshi can list the new round's market a few seconds after open, so
+        the first (INSERT OR IGNORE winning) signal row often lands before a
+        book exists. Later loop iterations patch the row in — signal timing
+        semantics unchanged, instrumentation only.
+        """
+        try:
+            conn = self._conn()
+            c = conn.cursor()
+            c.execute(
+                """UPDATE contract_signals SET
+                       yes_bid=?, yes_ask=?, no_bid=?, no_ask=?,
+                       mid_yes=?, edge_cents=?
+                   WHERE round_start=? AND phase=? AND yes_ask IS NULL""",
+                (book.get('yes_bid'), book.get('yes_ask'),
+                 book.get('no_bid'), book.get('no_ask'),
+                 book.get('mid_yes'), book.get('edge_cents'),
+                 round_start, phase)
+            )
+            n = c.rowcount
+            conn.commit()
+            conn.close()
+            return n > 0
+        except Exception as e:
+            logger.error(f"[{self.symbol}] update_signal_book error: {e}")
             return False
 
     def get_unresolved_signals(self, settled_before_iso: str,
